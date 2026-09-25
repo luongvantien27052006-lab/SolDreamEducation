@@ -1,0 +1,30 @@
+<div class="rich-editor" data-rich-editor>
+  <div class="rich-editor__toolbar" role="toolbar" aria-label="Công cụ định dạng nội dung">
+    <select data-block-format aria-label="Kiểu đoạn văn">
+      <option value="p">Đoạn văn</option>
+      <option value="h2">Tiêu đề H2</option>
+      <option value="h3">Tiêu đề H3</option>
+      <option value="h4">Tiêu đề H4</option>
+      <option value="blockquote">Trích dẫn</option>
+      <option value="pre">Khối mã</option>
+    </select>
+    <button type="button" data-command="bold" title="In đậm"><strong>B</strong></button>
+    <button type="button" data-command="italic" title="In nghiêng"><em>I</em></button>
+    <button type="button" data-command="underline" title="Gạch chân"><u>U</u></button>
+    <button type="button" data-command="insertUnorderedList" title="Danh sách chấm">• Danh sách</button>
+    <button type="button" data-command="insertOrderedList" title="Danh sách số">1. Danh sách</button>
+    <button type="button" data-command="justifyLeft" title="Căn trái">≡ Trái</button>
+    <button type="button" data-command="justifyCenter" title="Căn giữa">≡ Giữa</button>
+    <button type="button" data-action="link" title="Chèn liên kết">🔗 Link</button>
+    <button type="button" data-action="table" title="Chèn bảng">▦ Bảng</button>
+    <button type="button" data-command="insertHorizontalRule" title="Chèn đường phân cách">— Phân cách</button>
+    <button type="button" data-command="removeFormat" title="Xóa định dạng vùng đã chọn">Tx Xóa định dạng</button>
+    <label class="rich-editor__image" title="Chèn ảnh hoặc video chất lượng cao">🖼 Ảnh / 🎬 Video<input type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif,video/mp4,video/webm,video/quicktime,video/x-m4v" data-media-input hidden></label>
+    <button type="button" data-command="undo" title="Hoàn tác">↶</button>
+    <button type="button" data-command="redo" title="Làm lại">↷</button>
+    <button type="button" data-action="source" title="Xem hoặc sửa HTML">&lt;/&gt; HTML</button>
+  </div>
+  <div class="rich-editor__surface" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="<%= placeholder %>"></div>
+  <textarea class="rich-editor__source" name="<%= name %>" aria-label="Mã HTML nội dung" hidden><%= value || '' %></textarea>
+  <div class="rich-editor__status" aria-live="polite">Có thể dán trực tiếp từ Word, Google Docs, Excel hoặc trang web. Bảng, tiêu đề, danh sách, liên kết, ảnh và video chất lượng cao sẽ được giữ lại.</div>
+</div>

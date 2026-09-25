@@ -1,0 +1,28 @@
+<% if (typeof leadPopup !== 'undefined' && leadPopup) { %>
+<div class="site-popup lead-popup" data-lead-popup data-popup-delay="<%= leadPopup.delay_seconds %>" hidden>
+  <button class="site-popup__backdrop" type="button" data-lead-popup-close aria-label="Đóng đăng ký"></button>
+  <section class="site-popup__card lead-popup__card" role="dialog" aria-modal="true" aria-labelledby="lead-popup-title">
+    <button class="site-popup__close" type="button" data-lead-popup-close aria-label="Đóng">×</button>
+    <div class="site-popup__body">
+      <span class="eyebrow">Nhận thông tin sớm nhất</span>
+      <h2 id="lead-popup-title"><%= leadPopup.title %></h2>
+      <div class="section-lead"><%- leadPopup.content %></div>
+      <form data-lead-form>
+        <div class="field"><label for="lead-popup-name">Họ và tên</label><input id="lead-popup-name" name="name" type="text" autocomplete="name" minlength="2" maxlength="100" placeholder="Nhập họ và tên" required></div>
+        <div class="field"><label for="lead-popup-phone">Số điện thoại</label><input id="lead-popup-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" minlength="9" maxlength="20" placeholder="Ví dụ: 0364 648 282" required></div>
+        <div class="field"><label for="lead-popup-email">Email liên hệ</label><input id="lead-popup-email" name="email" type="email" autocomplete="email" maxlength="180" placeholder="tenban@example.com" required></div>
+        <div class="field"><label for="lead-popup-interest">Bạn quan tâm</label><input id="lead-popup-interest" name="interest" type="text" value="<%= leadContext ? leadContext.interest : 'Thông tin trên trang này' %>" readonly></div>
+        <div class="field hp-field" aria-hidden="true"><label for="lead-popup-website">Website</label><input id="lead-popup-website" name="website" tabindex="-1" autocomplete="off"></div>
+        <input type="hidden" name="contextLocked" value="1">
+        <input type="hidden" name="formStartedAt" value="">
+        <button class="btn btn-primary" type="submit" data-lead-submit><%= leadPopup.button_text || 'Gửi đăng ký' %></button>
+        <p class="form-note" data-lead-status role="status" aria-live="polite"></p>
+      </form>
+      <div class="lead-popup__choices" aria-label="Tùy chọn nhắc lại">
+        <button type="button" data-lead-dismiss-session>Không hiện lại trong lần này</button>
+        <button type="button" data-lead-remind>Hiện lại sau 10 phút</button>
+      </div>
+    </div>
+  </section>
+</div>
+<% } %>

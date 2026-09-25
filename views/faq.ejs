@@ -1,0 +1,39 @@
+<main>
+<section class="section knowledge-hub">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <span>Câu hỏi thường gặp</span></nav>
+    <header class="knowledge-hero">
+      <span class="eyebrow">Thông tin nhanh</span>
+      <h1>Câu hỏi thường gặp</h1>
+      <p>Các câu trả lời ngắn dưới đây giúp học viên hiểu phạm vi đào tạo, tư vấn du học và dữ liệu trên website SOL DREAM EDUCATION trước khi đăng ký hoặc đối chiếu thông tin chính thức.</p>
+      <div class="source-meta"><strong>Hỗ trợ thông tin:</strong> SOL DREAM EDUCATION · <strong>Cập nhật:</strong> 27/08/2026</div>
+    </header>
+
+    <nav class="faq-tabs" aria-label="Nhóm câu hỏi thường gặp">
+      <% faqGroups.forEach(function(group, index){ %>
+        <a href="#faq-nhom-<%= index + 1 %>"><%= group.category %><span><%= group.items.length %></span></a>
+      <% }); %>
+    </nav>
+
+    <div class="faq-groups">
+      <% faqGroups.forEach(function(group, groupIndex){ %>
+      <section class="faq-group" id="faq-nhom-<%= groupIndex + 1 %>" aria-labelledby="faq-title-<%= groupIndex + 1 %>">
+        <header><span class="eyebrow">Nhóm FAQ</span><h2 id="faq-title-<%= groupIndex + 1 %>"><%= group.category %></h2></header>
+        <div class="faq-list" aria-label="Câu hỏi về <%= group.category %>">
+          <% group.items.forEach(function(faq){ %>
+          <details class="faq-item" id="cau-hoi-<%= faq.id %>">
+            <summary><%= faq.question %></summary>
+            <div class="faq-answer"><p><%= faq.answer %></p>
+              <% if (faq.source_url) { %><a href="<%= faq.source_url %>" target="_blank" rel="noopener noreferrer">Đối chiếu nguồn chính thức ↗</a><% } %>
+            </div>
+          </details>
+          <% }); %>
+        </div>
+      </section>
+      <% }); %>
+    </div>
+
+    <aside class="source-note"><strong>Phạm vi:</strong> Nội dung FAQ cung cấp định hướng chung. Điều kiện tuyển sinh, visa, học phí và học bổng cần được kiểm tra lại theo thời điểm và hồ sơ thực tế.</aside>
+  </div>
+</section>
+</main>

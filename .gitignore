@@ -1,0 +1,10 @@
+node_modules/
+.env
+db/*.sqlite
+db/*.sqlite-*
+
+# ảnh do người dùng tải lên (giữ thư mục, bỏ qua nội dung)
+public/uploads/*
+!public/uploads/.gitkeep
+npm-debug.log*
+.DS_Store

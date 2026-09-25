@@ -1,0 +1,48 @@
+<main>
+<article class="section" style="padding-top:56px">
+  <div class="wrap" style="max-width:820px">
+    <nav class="crumbs" aria-label="breadcrumb" style="font-size:14px;color:var(--muted);margin-bottom:16px">
+      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span>
+      <a href="/tin-tuc" style="color:var(--muted)">Cẩm nang du học</a> <span>›</span> <span><%= post.title %></span>
+    </nav>
+    <span class="post__cat" style="color:var(--sky)"><%= post.category %></span>
+    <h1 style="font-size:clamp(28px,4.4vw,44px);margin:12px 0 14px"><%= post.title %></h1>
+    <p class="source-meta" style="margin-bottom:26px"><strong>Đơn vị cung cấp thông tin:</strong> <% if (post.author_url) { %><a href="<%= post.author_url %>" target="_blank" rel="author noopener noreferrer"><%= post.author_name || 'SOL DREAM EDUCATION' %></a><% } else { %><%= post.author_name || 'SOL DREAM EDUCATION' %><% } %><% if (post.author_role) { %> — <%= post.author_role %><% } %> · <strong>Đăng:</strong> <time datetime="<%= publishedTime %>"><%= post.dateFull %></time> · <strong>Cập nhật:</strong> <time datetime="<%= modifiedTime %>"><%= post.updatedDateFull %></time></p>
+    <div class="post__img <%= post.cover_image ? '' : post.cover %>" style="height:300px;border-radius:20px;margin-bottom:30px">
+      <img class="post__cover<%= (!post.cover_image || post.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= post.cover_image || '/img/research-cover.svg' %>" alt="<%= post.title %>" style="border-radius:20px">
+    </div>
+    <section class="direct-answer" aria-label="Tóm tắt bài viết">
+      <p class="direct-answer__label">Trả lời nhanh</p>
+      <p><strong>Thông tin hỗ trợ du học từ SOL DREAM EDUCATION:</strong> <%= post.excerpt %></p>
+    </section>
+    <div class="article-body" style="font-size:17px;line-height:1.8;color:var(--ink-2)">
+      <%- post.contentHtml %>
+    </div>
+    <section class="source-box">
+      <h2>Nguồn và phạm vi nội dung</h2>
+      <p class="section-lead">Thông tin được <%= post.author_name || 'SOL DREAM EDUCATION' %> cung cấp nhằm hỗ trợ học viên chuẩn bị hành trình du học Hàn Quốc. Học phí, visa, việc làm thêm, học bổng và quy định tuyển sinh sẽ được chuyên viên xác nhận lại theo thời điểm và hồ sơ trước khi thực hiện.</p>
+      <p><strong>Lần cập nhật gần nhất:</strong> <%= post.updatedDateFull %>.</p>
+      <% if (post.sourceLinks.length) { %>
+      <p><strong>Nguồn đối chiếu:</strong></p>
+      <ul><% post.sourceLinks.forEach(function(source){ %><li><a href="<%= source %>" target="_blank" rel="noopener noreferrer"><%= source %></a></li><% }); %></ul>
+      <% } %>
+    </section>
+    <% if (relatedFaqs && relatedFaqs.length) { %>
+    <section class="related-faq" aria-labelledby="article-faq-title">
+      <h2 id="article-faq-title">Câu hỏi thường gặp về nội dung này</h2>
+      <div class="faq-list"><% relatedFaqs.forEach(function(faq){ %><details class="faq-item"><summary><%= faq.question %></summary><div class="faq-answer"><p><%= faq.answer %></p></div></details><% }); %></div>
+    </section>
+    <% } %>
+    <% if (relatedPosts.length) { %>
+    <section class="related-content" aria-labelledby="related-news-title">
+      <h2 id="related-news-title">Nội dung hỗ trợ du học liên quan</h2>
+      <ul><% relatedPosts.forEach(function(item){ %><li><a href="/tin-tuc/<%= item.slug %>"><%= item.title %></a><span><%= item.category %> · cập nhật <%= item.updatedDateFull %></span></li><% }); %></ul>
+    </section>
+    <% } %>
+    <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--line)">
+      <a href="/tin-tuc" class="btn btn-ghost">← Quay lại cẩm nang</a>
+      <a href="/#lienhe" class="btn btn-primary" style="margin-left:8px">Đăng ký tư vấn</a>
+    </div>
+  </div>
+</article>
+</main>

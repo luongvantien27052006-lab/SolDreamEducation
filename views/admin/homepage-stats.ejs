@@ -1,0 +1,52 @@
+<div class="adm__head">
+  <div><h1>Số liệu trang chủ</h1><p>Thay đổi con số, nhãn, thứ tự; bật/tắt hoặc thêm bớt các mục trong thanh số liệu.</p></div>
+  <a class="btn2 btn2-ghost" href="/" target="_blank" rel="noopener noreferrer">Xem trang chủ ↗</a>
+</div>
+<% if (flash) { %><div class="flash"><%= flash %></div><% } %>
+<% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
+
+<section class="panel">
+  <div class="panel__head"><div><h2>Ghi chú nguồn số liệu</h2><p class="muted">Dòng nhỏ hiển thị bên dưới toàn bộ các con số.</p></div></div>
+  <form class="form" method="post" action="/admin/so-lieu-trang-chu/ghi-chu">
+    <div class="f"><textarea name="source_note" rows="2" maxlength="500"><%= sourceNote %></textarea></div>
+    <button class="btn2 btn2-primary" type="submit">Lưu ghi chú</button>
+  </form>
+</section>
+
+<% stats.forEach(function(stat){ %>
+<section class="panel homepage-stat-admin">
+  <div class="panel__head"><div><h2><%= stat.prefix %><%= Number(stat.value_number).toLocaleString('vi-VN') %><%= stat.suffix %> · <%= stat.label %></h2><span class="pill <%= stat.active?'on':'off' %>"><%= stat.active?'Đang hiển thị':'Đang ẩn' %></span></div></div>
+  <form class="form" method="post" action="/admin/so-lieu-trang-chu/<%= stat.id %>/sua">
+    <div class="row3">
+      <div class="f"><label>Con số *</label><input name="value_number" type="number" min="0" max="1000000000" step="1" required value="<%= stat.value_number %>"></div>
+      <div class="f"><label>Tiền tố</label><input name="prefix" maxlength="12" value="<%= stat.prefix %>" placeholder="VD: ~"></div>
+      <div class="f"><label>Hậu tố</label><input name="suffix" maxlength="12" value="<%= stat.suffix %>" placeholder="VD: + hoặc %"></div>
+    </div>
+    <div class="row2">
+      <div class="f"><label>Nhãn hiển thị *</label><input name="label" maxlength="120" required value="<%= stat.label %>"></div>
+      <div class="f"><label>Thứ tự</label><input name="sort_order" type="number" value="<%= stat.sort_order %>"></div>
+    </div>
+    <button class="btn2 btn2-primary" type="submit">Lưu mục này</button>
+  </form>
+  <div class="homepage-stat-actions">
+    <form class="inline" method="post" action="/admin/so-lieu-trang-chu/<%= stat.id %>/toggle"><button class="btn2 btn2-ghost" type="submit"><%= stat.active?'Ẩn khỏi website':'Hiện trên website' %></button></form>
+    <form class="inline" method="post" action="/admin/so-lieu-trang-chu/<%= stat.id %>/xoa" onsubmit="return confirm('Xóa mục số liệu này?')"><button class="btn2 btn2-ghost lnk-del" type="submit">Xóa mục</button></form>
+  </div>
+</section>
+<% }) %>
+
+<section class="panel">
+  <div class="panel__head"><div><h2>Thêm mục số liệu</h2><p class="muted">Mục mới sẽ hiển thị ngay sau khi lưu.</p></div></div>
+  <form class="form" method="post" action="/admin/so-lieu-trang-chu/moi">
+    <div class="row3">
+      <div class="f"><label>Con số *</label><input name="value_number" type="number" min="0" max="1000000000" step="1" required value="0"></div>
+      <div class="f"><label>Tiền tố</label><input name="prefix" maxlength="12" placeholder="VD: ~"></div>
+      <div class="f"><label>Hậu tố</label><input name="suffix" maxlength="12" placeholder="VD: + hoặc %"></div>
+    </div>
+    <div class="row2">
+      <div class="f"><label>Nhãn hiển thị *</label><input name="label" maxlength="120" required placeholder="VD: Học viên đã nhập học"></div>
+      <div class="f"><label>Thứ tự</label><input name="sort_order" type="number" value="50"></div>
+    </div>
+    <button class="btn2 btn2-primary" type="submit">Thêm mục</button>
+  </form>
+</section>

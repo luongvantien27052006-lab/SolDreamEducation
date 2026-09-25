@@ -1,0 +1,140 @@
+<main>
+<article class="section knowledge-detail">
+  <div class="wrap knowledge-layout">
+    <div class="knowledge-main">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="/">Trang chủ</a> <span>›</span>
+        <a href="/truong-dai-hoc">Trường đại học</a> <span>›</span>
+        <span><%= university.name %></span>
+      </nav>
+
+      <header class="knowledge-title">
+        <span class="post__cat">Hồ sơ trường đại học Hàn Quốc</span>
+        <h1><%= university.name %></h1>
+        <span class="freshness-badge"><%= university.freshnessLabel %></span>
+        <div class="geo-summary-box" aria-label="Tóm tắt định lượng">
+          <p class="geo-summary-box__bluf"><%= university.blufSummary %></p>
+          <ul class="geo-summary-box__facts">
+            <li><strong>Tổng chi phí năm đầu:</strong> <%= university.coreFacts.firstYearTotal %></li>
+            <li><strong>Nhóm trường:</strong> <%= university.coreFacts.visa %></li>
+            <li><strong>Sổ đóng băng:</strong> <%= university.financials.kStudyDeposit.amountUsd ? university.financials.kStudyDeposit.amountUsd.toLocaleString('en-US') + ' USD' : 'Chưa xác minh' %></li>
+            <li><strong>GPA tối thiểu:</strong> <%= university.coreFacts.gpa %></li>
+          </ul>
+        </div>
+        <p class="knowledge-title__names"><%= university.english_name %></p>
+        <div class="source-meta"><strong>Biên soạn:</strong> SOL DREAM EDUCATION · <strong>Cập nhật:</strong> <time datetime="<%= university.updatedDate %>"><%= university.updatedDateDisplay %></time></div>
+      </header>
+
+      <nav class="knowledge-toc" aria-label="Mục lục hồ sơ">
+        <strong>Nội dung hồ sơ</strong>
+        <% university.sections.forEach(function(section){ %><a href="#<%= section.id %>"><%= section.title %></a><% }); %>
+      </nav>
+
+      <section class="knowledge-section" id="chi-phi-dinh-luong">
+        <h2>Chi phí du học <%= university.name %> 1 năm cần bao nhiêu tiền?</h2>
+        <p class="section-lead">Bảng dưới đây chuẩn hóa học phí hệ tiếng, ký túc xá và yêu cầu sổ đóng băng từ dữ liệu hiện có của <%= university.name %>. Giá trị VND là ước tính theo tỷ giá bán tham khảo 19,73 VND/KRW của Vietcombank ngày 27/08/2026, không phải báo giá thanh toán.</p>
+        <div class="knowledge-table-wrap"><table class="geo-data-table">
+          <thead><tr><th scope="col">Khoản phí</th><th scope="col">KRW/USD</th><th scope="col">Quy đổi VND</th><th scope="col">Điều kiện và phạm vi</th></tr></thead>
+          <tbody>
+            <% university.costComparison.forEach(function(row){ %>
+            <tr><th scope="row"><%= row.item %></th><td><%= row.foreignAmount %></td><td><%= row.vndAmount %></td><td><%= row.note %></td></tr>
+            <% }); %>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="knowledge-section" id="dieu-kien-tuyen-sinh-visa">
+        <h2>Điều kiện tuyển sinh và visa <%= university.name %> năm 2026</h2>
+        <p class="section-lead">Bảng điều kiện tách riêng GPA, thời gian trống, TOPIK hệ D4, TOPIK hệ D2 và phân hạng visa của <%= university.name %>. Giá trị chưa có thông báo tuyển sinh chính thức còn hiệu lực được đánh dấu “chưa xác minh”, không suy diễn từ học bổng hoặc điều kiện chung.</p>
+        <div class="knowledge-table-wrap"><table class="geo-data-table">
+          <thead><tr><th scope="col">Tiêu chí</th><th scope="col">Giá trị 2026</th><th scope="col">Phạm vi áp dụng</th></tr></thead>
+          <tbody><% university.admissionRows.forEach(function(row){ %><tr><th scope="row"><%= row.criterion %></th><td><%= row.value %></td><td><%= row.note %></td></tr><% }); %></tbody>
+        </table></div>
+      </section>
+
+      <% university.sections.forEach(function(section){ %>
+      <section class="knowledge-section" id="<%= section.id %>">
+        <h2><%= section.title %></h2>
+        <p class="section-lead"><%= section.lead %></p>
+        <% section.blocks.forEach(function(block){ %>
+          <% if (block.type === 'heading') { %>
+            <h3><%= block.text %></h3>
+            <p class="section-lead"><%= block.lead %></p>
+          <% } else if (block.type === 'list') { %>
+            <ul><% block.items.forEach(function(item){ %><li><%= item %></li><% }); %></ul>
+          <% } else if (block.type === 'table') { %>
+            <div class="knowledge-table-wrap"><table class="knowledge-table">
+              <thead><tr><% block.headers.forEach(function(cell){ %><th scope="col"><%= cell %></th><% }); %></tr></thead>
+              <tbody><% block.rows.forEach(function(row){ %><tr><% row.forEach(function(cell){ %><td><%= cell %></td><% }); %></tr><% }); %></tbody>
+            </table></div>
+          <% } else { %>
+            <p><%= block.text %></p>
+          <% } %>
+        <% }); %>
+      </section>
+      <% }); %>
+
+      <section class="knowledge-section" id="case-study">
+        <h2>Case study hồ sơ thực tế</h2>
+        <p class="section-lead">Case study chỉ được công bố khi có đủ dữ liệu đã được phép sử dụng gồm tên viết tắt, GPA, thời gian xét visa và kỳ nhập học. SOL DREAM EDUCATION không tạo hồ sơ minh họa giả hoặc suy diễn kết quả visa để lấp khoảng trống dữ liệu.</p>
+        <% if (university.caseStudies && university.caseStudies.length) { %>
+          <div class="case-study-grid">
+          <% university.caseStudies.forEach(function(item){ %>
+            <article class="case-study-card">
+              <h3>Hồ sơ học viên <%= item.studentInitials %></h3>
+              <p class="section-lead"><%= item.summary %></p>
+              <dl><div><dt>GPA</dt><dd><%= item.gpa %></dd></div><div><dt>Thời gian xét visa</dt><dd><%= item.visaProcessingTime %></dd></div><div><dt>Kỳ nhập học</dt><dd><%= item.intake %></dd></div></dl>
+            </article>
+          <% }); %>
+          </div>
+        <% } else { %>
+          <aside class="source-note"><strong>Trạng thái dữ liệu:</strong> <%= university.caseStudyStatus %></aside>
+        <% } %>
+      </section>
+
+      <section class="knowledge-section university-faq" id="cau-hoi-thuong-gap">
+        <h2>Câu hỏi thường gặp về <%= university.name %></h2>
+        <p class="section-lead">Các câu trả lời sau tổng hợp những điểm người nộp hồ sơ thường cần đối chiếu: học phí, điều kiện GPA và TOPIK, phân hạng visa, sổ đóng băng và ký túc xá. Mọi giá trị chưa có nguồn xác minh được ghi rõ thay vì ước đoán.</p>
+        <% universityFaqs.forEach(function(faq, index){ %>
+        <details class="faq-item" id="faq-<%= index + 1 %>" <%= index === 0 ? 'open' : '' %>>
+          <summary><%= faq.question %></summary>
+          <p class="section-lead"><%= faq.answer %></p>
+        </details>
+        <% }); %>
+      </section>
+
+      <section class="author-box" aria-labelledby="advisor-title">
+        <h2 id="advisor-title">Đội ngũ tư vấn và hỗ trợ hồ sơ</h2>
+        <% if (advisor) { %>
+          <p class="section-lead"><strong><%= advisor.name %></strong> — <%= advisor.jobTitle %>. Chuyên viên hỗ trợ đối chiếu điều kiện, chọn trường và chuẩn bị hồ sơ theo tài liệu tuyển sinh được SOL DREAM EDUCATION xác minh tại thời điểm tư vấn.</p>
+          <% if (advisor.hasCredential && advisor.hasCredential.length) { %><ul><% advisor.hasCredential.forEach(function(credential){ %><li><%= credential.name %></li><% }); %></ul><% } %>
+          <% if (advisor.sameAs && advisor.sameAs.length) { %><p><a href="<%= advisor.sameAs[0] %>" rel="me noopener" target="_blank">Xem hồ sơ chuyên môn đã xác minh</a></p><% } %>
+        <% } else { %>
+          <p class="section-lead"><strong>SOL DREAM EDUCATION trực tiếp tư vấn và hỗ trợ đối chiếu hồ sơ.</strong> Website chưa công bố tên, chứng chỉ ICEF/QEAC hoặc hồ sơ LinkedIn của một cố vấn cá nhân đã xác minh, vì vậy hệ thống không tự tạo danh tính hay tuyên bố chứng chỉ khi chưa có dữ liệu thật.</p>
+        <% } %>
+      </section>
+
+      <section class="source-box" aria-labelledby="source-title">
+        <h2 id="source-title">Nguồn và phạm vi thông tin</h2>
+        <p class="section-lead">Thông tin được SOL DREAM EDUCATION tổng hợp để hỗ trợ học viên chọn trường và chuẩn bị hồ sơ du học Hàn Quốc. Nội dung không thay thế thông báo tuyển sinh chính thức; học phí, học bổng, ngành mở tuyển và kỳ nhập học sẽ được chuyên viên xác nhận lại theo thời điểm.</p>
+        <% if (university.officialWebsite) { %><p><strong>Nguồn đối chiếu:</strong> <a href="<%= university.officialWebsite %>" target="_blank" rel="noopener noreferrer">Website chính thức của <%= university.english_name %></a>.</p><% } %>
+        <p><strong>Ngày cập nhật dữ liệu:</strong> <%= university.updatedDateDisplay %>. <%= university.sourceNotice %></p>
+      </section>
+    </div>
+
+    <aside class="knowledge-sidebar">
+      <div class="knowledge-sidebar__card">
+        <h2>Cần kiểm tra hồ sơ phù hợp?</h2>
+        <p class="section-lead">SOL DREAM EDUCATION hỗ trợ đối chiếu GPA, TOPIK, năng lực tài chính, ngành dự kiến và kỳ nhập học với yêu cầu của từng trường. Kết quả tư vấn dựa trên hồ sơ thực tế và thông tin tuyển sinh được xác nhận tại thời điểm đánh giá.</p>
+        <a href="/#lienhe" class="btn btn-primary">Đăng ký tư vấn</a>
+      </div>
+      <div class="knowledge-sidebar__card">
+        <h2>Các trường khác</h2>
+        <p class="section-lead">Danh sách dưới đây dẫn đến các hồ sơ trường khác trong cùng bộ dữ liệu của SOL DREAM EDUCATION. Người đọc có thể dùng các trang này để so sánh vị trí, thế mạnh đào tạo, học phí tham khảo, học bổng và lựa chọn ký túc xá.</p>
+        <ul><% relatedUniversities.forEach(function(item){ %><li><a href="<%= item.url %>"><%= item.name %></a></li><% }); %></ul>
+        <a href="/truong-dai-hoc" class="knowledge-card__link">Xem toàn bộ danh sách →</a>
+      </div>
+    </aside>
+  </div>
+</article>
+</main>

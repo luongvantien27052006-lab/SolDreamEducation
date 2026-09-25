@@ -1,0 +1,117 @@
+<div class="adm__head">
+  <div><h1><%= mode==='create' ? (program.category==='Thông tin trường'?'Thêm thông tin trường':'Thêm chương trình du học') : (program.category==='Thông tin trường'?'Sửa thông tin trường':'Sửa chương trình du học') %></h1><p><%= program.category==='Thông tin trường'?'Hồ sơ trường đại học Hàn Quốc, thông tin tuyển sinh và nguồn chính thức.':'Chương trình du học Hàn Quốc, điều kiện, chi phí và lộ trình hồ sơ.' %></p></div>
+  <a class="btn2 btn2-ghost" href="/admin/du-hoc?category=<%= encodeURIComponent(program.category==='Thông tin trường'?'Thông tin trường':'Chương trình du học') %>">← Quay lại</a>
+</div>
+<% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
+<form method="post" action="<%= mode==='create' ? '/admin/du-hoc/moi' : '/admin/du-hoc/'+program.id+'/sua' %>" enctype="multipart/form-data" class="panel form" data-content-form data-content-type="du-hoc">
+  <div class="row2">
+    <div class="f">
+      <label>Tên chương trình / trường *</label>
+      <input name="title" value="<%= program.title || '' %>" required placeholder="VD: Trường Đại học Yonsei">
+    </div>
+    <div class="f">
+        <label>Tên quốc tế / tiếng Anh (nếu có)</label>
+        <input name="subtitle" value="<%= program.subtitle || '' %>" placeholder="Yonsei University">
+    </div>
+  </div>
+  <div class="row2">
+    <div class="f">
+      <label>Danh mục</label>
+      <select name="category">
+        <option value="Thông tin trường" <%= program.category==='Thông tin trường'?'selected':'' %>>Thông tin trường</option>
+        <option value="Chương trình du học" <%= program.category!=='Thông tin trường'?'selected':'' %>>Chương trình du học</option>
+      </select>
+    </div>
+    <div class="f">
+      <label>Đường dẫn (slug) — để trống sẽ tự tạo</label>
+      <input name="slug" value="<%= program.slug || '' %>" placeholder="tu-dong-tao-tu-ten">
+    </div>
+  </div>
+
+  <div class="f">
+    <label>Ảnh bìa chương trình / trường</label>
+    <div class="cover-box">
+      <div class="cover-preview" id="coverWrap" <%= program.cover_image ? '' : 'style="display:none"' %>>
+        <img id="coverPreview" src="<%= program.cover_image || '' %>" alt="Ảnh bìa">
+      </div>
+      <label class="cover-pick">
+        <span id="coverPickText">📷 Chọn ảnh từ máy…</span>
+        <input type="file" name="cover_image" accept="image/*" id="coverInput" hidden>
+      </label>
+      <% if (program.cover_image) { %>
+        <label class="cover-remove"><input type="checkbox" name="remove_cover" value="1"> Xoá ảnh hiện tại</label>
+      <% } %>
+    </div>
+    <small class="muted">Chấp nhận JPG, PNG, WEBP, GIF — tối đa 5MB. Nếu trường chưa có ảnh, hệ thống ưu tiên ảnh từ website chính thức rồi mới tìm ảnh bên ngoài có nguồn và giấy phép rõ ràng.</small>
+    <% if (program.cover_source_url) { %>
+      <small class="muted">
+        Nguồn ảnh tự động:
+        <a href="<%= program.cover_source_url %>" target="_blank" rel="noopener noreferrer"><%= program.cover_attribution || program.cover_source_url %></a>
+      </small>
+    <% } %>
+  </div>
+  <div class="row3">
+    <div class="f">
+      <label>Màu bìa dự phòng</label>
+      <select name="cover">
+        <option value="p1" <%= program.cover==='p1'?'selected':'' %>>Cam bình minh</option>
+        <option value="p2" <%= program.cover==='p2'?'selected':'' %>>Xanh dương</option>
+        <option value="p3" <%= program.cover==='p3'?'selected':'' %>>Navy đêm</option>
+      </select>
+    </div>
+    <div class="f">
+      <label>Thứ tự hiển thị (nhỏ hiện trước)</label>
+      <input name="sort_order" type="number" value="<%= program.sort_order != null ? program.sort_order : 0 %>" placeholder="0">
+    </div>
+    <div class="f">
+      <label>Trạng thái</label>
+      <select name="published">
+        <option value="1" <%= (program.published==1||program.published===undefined)?'selected':'' %>>Hiển thị</option>
+        <option value="0" <%= program.published==0?'selected':'' %>>Ẩn</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="f">
+    <label>Mô tả ngắn (hiện ở thẻ)</label>
+    <textarea name="excerpt" rows="2" placeholder="1–2 câu giới thiệu ngắn về chương trình/trường..."><%= program.excerpt || '' %></textarea>
+  </div>
+  <div class="row2">
+    <div class="f"><label>Chuyên viên phụ trách (nếu có)</label><input name="author_name" value="<%= program.author_name || '' %>" placeholder="Để trống nếu dùng tên SOL DREAM EDUCATION"></div>
+    <div class="f"><label>Vai trò / chuyên môn</label><input name="author_role" value="<%= program.author_role || '' %>" placeholder="VD: Chuyên viên tư vấn hồ sơ du học Hàn Quốc"></div>
+  </div>
+  <div class="f">
+    <label>Nội dung chi tiết</label>
+    <%- include('partials/rich-editor', { name: 'content', value: program.content || '', placeholder: 'Dán nguyên nội dung chương trình, bảng học phí, điều kiện tuyển sinh hoặc hình ảnh vào đây…' }) %>
+  </div>
+  <%- include('partials/seo-fields', { item: program }) %>
+  <div class="f">
+    <label>Nguồn đối chiếu chính thức</label>
+    <textarea name="source_urls" rows="3" placeholder="Mỗi dòng một URL chính thức của trường hoặc cơ quan quản lý"><%= program.source_urls || '' %></textarea>
+    <small class="muted">Nguồn được hiển thị trên trang chi tiết và đưa vào dữ liệu có cấu trúc để người đọc và công cụ tìm kiếm đối chiếu.</small>
+  </div>
+
+  <div class="form__actions">
+    <button type="submit" class="btn2 btn2-primary"><%= mode==='create' ? (program.category==='Thông tin trường'?'Thêm trường':'Thêm chương trình') : 'Lưu thay đổi' %></button>
+    <a href="/admin/du-hoc?category=<%= encodeURIComponent(program.category==='Thông tin trường'?'Thông tin trường':'Chương trình du học') %>" class="btn2 btn2-ghost">Huỷ</a>
+  </div>
+</form>
+
+<script>
+(function(){
+  var inp=document.getElementById('coverInput');
+  var wrap=document.getElementById('coverWrap');
+  var img=document.getElementById('coverPreview');
+  var txt=document.getElementById('coverPickText');
+  if(!inp) return;
+  inp.addEventListener('change',function(){
+    var f=this.files&&this.files[0];
+    if(!f) return;
+    img.src=URL.createObjectURL(f);
+    wrap.style.display='block';
+    txt.textContent='📷 '+f.name;
+    var rm=document.querySelector('input[name=remove_cover]');
+    if(rm) rm.checked=false;
+  });
+})();
+</script>

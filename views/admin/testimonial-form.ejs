@@ -1,0 +1,20 @@
+<div class="adm__head"><div><h1><%= mode === 'create' ? 'Thêm cảm nhận học viên' : 'Sửa cảm nhận học viên' %></h1><p>Nội dung đã bật hiển thị sẽ xuất hiện trên trang chủ và được đưa vào dữ liệu tra cứu của chatbot.</p></div><a class="btn2 btn2-ghost" href="/admin/cam-nhan">← Quay lại</a></div>
+<% if (error) { %><div class="flash error"><%= error %></div><% } %>
+<form class="panel form" method="post" enctype="multipart/form-data" action="<%= mode === 'create' ? '/admin/cam-nhan/moi' : '/admin/cam-nhan/' + testimonial.id + '/sua' %>">
+  <div class="row2">
+    <div class="f"><label>Tên học viên</label><input name="name" maxlength="160" required value="<%= testimonial.name || '' %>"></div>
+    <div class="f"><label>Vai trò / lớp / kỳ nhập học</label><input name="role" maxlength="200" value="<%= testimonial.role || '' %>" placeholder="Ví dụ: Lớp tiếng Hàn giao tiếp"></div>
+  </div>
+  <div class="f"><label>Nội dung cảm nhận</label><textarea name="quote" rows="6" maxlength="3000" required><%= testimonial.quote || '' %></textarea></div>
+  <div class="row3">
+    <div class="f"><label>Ảnh đại diện</label><input name="avatar_image" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif"><small class="muted">JPG, PNG, WebP, GIF hoặc AVIF; tối đa 5MB.</small></div>
+    <div class="f"><label>Chữ viết tắt khi không có ảnh</label><input name="initials" maxlength="3" value="<%= testimonial.initials || '' %>" placeholder="SD"></div>
+    <div class="f"><label>Số sao</label><select name="rating"><% [5,4,3,2,1].forEach(function(value){ %><option value="<%= value %>" <%= Number(testimonial.rating || 5) === value ? 'selected' : '' %>><%= value %> sao</option><% }); %></select></div>
+  </div>
+  <% if (testimonial.avatar_image) { %><div class="current-avatar"><img src="<%= testimonial.avatar_image %>" alt="Ảnh đại diện hiện tại"><label><input type="checkbox" name="remove_avatar" value="1"> Xóa ảnh hiện tại</label></div><% } %>
+  <div class="row2">
+    <div class="f"><label>Thứ tự</label><input name="sort_order" type="number" value="<%= testimonial.sort_order || 0 %>"></div>
+    <label class="check"><input type="checkbox" name="published" value="1" <%= testimonial.published ? 'checked' : '' %>> Hiển thị trên trang chủ</label>
+  </div>
+  <button class="btn2 btn2-primary" type="submit"><%= mode === 'create' ? 'Thêm cảm nhận' : 'Lưu thay đổi' %></button>
+</form>

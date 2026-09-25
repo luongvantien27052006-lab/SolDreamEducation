@@ -1,0 +1,96 @@
+<div class="adm__head">
+  <div><h1><%= mode==='create' ? 'Thêm bài viết' : 'Sửa bài viết' %></h1><p>Nội dung sẽ hiển thị trong Cẩm nang du học Hàn Quốc trên website.</p></div>
+  <a class="btn2 btn2-ghost" href="/admin/tin-tuc">← Quay lại</a>
+</div>
+<% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
+<form method="post" action="<%= mode==='create' ? '/admin/tin-tuc/moi' : '/admin/tin-tuc/'+post.id+'/sua' %>" enctype="multipart/form-data" class="panel form" data-content-form data-content-type="tin-tuc">
+  <div class="f">
+    <label>Tiêu đề *</label>
+    <input name="title" value="<%= post.title || '' %>" required placeholder="VD: Du học Hàn Quốc 2026 cần chuẩn bị gì?">
+  </div>
+  <div class="row2">
+    <div class="f">
+      <label>Danh mục</label>
+      <input name="category" value="<%= post.category || 'Tin tức' %>" placeholder="Tin tức / Cẩm nang / Câu chuyện">
+    </div>
+    <div class="f">
+      <label>Đường dẫn (slug) — để trống sẽ tự tạo</label>
+      <input name="slug" value="<%= post.slug || '' %>" placeholder="tu-dong-tao-tu-tieu-de">
+    </div>
+  </div>
+  <div class="f">
+    <label>Ảnh bìa bài viết</label>
+    <div class="cover-box">
+      <div class="cover-preview" id="coverWrap" <%= post.cover_image ? '' : 'style="display:none"' %>>
+        <img id="coverPreview" src="<%= post.cover_image || '' %>" alt="Ảnh bìa">
+      </div>
+      <label class="cover-pick">
+        <span id="coverPickText">📷 Chọn ảnh từ máy…</span>
+        <input type="file" name="cover_image" accept="image/*" id="coverInput" hidden>
+      </label>
+      <% if (post.cover_image) { %>
+        <label class="cover-remove"><input type="checkbox" name="remove_cover" value="1"> Xoá ảnh hiện tại</label>
+      <% } %>
+    </div>
+    <small class="muted">Chấp nhận JPG, PNG, WEBP, GIF — tối đa 5MB. Khuyến nghị tỉ lệ ngang ~1200×800px. Nếu không tải ảnh, hệ thống dùng màu bìa bên dưới.</small>
+  </div>
+
+  <div class="row2">
+    <div class="f">
+      <label>Màu bìa dự phòng (khi không có ảnh)</label>
+      <select name="cover">
+        <option value="p1" <%= post.cover==='p1'?'selected':'' %>>Cam bình minh</option>
+        <option value="p2" <%= post.cover==='p2'?'selected':'' %>>Xanh dương</option>
+        <option value="p3" <%= post.cover==='p3'?'selected':'' %>>Navy đêm</option>
+      </select>
+    </div>
+    <div class="f">
+      <label>Trạng thái</label>
+      <select name="published">
+        <option value="1" <%= (post.published==1||post.published===undefined)?'selected':'' %>>Hiển thị</option>
+        <option value="0" <%= post.published==0?'selected':'' %>>Ẩn</option>
+      </select>
+    </div>
+  </div>
+  <div class="f">
+    <label>Mô tả ngắn (excerpt)</label>
+    <textarea name="excerpt" rows="2" placeholder="1–2 câu tóm tắt hiển thị ở thẻ tin tức..."><%= post.excerpt || '' %></textarea>
+  </div>
+  <div class="row2">
+    <div class="f"><label>Chuyên viên phụ trách (nếu có)</label><input name="author_name" value="<%= post.author_name || '' %>" placeholder="Để trống nếu dùng tên SOL DREAM EDUCATION"></div>
+    <div class="f"><label>Vai trò / chuyên môn</label><input name="author_role" value="<%= post.author_role || '' %>" placeholder="VD: Chuyên viên tư vấn du học Hàn Quốc"></div>
+  </div>
+  <div class="f">
+    <label>Nội dung bài viết</label>
+    <%- include('partials/rich-editor', { name: 'content', value: post.content || '', placeholder: 'Dán nội dung từ Word, Google Docs, Excel hoặc trang web vào đây…' }) %>
+  </div>
+  <%- include('partials/seo-fields', { item: post }) %>
+  <div class="f">
+    <label>Nguồn đối chiếu chính thức</label>
+    <textarea name="source_urls" rows="3" placeholder="Mỗi dòng một URL, ví dụ: https://www.studyinkorea.go.kr/..."><%= post.source_urls || '' %></textarea>
+    <small class="muted">Ưu tiên website trường, Study in Korea, cơ quan chính phủ hoặc tài liệu gốc. Các URL sẽ hiển thị công khai và được khai báo trong Article schema.</small>
+  </div>
+  <div class="form__actions">
+    <button type="submit" class="btn2 btn2-primary"><%= mode==='create' ? 'Đăng bài' : 'Lưu thay đổi' %></button>
+    <a href="/admin/tin-tuc" class="btn2 btn2-ghost">Huỷ</a>
+  </div>
+</form>
+
+<script>
+(function(){
+  var inp=document.getElementById('coverInput');
+  var wrap=document.getElementById('coverWrap');
+  var img=document.getElementById('coverPreview');
+  var txt=document.getElementById('coverPickText');
+  if(!inp) return;
+  inp.addEventListener('change',function(){
+    var f=this.files&&this.files[0];
+    if(!f) return;
+    img.src=URL.createObjectURL(f);
+    wrap.style.display='block';
+    txt.textContent='📷 '+f.name;
+    var rm=document.querySelector('input[name=remove_cover]');
+    if(rm) rm.checked=false;
+  });
+})();
+</script>

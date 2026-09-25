@@ -1,0 +1,34 @@
+<div class="adm__head">
+  <div><h1>Giới thiệu website</h1><p>Thêm, sửa, sắp xếp, ẩn/hiện hoặc xóa nội dung giới thiệu ở trang chủ và trang Giới thiệu.</p></div>
+  <a class="btn2 btn2-primary" href="/admin/gioi-thieu/moi">+ Thêm phần giới thiệu</a>
+</div>
+<% if (flash) { %><div class="flash"><%= flash %></div><% } %>
+
+<% function renderGroup(title, location, sections) { %>
+  <section class="panel">
+    <div class="panel__head">
+      <div><h2><%= title %></h2><p class="muted"><%= sections.length %> phần nội dung</p></div>
+      <a class="btn2 btn2-ghost" href="/admin/gioi-thieu/moi?location=<%= location %>">+ Thêm vào mục này</a>
+    </div>
+    <% if (!sections.length) { %><p class="muted">Chưa có phần giới thiệu nào trong khu vực này.</p><% } %>
+    <div class="about-admin-list">
+      <% sections.forEach(function(section){ %>
+        <article class="about-admin-item">
+          <div>
+            <span class="pill <%= section.active ? 'on' : 'off' %>"><%= section.active ? 'Đang hiển thị' : 'Đang ẩn' %></span>
+            <strong><%= section.title %></strong>
+            <small><%= section.eyebrow || 'Không có nhãn nhỏ' %> · Thứ tự <%= section.sort_order %> · <%= section.section_style %></small>
+          </div>
+          <div class="about-admin-actions">
+            <a class="btn2 btn2-ghost" href="/admin/gioi-thieu/<%= section.id %>/sua">Sửa</a>
+            <form class="inline" method="post" action="/admin/gioi-thieu/<%= section.id %>/toggle"><button class="btn2 btn2-ghost" type="submit"><%= section.active ? 'Ẩn' : 'Hiện' %></button></form>
+            <form class="inline" method="post" action="/admin/gioi-thieu/<%= section.id %>/xoa" onsubmit="return confirm('Xóa phần giới thiệu này?')"><button class="btn2 btn2-ghost lnk-del" type="submit">Xóa</button></form>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+<% } %>
+
+<% renderGroup('Giới thiệu trên trang chủ', 'home', homeSections); %>
+<% renderGroup('Nội dung trang /gioi-thieu', 'page', pageSections); %>

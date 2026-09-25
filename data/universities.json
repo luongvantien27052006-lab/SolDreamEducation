@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "source": {
+    "document": "List các trường đại học .docx",
+    "imported_at": "2026-08-26",
+    "language": "vi",
+    "notice": "Thông tin được trích từ tài liệu Sol Dream cung cấp; học phí, học bổng, kỳ tuyển sinh và chính sách có thể thay đổi và cần xác nhận trước khi đăng ký."
+  },
+  "universities": [
+    {
+      "id": "hannam",
+      "name": "Trường Đại học Hannam",
+      "english_name": "Hannam University",
+      "korean_name": "한남대학교",
+      "aliases": [
+        "Hannam",
+        "Đại học Hannam",
+        "Hannam University",
+        "한남대학교"
+      ],
+      "location_terms": [
+        "Daejeon",
+        "Daedeok-gu"
+      ],
+      "blufSummary": "Hannam University nằm tại Daejeon, có học phí hệ tiếng khoảng 5.200.000 KRW mỗi năm và ký túc xá 1.000.000–1.400.000 KRW mỗi 6 tháng. Trường có chứng nhận quản lý sinh viên; phân hạng visa, GPA đầu vào và sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "topCategory": null,
+      "financials": {
+        "tuitionKrwYear": 5200000,
+        "tuitionVndYear": 102600000,
+        "dormitoryHalfYear": { "minKrw": 1000000, "maxKrw": 1400000 },
+        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
+        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+      },
+      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "caseStudies": [],
+      "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
+      "sections": [
+        {
+          "id": "overview",
+          "title": "1. Thông tin chung",
+          "content": "- Tên tiếng Hàn: 한남대학교\n- Tên tiếng Anh: Hannam University\n- Năm thành lập: 1956\n- Website: https://www.hannam.ac.kr/\n- Điện thoại: +82 42-629-7114\n- Địa chỉ cơ sở: 133 Ojeong-ro, Daedeok-gu, Daejeon.\n- Loại hình: Đại học Tư thục\n- Đặc điểm nổi bật & Xếp hạng:\n- Vị trí: Tọa lạc tại thành phố Daejeon – \"Thung lũng Silicon\" của Hàn Quốc.\n- Thế mạnh đào tạo: Kinh doanh, Ngôn ngữ, Thiết kế, Công nghệ Thông tin và Sinh học.\n- Chứng nhận: Trường đại học đạt chuẩn quản lý sinh viên quốc tế xuất sắc do Bộ Giáo dục Hàn Quốc cấp."
+        },
+        {
+          "id": "programs",
+          "title": "2. Chương trình đào tạo",
+          "content": "#### a) Chương trình học tiếng Hàn\n- Khóa học tiếng Hàn bài bản, nhiều hoạt động trải nghiệm văn hóa.\n- Các kỳ nhập học: Tháng 3, 6, 9, 12 hàng năm.\n#### b) Chương trình Đại học (Chuyên ngành)\n- Thời gian nhập học: Tháng 3 và Tháng 9 hàng năm.\n| Khối ngành | Chuyên ngành đào tạo |\n| --- | --- |\n| Kinh tế & Quản trị | Quản trị Kinh doanh, Thương mại Quốc tế, Quản lý Khách sạn & Du lịch, Tài chính |\n| Nhân văn & Xã hội | Ngôn ngữ Hàn/Anh/Trung, Báo chí Truyền thông, Hành chính công, Luật |\n| Kỹ thuật & Công nghệ | Kỹ thuật Máy tính, Công nghệ Thông tin, Kỹ thuật Hóa sinh, Kiến trúc |\n| Nghệ thuật & Thiết kế | Thiết kế Đồ họa, Thiết kế Thời trang, Mỹ thuật |\n#### c) Chương trình Sau Đại học (Cao học)\n- Đào tạo các bậc Thạc sĩ và Tiến sĩ về Khoa học Tự nhiên, Kỹ thuật, Xã hội Nhân văn và Quản trị."
+        },
+        {
+          "id": "tuition",
+          "title": "3. Học phí",
+          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Mức học phí: 1.300.000 won / kỳ (~5.200.000 won / năm).\n#### b) Học phí Chương trình Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Nhân văn, Kinh tế, Xã hội | 3.200.000 – 3.500.000 |\n| Kỹ thuật, Khoa học Tự nhiên | 4.000.000 – 4.400.000 |\n| Nghệ thuật & Thiết kế | 4.200.000 – 4.500.000 |\n#### c) Học phí Chương trình Sau Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Khoa Nhân văn & Xã hội | 4.300.000 – 4.800.000 |\n| Khoa Kỹ thuật & Tự nhiên | 5.300.000 – 5.900.000 |"
+        },
+        {
+          "id": "scholarships",
+          "title": "4. Chính sách Học bổng",
+          "content": "| Loại học bổng | Đối tượng | Lợi ích | Điều kiện / Yêu cầu | Điều kiện duy trì học bổng |\n| --- | --- | --- | --- | --- |\n| Học bổng TOPIK | Sinh viên năm nhất | 30% - 100% học phí kỳ 1 | Đạt TOPIK 3 trở lên tại thời điểm nộp hồ sơ | Duy trì GPA ≥ 2.5/4.0 |\n| Học bổng Khuyến học | Sinh viên đang theo học | 20% - 60% học phí | Xét theo thành tích GPA học kỳ trước | Đạt GPA từ 2.8 trở lên |"
+        },
+        {
+          "id": "dormitory",
+          "title": "5. Ký túc xá",
+          "content": "- Cơ sở vật chất: Ký túc xá rộng rãi, an ninh tốt, tiện nghi đầy đủ (bàn, tủ, điều hòa, Wi-Fi, phòng tự học).\n- Chi phí ký túc xá: ~1.000.000 – 1.400.000 won / 6 tháng."
+        }
+      ]
+    },
+    {
+      "id": "woosong",
+      "name": "Trường Đại học Woosong",
+      "english_name": "Woosong University",
+      "korean_name": "우송대학교",
+      "aliases": [
+        "Woosong",
+        "Đại học Woosong",
+        "Woosong University",
+        "우송대학교",
+        "SolBridge",
+        "Endicott"
+      ],
+      "location_terms": [
+        "Daejeon",
+        "Dong-gu"
+      ],
+      "blufSummary": "Woosong University nằm tại Daejeon, có học phí hệ tiếng khoảng 4.800.000 KRW mỗi năm và ký túc xá 1.200.000–1.600.000 KRW mỗi 6 tháng. Trường nổi bật với SolBridge và Endicott; phân hạng visa, GPA đầu vào, TOPIK và sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "topCategory": null,
+      "financials": {
+        "tuitionKrwYear": 4800000,
+        "tuitionVndYear": 94700000,
+        "dormitoryHalfYear": { "minKrw": 1200000, "maxKrw": 1600000 },
+        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
+        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+      },
+      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "caseStudies": [],
+      "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
+      "sections": [
+        {
+          "id": "overview",
+          "title": "1. Thông tin chung",
+          "content": "- Tên tiếng Hàn: 우송대학교\n- Tên tiếng Anh: Woosong University\n- Năm thành lập: 1995\n- Website: https://www.wsu.ac.kr/\n- Điện thoại: +82 42-630-9600\n- Địa chỉ cơ sở: 171 Dongdaejeon-ro, Dong-gu, Daejeon.\n- Loại hình: Đại học Tư thục\n- Đặc điểm nổi bật & Xếp hạng:\n- Đặc điểm nổi bật: Đào tạo chương trình bằng 100% tiếng Anh thông qua Trường Kinh doanh SolBridge (AACSB chứng nhận) và Trường Đào tạo Quốc tế Endicott.\n- Vị trí: Nằm tại trung tâm giao thông Daejeon.\n- Thế mạnh đào tạo: Quản trị Kinh doanh International, Quản lý Khách sạn - Ẩm thực (Sol International School), CNTT."
+        },
+        {
+          "id": "programs",
+          "title": "2. Chương trình đào tạo",
+          "content": "#### a) Chương trình học tiếng Hàn & Tiếng Anh\n- Đào tạo tiếng Hàn chuẩn và các chương trình chuẩn bị tiếng Anh khắt khe.\n- Các kỳ nhập học: Tháng 3, 6, 9, 12 hàng năm.\n#### b) Chương trình Đại học (Chuyên ngành)\n- Thời gian nhập học: Tháng 3 và Tháng 9 hàng năm.\n| Trường thành viên | Khối ngành | Chuyên ngành đào tạo |\n| --- | --- | --- |\n| SolBridge International | Kinh doanh (100% tiếng Anh) | Quản trị Kinh doanh, Tài chính, Marketing, Khởi nghiệp |\n| Endicott College | Công nghệ & Nghiên cứu toàn cầu | Quản lý Dịch vụ Công nghệ, Quản trị Toàn cầu, Trí tuệ Nhân tạo |\n| Sol International (SIS) | Khách sạn & Ẩm thực | Nghệ thuật Ẩm thực Quốc tế, Quản lý Khách sạn Toàn cầu |\n| Khoa chuyên ngành tiếng Hàn | Kỹ thuật & Xã hội | Kỹ thuật Đường sắt, Y tế, Truyền thông |\n#### c) Chương trình Sau Đại học (Cao học)\n- Đào tạo Thạc sĩ MBA (SolBridge), Thạc sĩ/Tiến sĩ Quản lý Khách sạn, Công nghệ thông tin."
+        },
+        {
+          "id": "tuition",
+          "title": "3. Học phí",
+          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Mức học phí: 1.200.000 won / kỳ (~4.800.000 won / năm).\n#### b) Học phí Chương trình Đại học\n| Trường / Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Chương trình giảng dạy tiếng Hàn | 3.200.000 – 3.800.000 |\n| Trường Quốc tế Endicott (SIS) | ~4.500.000 |\n| Trường Kinh doanh SolBridge (100% Tiếng Anh) | ~5.000.000 – 5.500.000 |\n#### c) Học phí Chương trình Sau Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Chương trình Cao học chung | 4.500.000 – 5.200.000 |\n| SolBridge MBA | ~6.000.000 – 7.000.000 |"
+        },
+        {
+          "id": "scholarships",
+          "title": "4. Chính sách Học bổng",
+          "content": "| Loại học bổng | Đối tượng | Lợi ích | Điều kiện / Yêu cầu | Điều kiện duy trì học bổng |\n| --- | --- | --- | --- | --- |\n| Học bổng SolBridge / SIS | Sinh viên năm nhất | 30% - 100% học phí | Xét điểm TOEFL/IELTS hoặc TOPIK cao + Phỏng vấn | Duy trì GPA ≥ 3.0/4.5 mỗi kỳ |\n| Học bổng Khuyến học | Sinh viên quốc tế | 30% - 70% học phí | Thành tích GPA kỳ học trước xuất sắc | Đạt GPA theo mức quy định |"
+        },
+        {
+          "id": "dormitory",
+          "title": "5. Ký túc xá",
+          "content": "- Cơ sở vật chất: Hệ thống ký túc xá SolGeo, Pine Hall hiện đại, tiện nghi tiêu chuẩn quốc tế.\n- Chi phí ký túc xá: ~1.200.000 – 1.600.000 won / 6 tháng (bao gồm tiền ăn tùy gói)."
+        }
+      ]
+    },
+    {
+      "id": "hanyang",
+      "name": "Trường Đại học Hanyang",
+      "english_name": "Hanyang University",
+      "korean_name": "한양대학교",
+      "aliases": [
+        "Hanyang",
+        "Đại học Hanyang",
+        "Hanyang University",
+        "한양대학교",
+        "Hanyang ERICA",
+        "ERICA"
+      ],
+      "location_terms": [
+        "Seoul",
+        "Ansan",
+        "Gyeonggi-do"
+      ],
+      "blufSummary": "Hanyang University có cơ sở tại Seoul và Ansan; học phí hệ tiếng Seoul khoảng 7.200.000 KRW mỗi năm, ký túc xá 1.250.000–2.500.000 KRW mỗi 6 tháng. Trường mạnh về kỹ thuật; phân hạng visa, GPA đầu vào và mức sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "topCategory": null,
+      "financials": {
+        "tuitionKrwYear": 7200000,
+        "tuitionVndYear": 142100000,
+        "dormitoryHalfYear": { "minKrw": 1250000, "maxKrw": 2500000 },
+        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "tuitionBasis": "Chương trình tiếng Hàn tại Seoul Campus; ERICA khoảng 5.450.000 KRW/năm",
+        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+      },
+      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Học bổng có tiêu chí TOPIK riêng; chưa có điều kiện nhập học tối thiểu đã xác minh" },
+      "caseStudies": [],
+      "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
+      "sections": [
+        {
+          "id": "overview",
+          "title": "1. Thông tin chung",
+          "content": "- Tên tiếng Hàn: 한양대학교\n- Tên tiếng Anh: Hanyang University\n- Năm thành lập: 1939\n- Website: https://www.hanyang.ac.kr/\n- Địa chỉ cơ sở:\n- Seoul Campus: 222 Wangsimni-ro, Seongdong-gu, Seoul\n- ERICA Campus: 55 Hanyangdaehak-ro, Sangnok-gu, Ansan, Gyeonggi-do.\n- Loại hình: Đại học Tư thục\n- Đặc điểm nổi bật & Xếp hạng:\n- Vị trí & Quy mô: Thuộc Top 10 trường Đại học danh giá nhất Hàn Quốc (nhóm SKY + Hanyang).\n- Thế mạnh đào tạo: Đứng số 1 Hàn Quốc về khối ngành Kỹ thuật, Công nghệ, Kiến trúc và Kinh doanh.\n- Xếp hạng: Top 150-160 các trường đại học tốt nhất thế giới (QS World University Rankings). Xếp hạng 1 về số lượng cựu sinh viên giữ chức vụ CEO tại các doanh nghiệp lớn/liên doanh tại Hàn Quốc."
+        },
+        {
+          "id": "programs",
+          "title": "2. Chương trình đào tạo",
+          "content": "#### a) Chương trình học tiếng Hàn\n- Đào tạo toàn diện 4 kỹ năng (Nghe, Nói, Đọc, Viết) kết hợp các hoạt động trải nghiệm văn hóa đa dạng.\n- Các kỳ nhập học: Tháng 3, 6, 9, 12 hàng năm (4 kỳ/năm)\n#### b) Chương trình Đại học (Chuyên ngành)\n- Thời gian nhập học: Tháng 3 và Tháng 9 hàng năm.\n| Khối ngành | Chuyên ngành đào tạo |\n| --- | --- |\n| Kỹ thuật & Công nghệ | Kỹ thuật Máy tính, Kỹ thuật Cơ khí, Kiến trúc, Kỹ thuật Điện tử, Xây dựng, Công nghệ Sinh học/Bionano |\n| Kinh tế & Quản trị | Quản trị Kinh doanh (MBA/BBA), Tài chính - Kinh tế, Nghiên cứu Quốc tế, Thương mại |\n| Nhân văn & Xã hội | Ngôn ngữ & Văn hóa Hàn/Anh/Trung, Báo chí & Truyền thông, Hành chính công, Luật, Khoa học Chính sách |\n| Nghệ thuật & Thiết kế | Thiết kế Đồ họa, Thiết kế Truyền thông, Thiết kế Thời trang, Âm nhạc, Thể thao |\n#### c) Chương trình Sau Đại học (Cao học)\n- Đào tạo Thạc sĩ và Tiến sĩ thuộc hơn 87 khoa chuyên ngành: Khoa học Tự nhiên, Kỹ thuật, Xã hội Nhân văn, Y học, Nghiên cứu Quốc tế và Quản trị Kinh doanh"
+        },
+        {
+          "id": "tuition",
+          "title": "3. Học phí",
+          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Seoul Campus: ~1.800.000 won / kỳ (~7.200.000 won / năm).\n- ERICA Campus: ~1.360.000 – 1.400.000 won / kỳ (~5.450.000 won / năm).\n- Phí xét tuyển / Phí nhập học: 100.000 – 150.000 won (đóng 1 lần\n#### b) Học phí Chương trình Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Nhân văn, Kinh tế, Xã hội | 4.100.000 – 4.600.000 |\n| Khoa học Tự nhiên, Thể dục | 5.300.000 – 5.950.000 |\n| Kỹ thuật, Điện toán | 6.200.000 – 7.370.000 |\n| Nghệ thuật & Y dược | 6.500.000 – 9.700.000 |\n#### c) Học phí Chương trình Sau Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Khoa Nhân văn & Xã hội / Quốc tế học | 5.900.000 – 6.900.000 |\n| Khoa Kỹ thuật, Tự nhiên & Y sinh | 7.000.000 – 8.400.000 |"
+        },
+        {
+          "id": "scholarships",
+          "title": "4. Chính sách Học bổng",
+          "content": "| Loại học bổng | Đối tượng | Lợi ích | Điều kiện / Yêu cầu | Điều kiện duy trì học bổng |\n| --- | --- | --- | --- | --- |\n| Học bổng TOPIK / Quốc tế (HISP / HIEA) | Sinh viên quốc tế năm nhất | 30% - 100% học phí kỳ 1 | Đạt TOPIK 4 trở lên (hoặc IELTS 6.5+ / TOEFL iBT 90+) | Tùy theo kết quả xét tuyển hồ sơ & phỏng vấn |\n| Học bổng Khuyến học (Thành tích xuất sắc) | Sinh viên đang theo học | 30% - 100% học phí | Xét theo thành tích GPA học kỳ trước | Đạt GPA ≥ 3.0/4.5 hoặc 4.0/4.5 tùy mức học bổng |\n| Học bổng Viện Giáo dục Quốc tế | Học sinh hoàn thành hệ tiếng tại Hanyang | 30% - 50% học phí kỳ 1 | Tốt nghiệp cấp độ 5 hoặc 6 tại Viện ngôn ngữ của trường | Áp dụng cho kỳ đầu tiên |"
+        },
+        {
+          "id": "dormitory",
+          "title": "5. Ký túc xá",
+          "content": "- Cơ sở vật chất: Hiện đại, sạch sẽ, an ninh 24/7. Phòng trang bị đầy đủ bàn học, tủ quần áo, điều hòa, Wi-Fi. Tiện ích chung gồm có phòng tự học, phòng gym, phòng máy tính, phòng giặt, nhà ăn.\n- Chi phí ký túc xá: ~1.250.000 – 2.500.000 won / 6 tháng (tùy thuộc vào dạng phòng đơn, phòng đôi hoặc phòng 3-4 người tại Seoul Campus hay ERICA Campus)."
+        }
+      ]
+    },
+    {
+      "id": "daeduk",
+      "name": "Trường Đại học Daeduk",
+      "english_name": "Daeduk University",
+      "korean_name": "대덕대학교",
+      "aliases": [
+        "Daeduk",
+        "Đại học Daeduk",
+        "Cao đẳng Daeduk",
+        "Daeduk University",
+        "대덕대학교",
+        "DDU"
+      ],
+      "location_terms": [
+        "Daejeon",
+        "Yuseong-gu",
+        "Daedeok Innopolis"
+      ],
+      "blufSummary": "Daeduk University nằm tại khu Daedeok Innopolis, Daejeon, có học phí hệ tiếng khoảng 4.900.000 KRW mỗi năm. Ký túc xá và phí quản lý khoảng 1.350.000 KRW mỗi 6 tháng; phân hạng visa, GPA, TOPIK đầu vào và sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "topCategory": null,
+      "financials": {
+        "tuitionKrwYear": 4900000,
+        "tuitionVndYear": 96700000,
+        "dormitoryHalfYear": { "minKrw": 1350000, "maxKrw": 1350000 },
+        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
+        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+      },
+      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "caseStudies": [],
+      "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
+      "sections": [
+        {
+          "id": "overview",
+          "title": "1. Thông tin chung",
+          "content": "- Tên tiếng Hàn: 대덕대학교\n- Tên tiếng Anh: Daeduk University\n- Năm thành lập: 1981\n- Website: https://www.ddu.ac.kr/\n- Điện thoại: +82 42-866-0200\n- Địa chỉ cơ sở: 68 Gajeongbuk-ro, Yuseong-gu, Daejeon.\n- Loại hình: Đại học Tư thục (Hệ Cao đẳng / Đại học ứng dụng)\n- Đặc điểm nổi bật & Xếp hạng:\n- Vị trí: Đặt tại khu Nghiên cứu & Phát triển Daedeok Innopolis (Daejeon).\n- Thế mạnh đào tạo: Kỹ thuật Quân sự, Điều dưỡng, Kỹ thuật Cơ khí, Thiết kế Thời trang / Làm đẹp, Dịch vụ Hàng không.\n- Đặc điểm: Định hướng thực hành cao, hợp tác chặt chẽ với hàng trăm doanh nghiệp tại Daejeon giúp sinh viên dễ có việc làm."
+        },
+        {
+          "id": "programs",
+          "title": "2. Chương trình đào tạo",
+          "content": "#### a) Chương trình học tiếng Hàn\n- Đào tạo tiếng Hàn tập trung thực hành hội thoại và chuẩn bị TOPIK.\n- Các kỳ nhập học: Tháng 3, 9 hàng năm.\n#### b) Chương trình Đại học / Cao đẳng (Chuyên ngành)\n- Thời gian nhập học: Tháng 3 và Tháng 9 hàng năm.\n| Viện / Khối ngành | Chuyên ngành đào tạo |\n| --- | --- |\n| Kỹ thuật & Quân sự | Kỹ thuật Quân sự, Kỹ thuật Cơ khí, Kỹ thuật Điện tử, Ô tô |\n| Dịch vụ & Xã hội | Dịch vụ Hàng không, Quản trị Khách sạn, Giáo dục Trẻ em, Phúc lợi Xã hội |\n| Nghệ thuật & Làm đẹp | Thiết kế Đồ họa, Thiết kế Thời trang, Chăm sóc Mẫu / Làm đẹp, Phim & Kịch |\n#### c) Chương trình Sau Đại học (Cao học)\n- Trường chủ yếu tập trung đào tạo cử nhân và hệ cao đẳng ứng dụng chuyên sâu."
+        },
+        {
+          "id": "tuition",
+          "title": "3. Học phí",
+          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Mức học phí: 1.225.000 won / kỳ (4.900.000 won / năm).\n#### b) Học phí Chương trình Chuyên ngành\n| Viện đào tạo | Học phí (WON / kỳ) |\n| --- | --- |\n| Viện Khoa học Xã hội – Nhân văn | 2.400.000 |\n| Viện Kỹ thuật Quân sự | 2.500.000 |\n| Viện Nghệ thuật và Thể thao | 2.500.000 |\n| Viện Khoa học Tự nhiên / Điều dưỡng | 3.000.000 |"
+        },
+        {
+          "id": "scholarships",
+          "title": "4. Chính sách Học bổng",
+          "content": "| Loại học bổng | Đối tượng | Lợi ích | Điều kiện / Yêu cầu | Điều kiện duy trì học bổng |\n| --- | --- | --- | --- | --- |\n| Học bổng Thủ khoa Hệ tiếng | Sinh viên mới chuyên ngành | 100% học phí năm đầu | Đạt thành tích xuất sắc nhất khóa tiếng Hàn | N/A |\n| Học bổng Thành tích | Sinh viên chuyên ngành | 20% - 30% học phí | - GPA ≥ 2.75: Miễn 30% học phí - GPA 2.50 - 2.75: Miễn 20% học phí | Xét theo điểm GPA từng học kỳ |"
+        },
+        {
+          "id": "dormitory",
+          "title": "5. Ký túc xá",
+          "content": "- Cơ sở vật chất: 2 tòa nhà ký túc xá quy mô 860 giường, trang bị phòng đọc sách, gym, canteen.\n- Chi phí ký túc xá: ~1.000.000 won / 6 tháng + phí quản lý 350.000 won."
+        }
+      ]
+    },
+    {
+      "id": "dongyang",
+      "name": "Trường Đại học Dongyang",
+      "english_name": "Dongyang University",
+      "korean_name": "동양대학교",
+      "aliases": [
+        "Dongyang",
+        "Đại học Dongyang",
+        "Dongyang University",
+        "동양대학교",
+        "DYU"
+      ],
+      "location_terms": [
+        "Yeongju",
+        "Dongducheon",
+        "Gyeongsangbuk-do",
+        "Gyeonggi-do"
+      ],
+      "blufSummary": "Dongyang University có cơ sở tại Yeongju và Dongducheon, học phí hệ tiếng khoảng 4.400.000 KRW mỗi năm, ký túc xá 900.000–1.200.000 KRW mỗi 6 tháng. Trường mạnh về đường sắt và CNTT; phân hạng visa, GPA, TOPIK và sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "topCategory": null,
+      "financials": {
+        "tuitionKrwYear": 4400000,
+        "tuitionVndYear": 86800000,
+        "dormitoryHalfYear": { "minKrw": 900000, "maxKrw": 1200000 },
+        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
+        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+      },
+      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "caseStudies": [],
+      "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
+      "sections": [
+        {
+          "id": "overview",
+          "title": "1. Thông tin chung",
+          "content": "- Tên tiếng Hàn: 동양대학교\n- Tên tiếng Anh: Dongyang University\n- Năm thành lập: 1994\n- Website: https://www.dyu.ac.kr/\n- Điện thoại: +82 54-630-1114\n- Địa chỉ các cơ sở:\n- Yeongju Campus: 145 Dongyang-ro, Punggi-eup, Yeongju-si, Gyeongsangbuk-do.\n- Dongducheon Campus: 112 Pyeonghwa-ro, Dongducheon-si, Gyeonggi-do.\n- Loại hình: Đại học Tư thục\n- Đặc điểm nổi bật & Xếp hạng:\n- Thế mạnh đào tạo: Kỹ thuật Đường sắt (Hàng đầu Hàn Quốc), Hành chính Cảnh sát, Thiết kế Game & CNTT.\n- Phân bố cơ sở: Cơ sở Dongducheon nằm sát Seoul chuyên đào tạo Nghệ thuật & Thiết kế/CNTT."
+        },
+        {
+          "id": "programs",
+          "title": "2. Chương trình đào tạo",
+          "content": "#### a) Chương trình học tiếng Hàn\n- Chương trình chú trọng giao tiếp ứng dụng thực tế.\n- Các kỳ nhập học: Tháng 3, 6, 9, 12 hàng năm.\n#### b) Chương trình Đại học (Chuyên ngành)\n- Thời gian nhập học: Tháng 3 và Tháng 9 hàng năm.\n| Cơ sở | Khối ngành | Chuyên ngành đào tạo |\n| --- | --- | --- |\n| Yeongju Campus | Đường sắt & Kỹ thuật | Kỹ thuật Vận tải Đường sắt, Điện đường sắt, Kỹ thuật Cơ khí |\n|  | Hành chính & Xã hội | Cảnh sát học, Hành chính công, Quản trị Kinh doanh |\n| Dongducheon Campus | CNTT & Thiết kế | Thiết kế Game, Hoạt hình 3D, Thiết kế Đồ họa, Công nghệ Thông tin |\n#### c) Chương trình Sau Đại học (Cao học)\n- Đào tạo Thạc sĩ chuyên ngành Kỹ thuật Đường sắt, Thiết kế và Quản trị."
+        },
+        {
+          "id": "tuition",
+          "title": "3. Học phí",
+          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Mức học phí: 1.100.000 won / kỳ (~4.400.000 won / năm).\n#### b) Học phí Chương trình Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Khối Nhân văn & Xã hội | 3.000.000 – 3.300.000 |\n| Khối Kỹ thuật Đường sắt & CNTT | 3.800.000 – 4.200.000 |\n| Khối Thiết kế & Game | 4.000.000 – 4.300.000 |\n#### c) Học phí Chương trình Sau Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Khối Xã hội & Nhân văn | 4.000.000 – 4.400.000 |\n| Khối Kỹ thuật & Thiết kế | 5.000.000 – 5.500.000 |"
+        },
+        {
+          "id": "scholarships",
+          "title": "4. Chính sách Học bổng",
+          "content": "| Loại học bổng | Đối tượng | Lợi ích | Điều kiện / Yêu cầu | Điều kiện duy trì học bổng |\n| --- | --- | --- | --- | --- |\n| Học bổng TOPIK Đầu vào | Sinh viên năm nhất | 30% - 70% học phí | Đạt chứng chỉ TOPIK 3 trở lên | GPA kỳ trước ≥ 2.5 |\n| Học bổng Khuyến học | Sinh viên đang theo học | 20% - 50% học phí | Đạt điểm GPA cao trong kỳ trước | GPA từ 3.0 trở lên |"
+        },
+        {
+          "id": "dormitory",
+          "title": "5. Ký túc xá",
+          "content": "- Cơ sở vật chất: Ký túc xá khang trang, phòng ở 2-4 người đầy đủ trang thiết bị sinh hoạt.\n- Chi phí ký túc xá: ~900.000 – 1.200.000 won / 6 tháng."
+        }
+      ]
+    },
+    {
+      "id": "gimhae",
+      "name": "Trường Đại học Gimhae",
+      "english_name": "Gimhae College",
+      "korean_name": "김해대학교",
+      "aliases": [
+        "Gimhae",
+        "KimHae",
+        "Đại học Gimhae",
+        "Cao đẳng Gimhae",
+        "Gimhae College",
+        "김해대학교"
+      ],
+      "location_terms": [
+        "Gimhae",
+        "Busan",
+        "Gyeongsangnam-do"
+      ],
+      "blufSummary": "Gimhae College nằm tại Gimhae, giáp Busan, có học phí hệ tiếng khoảng 4.000.000 KRW mỗi năm và ký túc xá 800.000–1.000.000 KRW mỗi 6 tháng. Trường thiên về đào tạo nghề; phân hạng visa, GPA, TOPIK và sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "topCategory": null,
+      "financials": {
+        "tuitionKrwYear": 4000000,
+        "tuitionVndYear": 78900000,
+        "dormitoryHalfYear": { "minKrw": 800000, "maxKrw": 1000000 },
+        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
+        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+      },
+      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "caseStudies": [],
+      "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
+      "sections": [
+        {
+          "id": "overview",
+          "title": "1. Thông tin chung",
+          "content": "- Tên tiếng Hàn: 김해대학교\n- Tên tiếng Anh: Gimhae College (Đại học KimHae)\n- Năm thành lập: 2005\n- Website: https://www.gimhae.ac.kr/\n- Điện thoại: +82 55-320-1600\n- Địa chỉ cơ sở: 112 Gimhae-daero 2232beon-gil, Gimhae-si, Gyeongsangnam-do (Giáp với Busan).\n- Loại hình: Đại học Tư thục (Hệ Cao đẳng Chuyên nghiệp)\n- Đặc điểm nổi bật & Xếp hạng:\n- Vị trí: Thành phố Gimhae, liền kề trung tâm kinh tế Busan.\n- Thế mạnh đào tạo: Điều dưỡng, Cấp cứu Y tế, Chăm sóc Sức khỏe, Kỹ thuật Ô tô, Chăm sóc Trẻ em.\n- Đặc điểm: Tập trung đào tạo tay nghề thực hành cao, cam kết hỗ trợ sinh viên chuyển tiếp lên Đại học 4 năm hoặc xin việc làm visa D10/E7."
+        },
+        {
+          "id": "programs",
+          "title": "2. Chương trình đào tạo",
+          "content": "#### a) Chương trình học tiếng Hàn\n- Khóa tiếng Hàn chú trọng kỹ năng hội thoại và kỹ năng thực hành nghề.\n- Các kỳ nhập học: Tháng 3, 9 hàng năm.\n#### b) Chương trình Chuyên ngành (Hệ Cao đẳng / Đại học Ứng dụng)\n- Thời gian nhập học: Tháng 3 hàng năm.\n| Khối ngành | Chuyên ngành đào tạo |\n| --- | --- |\n| Y tế & Chăm sóc Sức khỏe | Điều dưỡng, Cấp cứu Y tế, Quản lý Dịch vụ Y tế |\n| Kỹ thuật & Dịch vụ | Kỹ thuật Ô tô, An toàn Công nghiệp, Dịch vụ Cảnh sát, Nấu ăn & Khách sạn |\n#### c) Chương trình Sau Đại học\n- Trường không có hệ Sau Đại học (chủ yếu tập trung hệ Cao đẳng Chuyên nghiệp và Cử nhân ứng dụng)."
+        },
+        {
+          "id": "tuition",
+          "title": "3. Học phí",
+          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Mức học phí: ~1.000.000 won / kỳ (~4.000.000 won / năm).\n#### b) Học phí Chương trình Chuyên ngành\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Khối Dịch vụ & Xã hội | 2.200.000 – 2.500.000 |\n| Khối Kỹ thuật & Y tế | 2.600.000 – 2.900.000 |"
+        },
+        {
+          "id": "scholarships",
+          "title": "4. Chính sách Học bổng",
+          "content": "| Loại học bổng | Đối tượng | Lợi ích | Điều kiện / Yêu cầu | Điều kiện duy trì học bổng |\n| --- | --- | --- | --- | --- |\n| Học bổng Nhập học | Sinh viên năm nhất | 20% - 40% học phí | Đạt TOPIK 2 - 3 | GPA kỳ trước ≥ 2.5 |\n| Học bổng Khuyến học | Sinh viên đang theo học | 20% - 50% học phí | Xét theo điểm GPA học kỳ trước | GPA ≥ 3.0 |"
+        },
+        {
+          "id": "dormitory",
+          "title": "5. Ký túc xá",
+          "content": "- Cơ sở vật chất: Ký túc xá khép kín sạch sẽ, gần trường, trang bị bàn học, tủ quần áo, internet.\n- Chi phí ký túc xá: ~800.000 – 1.000.000 won / 6 tháng."
+        }
+      ]
+    }
+  ],
+  "pendingUniversityTemplates": [
+    {
+      "id": "seoul-national-university",
+      "slug": "seoul-national-university",
+      "name": "Seoul National University",
+      "koreanName": "서울대학교",
+      "city": "Seoul",
+      "topCategory": null,
+      "blufSummary": "Seoul National University nằm tại Seoul và nổi bật về nghiên cứu đa ngành. Học phí D4, D2, tổng chi phí năm đầu, GPA, TOPIK, phân hạng visa và sổ đóng băng trong mẫu này chưa có nguồn tuyển sinh 2026 được SOL DREAM EDUCATION xác minh nên chưa được công bố.",
+      "financials": { "tuitionD4KrwYear": null, "tuitionD2KrwYear": null, "tuitionVndEstimate": null, "dormitoryHalfYearKrw": null, "dormitoryVndEstimate": null, "kStudyDepositUsd": null, "insuranceKrwMonth": null, "livingCostMonthlyEstimateVnd": null },
+      "admissionCriteria": { "minGpa": null, "maxGapYears": null, "topikRequirementD4": null, "topikRequirementD2": null },
+      "caseStudies": [],
+      "verificationStatus": "Chưa kích hoạt: cần nguồn chính thức và case study được phép công bố",
+      "lastUpdated": "2026-08"
+    },
+    {
+      "id": "chung-ang-university",
+      "slug": "chung-ang-university",
+      "name": "Chung-Ang University",
+      "koreanName": "중앙대학교",
+      "city": "Seoul",
+      "topCategory": null,
+      "blufSummary": "Chung-Ang University có cơ sở tại Seoul và được biết đến với truyền thông, nghệ thuật cùng nhiều ngành đào tạo khác. Học phí D4, D2, GPA, TOPIK, phân hạng visa, sổ đóng băng và chi phí sinh hoạt năm 2026 chưa có nguồn được xác minh nên mẫu chưa được xuất bản.",
+      "financials": { "tuitionD4KrwYear": null, "tuitionD2KrwYear": null, "tuitionVndEstimate": null, "dormitoryHalfYearKrw": null, "dormitoryVndEstimate": null, "kStudyDepositUsd": null, "insuranceKrwMonth": null, "livingCostMonthlyEstimateVnd": null },
+      "admissionCriteria": { "minGpa": null, "maxGapYears": null, "topikRequirementD4": null, "topikRequirementD2": null },
+      "caseStudies": [],
+      "verificationStatus": "Chưa kích hoạt: cần nguồn chính thức và case study được phép công bố",
+      "lastUpdated": "2026-08"
+    },
+    {
+      "id": "daegu-university",
+      "slug": "daegu-university",
+      "name": "Daegu University",
+      "koreanName": "대구대학교",
+      "city": "Gyeongsan",
+      "topCategory": null,
+      "blufSummary": "Daegu University nằm tại Gyeongsan và có hệ đào tạo đa ngành. Học phí D4, D2, ký túc xá, bảo hiểm, sinh hoạt phí, GPA, TOPIK, phân hạng visa và sổ đóng băng năm 2026 chưa được tài liệu nguồn xác minh; hồ sơ mẫu chưa được đưa vào danh mục công khai.",
+      "financials": { "tuitionD4KrwYear": null, "tuitionD2KrwYear": null, "tuitionVndEstimate": null, "dormitoryHalfYearKrw": null, "dormitoryVndEstimate": null, "kStudyDepositUsd": null, "insuranceKrwMonth": null, "livingCostMonthlyEstimateVnd": null },
+      "admissionCriteria": { "minGpa": null, "maxGapYears": null, "topikRequirementD4": null, "topikRequirementD2": null },
+      "caseStudies": [],
+      "verificationStatus": "Chưa kích hoạt: cần nguồn chính thức và case study được phép công bố",
+      "lastUpdated": "2026-08"
+    }
+  ]
+}

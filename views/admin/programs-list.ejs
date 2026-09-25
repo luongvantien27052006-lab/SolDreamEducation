@@ -1,0 +1,42 @@
+<div class="adm__head">
+  <div><h1><%= active==='schools'?'Thông tin trường':'Du học Hàn Quốc' %></h1><p><%= active==='schools'?'Quản lý hồ sơ và thông tin tuyển sinh của các trường.':'Quản lý chương trình, hồ sơ và nội dung tư vấn du học.' %></p></div>
+  <a class="btn2 btn2-primary" href="/admin/du-hoc/moi?category=<%= encodeURIComponent(active==='schools'?'Thông tin trường':'Chương trình du học') %>">+ <%= active==='schools'?'Thêm trường':'Thêm chương trình' %></a>
+</div>
+<% if (flash) { %><div class="flash"><%= flash %></div><% } %>
+<form class="content-filters" method="get">
+  <input type="hidden" name="category" value="<%= filters.category %>">
+  <input name="q" value="<%= filters.q %>" placeholder="Tìm trường, chương trình hoặc nội dung…">
+  <select name="status"><option value="all">Mọi trạng thái</option><option value="published" <%= filters.status==='published'?'selected':'' %>>Đang hiển thị</option><option value="draft" <%= filters.status==='draft'?'selected':'' %>>Bản nháp</option><option value="noindex" <%= filters.status==='noindex'?'selected':'' %>>Noindex</option></select>
+  <button class="btn2 btn2-primary" type="submit">Lọc</button><a class="btn2 btn2-ghost" href="/admin/du-hoc?category=<%= encodeURIComponent(filters.category) %>">Đặt lại</a>
+</form>
+<div class="panel">
+  <div class="tbl-scroll">
+  <table class="tbl">
+    <thead><tr><th><%= active==='schools'?'Tên trường':'Tên chương trình' %></th><th>Danh mục</th><th>GEO</th><th>Thứ tự</th><th>Trạng thái</th><th style="text-align:right">Thao tác</th></tr></thead>
+    <tbody>
+      <% programs.forEach(function(p){ %>
+        <tr>
+          <td>
+            <strong><%= p.title %></strong><% if (p.subtitle) { %> <span class="muted">· <%= p.subtitle %></span><% } %><br>
+            <small class="muted"><%= p.category==='Thông tin trường'?'/truong-dai-hoc/':'/du-hoc/' %><%= p.slug %></small><% if (p.noindex) { %><br><small class="warning-text">Không lập chỉ mục</small><% } %>
+          </td>
+          <td><span class="tag"><%= p.category %></span></td>
+          <td><span class="quality-badge <%= p.quality.score>=75?'good':(p.quality.score>=55?'medium':'low') %>"><%= p.quality.score %>/100</span><br><small class="muted"><%= p.quality.words %> từ · <%= p.quality.sourceCount %> nguồn</small></td>
+          <td><%= p.sort_order %></td>
+          <td><% if (p.published) { %><span class="pill on">Hiển thị</span><% } else { %><span class="pill off">Ẩn</span><% } %></td>
+          <td style="text-align:right;white-space:nowrap">
+            <a class="lnk" href="<%= p.category==='Thông tin trường'?'/truong-dai-hoc/':'/du-hoc/' %><%= p.slug %>" target="_blank">Xem</a>
+            <a class="lnk" href="/admin/du-hoc/<%= p.id %>/sua">Sửa</a>
+            <form method="post" action="/admin/du-hoc/<%= p.id %>/toggle" style="display:inline"><button type="submit" class="lnk"><%= p.published?'Ẩn':'Xuất bản' %></button></form>
+            <form method="post" action="/admin/du-hoc/<%= p.id %>/xoa" style="display:inline" onsubmit="return confirm('Xoá chương trình &quot;<%= p.title.replace(/"/g,'') %>&quot;?');">
+              <button type="submit" class="lnk lnk-del">Xoá</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+      <% if (programs.length===0){ %><tr><td colspan="6" class="muted">Không tìm thấy <%= active==='schools'?'thông tin trường':'chương trình du học' %> phù hợp.</td></tr><% } %>
+    </tbody>
+  </table>
+  </div>
+</div>
+<% if (pagination.pages > 1) { %><nav class="pagination"><% for(var page=1;page<=pagination.pages;page++){ %><a class="<%= page===pagination.page?'on':'' %>" href="?q=<%= encodeURIComponent(filters.q) %>&status=<%= filters.status %>&category=<%= encodeURIComponent(filters.category) %>&page=<%= page %>"><%= page %></a><% } %></nav><% } %>

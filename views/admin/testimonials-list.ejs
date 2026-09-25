@@ -1,0 +1,27 @@
+<div class="adm__head">
+  <div><h1>Cảm nhận học viên</h1><p>Quản lý lời chia sẻ, vai trò, thứ tự và ảnh đại diện hiển thị trên trang chủ.</p></div>
+  <a class="btn2 btn2-primary" href="/admin/cam-nhan/moi">+ Thêm cảm nhận</a>
+</div>
+<% if (flash) { %><div class="flash"><%= flash %></div><% } %>
+<section class="panel">
+  <div class="tbl-scroll"><table class="tbl">
+    <thead><tr><th>Học viên</th><th>Cảm nhận</th><th>Đánh giá</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+    <tbody>
+      <% testimonials.forEach(function(item){ %>
+      <tr>
+        <td>
+          <div class="admin-person">
+            <% if (item.avatar_image) { %><img src="<%= item.avatar_image %>" alt=""><% } else { %><span><%= item.initials || 'SD' %></span><% } %>
+            <div><strong><%= item.name %></strong><br><small class="muted"><%= item.role || 'Chưa nhập vai trò' %></small></div>
+          </div>
+        </td>
+        <td><p class="research-excerpt"><%= item.quote %></p><small class="muted">Thứ tự: <%= item.sort_order %></small></td>
+        <td><span class="rating-stars"><%= '★'.repeat(item.rating) %><%= '☆'.repeat(5-item.rating) %></span></td>
+        <td><span class="pill <%= item.published ? 'on' : 'off' %>"><%= item.published ? 'Đang hiện' : 'Đang ẩn' %></span></td>
+        <td><a class="lnk" href="/admin/cam-nhan/<%= item.id %>/sua">Sửa</a><form class="inline" method="post" action="/admin/cam-nhan/<%= item.id %>/toggle"><button class="lnk" type="submit"><%= item.published ? 'Ẩn' : 'Hiện' %></button></form><form class="inline" method="post" action="/admin/cam-nhan/<%= item.id %>/xoa" onsubmit="return confirm('Xóa cảm nhận này?')"><button class="lnk lnk-del" type="submit">Xóa</button></form></td>
+      </tr>
+      <% }); %>
+      <% if (!testimonials.length) { %><tr><td colspan="5" class="muted">Chưa có cảm nhận học viên.</td></tr><% } %>
+    </tbody>
+  </table></div>
+</section>

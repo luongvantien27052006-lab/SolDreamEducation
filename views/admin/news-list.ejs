@@ -1,0 +1,39 @@
+<div class="adm__head">
+  <div><h1>Cẩm nang du học</h1><p>Quản lý hướng dẫn, kinh nghiệm và thông tin hỗ trợ hành trình du học Hàn Quốc.</p></div>
+  <a class="btn2 btn2-primary" href="/admin/tin-tuc/moi">+ Thêm bài viết</a>
+</div>
+<% if (flash) { %><div class="flash"><%= flash %></div><% } %>
+<form class="content-filters" method="get">
+  <input name="q" value="<%= filters.q %>" placeholder="Tìm theo tiêu đề hoặc nội dung…">
+  <select name="status"><option value="all">Mọi trạng thái</option><option value="published" <%= filters.status==='published'?'selected':'' %>>Đang hiển thị</option><option value="draft" <%= filters.status==='draft'?'selected':'' %>>Bản nháp</option><option value="noindex" <%= filters.status==='noindex'?'selected':'' %>>Noindex</option></select>
+  <select name="category"><option value="">Mọi danh mục</option><% categories.forEach(function(category){ %><option value="<%= category %>" <%= filters.category===category?'selected':'' %>><%= category %></option><% }) %></select>
+  <button class="btn2 btn2-primary" type="submit">Lọc</button><a class="btn2 btn2-ghost" href="/admin/tin-tuc">Đặt lại</a>
+</form>
+<div class="panel">
+  <div class="tbl-scroll">
+  <table class="tbl">
+    <thead><tr><th>Tiêu đề</th><th>Danh mục</th><th>GEO</th><th>Cập nhật</th><th>Trạng thái</th><th style="text-align:right">Thao tác</th></tr></thead>
+    <tbody>
+      <% posts.forEach(function(p){ %>
+        <tr>
+          <td><strong><%= p.title %></strong><br><small class="muted">/tin-tuc/<%= p.slug %></small><% if (p.noindex) { %><br><small class="warning-text">Không lập chỉ mục</small><% } %></td>
+          <td><span class="tag"><%= p.category %></span></td>
+          <td><span class="quality-badge <%= p.quality.score>=75?'good':(p.quality.score>=55?'medium':'low') %>"><%= p.quality.score %>/100</span><br><small class="muted"><%= p.quality.words %> từ · <%= p.quality.sourceCount %> nguồn</small></td>
+          <td><%= p.updatedDateFull %></td>
+          <td><% if (p.published) { %><span class="pill on">Hiển thị</span><% } else { %><span class="pill off">Ẩn</span><% } %></td>
+          <td style="text-align:right;white-space:nowrap">
+            <a class="lnk" href="/tin-tuc/<%= p.slug %>" target="_blank">Xem</a>
+            <a class="lnk" href="/admin/tin-tuc/<%= p.id %>/sua">Sửa</a>
+            <form method="post" action="/admin/tin-tuc/<%= p.id %>/toggle" style="display:inline"><button type="submit" class="lnk"><%= p.published?'Ẩn':'Xuất bản' %></button></form>
+            <form method="post" action="/admin/tin-tuc/<%= p.id %>/xoa" style="display:inline" onsubmit="return confirm('Xoá bài viết &quot;<%= p.title.replace(/"/g,'') %>&quot;?');">
+              <button type="submit" class="lnk lnk-del">Xoá</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+      <% if (posts.length===0){ %><tr><td colspan="6" class="muted">Không tìm thấy bài viết phù hợp.</td></tr><% } %>
+    </tbody>
+  </table>
+  </div>
+</div>
+<% if (pagination.pages > 1) { %><nav class="pagination"><% for(var page=1;page<=pagination.pages;page++){ %><a class="<%= page===pagination.page?'on':'' %>" href="?q=<%= encodeURIComponent(filters.q) %>&status=<%= filters.status %>&category=<%= encodeURIComponent(filters.category) %>&page=<%= page %>"><%= page %></a><% } %></nav><% } %>

@@ -1,0 +1,34 @@
+<main>
+<section class="section" style="padding-top:56px">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="breadcrumb" style="font-size:14px;color:var(--muted);margin-bottom:14px">
+      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span> <span>Cẩm nang du học Hàn Quốc</span>
+    </nav>
+    <div class="sec-head">
+      <span class="eyebrow">Cẩm nang du học</span>
+      <h1>Cẩm nang &amp; câu chuyện du học Hàn Quốc</h1>
+      <p>Kinh nghiệm, văn hóa và những chia sẻ thật từ hành trình du học Hàn.</p>
+      <div class="source-meta"><strong>Đơn vị tư vấn và cung cấp thông tin:</strong> SOL DREAM EDUCATION · Nội dung được cập nhật theo từng chủ đề</div>
+    </div>
+    <section class="direct-answer list-direct-answer" aria-label="Giới thiệu thư viện tin tức">
+      <p class="direct-answer__label">Trả lời nhanh</p>
+      <p><strong>Cẩm nang của SOL DREAM EDUCATION</strong> hỗ trợ học viên học tiếng, chọn ngành, chuẩn bị hồ sơ và thích nghi với đời sống tại Hàn Quốc. Mỗi nội dung ghi rõ ngày cập nhật và đơn vị phụ trách để học viên kiểm tra độ mới trước khi áp dụng.</p>
+    </section>
+    <div class="news-grid">
+      <% posts.forEach(function(p){ %>
+      <a class="post" href="/tin-tuc/<%= p.slug %>">
+        <div class="post__img <%= p.cover_image ? '' : p.cover %>">
+          <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= p.cover_image || '/img/research-cover.svg' %>" alt="<%= p.title %>" loading="lazy">
+          <div class="post__date"><b><%= p.day %></b><span><%= p.monthYear %></span></div>
+        </div>
+        <div class="post__body"><span class="post__cat"><%= p.category %></span>
+          <h3><%= p.title %></h3>
+          <p class="section-lead"><%= p.geoBluf %></p>
+        </div>
+      </a>
+      <% }); %>
+      <% if (posts.length === 0) { %><p>Chưa có bài viết nào.</p><% } %>
+    </div>
+  </div>
+</section>
+</main>

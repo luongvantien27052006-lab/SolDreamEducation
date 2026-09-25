@@ -1,0 +1,8 @@
+<div class="adm__head"><div><h1>FAQ</h1><p>FAQ tự động và thủ công đều có thể sửa, ẩn hoặc xóa trước khi hiển thị.</p></div><a class="btn2 btn2-primary" href="/admin/faq/moi">+ Thêm FAQ</a></div>
+<% if (flash) { %><div class="flash"><%= flash %></div><% } %>
+<% categories.forEach(function(category){ const rows=faqs.filter(function(f){return f.category===category}); %>
+<section class="panel"><div class="panel__head"><h2><%= category %> <span class="tag"><%= rows.length %></span></h2></div>
+<div class="tbl-scroll"><table class="tbl"><thead><tr><th>Câu hỏi</th><th>Nguồn tạo</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>
+<% rows.forEach(function(faq){ %><tr><td><strong><%= faq.question %></strong><br><small class="muted"><%= faq.answer.slice(0,140) %><%= faq.answer.length>140?'…':'' %></small></td><td><span class="tag"><%= faq.generated?'AI gợi ý':'Thủ công' %></span></td><td><span class="pill <%= faq.published?'on':'off' %>"><%= faq.published?'Công khai':'Bản nháp' %></span></td><td><a class="lnk" href="/admin/faq/<%= faq.id %>/sua">Sửa</a><form method="post" action="/admin/faq/<%= faq.id %>/toggle" class="inline"><button class="lnk" type="submit"><%= faq.published?'Ẩn':'Đăng' %></button></form><form method="post" action="/admin/faq/<%= faq.id %>/xoa" class="inline" onsubmit="return confirm('Xóa FAQ này?')"><button class="lnk lnk-del" type="submit">Xóa</button></form></td></tr><% }) %>
+<% if(!rows.length){ %><tr><td colspan="4" class="muted">Chưa có câu hỏi trong mục này.</td></tr><% } %>
+</tbody></table></div></section><% }) %>

@@ -1,0 +1,56 @@
+<div class="adm__head">
+  <div><h1>Bảng điều khiển</h1><p>Tổng quan lượt truy cập website Sol Dream.</p></div>
+  <a class="btn2 btn2-primary" href="/admin/tin-tuc/moi">+ Thêm bài viết</a>
+</div>
+
+<div class="cards">
+  <div class="card"><span class="card__ic">👥</span><b><%= uniqueVisitors.toLocaleString('vi-VN') %></b><span>Tổng khách truy cập</span></div>
+  <div class="card"><span class="card__ic">👁️</span><b><%= totalViews.toLocaleString('vi-VN') %></b><span>Tổng lượt xem trang</span></div>
+  <div class="card"><span class="card__ic">📅</span><b><%= todayVisitors.toLocaleString('vi-VN') %></b><span>Khách hôm nay</span></div>
+  <div class="card"><span class="card__ic">📈</span><b><%= todayViews.toLocaleString('vi-VN') %></b><span>Lượt xem hôm nay</span></div>
+</div>
+
+<div class="cards content-cards">
+  <div class="card"><span class="card__ic">📰</span><b><%= postCount %></b><span>Bài cẩm nang</span></div>
+  <div class="card"><span class="card__ic">🎓</span><b><%= programCount %></b><span>Chương trình / trường</span></div>
+  <div class="card"><span class="card__ic">✅</span><b><%= publishedCount %></b><span>Nội dung đang hiển thị</span></div>
+  <div class="card"><span class="card__ic">📝</span><b><%= draftCount %></b><span>Bản nháp</span></div>
+</div>
+
+<div class="panel">
+  <div class="panel__head"><h2>Lượt truy cập 14 ngày qua</h2><span class="legend"><i class="lg-v"></i> Lượt xem</span></div>
+  <div class="chart">
+    <% series.forEach(function(s){ %>
+      <div class="bar" title="<%= s.label %>: <%= s.views %> lượt xem, <%= s.visitors %> khách">
+        <span class="bar__fill" style="height: <%= Math.round(s.views / maxViews * 100) %>%"></span>
+        <span class="bar__num"><%= s.views %></span>
+        <span class="bar__x"><%= s.label %></span>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="panel">
+    <div class="panel__head"><h2>Trang được xem nhiều</h2></div>
+    <table class="tbl">
+      <thead><tr><th>Đường dẫn</th><th style="text-align:right">Lượt xem</th></tr></thead>
+      <tbody>
+        <% topPages.forEach(function(p){ %>
+          <tr><td><a href="<%= p.path %>" target="_blank"><%= p.path %></a></td><td style="text-align:right"><%= p.c.toLocaleString('vi-VN') %></td></tr>
+        <% }); %>
+        <% if (topPages.length===0){ %><tr><td colspan="2" class="muted">Chưa có dữ liệu.</td></tr><% } %>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <div class="panel__head"><h2>Cần tối ưu SEO/GEO</h2></div>
+    <% needsImprovement.forEach(function(item){ %><div class="health-row"><div><a href="/admin/<%= item.type==='post'?'tin-tuc':'du-hoc' %>/<%= item.id %>/sua"><strong><%= item.title %></strong></a><small class="muted"><%= item.quality.issues[0] || 'Cần rà soát nội dung' %></small></div><span class="quality-badge low"><%= item.quality.score %></span></div><% }) %>
+    <% if (!needsImprovement.length) { %><p class="muted">Không có nội dung dưới 60 điểm.</p><% } %>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel__head"><h2>Nội dung cập nhật gần đây</h2></div>
+  <div class="recent-grid"><% latestContent.forEach(function(item){ %><a href="/admin/<%= item.type==='post'?'tin-tuc':'du-hoc' %>/<%= item.id %>/sua"><strong><%= item.title %></strong><small><%= item.updated_at %> · <%= item.published?'Đang hiển thị':'Bản nháp' %></small></a><% }) %></div>
+</div>

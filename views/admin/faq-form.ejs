@@ -1,0 +1,10 @@
+<div class="adm__head"><div><h1><%= mode==='create'?'Thêm FAQ':'Sửa FAQ' %></h1><p>Nội dung chỉ xuất hiện công khai khi trạng thái là “Hiển thị”.</p></div><a class="btn2 btn2-ghost" href="/admin/faq">← Quay lại</a></div>
+<% if(error){ %><div class="flash flash-err"><%= error %></div><% } %>
+<form class="panel form" method="post" action="<%= mode==='create'?'/admin/faq/moi':'/admin/faq/'+faq.id+'/sua' %>">
+  <div class="row2"><div class="f"><label>Nhóm FAQ</label><select name="category"><% categories.forEach(function(c){ %><option <%= faq.category===c?'selected':'' %>><%= c %></option><% }) %></select></div><div class="f"><label>Thứ tự</label><input type="number" name="sort_order" value="<%= faq.sort_order||0 %>"></div></div>
+  <div class="f"><label>Câu hỏi *</label><textarea name="question" rows="2" required><%= faq.question||'' %></textarea></div>
+  <div class="f"><label>Câu trả lời *</label><textarea name="answer" rows="8" required><%= faq.answer||'' %></textarea></div>
+  <div class="f"><label>URL nguồn chính thức</label><input type="url" name="source_url" value="<%= faq.source_url||'' %>" placeholder="https://..."></div>
+  <div class="f"><label>Trạng thái</label><select name="published"><option value="0" <%= !faq.published?'selected':'' %>>Bản nháp</option><option value="1" <%= faq.published?'selected':'' %>>Hiển thị</option></select></div>
+  <div class="form__actions"><button class="btn2 btn2-primary" type="submit">Lưu FAQ</button><a class="btn2 btn2-ghost" href="/admin/faq">Hủy</a></div>
+</form>

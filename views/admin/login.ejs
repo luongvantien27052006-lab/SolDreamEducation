@@ -1,0 +1,14 @@
+<div class="login">
+  <div class="login__card">
+    <div class="login__brand"><img src="/img/logo-mark.png" alt="Sol Dream" style="height:34px;width:auto"> SOL DREAM <small>Admin</small></div>
+    <h1>Đăng nhập quản trị</h1>
+    <p>Nhập mật khẩu để quản lý tin tức và xem lượt truy cập.</p>
+    <% if (error) { %><div class="login__err"><%= error %></div><% } %>
+    <form method="post" action="/admin/login">
+      <label for="pw">Mật khẩu</label>
+      <input id="pw" name="password" type="password" autofocus placeholder="••••••••" required>
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <a class="login__back" href="/">← Về trang chủ</a>
+  </div>
+</div>

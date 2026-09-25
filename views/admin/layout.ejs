@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2C1B3D">
+<meta name="robots" content="noindex, nofollow">
+<title><%= title %> · Sol Dream Admin</title>
+<link rel="icon" type="image/png" href="/img/logo-mark.png">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/admin.css?v=<%= typeof assetVer !== 'undefined' ? assetVer : Date.now() %>">
+</head>
+<body>
+<% if (typeof active !== 'undefined') { %>
+<div class="adm">
+  <aside class="adm__side">
+    <a href="/admin" class="adm__brand"><img src="/img/logo-mark.png" alt="Sol Dream" style="height:30px;width:auto"> Sol Dream <small>Admin</small></a>
+    <nav class="adm__nav">
+      <a href="/admin" class="<%= active==='dashboard'?'on':'' %>">📊 Bảng điều khiển</a>
+      <a href="/admin/tin-tuc" class="<%= active==='news'?'on':'' %>">📰 Cẩm nang &amp; Thông tin</a>
+      <a href="/admin/khoa-hoc" class="<%= active==='courses'?'on':'' %>">📚 Khóa học</a>
+      <a href="/admin/du-hoc?category=Chương trình du học" class="<%= active==='programs'?'on':'' %>">🎓 Du học Hàn Quốc</a>
+      <a href="/admin/du-hoc?category=Thông tin trường" class="<%= active==='schools'?'on':'' %>">🏫 Thông tin trường</a>
+      <a href="/admin/faq" class="<%= active==='faq'?'on':'' %>">❓ FAQ</a>
+      <a href="/admin/cam-nhan" class="<%= active==='testimonials'?'on':'' %>">💬 Cảm nhận học viên</a>
+      <a href="/admin/so-lieu-trang-chu" class="<%= active==='homepage-stats'?'on':'' %>">🔢 Số liệu trang chủ</a>
+      <a href="/admin/gioi-thieu" class="<%= active==='about'?'on':'' %>">🪪 Giới thiệu website</a>
+      <a href="/admin/nghien-cuu" class="<%= active==='research'?'on':'' %>">🤖 Dữ liệu &amp; AI</a>
+      <a href="/admin/popup" class="<%= active==='popup'?'on':'' %>">▣ Pop-up</a>
+      <a href="/admin/lien-he" class="<%= active==='leads'?'on':'' %>">☎ Yêu cầu liên hệ</a>
+      <a href="/" target="_blank">🌐 Xem website</a>
+    </nav>
+    <form method="post" action="/admin/logout" class="adm__logout"><button type="submit">↩ Đăng xuất</button></form>
+  </aside>
+  <main class="adm__main">
+    <%- body %>
+  </main>
+</div>
+<% } else { %>
+<%- body %>
+<% } %>
+<script src="/js/admin-rich-editor.js?v=<%= typeof assetVer !== 'undefined' ? assetVer : Date.now() %>"></script>
+<script src="/js/admin-content.js?v=<%= typeof assetVer !== 'undefined' ? assetVer : Date.now() %>"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="/" class="brand" aria-label="Sol Dream Education">
+      <img class="brand__logo" src="/img/logo-mark.png" alt="Logo SOL DREAM EDUCATION" width="48" height="48">
+      <span class="brand__wordmark" aria-hidden="true">
+        <strong>Sol Dream</strong>
+        <small><i></i><span>Education</span><i></i></small>
+      </span>
+    </a>
+    <nav aria-label="Điều hướng chính">
+      <button class="menu-close" id="menu-close" type="button" aria-label="Đóng menu">
+        <span aria-hidden="true">×</span>
+      </button>
+      <ul class="menu" id="menu">
+        <li><a href="/gioi-thieu">Giới thiệu</a></li>
+        <li><a href="/khoa-hoc">Khóa học <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
+          <div class="dropdown">
+            <% (typeof navigationCourses !== 'undefined' ? navigationCourses : []).forEach(function(course){ %>
+              <a href="<%= course.url %>"><%= course.name %></a>
+            <% }) %>
+          </div>
+        </li>
+        <li><a href="/du-hoc">Du học Hàn Quốc</a></li>
+        <li><a href="/truong-dai-hoc">Thông tin trường</a></li>
+        <li><a href="/tin-tuc">Cẩm nang &amp; Thông tin <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
+          <div class="dropdown">
+            <a href="/tin-tuc">Cẩm nang du học</a>
+            <a href="/cuoc-song-han-quoc">Sinh hoạt tại Hàn Quốc</a>
+          </div>
+        </li>
+        <li><a href="/cau-hoi-thuong-gap">FAQ</a></li>
+        <li><a href="/#lienhe">Liên hệ</a></li>
+      </ul>
+    </nav>
+    <div class="nav__cta">
+      <a href="/#lienhe" class="btn btn-primary">Đăng ký tư vấn</a>
+      <button class="burger" id="burger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="backdrop" id="backdrop"></div>
+</header>

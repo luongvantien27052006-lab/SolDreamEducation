@@ -1,0 +1,47 @@
+<main class="chat-page">
+  <div class="wrap chat-page__layout">
+    <section class="chat-page__shell" data-chat-interface aria-labelledby="chatbot-title">
+      <header class="chatbot__header">
+        <a class="chatbot__back" href="/" aria-label="Quay lại trang chủ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
+        <div class="chatbot__avatar" aria-hidden="true"><img src="/img/soldream-robot.png?v=sde3" alt=""></div>
+        <div class="chatbot__identity">
+          <h1 id="chatbot-title">SolDream Support<span class="chatbot__seo-title"> – Trợ lý tư vấn du học Hàn Quốc</span></h1>
+          <span class="chatbot__status" role="status"><i aria-hidden="true"></i> <span>Sẵn sàng hỗ trợ</span></span>
+        </div>
+        <button class="chatbot__new" type="button" aria-label="Tạo cuộc trò chuyện mới" title="Cuộc trò chuyện mới">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <a class="chatbot__advisor" href="https://zalo.me/0364648282" target="_blank" rel="noopener noreferrer" aria-label="Liên hệ tư vấn viên qua Zalo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15.5a3.5 3.5 0 0 1-3.5 3.5h-11L3 21v-5.5A3.5 3.5 0 0 1 2 13V6.5A3.5 3.5 0 0 1 5.5 3h12A3.5 3.5 0 0 1 21 6.5Z"/><path d="M7 8h10M7 12h7"/></svg>
+          <span>Tư vấn viên</span>
+        </a>
+      </header>
+
+      <div class="chatbot__messages" aria-live="polite" aria-label="Nội dung trò chuyện">
+        <div class="chatbot__day"><span>Hôm nay</span></div>
+        <div class="chatbot__message-row chatbot__message-row--bot">
+          <div class="chatbot__mini-avatar" aria-hidden="true"><img src="/img/soldream-robot.png?v=sde3" alt=""></div>
+          <div class="chatbot__message chatbot__message--bot"><p>Chào bạn! Mình là trợ lý của Sol Dream Education. Bạn có thể hỏi về khóa học, trường đại học, học phí, học bổng, hồ sơ hoặc chương trình du học Hàn Quốc.</p></div>
+        </div>
+      </div>
+
+      <div class="chatbot__quick-questions" aria-label="Câu hỏi gợi ý">
+        <button type="button">Khóa học mới nhất</button>
+        <button type="button">Chi phí du học Hàn Quốc</button>
+        <button type="button">Tìm trường phù hợp với GPA</button>
+        <button type="button">Liên hệ tư vấn viên</button>
+      </div>
+
+      <form class="chatbot__form">
+        <div class="chatbot__composer">
+          <textarea id="chatbot-input" class="chatbot__input" name="message" rows="1" maxlength="1500" autocomplete="off" enterkeyhint="send" aria-label="Nhập câu hỏi cho trợ lý Sol Dream" placeholder="Nhập tin nhắn..."></textarea>
+        </div>
+        <button class="chatbot__send" type="submit" aria-label="Gửi tin nhắn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-7.7 18-2.8-7.2L3 11l18-8Z"/><path d="m10.5 13.8 4.1-4.1"/></svg>
+        </button>
+      </form>
+    </section>
+  </div>
+</main>

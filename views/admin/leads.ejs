@@ -1,0 +1,16 @@
+<div class="adm__head"><div><h1>Yêu cầu liên hệ</h1><p>Yêu cầu được tách theo đúng mục đích để đội ngũ xử lý nhanh hơn.</p></div></div>
+<% if(flash){ %><div class="flash"><%= flash %></div><% } %>
+<% leadGroups.forEach(function(group){ %>
+<section class="panel lead-group">
+  <div class="panel__head"><h2><%= group.title %> <span class="pill"><%= group.rows.length %></span></h2></div>
+  <div class="tbl-scroll"><table class="tbl"><thead><tr><th>Khách hàng</th><th>Nhu cầu</th><th>Thời gian</th><th>Thông báo</th><th>Trạng thái</th></tr></thead><tbody>
+  <% group.rows.forEach(function(lead){ %><tr>
+    <td><strong><%= lead.name %></strong><br><a href="tel:<%= lead.phone %>" class="lnk"><%= lead.phone %></a><br><a href="mailto:<%= lead.email %>" class="lnk"><%= lead.email||'Chưa có email' %></a></td>
+    <td><%= lead.interest||'Chưa chọn' %><% if(lead.interest_detail){ %><br><strong><%= lead.interest_detail %></strong><% } %><br><a class="lnk" href="<%= lead.source_path||'/' %>" target="_blank"><%= lead.source_title||lead.source_path||'Trang chủ' %> ↗</a></td><td><%= lead.created_at %></td>
+    <td><span class="pill <%= lead.notified?'on':'off' %>"><%= lead.notified?'Đã gửi hotline':'Chưa cấu hình/đang chờ' %></span><br><small class="muted"><%= lead.subscription_active?'Đang nhận email':'Đã dừng email' %></small></td>
+    <td><form method="post" action="/admin/lien-he/<%= lead.id %>/status"><select name="status" onchange="this.form.submit()"><option value="new" <%= lead.status==='new'?'selected':'' %>>Mới</option><option value="contacted" <%= lead.status==='contacted'?'selected':'' %>>Đã liên hệ</option><option value="closed" <%= lead.status==='closed'?'selected':'' %>>Đã đóng</option></select></form></td>
+  </tr><% }) %>
+  <% if(!group.rows.length){ %><tr><td colspan="5" class="muted">Chưa có yêu cầu trong nhóm này.</td></tr><% } %>
+  </tbody></table></div>
+</section>
+<% }) %>

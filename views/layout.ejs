@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<%- include('partials/head') %>
+</head>
+<body class="<%= typeof chatPageMode !== 'undefined' && chatPageMode ? 'chat-mode' : '' %>">
+<%- include('partials/header') %>
+<%- body %>
+<% if (!(typeof hideFooter !== 'undefined' && hideFooter)) { %><%- include('partials/footer') %><% } %>
+<% if (!(typeof hideFloatingChat !== 'undefined' && hideFloatingChat)) { %><%- include('partials/chatbot') %><% } %>
+<%- include('partials/site-popup') %>
+<%- include('partials/lead-popup') %>
+<script src="/js/site.js?v=<%= assetVer %>" defer></script>
+<script src="/js/chatbot.js?v=<%= assetVer %>" defer></script>
+</body>
+</html>

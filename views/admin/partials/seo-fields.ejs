@@ -1,0 +1,33 @@
+<section class="seo-panel" data-seo-panel>
+  <div class="panel__head">
+    <div><h2>SEO & GEO</h2><p class="muted">Kiểm soát cách trang xuất hiện trên Google, Bing và trong câu trả lời AI.</p></div>
+    <strong class="quality-score" data-quality-score>0/100</strong>
+  </div>
+  <div class="row2">
+    <div class="f">
+      <label>Từ khóa / chủ đề trọng tâm</label>
+      <input name="focus_keyword" value="<%= item.focus_keyword || '' %>" placeholder="VD: học phí Đại học Pusan" data-focus-keyword>
+      <small class="muted">Dùng để kiểm tra độ bao phủ nội dung, không tạo thẻ meta keywords.</small>
+    </div>
+    <div class="f">
+      <label>URL hồ sơ tác giả</label>
+      <input name="author_url" type="url" value="<%= item.author_url || '' %>" placeholder="https://linkedin.com/in/...">
+      <small class="muted">Chỉ nhập hồ sơ thật đã được tác giả đồng ý công bố.</small>
+    </div>
+  </div>
+  <div class="f">
+    <label>Tiêu đề SEO <span class="field-counter" data-title-count>0/65</span></label>
+    <input name="seo_title" maxlength="100" value="<%= item.seo_title || '' %>" placeholder="Để trống để dùng tiêu đề bài" data-seo-title>
+  </div>
+  <div class="f">
+    <label>Mô tả SEO <span class="field-counter" data-description-count>0/165</span></label>
+    <textarea name="meta_description" maxlength="220" rows="3" placeholder="Để trống để dùng mô tả ngắn" data-meta-description><%= item.meta_description || '' %></textarea>
+  </div>
+  <div class="search-preview" aria-label="Xem trước kết quả tìm kiếm">
+    <small>soldream.edu.vn › <span data-preview-path>noi-dung</span></small>
+    <strong data-preview-title>Tiêu đề trang</strong>
+    <p data-preview-description>Mô tả trang sẽ xuất hiện tại đây.</p>
+  </div>
+  <label class="index-control"><input type="checkbox" name="noindex" value="1" <%= item.noindex==1?'checked':'' %>> Không cho công cụ tìm kiếm lập chỉ mục trang này</label>
+  <ul class="quality-list" data-quality-list></ul>
+</section>

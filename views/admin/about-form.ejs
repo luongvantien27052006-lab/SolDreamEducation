@@ -1,0 +1,22 @@
+<div class="adm__head">
+  <div><h1><%= mode === 'create' ? 'Thêm phần giới thiệu' : 'Sửa phần giới thiệu' %></h1><p>Nội dung sau khi lưu sẽ được cập nhật vào website và chỉ mục chatbot.</p></div>
+  <a class="btn2 btn2-ghost" href="/admin/gioi-thieu">← Quay lại</a>
+</div>
+<% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
+
+<section class="panel">
+  <form class="form" method="post" action="<%= mode === 'create' ? '/admin/gioi-thieu/moi' : '/admin/gioi-thieu/' + section.id + '/sua' %>">
+    <div class="row2">
+      <div class="f"><label>Vị trí hiển thị *</label><select name="location"><option value="home" <%= section.location==='home'?'selected':'' %>>Trang chủ</option><option value="page" <%= section.location!=='home'?'selected':'' %>>Trang Giới thiệu</option></select></div>
+      <div class="f"><label>Kiểu trình bày *</label><select name="section_style"><option value="standard" <%= section.section_style==='standard'?'selected':'' %>>Nội dung tiêu chuẩn</option><option value="direct-answer" <%= section.section_style==='direct-answer'?'selected':'' %>>Khung trả lời nhanh</option><option value="source-box" <%= section.section_style==='source-box'?'selected':'' %>>Khung nguồn/minh bạch</option></select></div>
+    </div>
+    <div class="row2">
+      <div class="f"><label>Nhãn nhỏ</label><input name="eyebrow" maxlength="100" value="<%= section.eyebrow || '' %>" placeholder="VD: Về Sol Dream"></div>
+      <div class="f"><label>Thứ tự</label><input name="sort_order" type="number" value="<%= section.sort_order || 0 %>"></div>
+    </div>
+    <div class="f"><label>Tiêu đề *</label><input name="title" maxlength="180" required value="<%= section.title || '' %>"></div>
+    <div class="f"><label>Nội dung chi tiết *</label><%- include('partials/rich-editor', { name: 'content', value: section.content || '', placeholder: 'Nhập nội dung giới thiệu. Có thể dùng tiêu đề, danh sách, bảng, liên kết và hình ảnh.' }) %></div>
+    <label class="index-control"><input type="checkbox" name="active" value="1" <%= Number(section.active)!==0?'checked':'' %>> Hiển thị phần này trên website</label>
+    <div class="form__actions"><button class="btn2 btn2-primary" type="submit">Lưu phần giới thiệu</button><a class="btn2 btn2-ghost" href="/admin/gioi-thieu">Hủy</a></div>
+  </form>
+</section>

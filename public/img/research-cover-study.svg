@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Cẩm nang du học Hàn Quốc">
+ <defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#26133d"/><stop offset="1" stop-color="#bd1e67"/></linearGradient></defs>
+ <rect width="1200" height="630" rx="36" fill="url(#g)"/><circle cx="1040" cy="90" r="210" fill="#ffca5d" opacity=".18"/><path d="M0 500c240-150 410 80 650-40 210-105 370-20 550-100v270H0Z" fill="#fff" opacity=".08"/>
+ <g fill="none" stroke="#fff" stroke-width="18" stroke-linejoin="round"><path d="M720 180h320v270H720z"/><path d="m700 175 180-95 180 95M785 255h190M785 330h190"/></g>
+ <text x="90" y="154" fill="#ffca5d" font-family="Segoe UI Light,Arial" font-size="42" font-weight="300">Sol Dream</text><path d="M90 181h42m185 0h42" stroke="#ffca5d" stroke-width="2"/><text x="145" y="186" fill="#ffca5d" font-family="Arial" font-size="14" font-weight="600" letter-spacing="7">EDUCATION</text><text x="90" y="285" fill="#fff" font-family="Segoe UI,Arial" font-size="64" font-weight="800">CẨM NANG</text><text x="90" y="360" fill="#fff" font-family="Segoe UI,Arial" font-size="64" font-weight="800">DU HỌC HÀN QUỐC</text><text x="90" y="420" fill="#fff" opacity=".82" font-family="Segoe UI,Arial" font-size="25">Trường học · Tuyển sinh · Hành trình</text>
+</svg>

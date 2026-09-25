@@ -1,0 +1,29 @@
+<main>
+<article class="section knowledge-hub">
+  <div class="wrap" style="max-width:920px">
+    <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <span>Giới thiệu</span></nav>
+    <header class="knowledge-hero">
+      <span class="eyebrow">Về chúng tôi</span>
+      <h1>SOL DREAM EDUCATION là ai?</h1>
+      <p>SOL DREAM EDUCATION là trung tâm Hàn ngữ và tư vấn du học Hàn Quốc tại Tân Phú, TP.HCM, hoạt động từ năm 2019 với định hướng đào tạo ngoại ngữ và đồng hành hồ sơ du học.</p>
+      <div class="source-meta"><strong>Thông tin do:</strong> SOL DREAM EDUCATION công bố · <strong>Cập nhật:</strong> 27/08/2026</div>
+    </header>
+
+    <% (aboutSections || []).forEach(function(section){ %>
+      <% if (section.section_style === 'direct-answer') { %>
+        <section class="direct-answer" aria-labelledby="about-section-<%= section.id %>">
+          <p class="direct-answer__label"><%= section.eyebrow || 'Trả lời nhanh' %></p>
+          <h2 id="about-section-<%= section.id %>" class="sr-only"><%= section.title %></h2>
+          <%- section.content %>
+        </section>
+      <% } else { %>
+        <section class="<%= section.section_style === 'source-box' ? 'source-box' : 'knowledge-section' %>" aria-labelledby="about-section-<%= section.id %>">
+          <% if (section.eyebrow) { %><span class="eyebrow"><%= section.eyebrow %></span><% } %>
+          <h2 id="about-section-<%= section.id %>"><%= section.title %></h2>
+          <%- section.content %>
+        </section>
+      <% } %>
+    <% }) %>
+  </div>
+</article>
+</main>

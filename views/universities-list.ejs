@@ -1,0 +1,58 @@
+<main>
+<section class="section knowledge-hub">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="breadcrumb">
+      <a href="/">Trang chủ</a> <span>›</span> <span>Thông tin trường đại học Hàn Quốc</span>
+    </nav>
+    <header class="knowledge-hero">
+      <span class="eyebrow">Tra cứu và chọn trường</span>
+      <h1>Thông tin trường đại học Hàn Quốc</h1>
+      <p>SOL DREAM EDUCATION tổng hợp thông tin chương trình, ngành học, học phí, học bổng và ký túc xá để học sinh dễ tra cứu và so sánh trước khi đăng ký.</p>
+      <div class="source-meta"><strong>Đơn vị tư vấn:</strong> SOL DREAM EDUCATION · <strong>Cập nhật:</strong> 26/08/2026</div>
+    </header>
+
+    <% if (schoolPrograms && schoolPrograms.length) { %>
+    <section aria-labelledby="admin-school-title">
+      <h2 id="admin-school-title" style="margin:36px 0 20px">Thông tin trường mới nhất</h2>
+      <div class="news-grid">
+        <% schoolPrograms.forEach(function(program){ %>
+        <a class="post" href="/truong-dai-hoc/<%= program.slug %>">
+          <div class="post__img <%= program.cover_image ? '' : program.cover %>"><img class="post__cover<%= (!program.cover_image || program.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= program.cover_image || '/img/research-cover.svg' %>" alt="<%= program.title %>" loading="lazy"></div>
+          <div class="post__body"><span class="post__cat">Thông tin trường</span><h3><%= program.title %></h3><p class="section-lead"><%= program.geoBluf %></p><% if(program.subtitle){ %><div class="prog__kr"><%= program.subtitle %></div><% } %></div>
+        </a>
+        <% }); %>
+      </div>
+    </section>
+    <% } %>
+
+    <% if (universities.length) { %><h2 style="margin:42px 0 20px">Hồ sơ trường chuyên sâu</h2><% } %>
+    <div class="knowledge-grid">
+      <% universities.forEach(function(university){ %>
+      <article class="knowledge-card">
+        <div class="knowledge-card__top"><span><%= university.english_name %></span><span><%= university.location_terms[0] %></span></div>
+        <h2><a href="<%= university.url %>"><%= university.name %></a></h2>
+        <p class="section-lead"><%= university.bluf %></p>
+        <p class="knowledge-card__en"><%= university.english_name %></p>
+        <p><%= university.highlight %></p>
+        <% if (university.tuitionSummary) { %><p class="knowledge-card__fact"><strong>Học phí tiếng tham khảo:</strong> <%= university.tuitionSummary %></p><% } %>
+        <a class="knowledge-card__link" href="<%= university.url %>">Xem hồ sơ đầy đủ →</a>
+      </article>
+      <% }); %>
+    </div>
+
+    <section class="source-box dataset-scope" aria-labelledby="dataset-title">
+      <h2 id="dataset-title">Phạm vi bộ dữ liệu trường đại học</h2>
+      <p class="section-lead">Bộ dữ liệu hiện gồm <%= universities.length + schoolPrograms.length %> hồ sơ trường đại học Hàn Quốc. Mỗi hồ sơ trình bày tổng quan, ngành học, học phí, học bổng, ký túc xá và đường dẫn website chính thức khi tài liệu nguồn có cung cấp.</p>
+      <ul>
+        <li><strong>Thực thể:</strong> <%= schoolPrograms.map(function(item){ return item.title; }).concat(universities.map(function(item){ return item.name; })).join('; ') %>.</li>
+        <li><strong>Trường dữ liệu chính:</strong> tên trường, địa chỉ, ngành học, học phí, học bổng và ký túc xá.</li>
+        <li><strong>Mục đích:</strong> tra cứu và lập danh sách trường ban đầu; không thay thế thông báo tuyển sinh.</li>
+      </ul>
+    </section>
+
+    <aside class="source-note">
+      <strong>Lưu ý:</strong> Học phí, học bổng, ngành mở tuyển và kỳ nhập học có thể thay đổi theo năm hoặc từng khoa. Hãy xác nhận lại với SOL DREAM EDUCATION và website chính thức của trường trước khi nộp hồ sơ.
+    </aside>
+  </div>
+</section>
+</main>

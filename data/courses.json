@@ -1,0 +1,72 @@
+{
+  "updated_at": "2026-08-27",
+  "notice": "Lịch học, học phí và ưu đãi có thể thay đổi theo thời điểm mở lớp. Vui lòng xác nhận với SOL DREAM EDUCATION trước khi đăng ký.",
+  "courses": [
+    {
+      "id": "giao-tiep-giao-vien-han",
+      "name": "Tiếng Hàn giao tiếp cùng giáo viên Hàn Quốc",
+      "blufSummary": "Khóa giao tiếp cùng giáo viên Hàn Quốc dành cho học viên muốn luyện nói và phản xạ trực tiếp. Chương trình hiện giới thiệu hai buổi học thử miễn phí; lịch học, thời lượng, học phí và trình độ đầu vào cần được xác nhận khi đăng ký.",
+      "audience": "Học viên muốn luyện nói và phản xạ trực tiếp với người bản ngữ",
+      "description": "Môi trường luyện nói với giáo viên Hàn Quốc; chương trình hiện giới thiệu 2 buổi học thử.",
+      "price": "Miễn phí 2 buổi học thử",
+      "language": "Tiếng Hàn",
+      "financials": { "priceVndTotal": 0, "priceNote": "Miễn phí 2 buổi học thử; chưa công bố học phí khóa" },
+      "requirements": { "entryLevel": null, "topikRequired": null, "status": "Kiểm tra mục tiêu và trình độ trước khi xếp lớp" }
+    },
+    {
+      "id": "tieng-han-giao-tiep",
+      "name": "Lớp tiếng Hàn giao tiếp",
+      "blufSummary": "Lớp tiếng Hàn giao tiếp tập trung phản xạ nghe nói cho người muốn trò chuyện tự tin. Website chưa công bố học phí, thời lượng và trình độ đầu vào; học viên cần được kiểm tra năng lực và xác nhận lịch mở lớp trước khi đăng ký.",
+      "audience": "Người muốn tăng phản xạ nghe và nói theo các chủ đề thực tế",
+      "description": "Rèn luyện phản xạ nghe - nói theo chủ đề, hướng tới khả năng trò chuyện tự tin với người Hàn.",
+      "price": "Liên hệ để nhận học phí",
+      "language": "Tiếng Hàn",
+      "financials": { "priceVndTotal": null, "priceNote": "Chưa công bố" },
+      "requirements": { "entryLevel": null, "topikRequired": null, "status": "Kiểm tra trình độ trước khi xếp lớp" }
+    },
+    {
+      "id": "tieng-han-so-cap-1",
+      "name": "Tiếng Hàn sơ cấp 1",
+      "blufSummary": "Tiếng Hàn sơ cấp 1 dành cho người mới bắt đầu, xây dựng nền tảng Hangul và ngữ pháp cơ bản. Học phí công bố là 2.020.000 VND trọn khóa; thời lượng, lịch học, giáo trình và điều kiện ưu đãi cần được xác nhận trước khi đăng ký.",
+      "audience": "Người mới bắt đầu học tiếng Hàn",
+      "description": "Xây dựng nền tảng bảng chữ cái Hangul, phát âm và ngữ pháp cơ bản.",
+      "price": "2.020.000 VNĐ trọn khóa",
+      "language": "Tiếng Hàn",
+      "financials": { "priceVndTotal": 2020000, "priceNote": "Trọn khóa theo dữ liệu công bố ngày 27/08/2026" },
+      "requirements": { "entryLevel": "Người mới bắt đầu", "topikRequired": null, "status": "Không công bố yêu cầu TOPIK đầu vào" }
+    },
+    {
+      "id": "tieng-han-cap-toc",
+      "name": "Lớp tiếng Hàn cấp tốc",
+      "blufSummary": "Lớp tiếng Hàn cấp tốc dành cho học viên cần tăng trình độ để chuẩn bị hồ sơ du học. Chương trình tập trung mục tiêu TOPIK; học phí, thời lượng, trình độ đầu vào và cấp TOPIK mục tiêu được xác định sau khi kiểm tra hồ sơ.",
+      "audience": "Học viên cần tăng tốc trình độ để chuẩn bị hồ sơ du học",
+      "description": "Lộ trình rút gọn, tập trung mục tiêu tiếng Hàn và TOPIK phục vụ kế hoạch du học Hàn Quốc.",
+      "price": "Liên hệ để nhận học phí",
+      "language": "Tiếng Hàn",
+      "financials": { "priceVndTotal": null, "priceNote": "Chưa công bố" },
+      "requirements": { "entryLevel": null, "topikRequired": null, "status": "Xác định sau khi kiểm tra mục tiêu du học và trình độ" }
+    },
+    {
+      "id": "phat-am-tieng-han",
+      "name": "Lớp phát âm tiếng Hàn",
+      "blufSummary": "Lớp phát âm tiếng Hàn dành cho học viên muốn sửa lỗi cùng giáo viên Hàn Quốc. Website chưa công bố học phí, thời lượng hoặc trình độ tối thiểu; học viên cần được kiểm tra phát âm và xác nhận lịch mở lớp trước khi đăng ký.",
+      "audience": "Học viên muốn chỉnh phát âm và nói rõ ràng, tự nhiên hơn",
+      "description": "Chỉnh phát âm cùng giáo viên Hàn Quốc, tập trung độ chính xác và sự tự nhiên khi nói.",
+      "price": "Liên hệ để nhận học phí",
+      "language": "Tiếng Hàn",
+      "financials": { "priceVndTotal": null, "priceNote": "Chưa công bố" },
+      "requirements": { "entryLevel": null, "topikRequired": null, "status": "Kiểm tra phát âm trước khi xếp lớp" }
+    },
+    {
+      "id": "tieng-anh-giao-tiep",
+      "name": "Tiếng Anh giao tiếp",
+      "blufSummary": "Lớp tiếng Anh giao tiếp dành cho học viên muốn phát triển ngoại ngữ thứ hai. Chương trình hướng đến kỹ năng giao tiếp thực tế; website chưa công bố học phí, thời lượng và trình độ đầu vào nên cần xác nhận trực tiếp trước khi đăng ký.",
+      "audience": "Học viên muốn trang bị thêm ngoại ngữ thứ hai",
+      "description": "Lớp giao tiếp tiếng Anh hỗ trợ học viên phát triển thêm kỹ năng ngoại ngữ.",
+      "price": "Liên hệ để nhận học phí",
+      "language": "Tiếng Anh",
+      "financials": { "priceVndTotal": null, "priceNote": "Chưa công bố" },
+      "requirements": { "entryLevel": null, "certificateRequired": null, "status": "Kiểm tra trình độ tiếng Anh trước khi xếp lớp; TOEIC hoặc IELTS chỉ áp dụng khi chương trình cụ thể yêu cầu" }
+    }
+  ]
+}

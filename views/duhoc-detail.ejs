@@ -1,0 +1,50 @@
+<main>
+<article class="section" style="padding-top:56px">
+  <div class="wrap" style="max-width:820px">
+    <nav class="crumbs" aria-label="breadcrumb" style="font-size:14px;color:var(--muted);margin-bottom:16px">
+      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span>
+      <a href="<%= isSchoolPage?'/truong-dai-hoc':'/du-hoc' %>" style="color:var(--muted)"><%= isSchoolPage?'Thông tin trường':'Du học Hàn Quốc' %></a> <span>›</span> <span><%= program.title %></span>
+    </nav>
+    <span class="post__cat" style="color:var(--sky)"><%= program.category %></span>
+    <h1 style="font-size:clamp(28px,4.4vw,44px);margin:12px 0 6px"><%= program.title %></h1>
+    <% if (program.subtitle) { %><div class="prog__kr" style="font-size:18px;margin-bottom:20px"><%= program.subtitle %></div><% } else { %><div style="margin-bottom:20px"></div><% } %>
+    <p class="source-meta" style="margin-bottom:24px"><strong>Đơn vị tư vấn:</strong> <% if (program.author_url) { %><a href="<%= program.author_url %>" target="_blank" rel="author noopener noreferrer"><%= program.author_name || 'SOL DREAM EDUCATION' %></a><% } else { %><%= program.author_name || 'SOL DREAM EDUCATION' %><% } %><% if (program.author_role) { %> — <%= program.author_role %><% } %> · <strong>Cập nhật:</strong> <time datetime="<%= modifiedTime %>"><%= program.updatedDateFull %></time></p>
+    <div class="post__img <%= program.cover_image ? '' : program.cover %>" style="height:300px;border-radius:20px;margin-bottom:30px">
+      <img class="post__cover<%= (!program.cover_image || program.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= program.cover_image || '/img/research-cover.svg' %>" alt="<%= program.title %>" style="border-radius:20px">
+    </div>
+    <section class="direct-answer" aria-label="Tóm tắt chương trình">
+      <p class="direct-answer__label">Trả lời nhanh</p>
+      <p><strong>SOL DREAM EDUCATION tổng hợp:</strong> <%= program.excerpt %></p>
+    </section>
+    <div class="article-body" style="font-size:17px;line-height:1.8;color:var(--ink-2)">
+      <%- program.contentHtml %>
+    </div>
+    <section class="source-box">
+      <h2>Nguồn và phạm vi thông tin</h2>
+      <p class="section-lead">Thông tin được <%= program.author_name || 'SOL DREAM EDUCATION' %> tổng hợp để hỗ trợ chọn trường và xây dựng lộ trình du học Hàn Quốc. Điều kiện tuyển sinh, ngành mở, học phí, học bổng và visa sẽ được chuyên viên kiểm tra lại theo kỳ tuyển sinh và hồ sơ trước khi nộp.</p>
+      <p><strong>Lần cập nhật gần nhất:</strong> <%= program.updatedDateFull %>.</p>
+      <% if (program.sourceLinks.length) { %>
+      <p><strong>Nguồn đối chiếu:</strong></p>
+      <ul><% program.sourceLinks.forEach(function(source){ %><li><a href="<%= source %>" target="_blank" rel="noopener noreferrer"><%= source %></a></li><% }); %></ul>
+      <% } %>
+      <p><a href="/truong-dai-hoc">Tra cứu hồ sơ trường đại học chi tiết</a></p>
+    </section>
+    <% if (relatedFaqs && relatedFaqs.length) { %>
+    <section class="related-faq" aria-labelledby="program-faq-title">
+      <h2 id="program-faq-title">Câu hỏi thường gặp về <%= isSchoolPage?'trường này':'chương trình này' %></h2>
+      <div class="faq-list"><% relatedFaqs.forEach(function(faq){ %><details class="faq-item"><summary><%= faq.question %></summary><div class="faq-answer"><p><%= faq.answer %></p></div></details><% }); %></div>
+    </section>
+    <% } %>
+    <% if (relatedPrograms.length) { %>
+    <section class="related-content" aria-labelledby="related-programs-title">
+      <h2 id="related-programs-title"><%= isSchoolPage?'Thông tin trường liên quan':'Chương trình và hướng dẫn liên quan' %></h2>
+      <ul><% relatedPrograms.forEach(function(item){ %><li><a href="<%= isSchoolPage?'/truong-dai-hoc/':'/du-hoc/' %><%= item.slug %>"><%= item.title %></a><span><%= item.category %> · cập nhật <%= item.updatedDateFull %></span></li><% }); %></ul>
+    </section>
+    <% } %>
+    <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--line)">
+      <a href="<%= isSchoolPage?'/truong-dai-hoc':'/du-hoc' %>" class="btn btn-ghost">← <%= isSchoolPage?'Xem trường khác':'Xem chương trình khác' %></a>
+      <a href="/#lienhe" class="btn btn-primary" style="margin-left:8px">Đăng ký tư vấn du học</a>
+    </div>
+  </div>
+</article>
+</main>

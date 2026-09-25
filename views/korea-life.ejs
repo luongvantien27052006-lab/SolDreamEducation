@@ -1,0 +1,22 @@
+<main class="life-page">
+  <section class="page-hero compact"><div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Trang chủ</a><span>/</span><span>Sinh hoạt tại Hàn Quốc</span></nav>
+    <span class="eyebrow">CẬP NHẬT <%= life.lastUpdated.split('-').reverse().join('/') %></span>
+    <h1><%= life.title %></h1>
+    <div class="geo-summary"><strong>Tóm tắt nhanh:</strong> <%= life.blufSummary %></div>
+  </div></section>
+  <section class="section"><div class="wrap narrow">
+    <h2>Du học sinh cần bao nhiêu tiền sinh hoạt mỗi tháng?</h2>
+    <p class="section-lead">Các mức dưới đây là số tham khảo do Study in Korea công bố. Đây không phải báo giá cố định; hãy lập ngân sách riêng theo trường và nơi ở.</p>
+    <div class="table-scroll"><table class="geo-data-table"><thead><tr><th>Khoản chi</th><th>KRW/tháng</th><th>Lưu ý</th></tr></thead><tbody>
+      <% life.monthlyBudget.forEach(function(row){ %><tr><th scope="row"><%= row.item %></th><td><%= row.krw %></td><td><%= row.note %></td></tr><% }) %>
+    </tbody></table></div>
+    <p class="source-note">Nguồn: <a href="https://studyinkorea.go.kr/ko/life/livingExpense.do" target="_blank" rel="noopener noreferrer">Study in Korea – Living Expenses</a>.</p>
+    <nav class="faq-tabs life-tabs" aria-label="Chủ đề sinh hoạt"><% life.topics.forEach(function(topic){ %><a href="#<%= topic.id %>"><%= topic.title %></a><% }) %></nav>
+    <div class="life-grid"><% life.topics.forEach(function(topic){ %><article class="life-card" id="<%= topic.id %>">
+      <h2><%= topic.title %></h2><p><%= topic.summary %></p><h3>Việc nên làm</h3><ul><% topic.checklist.forEach(function(item){ %><li><%= item %></li><% }) %></ul>
+      <a class="official-source" href="<%= topic.sourceUrl %>" target="_blank" rel="noopener noreferrer">Kiểm tra nguồn chính thức: <%= topic.sourceName %> ↗</a>
+    </article><% }) %></div>
+    <aside class="geo-summary"><strong>Lưu ý:</strong> Quy định visa, cư trú, làm thêm và bảo hiểm có thể thay đổi. Hãy đối chiếu nguồn chính thức và xác nhận với trường trước khi thực hiện.</aside>
+  </div></section>
+</main>

@@ -1,0 +1,37 @@
+<main>
+<section class="section" style="padding-top:56px">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="breadcrumb" style="font-size:14px;color:var(--muted);margin-bottom:14px">
+      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span> <span>Du học Hàn Quốc</span>
+    </nav>
+    <div class="sec-head">
+      <span class="eyebrow">Du học Hàn Quốc</span>
+      <h1>Chương trình du học Hàn Quốc</h1>
+      <p>Thông tin chương trình, điều kiện, chi phí và lộ trình hồ sơ được SOL DREAM EDUCATION tư vấn, đồng hành từ A–Z.</p>
+      <div class="source-meta"><strong>Đơn vị tư vấn du học:</strong> SOL DREAM EDUCATION · Thông tin được kiểm tra lại theo kỳ tuyển sinh và hồ sơ</div>
+    </div>
+    <section class="direct-answer list-direct-answer" aria-label="Tóm tắt dịch vụ du học">
+      <p class="direct-answer__label">Trả lời nhanh</p>
+      <p><strong>SOL DREAM EDUCATION tư vấn du học Hàn Quốc</strong> theo hồ sơ học tập, năng lực tiếng Hàn và ngân sách của từng học sinh. Danh sách dưới đây là nguồn tham khảo ban đầu; điều kiện, học phí và học bổng cần được đối chiếu tại thời điểm đăng ký.</p>
+    </section>
+    <div class="news-grid">
+      <% programs.forEach(function(p){ %>
+      <a class="post" href="/du-hoc/<%= p.slug %>">
+        <div class="post__img <%= p.cover_image ? '' : p.cover %>">
+          <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= p.cover_image || '/img/research-cover.svg' %>" alt="<%= p.title %>" loading="lazy">
+        </div>
+        <div class="post__body"><span class="post__cat"><%= p.category %></span>
+          <h3><%= p.title %></h3>
+          <p class="section-lead"><%= p.geoBluf %></p>
+          <% if (p.subtitle) { %><div class="prog__kr"><%= p.subtitle %></div><% } %>
+        </div>
+      </a>
+      <% }); %>
+      <% if (programs.length === 0) { %><p>Chưa có chương trình nào.</p><% } %>
+    </div>
+    <div style="text-align:center;margin-top:44px">
+      <a href="/#lienhe" class="btn btn-primary">Đăng ký tư vấn du học</a>
+    </div>
+  </div>
+</section>
+</main>

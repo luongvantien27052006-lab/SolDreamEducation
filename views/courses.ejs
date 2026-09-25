@@ -1,0 +1,33 @@
+<main>
+<section class="section knowledge-hub">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <span>Khóa học</span></nav>
+    <header class="knowledge-hero">
+      <span class="eyebrow">Đào tạo ngoại ngữ</span>
+      <h1>Khóa học tại SOL DREAM EDUCATION</h1>
+      <p>SOL DREAM EDUCATION đào tạo tiếng Hàn từ nền tảng, giao tiếp, phát âm đến lộ trình cấp tốc chuẩn bị du học; đồng thời có lớp tiếng Anh giao tiếp cho học viên cần thêm ngoại ngữ thứ hai.</p>
+      <div class="source-meta"><strong>Đơn vị đào tạo:</strong> SOL DREAM EDUCATION · <strong>Cập nhật:</strong> 27/08/2026</div>
+    </header>
+
+    <section class="direct-answer" aria-labelledby="course-answer-title">
+      <p class="direct-answer__label" id="course-answer-title">Trả lời nhanh</p>
+      <p><strong>Nên chọn khóa học nào?</strong> Người mới bắt đầu có thể chọn Tiếng Hàn sơ cấp 1; người cần luyện phản xạ chọn lớp giao tiếp; người chuẩn bị du học trong thời gian ngắn có thể tìm hiểu lớp cấp tốc. SOL DREAM EDUCATION sẽ kiểm tra mục tiêu và trình độ trước khi tư vấn lớp phù hợp.</p>
+    </section>
+
+    <div class="knowledge-grid course-knowledge-grid">
+      <% courses.forEach(function(course){ %>
+      <article class="knowledge-card" id="<%= course.id %>">
+        <div class="knowledge-card__top"><span><%= course.language %></span><span>Khóa học</span></div>
+        <h2><a href="<%= course.url %>"><%= course.name %></a></h2>
+        <p class="section-lead"><%= course.bluf %></p>
+        <p class="knowledge-card__fact"><strong>Phù hợp với:</strong> <%= course.audience %></p>
+        <p class="knowledge-card__fact"><strong>Học phí:</strong> <%= course.price %></p>
+        <a class="knowledge-card__link" href="<%= course.url %>">Xem nội dung và học phí →</a>
+      </article>
+      <% }); %>
+    </div>
+
+    <aside class="source-note"><strong>Lưu ý:</strong> <%= courseNotice %></aside>
+  </div>
+</section>
+</main>

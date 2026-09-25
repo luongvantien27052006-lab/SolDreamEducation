@@ -1,0 +1,46 @@
+<main>
+<article class="section knowledge-hub">
+  <div class="wrap" style="max-width:920px">
+    <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <a href="/khoa-hoc">Khóa học</a> <span>›</span> <span><%= course.name %></span></nav>
+    <header class="knowledge-hero">
+      <span class="eyebrow"><%= course.language %></span>
+      <h1><%= course.name %></h1>
+      <div class="geo-summary-box">
+        <p class="geo-summary-box__bluf"><%= course.blufSummary %></p>
+        <ul class="geo-summary-box__facts">
+          <li><strong>Phù hợp:</strong> <%= course.audience %></li>
+          <li><strong>Học phí:</strong> <%= course.price %></li>
+          <li><strong>Đầu vào:</strong> <%= course.requirements.entryLevel || 'Kiểm tra trước khi xếp lớp' %></li>
+          <li><strong><%= course.entryExamLabel %>:</strong> <%= course.entryExamRequirement || 'Không công bố yêu cầu chứng chỉ đầu vào' %></li>
+        </ul>
+      </div>
+    </header>
+    <section class="knowledge-section">
+      <h2><%= course.name %> phù hợp với ai?</h2>
+      <p class="section-lead"><%= course.blufSummary %></p>
+      <ul><li><strong>Đối tượng:</strong> <%= course.audience %></li><li><strong>Nội dung:</strong> <%= course.description %></li><li><strong>Học phí:</strong> <%= course.financials.priceNote %></li></ul>
+    </section>
+    <section class="knowledge-section">
+      <h2>Học phí và điều kiện của <%= course.name %></h2>
+      <p class="section-lead">Thông tin dưới đây giúp học viên nhận biết khoản phí đã được công bố và những điều kiện còn phải xác nhận trước khi đăng ký. SOL DREAM EDUCATION kiểm tra trình độ và mục tiêu thực tế để tư vấn lớp phù hợp.</p>
+      <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th>Hạng mục</th><th>Thông tin hiện có</th></tr></thead><tbody>
+        <tr><td>Học phí</td><td><%= course.price %></td></tr>
+        <tr><td>Ghi chú học phí</td><td><%= course.financials.priceNote %></td></tr>
+        <tr><td>Trình độ đầu vào</td><td><%= course.requirements.entryLevel || 'Kiểm tra trước khi xếp lớp' %></td></tr>
+        <tr><td>Yêu cầu <%= course.entryExamLabel %></td><td><%= course.entryExamRequirement || ('Chưa công bố yêu cầu ' + course.entryExamLabel + ' đầu vào') %></td></tr>
+      </tbody></table></div>
+    </section>
+    <section class="knowledge-section">
+      <h2>Đăng ký và xếp lớp như thế nào?</h2>
+      <p class="section-lead">Học viên gửi mục tiêu học tập, trình độ hiện tại và thời gian có thể tham gia. SOL DREAM EDUCATION kiểm tra nhu cầu, xác nhận lịch khai giảng, học phí và điều kiện áp dụng trước khi học viên quyết định đăng ký.</p>
+      <ol><li>Gửi thông tin và mục tiêu học <%= String(course.language || 'ngoại ngữ').toLocaleLowerCase('vi') %>.</li><li>Kiểm tra trình độ, tư vấn khóa học và lộ trình phù hợp.</li><li>Xác nhận lịch học, học phí, giáo trình và chính sách tại thời điểm mở lớp.</li></ol>
+    </section>
+    <section class="faq-section" aria-labelledby="course-faq-title">
+      <h2 id="course-faq-title">Câu hỏi thường gặp về <%= course.name %></h2>
+      <% courseFaqs.forEach(function(faq, index){ %><details class="faq-item" <%= index === 0 ? 'open' : '' %>><summary><%= faq.question %></summary><p class="section-lead"><%= faq.answer %></p></details><% }); %>
+    </section>
+    <aside class="source-note"><strong>Lưu ý:</strong> <%= courseNotice %></aside>
+    <p style="margin-top:28px"><a href="/#lienhe" class="btn btn-primary">Đăng ký tư vấn lớp học</a></p>
+  </div>
+</article>
+</main>
