@@ -358,6 +358,8 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .footer ul.fl{list-style:none;display:flex;flex-direction:column;gap:11px}
 .footer ul.fl a{font-size:14px;transition:.15s}
 .footer ul.fl a:hover{color:#fff;padding-left:4px}
+.footer__branch-title{margin:0 0 12px;color:#fff;font-size:13px;font-weight:800;letter-spacing:.02em}
+.footer__branch-title--secondary{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
 .footer .contact-li{display:flex;gap:10px;font-size:14px;margin-bottom:13px;align-items:flex-start}
 .footer .contact-li svg{width:17px;height:17px;color:var(--persimmon);flex-shrink:0;margin-top:3px}
 .footer__map{overflow:hidden;aspect-ratio:407/156;height:auto;margin-top:6px;border:1px solid rgba(255,255,255,.12);border-radius:14px}
