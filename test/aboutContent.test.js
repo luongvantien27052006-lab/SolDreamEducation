@@ -31,6 +31,12 @@ test('official introduction content is available as three editable tabs', () => 
   assert.doesNotMatch(tabs[2].content, /Khối Hành chính|Ban kiểm soát|Marketing/);
 });
 
+test('director portrait sits above the letter on mobile and lets desktop text flow below it', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'css', 'style.css'), 'utf8');
+  assert.match(css, /about-tabs__panel--greeting \.about-tabs__content>figure:first-child\{float:right;/);
+  assert.match(css, /@media\(max-width:640px\)[\s\S]*about-tabs__panel--greeting \.about-tabs__content>figure:first-child\{float:none;/);
+});
+
 test('Admin provides add, edit, visibility and delete controls for introduction content', () => {
   const root = path.join(__dirname, '..');
   const routes = fs.readFileSync(path.join(root, 'routes', 'admin.js'), 'utf8');
