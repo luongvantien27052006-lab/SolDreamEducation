@@ -68,6 +68,12 @@ test('keeps valid source coverage markers and rejects arbitrary data attributes'
   assert.doesNotMatch(html, /data-private/);
 });
 
+test('keeps safe local brand and portrait images from the public image directory', () => {
+  const html = sanitizeRichHtml('<figure><img src="/img/dao-duy-thang.jpg" alt="Tiến sĩ Đào Duy Thắng"></figure>');
+  assert.match(html, /src="\/img\/dao-duy-thang\.jpg"/);
+  assert.match(html, /alt="Tiến sĩ Đào Duy Thắng"/);
+});
+
 test('keeps safe high-quality video embeds while removing executable media attributes', () => {
   const html = sanitizeRichHtml('<figure><video src="/uploads/tu-van.mp4" controls autoplay onplay="steal()"><source src="/uploads/tu-van.webm" type="video/webm"><track onload="steal()"></video><figcaption>Hướng dẫn hồ sơ</figcaption></figure>');
   assert.match(html, /<video[^>]+src="\/uploads\/tu-van\.mp4"/);

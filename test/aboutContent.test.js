@@ -19,6 +19,7 @@ test('official introduction content is available as three editable tabs', () => 
   const tabs = getAboutSections('page').filter((section) => section.section_style === 'tab');
   assert.deepEqual(tabs.map((section) => section.title), ['Lời chào', 'Tầm nhìn & Sứ mệnh', 'Bộ máy tổ chức']);
   assert.match(tabs[0].content, /Tiến sĩ Đào Duy Thắng/);
+  assert.match(tabs[0].content, /\/img\/dao-duy-thang\.jpg/);
   assert.match(tabs[1].content, /Kỷ nguyên vươn mình/);
   assert.match(tabs[2].content, /Khối Tư vấn &amp; Tuyển sinh|Khối Tư vấn & Tuyển sinh/);
 });

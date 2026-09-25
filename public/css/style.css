@@ -494,11 +494,15 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .about-tabs--ready .about-tabs__panel[hidden]{display:none}
 .about-tabs__panel h2{margin:10px 0 24px;font-size:clamp(27px,4vw,38px)}
 .about-tabs__content{color:var(--ink-2);line-height:1.78}
+.about-tabs__content::after{content:"";display:block;clear:both}
 .about-tabs__content>p:first-child{font-size:17px;color:var(--ink)}
+.about-tabs__content>figure:first-of-type{float:right;width:min(280px,38%);margin:0 0 26px 32px;padding:10px;border:1px solid var(--line);border-radius:20px;background:var(--paper);box-shadow:0 18px 42px -24px rgba(44,27,61,.45)}
+.about-tabs__content>figure:first-of-type img{width:100%;height:auto;margin:0;border-radius:13px;object-fit:cover;object-position:center top}
+.about-tabs__content>figure:first-of-type figcaption{padding:10px 4px 2px;color:var(--ink);font-size:12px;font-weight:700;line-height:1.5;text-align:center}
 .about-tabs__content h3{margin:28px 0 10px;padding-top:20px;border-top:1px solid var(--line);font-size:20px;color:var(--ink)}
 .about-tabs__content blockquote{margin:24px 0;padding:20px 22px;border-left:4px solid var(--persimmon);border-radius:0 14px 14px 0;background:var(--paper);color:var(--ink);font-size:18px;font-weight:700}
 .about-tabs__content ul{margin:12px 0;padding-left:22px}.about-tabs__content li{margin:8px 0}.about-tabs__content li::marker{color:var(--persimmon)}
-@media(max-width:640px){.about-tabs{margin-top:24px}.about-tabs__list{overflow-x:auto;justify-content:flex-start;padding:6px;-webkit-overflow-scrolling:touch}.about-tabs__tab{flex:0 0 auto;white-space:nowrap;min-height:48px;padding:10px 15px}.about-tabs__panel{padding:22px 18px;border-radius:18px}.about-tabs__panel h2{font-size:27px}.about-tabs__content>p:first-child{font-size:16px}}
+@media(max-width:640px){.about-tabs{margin-top:24px}.about-tabs__list{overflow-x:auto;justify-content:flex-start;padding:6px;-webkit-overflow-scrolling:touch}.about-tabs__tab{flex:0 0 auto;white-space:nowrap;min-height:48px;padding:10px 15px}.about-tabs__panel{padding:22px 18px;border-radius:18px}.about-tabs__panel h2{font-size:27px}.about-tabs__content>p:first-child{font-size:16px}.about-tabs__content>figure:first-of-type{float:none;width:100%;max-width:330px;margin:18px auto 24px}}
 .list-direct-answer{max-width:920px;margin:-8px 0 34px}
 .course-knowledge-grid .knowledge-card{scroll-margin-top:100px}
 .knowledge-toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:34px}
