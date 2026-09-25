@@ -21,7 +21,13 @@ test('official introduction content is available as three editable tabs', () => 
   assert.match(tabs[0].content, /Tiến sĩ Đào Duy Thắng/);
   assert.match(tabs[0].content, /\/img\/dao-duy-thang\.jpg/);
   assert.match(tabs[1].content, /Kỷ nguyên vươn mình/);
-  assert.match(tabs[2].content, /Khối Tư vấn &amp; Tuyển sinh|Khối Tư vấn & Tuyển sinh/);
+  assert.match(tabs[2].content, /\/img\/nguyen-huynh-nhu\.jpg/);
+  assert.match(tabs[2].content, /\/img\/pham-vuong-kha-tran\.jpg/);
+  assert.match(tabs[2].content, /\/img\/dao-duy-thang\.jpg/);
+  assert.match(tabs[2].content, /Khối chuyên môn/);
+  assert.match(tabs[2].content, /Khối tư vấn/);
+  assert.match(tabs[2].content, /Khối kinh doanh/);
+  assert.doesNotMatch(tabs[2].content, /Khối Hành chính|Ban kiểm soát|Marketing/);
 });
 
 test('Admin provides add, edit, visibility and delete controls for introduction content', () => {

@@ -371,6 +371,12 @@ if (!aboutSectionsSeeded) db.prepare("INSERT INTO system_meta (key,value) VALUES
 
 // Add the three official introduction tabs supplied by SOL DREAM EDUCATION.
 // The migration is recorded once so later Admin edits are never overwritten.
+const officialTeamStructureContent = `<p>SOL DREAM EDUCATION tổ chức đội ngũ theo ba khối trọng tâm, mỗi khối có một người phụ trách chuyên môn rõ ràng để phối hợp xuyên suốt quá trình đào tạo, tư vấn và phát triển hoạt động.</p>
+  <div>
+    <figure><img src="/img/nguyen-huynh-nhu.jpg" alt="Thạc sĩ Nguyễn Huỳnh Như, phụ trách Khối chuyên môn SOL DREAM EDUCATION" width="1284" height="1268"><figcaption><span>Khối chuyên môn</span><strong>Thạc sĩ Nguyễn Huỳnh Như</strong><span>Thạc sĩ Đại học Woosong<br>Chuyên ngành Ngôn ngữ và Văn học Hàn Quốc</span></figcaption></figure>
+    <figure><img src="/img/pham-vuong-kha-tran.jpg" alt="Thạc sĩ Phạm Vương Khả Trân, phụ trách Khối tư vấn SOL DREAM EDUCATION" width="354" height="472"><figcaption><span>Khối tư vấn</span><strong>Thạc sĩ Phạm Vương Khả Trân</strong><span>Phụ trách Khối tư vấn</span></figcaption></figure>
+    <figure><img src="/img/dao-duy-thang.jpg" alt="Tiến sĩ Đào Duy Thắng, phụ trách Khối kinh doanh SOL DREAM EDUCATION" width="1706" height="2560"><figcaption><span>Khối kinh doanh</span><strong>Tiến sĩ Đào Duy Thắng</strong><span>Tiến sĩ Đại học Woosong<br>Chuyên ngành Quản trị học</span></figcaption></figure>
+  </div>`;
 const aboutTabsMigrationKey = 'about_official_tabs_20260925';
 if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTabsMigrationKey)) {
   const officialAboutTabs = [
@@ -400,21 +406,7 @@ if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTabsMigrationK
     },
     {
       title: 'Bộ máy tổ chức', eyebrow: 'Cơ cấu SOL DREAM EDUCATION', sortOrder: 3,
-      content: `<p>Cơ cấu tổ chức của SOL DREAM EDUCATION được vận hành dưới sự điều hành của CEO, Ban giám đốc và sự giám sát của Ban kiểm soát. Các khối chuyên môn phối hợp từ tư vấn, tuyển sinh, đào tạo, hồ sơ đến chăm sóc sinh viên.</p>
-        <h3>Cấp điều hành và kiểm soát</h3>
-        <ul><li><strong>CEO</strong></li><li><strong>Ban giám đốc</strong></li><li><strong>Ban kiểm soát</strong></li></ul>
-        <h3>Khối Hành chính — phụ trách: bà Ngọc</h3>
-        <ul><li>Lễ tân, hành chính và kế toán</li><li>Thủ tục hồ sơ và hợp đồng</li><li>Quản lý và chăm sóc sinh viên</li></ul>
-        <h3>Marketing — phụ trách: bà Chi và bà Hương</h3>
-        <ul><li>Content và Digital</li><li>Media và sự kiện</li></ul>
-        <h3>Khối Tư vấn & Tuyển sinh — phụ trách: bà Trân</h3>
-        <p>Thạc sĩ Kinh doanh Quốc tế, Đại học Woosong, Hàn Quốc.</p>
-        <ul><li>Cộng tác viên cấp 1</li><li>Cộng tác viên cấp 2</li><li>Đội ngũ telesales</li></ul>
-        <h3>Khối Đào tạo — phụ trách: bà Như</h3>
-        <p>Thạc sĩ Ngôn ngữ Hàn Quốc, Đại học Quốc gia Seoul, Hàn Quốc.</p>
-        <ul><li>Đội ngũ giáo viên Việt Nam</li><li>Đội ngũ giáo viên nước ngoài</li></ul>
-        <h3>Đơn vị thành viên</h3>
-        <ul><li>Công ty Cổ phần VIETCOREA</li><li>Hệ thống nhà hàng Cô Ba Sài Gòn</li></ul>`,
+      content: officialTeamStructureContent,
     },
   ];
   const findAboutTab = db.prepare("SELECT id FROM about_sections WHERE location='page' AND title=? LIMIT 1");
@@ -447,6 +439,17 @@ if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutDirectorPortra
       db.prepare("UPDATE about_sections SET content=?,updated_at=datetime('now','localtime') WHERE id=?").run(updated, greeting.id);
     }
     db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutDirectorPortraitKey, '1');
+  })();
+}
+
+// Replace the former detailed organization chart with the three current
+// professional, consulting and business blocks requested by the organization.
+const aboutTeamBlocksKey = 'about_team_blocks_20260926_v2';
+if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTeamBlocksKey)) {
+  db.transaction(() => {
+    db.prepare("UPDATE about_sections SET eyebrow='Cơ cấu SOL DREAM EDUCATION',content=?,section_style='tab',active=1,updated_at=datetime('now','localtime') WHERE location='page' AND title='Bộ máy tổ chức'")
+      .run(officialTeamStructureContent);
+    db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutTeamBlocksKey, '1');
   })();
 }
 
