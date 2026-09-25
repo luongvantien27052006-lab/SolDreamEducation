@@ -382,8 +382,8 @@ if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTabsMigrationK
   const officialAboutTabs = [
     {
       title: 'Lời chào', eyebrow: 'Thư ngỏ từ Giám đốc', sortOrder: 1,
-      content: `<p>Gửi những thế hệ trẻ đang mang trong mình khát vọng vươn ra thế giới,</p>
-        <figure><img src="/img/dao-duy-thang.jpg" alt="Tiến sĩ Đào Duy Thắng, Giám đốc SOL DREAM EDUCATION" width="1706" height="2560"><figcaption>Tiến sĩ Đào Duy Thắng — Giám đốc SOL DREAM EDUCATION</figcaption></figure>
+      content: `<figure><img src="/img/dao-duy-thang.jpg" alt="Tiến sĩ Đào Duy Thắng, Giám đốc SOL DREAM EDUCATION" width="1706" height="2560"><figcaption>Tiến sĩ Đào Duy Thắng — Giám đốc SOL DREAM EDUCATION</figcaption></figure>
+        <p>Gửi những thế hệ trẻ đang mang trong mình khát vọng vươn ra thế giới,</p>
         <p>Năm 2012, tôi đặt chân đến Hàn Quốc trong chương trình trao đổi sinh viên giữa Trường Đại học Kinh tế Thành phố Hồ Chí Minh và Trường Đại học Woosong. Những ngày đầu nơi đất khách, tôi cũng từng bỡ ngỡ trước rào cản ngôn ngữ và khác biệt văn hóa; từng miệt mài với những hạn nộp bài, những giờ làm thêm và cả những đêm dài tự hỏi con đường phía trước sẽ đi về đâu.</p>
         <p>Chính trong hành trình ấy, tôi nhận ra nỗ lực của một cá nhân là chưa đủ. Du học sinh cần một cộng đồng để kết nối, cần những người đi trước để chỉ đường và cần một điểm tựa đủ vững chắc để bảo vệ quyền lợi, định hướng tương lai. Hạt mầm ấy đã thôi thúc tôi xây dựng SOL DREAM EDUCATION.</p>
         <p>SOL DREAM không chỉ làm hồ sơ visa hay đưa học sinh qua biên giới. Từ hơn một thập kỷ trải nghiệm học tập, sinh sống và kinh doanh tại Hàn Quốc, chúng tôi xây dựng một nền tảng kết nối toàn diện: lộ trình học tập rõ ràng, cơ hội việc làm thực tế, hỗ trợ pháp lý và bảo vệ du học sinh trong suốt thời gian tại Hàn Quốc.</p>
@@ -439,6 +439,25 @@ if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutDirectorPortra
       db.prepare("UPDATE about_sections SET content=?,updated_at=datetime('now','localtime') WHERE id=?").run(updated, greeting.id);
     }
     db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutDirectorPortraitKey, '1');
+  })();
+}
+
+// Keep the portrait above the letter on mobile while the page layout places it
+// in a dedicated right-hand column on desktop.
+const aboutDirectorPortraitLayoutKey = 'about_director_portrait_layout_20260926';
+if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutDirectorPortraitLayoutKey)) {
+  db.transaction(() => {
+    const greeting = db.prepare("SELECT id,content FROM about_sections WHERE location='page' AND title='Lời chào' LIMIT 1").get();
+    if (greeting) {
+      const portraitPattern = /<figure>\s*<img\b[^>]*src=["']\/img\/dao-duy-thang\.jpg["'][^>]*>[\s\S]*?<\/figure>/i;
+      const match = String(greeting.content || '').match(portraitPattern);
+      if (match) {
+        const withoutPortrait = String(greeting.content).replace(portraitPattern, '').trim();
+        db.prepare("UPDATE about_sections SET content=?,updated_at=datetime('now','localtime') WHERE id=?")
+          .run(`${match[0]}${withoutPortrait}`, greeting.id);
+      }
+    }
+    db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutDirectorPortraitLayoutKey, '1');
   })();
 }
 

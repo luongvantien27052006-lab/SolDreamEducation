@@ -20,6 +20,7 @@ test('official introduction content is available as three editable tabs', () => 
   assert.deepEqual(tabs.map((section) => section.title), ['Lời chào', 'Tầm nhìn & Sứ mệnh', 'Bộ máy tổ chức']);
   assert.match(tabs[0].content, /Tiến sĩ Đào Duy Thắng/);
   assert.match(tabs[0].content, /\/img\/dao-duy-thang\.jpg/);
+  assert.ok(tabs[0].content.indexOf('/img/dao-duy-thang.jpg') < tabs[0].content.indexOf('Gửi những thế hệ trẻ'));
   assert.match(tabs[1].content, /Kỷ nguyên vươn mình/);
   assert.match(tabs[2].content, /\/img\/nguyen-huynh-nhu\.jpg/);
   assert.match(tabs[2].content, /\/img\/pham-vuong-kha-tran\.jpg/);

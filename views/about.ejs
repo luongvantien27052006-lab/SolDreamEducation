@@ -20,7 +20,7 @@
         </div>
         <div class="about-tabs__panels">
           <% tabSections.forEach(function(section, index){ %>
-            <section class="about-tabs__panel<%= index === 0 ? ' is-active' : '' %><%= section.title === 'Bộ máy tổ chức' ? ' about-tabs__panel--organization' : '' %>" id="about-tab-panel-<%= section.id %>" role="tabpanel" tabindex="0" aria-labelledby="about-tab-button-<%= section.id %>">
+            <section class="about-tabs__panel<%= index === 0 ? ' is-active' : '' %><%= section.title === 'Lời chào' ? ' about-tabs__panel--greeting' : '' %><%= section.title === 'Bộ máy tổ chức' ? ' about-tabs__panel--organization' : '' %>" id="about-tab-panel-<%= section.id %>" role="tabpanel" tabindex="0" aria-labelledby="about-tab-button-<%= section.id %>">
               <% if (section.eyebrow) { %><span class="eyebrow"><%= section.eyebrow %></span><% } %>
               <h2><%= section.title %></h2>
               <div class="about-tabs__content"><%- section.content %></div>
