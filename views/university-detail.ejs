@@ -74,24 +74,6 @@
       </section>
       <% }); %>
 
-      <section class="knowledge-section" id="case-study">
-        <h2>Case study hồ sơ thực tế</h2>
-        <p class="section-lead">Case study chỉ được công bố khi có đủ dữ liệu đã được phép sử dụng gồm tên viết tắt, GPA, thời gian xét visa và kỳ nhập học. SOL DREAM EDUCATION không tạo hồ sơ minh họa giả hoặc suy diễn kết quả visa để lấp khoảng trống dữ liệu.</p>
-        <% if (university.caseStudies && university.caseStudies.length) { %>
-          <div class="case-study-grid">
-          <% university.caseStudies.forEach(function(item){ %>
-            <article class="case-study-card">
-              <h3>Hồ sơ học viên <%= item.studentInitials %></h3>
-              <p class="section-lead"><%= item.summary %></p>
-              <dl><div><dt>GPA</dt><dd><%= item.gpa %></dd></div><div><dt>Thời gian xét visa</dt><dd><%= item.visaProcessingTime %></dd></div><div><dt>Kỳ nhập học</dt><dd><%= item.intake %></dd></div></dl>
-            </article>
-          <% }); %>
-          </div>
-        <% } else { %>
-          <aside class="source-note"><strong>Trạng thái dữ liệu:</strong> <%= university.caseStudyStatus %></aside>
-        <% } %>
-      </section>
-
       <section class="knowledge-section university-faq" id="cau-hoi-thuong-gap">
         <h2>Câu hỏi thường gặp về <%= university.name %></h2>
         <p class="section-lead">Các câu trả lời sau tổng hợp những điểm người nộp hồ sơ thường cần đối chiếu: học phí, điều kiện GPA và TOPIK, phân hạng visa, sổ đóng băng và ký túc xá. Mọi giá trị chưa có nguồn xác minh được ghi rõ thay vì ước đoán.</p>

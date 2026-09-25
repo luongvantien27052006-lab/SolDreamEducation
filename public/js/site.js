@@ -41,6 +41,35 @@ function animCount(el){
 var sObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){animCount(e.target.querySelector('b'));sObs.unobserve(e.target);}});},{threshold:.5});
 document.querySelectorAll('.stats .stat').forEach(function(s){sObs.observe(s);});
 
+// Accessible introduction tabs. Without JavaScript every panel remains visible;
+// once enhanced, only the selected panel is hidden/shown and arrow keys work.
+document.querySelectorAll('[data-about-tabs]').forEach(function(tabGroup){
+  var tabs=Array.from(tabGroup.querySelectorAll('[role="tab"]')),panels=Array.from(tabGroup.querySelectorAll('[role="tabpanel"]'));
+  if(!tabs.length||!panels.length)return;
+  function activateTab(tab,focus,updateHash){
+    var targetId=tab.dataset.aboutTabTarget;
+    tabs.forEach(function(item){var active=item===tab;item.classList.toggle('is-active',active);item.setAttribute('aria-selected',String(active));item.tabIndex=active?0:-1;});
+    panels.forEach(function(panel){var active=panel.id===targetId;panel.hidden=!active;panel.classList.toggle('is-active',active);});
+    if(focus)tab.focus();
+    if(updateHash&&history.replaceState)history.replaceState(null,'','#'+targetId);
+  }
+  tabGroup.classList.add('about-tabs--ready');
+  var hashTab=tabs.find(function(tab){return '#'+tab.dataset.aboutTabTarget===location.hash;});
+  activateTab(hashTab||tabs[0],false,false);
+  tabs.forEach(function(tab,index){
+    tab.addEventListener('click',function(){activateTab(tab,false,true);});
+    tab.addEventListener('keydown',function(event){
+      var next=index;
+      if(event.key==='ArrowRight')next=(index+1)%tabs.length;
+      else if(event.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;
+      else if(event.key==='Home')next=0;
+      else if(event.key==='End')next=tabs.length-1;
+      else return;
+      event.preventDefault();activateTab(tabs[next],true,true);
+    });
+  });
+});
+
 // Brand journey motion: the boarding pass becomes a plane; the timeline starts only when scrolled into view.
 var flightTicket=document.querySelector('[data-flight-ticket]'),flightStage=flightTicket&&flightTicket.closest('.hero__visual'),flightPlane=flightStage&&flightStage.querySelector('.ticket-flight__plane'),hcmMarker=flightStage&&flightStage.querySelector('[data-hcm-marker]'),seoulMarker=flightStage&&flightStage.querySelector('[data-seoul-marker]'),journey=document.querySelector('[data-journey]'),flightTimer=null,planeMotion=null;
 function playJourney(){if(!journey)return;journey.classList.remove('journey--active');void journey.offsetWidth;journey.classList.add('journey--active');}

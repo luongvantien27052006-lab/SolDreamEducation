@@ -15,6 +15,14 @@ test('introduction sections are database-backed and indexed for chatbot answers'
   sections.forEach((section) => assert.ok(indexed.some((document) => document.title === section.title)));
 });
 
+test('official introduction content is available as three editable tabs', () => {
+  const tabs = getAboutSections('page').filter((section) => section.section_style === 'tab');
+  assert.deepEqual(tabs.map((section) => section.title), ['Lời chào', 'Tầm nhìn & Sứ mệnh', 'Bộ máy tổ chức']);
+  assert.match(tabs[0].content, /Tiến sĩ Đào Duy Thắng/);
+  assert.match(tabs[1].content, /Kỷ nguyên vươn mình/);
+  assert.match(tabs[2].content, /Khối Tư vấn &amp; Tuyển sinh|Khối Tư vấn & Tuyển sinh/);
+});
+
 test('Admin provides add, edit, visibility and delete controls for introduction content', () => {
   const root = path.join(__dirname, '..');
   const routes = fs.readFileSync(path.join(root, 'routes', 'admin.js'), 'utf8');

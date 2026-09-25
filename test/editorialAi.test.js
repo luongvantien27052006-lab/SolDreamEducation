@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { universityDraftCoverage, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, sourceFidelityReport, sourceBlockCoverageReport } = require('../lib/editorialAi');
+const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, sourceFidelityReport, sourceBlockCoverageReport } = require('../lib/editorialAi');
 
 function comprehensiveDraft() {
   const headings = [
@@ -20,6 +20,13 @@ test('universityDraftCoverage accepts a comprehensive Vietnamese university prof
 
 test('universityDraftCoverage rejects sparse placeholder content', () => {
   assert.equal(universityDraftCoverage({ title: 'Trường', content: '<h2>Thông tin cần kiểm tra</h2><p>Đang chờ biên tập.</p>' }), false);
+});
+
+test('strict generated university profiles require at least 1,800 words and every mandatory group', () => {
+  const report = universityDraftCoverageReport(comprehensiveDraft(), { minimumWords: 1800, minimumHeadings: 11, minimumGroups: 11 });
+  assert.equal(report.complete, false);
+  assert.ok(report.wordCount >= 900);
+  assert.ok(report.missingGroups.includes('chương trình tiếng Hàn'));
 });
 
 test('universityDraftCoverage rejects untranslated Hangul', () => {

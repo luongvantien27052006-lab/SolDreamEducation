@@ -369,6 +369,67 @@ if (!aboutSectionsSeeded && db.prepare('SELECT COUNT(*) c FROM about_sections').
 }
 if (!aboutSectionsSeeded) db.prepare("INSERT INTO system_meta (key,value) VALUES ('about_sections_seeded','1')").run();
 
+// Add the three official introduction tabs supplied by SOL DREAM EDUCATION.
+// The migration is recorded once so later Admin edits are never overwritten.
+const aboutTabsMigrationKey = 'about_official_tabs_20260925';
+if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTabsMigrationKey)) {
+  const officialAboutTabs = [
+    {
+      title: 'Lời chào', eyebrow: 'Thư ngỏ từ Giám đốc', sortOrder: 1,
+      content: `<p>Gửi những thế hệ trẻ đang mang trong mình khát vọng vươn ra thế giới,</p>
+        <p>Năm 2012, tôi đặt chân đến Hàn Quốc trong chương trình trao đổi sinh viên giữa Trường Đại học Kinh tế Thành phố Hồ Chí Minh và Trường Đại học Woosong. Những ngày đầu nơi đất khách, tôi cũng từng bỡ ngỡ trước rào cản ngôn ngữ và khác biệt văn hóa; từng miệt mài với những hạn nộp bài, những giờ làm thêm và cả những đêm dài tự hỏi con đường phía trước sẽ đi về đâu.</p>
+        <p>Chính trong hành trình ấy, tôi nhận ra nỗ lực của một cá nhân là chưa đủ. Du học sinh cần một cộng đồng để kết nối, cần những người đi trước để chỉ đường và cần một điểm tựa đủ vững chắc để bảo vệ quyền lợi, định hướng tương lai. Hạt mầm ấy đã thôi thúc tôi xây dựng SOL DREAM EDUCATION.</p>
+        <p>SOL DREAM không chỉ làm hồ sơ visa hay đưa học sinh qua biên giới. Từ hơn một thập kỷ trải nghiệm học tập, sinh sống và kinh doanh tại Hàn Quốc, chúng tôi xây dựng một nền tảng kết nối toàn diện: lộ trình học tập rõ ràng, cơ hội việc làm thực tế, hỗ trợ pháp lý và bảo vệ du học sinh trong suốt thời gian tại Hàn Quốc.</p>
+        <p>Tôi mong mỗi Soldreamer sẽ có một bệ phóng tốt hơn những gì thế hệ chúng tôi từng có; không chỉ thích nghi mà còn có thể bứt phá, làm chủ cuộc sống và sự nghiệp trên quê hương thứ hai.</p>
+        <p>Kỷ nguyên mới đã bắt đầu. Hãy để SOL DREAM đồng hành cùng bạn trên hành trình viết tiếp ước mơ của mình.</p>
+        <blockquote>Chào mừng bạn đến với SOL DREAM EDUCATION!</blockquote>
+        <p><strong>Tiến sĩ Đào Duy Thắng</strong><br>Giám đốc SOL DREAM EDUCATION</p>`,
+    },
+    {
+      title: 'Tầm nhìn & Sứ mệnh', eyebrow: 'Định hướng phát triển', sortOrder: 2,
+      content: `<p>Đội ngũ tư vấn và đào tạo của SOL DREAM EDUCATION gồm các cựu du học sinh Việt Nam đã hoàn thành chương trình thạc sĩ, tiến sĩ và đang học tập, làm việc hoặc kinh doanh tại Hàn Quốc. Theo hồ sơ năng lực do trung tâm cung cấp, 100% giáo viên có TOPIK cấp 4 trở lên; đội ngũ quản lý có trình độ sau đại học và từng học chương trình ngôn ngữ Hàn tại Đại học Quốc gia Seoul.</p>
+        <h3>Mục tiêu</h3>
+        <p>SOL DREAM hướng đến việc kết hợp giáo dục ngôn ngữ chuyên sâu với định hướng học tập và nghề nghiệp thực tế. Học viên không chỉ được trang bị kiến thức mà còn được chuẩn bị bản lĩnh để làm chủ cuộc sống trong môi trường quốc tế.</p>
+        <p>Trách nhiệm của SOL DREAM không kết thúc khi học viên nhận visa. Cộng đồng SolDreamer được xây dựng để tiếp tục đồng hành trong quá trình học tập, làm việc và sinh sống tại Hàn Quốc.</p>
+        <h3>Sứ mệnh</h3>
+        <p>SOL DREAM mong muốn trở thành điểm tựa và bệ phóng cho người trẻ Việt Nam trên hành trình chinh phục tri thức quốc tế. Trung tâm xây dựng một cộng đồng du học sinh lành mạnh, gắn kết và hỗ trợ toàn diện về quyền lợi, định hướng tương lai cũng như cơ hội việc làm thực tế tại Hàn Quốc.</p>
+        <h3>Tầm nhìn</h3>
+        <p>SOL DREAM định hướng trở thành hệ sinh thái giáo dục và kết nối Việt Nam – Hàn Quốc hàng đầu, nơi mỗi học viên có điều kiện phát triển tiềm năng, đóng góp cho cả hai quốc gia và xem Hàn Quốc như quê hương thứ hai nuôi dưỡng thành công.</p>
+        <blockquote>SOL DREAM: Kỷ nguyên vươn mình – Trí tuệ Việt, Tương lai toàn cầu.</blockquote>`,
+    },
+    {
+      title: 'Bộ máy tổ chức', eyebrow: 'Cơ cấu SOL DREAM EDUCATION', sortOrder: 3,
+      content: `<p>Cơ cấu tổ chức của SOL DREAM EDUCATION được vận hành dưới sự điều hành của CEO, Ban giám đốc và sự giám sát của Ban kiểm soát. Các khối chuyên môn phối hợp từ tư vấn, tuyển sinh, đào tạo, hồ sơ đến chăm sóc sinh viên.</p>
+        <h3>Cấp điều hành và kiểm soát</h3>
+        <ul><li><strong>CEO</strong></li><li><strong>Ban giám đốc</strong></li><li><strong>Ban kiểm soát</strong></li></ul>
+        <h3>Khối Hành chính — phụ trách: bà Ngọc</h3>
+        <ul><li>Lễ tân, hành chính và kế toán</li><li>Thủ tục hồ sơ và hợp đồng</li><li>Quản lý và chăm sóc sinh viên</li></ul>
+        <h3>Marketing — phụ trách: bà Chi và bà Hương</h3>
+        <ul><li>Content và Digital</li><li>Media và sự kiện</li></ul>
+        <h3>Khối Tư vấn & Tuyển sinh — phụ trách: bà Trân</h3>
+        <p>Thạc sĩ Kinh doanh Quốc tế, Đại học Woosong, Hàn Quốc.</p>
+        <ul><li>Cộng tác viên cấp 1</li><li>Cộng tác viên cấp 2</li><li>Đội ngũ telesales</li></ul>
+        <h3>Khối Đào tạo — phụ trách: bà Như</h3>
+        <p>Thạc sĩ Ngôn ngữ Hàn Quốc, Đại học Quốc gia Seoul, Hàn Quốc.</p>
+        <ul><li>Đội ngũ giáo viên Việt Nam</li><li>Đội ngũ giáo viên nước ngoài</li></ul>
+        <h3>Đơn vị thành viên</h3>
+        <ul><li>Công ty Cổ phần VIETCOREA</li><li>Hệ thống nhà hàng Cô Ba Sài Gòn</li></ul>`,
+    },
+  ];
+  const findAboutTab = db.prepare("SELECT id FROM about_sections WHERE location='page' AND title=? LIMIT 1");
+  const insertAboutTab = db.prepare(`INSERT INTO about_sections
+    (location,eyebrow,title,content,section_style,sort_order,active) VALUES ('page',?,?,?,'tab',?,1)`);
+  const updateAboutTab = db.prepare(`UPDATE about_sections SET eyebrow=?,content=?,section_style='tab',sort_order=?,active=1,updated_at=datetime('now','localtime') WHERE id=?`);
+  db.transaction(() => {
+    for (const tab of officialAboutTabs) {
+      const existing = findAboutTab.get(tab.title);
+      if (existing) updateAboutTab.run(tab.eyebrow, tab.content, tab.sortOrder, existing.id);
+      else insertAboutTab.run(tab.eyebrow, tab.title, tab.content, tab.sortOrder);
+    }
+    db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutTabsMigrationKey, '1');
+  })();
+}
+
 if (db.prepare('SELECT COUNT(*) c FROM testimonials').get().c === 0) {
   const insertTestimonial = db.prepare(`INSERT INTO testimonials
     (name,role,quote,initials,rating,sort_order,published) VALUES (?,?,?,?,?,?,1)`);

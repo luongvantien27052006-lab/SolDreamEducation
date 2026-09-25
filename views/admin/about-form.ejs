@@ -8,7 +8,7 @@
   <form class="form" method="post" action="<%= mode === 'create' ? '/admin/gioi-thieu/moi' : '/admin/gioi-thieu/' + section.id + '/sua' %>">
     <div class="row2">
       <div class="f"><label>Vị trí hiển thị *</label><select name="location"><option value="home" <%= section.location==='home'?'selected':'' %>>Trang chủ</option><option value="page" <%= section.location!=='home'?'selected':'' %>>Trang Giới thiệu</option></select></div>
-      <div class="f"><label>Kiểu trình bày *</label><select name="section_style"><option value="standard" <%= section.section_style==='standard'?'selected':'' %>>Nội dung tiêu chuẩn</option><option value="direct-answer" <%= section.section_style==='direct-answer'?'selected':'' %>>Khung trả lời nhanh</option><option value="source-box" <%= section.section_style==='source-box'?'selected':'' %>>Khung nguồn/minh bạch</option></select></div>
+      <div class="f"><label>Kiểu trình bày *</label><select name="section_style"><option value="standard" <%= section.section_style==='standard'?'selected':'' %>>Nội dung tiêu chuẩn</option><option value="tab" <%= section.section_style==='tab'?'selected':'' %>>Nội dung trong tab</option><option value="direct-answer" <%= section.section_style==='direct-answer'?'selected':'' %>>Khung trả lời nhanh</option><option value="source-box" <%= section.section_style==='source-box'?'selected':'' %>>Khung nguồn/minh bạch</option></select></div>
     </div>
     <div class="row2">
       <div class="f"><label>Nhãn nhỏ</label><input name="eyebrow" maxlength="100" value="<%= section.eyebrow || '' %>" placeholder="VD: Về Sol Dream"></div>

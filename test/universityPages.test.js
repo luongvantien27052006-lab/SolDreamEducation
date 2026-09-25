@@ -63,7 +63,7 @@ test('serves public university pages and includes them in the sitemap', async (c
   assert.equal(detailResponse.status, 200);
   assert.match(detailHtml, /Hanyang University có cơ sở tại Seoul và Ansan/);
   assert.match(detailHtml, /<table class="geo-data-table">/);
-  assert.match(detailHtml, /Case study hồ sơ thực tế/);
+  assert.doesNotMatch(detailHtml, /Case study hồ sơ thực tế/);
   assert.match(detailHtml, /Câu hỏi thường gặp về Trường Đại học Hanyang/);
   assert.match(detailHtml, /<table class="knowledge-table">/);
   assert.match(detailHtml, /Nguồn và phạm vi thông tin/);
