@@ -2,6 +2,16 @@
 <article class="section knowledge-hub">
   <div class="wrap" style="max-width:920px">
     <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <span>Giới thiệu</span></nav>
+    <% const aboutSloganSection = (aboutSections || []).find(function(section){ return section.title === 'Slogan SOL DREAM'; }); %>
+    <% if (aboutSloganSection) { %>
+      <aside class="about-slogan" aria-label="Slogan SOL DREAM EDUCATION">
+        <img src="/img/logo-mark.png" width="80" height="80" alt="" aria-hidden="true">
+        <div>
+          <span><%= aboutSloganSection.eyebrow || 'Thông điệp SOL DREAM' %></span>
+          <%- aboutSloganSection.content %>
+        </div>
+      </aside>
+    <% } %>
     <header class="knowledge-hero">
       <span class="eyebrow">Về chúng tôi</span>
       <h1>SOL DREAM EDUCATION là ai?</h1>
@@ -10,10 +20,11 @@
     </header>
 
     <% const tabSections = (aboutSections || []).filter(function(section){ return section.section_style === 'tab'; }); %>
-    <% const regularSections = (aboutSections || []).filter(function(section){ return section.section_style !== 'tab'; }); %>
+    <% const regularSections = (aboutSections || []).filter(function(section){ return section.section_style !== 'tab' && section.title !== 'Slogan SOL DREAM'; }); %>
     <% if (tabSections.length) { %>
       <section class="about-tabs" data-about-tabs aria-label="Nội dung giới thiệu SOL DREAM EDUCATION">
         <div class="about-tabs__list" role="tablist" aria-label="Các mục giới thiệu">
+          <span class="about-tabs__tree-mark" aria-hidden="true"><img src="/img/logo-mark.png" width="62" height="62" alt=""></span>
           <% tabSections.forEach(function(section, index){ %>
             <button class="about-tabs__tab<%= index === 0 ? ' is-active' : '' %>" type="button" role="tab" id="about-tab-button-<%= section.id %>" aria-controls="about-tab-panel-<%= section.id %>" aria-selected="<%= index === 0 ? 'true' : 'false' %>" tabindex="<%= index === 0 ? '0' : '-1' %>" data-about-tab-target="about-tab-panel-<%= section.id %>"><%= section.title %></button>
           <% }); %>

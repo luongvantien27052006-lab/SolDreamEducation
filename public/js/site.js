@@ -60,8 +60,8 @@ document.querySelectorAll('[data-about-tabs]').forEach(function(tabGroup){
     tab.addEventListener('click',function(){activateTab(tab,false,true);});
     tab.addEventListener('keydown',function(event){
       var next=index;
-      if(event.key==='ArrowRight')next=(index+1)%tabs.length;
-      else if(event.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;
+      if(event.key==='ArrowRight'||event.key==='ArrowDown')next=(index+1)%tabs.length;
+      else if(event.key==='ArrowLeft'||event.key==='ArrowUp')next=(index-1+tabs.length)%tabs.length;
       else if(event.key==='Home')next=0;
       else if(event.key==='End')next=tabs.length-1;
       else return;

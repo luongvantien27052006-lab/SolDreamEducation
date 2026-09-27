@@ -373,9 +373,9 @@ if (!aboutSectionsSeeded) db.prepare("INSERT INTO system_meta (key,value) VALUES
 // The migration is recorded once so later Admin edits are never overwritten.
 const officialTeamStructureContent = `<p>SOL DREAM EDUCATION tổ chức đội ngũ theo ba khối trọng tâm, mỗi khối có một người phụ trách chuyên môn rõ ràng để phối hợp xuyên suốt quá trình đào tạo, tư vấn và phát triển hoạt động.</p>
   <div>
-    <figure><img src="/img/nguyen-huynh-nhu.jpg" alt="Thạc sĩ Nguyễn Huỳnh Như, phụ trách Khối chuyên môn SOL DREAM EDUCATION" width="1284" height="1268"><figcaption><span>Khối chuyên môn</span><strong>Thạc sĩ Nguyễn Huỳnh Như</strong><span>Thạc sĩ Đại học Woosong<br>Chuyên ngành Ngôn ngữ và Văn học Hàn Quốc</span></figcaption></figure>
-    <figure><img src="/img/pham-vuong-kha-tran.jpg" alt="Thạc sĩ Phạm Vương Khả Trân, phụ trách Khối tư vấn SOL DREAM EDUCATION" width="354" height="472"><figcaption><span>Khối tư vấn</span><strong>Thạc sĩ Phạm Vương Khả Trân</strong><span>Phụ trách Khối tư vấn</span></figcaption></figure>
     <figure><img src="/img/dao-duy-thang.jpg" alt="Tiến sĩ Đào Duy Thắng, phụ trách Khối kinh doanh SOL DREAM EDUCATION" width="1706" height="2560"><figcaption><span>Khối kinh doanh</span><strong>Tiến sĩ Đào Duy Thắng</strong><span>Tiến sĩ Đại học Woosong<br>Chuyên ngành Quản trị học</span></figcaption></figure>
+    <figure><img src="/img/pham-vuong-kha-tran.jpg" alt="Thạc sĩ Phạm Vương Khả Trân, phụ trách Khối tư vấn SOL DREAM EDUCATION" width="354" height="472"><figcaption><span>Khối tư vấn</span><strong>Thạc sĩ Phạm Vương Khả Trân</strong><span>Phụ trách Khối tư vấn</span></figcaption></figure>
+    <figure><img src="/img/nguyen-huynh-nhu.jpg" alt="Thạc sĩ Nguyễn Huỳnh Như, phụ trách Khối chuyên môn SOL DREAM EDUCATION" width="1284" height="1268"><figcaption><span>Khối chuyên môn</span><strong>Thạc sĩ Nguyễn Huỳnh Như</strong><span>Thạc sĩ Đại học Seoul<br>Chuyên ngành Ngôn ngữ và Văn học Hàn Quốc</span></figcaption></figure>
   </div>`;
 const aboutTabsMigrationKey = 'about_official_tabs_20260925';
 if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTabsMigrationKey)) {
@@ -401,8 +401,7 @@ if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTabsMigrationK
         <h3>Sứ mệnh</h3>
         <p>SOL DREAM mong muốn trở thành điểm tựa và bệ phóng cho người trẻ Việt Nam trên hành trình chinh phục tri thức quốc tế. Trung tâm xây dựng một cộng đồng du học sinh lành mạnh, gắn kết và hỗ trợ toàn diện về quyền lợi, định hướng tương lai cũng như cơ hội việc làm thực tế tại Hàn Quốc.</p>
         <h3>Tầm nhìn</h3>
-        <p>SOL DREAM định hướng trở thành hệ sinh thái giáo dục và kết nối Việt Nam – Hàn Quốc hàng đầu, nơi mỗi học viên có điều kiện phát triển tiềm năng, đóng góp cho cả hai quốc gia và xem Hàn Quốc như quê hương thứ hai nuôi dưỡng thành công.</p>
-        <blockquote>SOL DREAM: Kỷ nguyên vươn mình – Trí tuệ Việt, Tương lai toàn cầu.</blockquote>`,
+        <p>SOL DREAM định hướng trở thành hệ sinh thái giáo dục và kết nối Việt Nam – Hàn Quốc hàng đầu, nơi mỗi học viên có điều kiện phát triển tiềm năng, đóng góp cho cả hai quốc gia và xem Hàn Quốc như quê hương thứ hai nuôi dưỡng thành công.</p>`,
     },
     {
       title: 'Bộ máy tổ chức', eyebrow: 'Cơ cấu SOL DREAM EDUCATION', sortOrder: 3,
@@ -469,6 +468,33 @@ if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTeamBlocksKey)
     db.prepare("UPDATE about_sections SET eyebrow='Cơ cấu SOL DREAM EDUCATION',content=?,section_style='tab',active=1,updated_at=datetime('now','localtime') WHERE location='page' AND title='Bộ máy tổ chức'")
       .run(officialTeamStructureContent);
     db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutTeamBlocksKey, '1');
+  })();
+}
+
+// Reorder the current leadership blocks, correct Nguyễn Huỳnh Như's school,
+// and make the company slogan an Admin-editable lead element on /gioi-thieu.
+const aboutTreeNavigationKey = 'about_tree_navigation_20260928_v1';
+if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTreeNavigationKey)) {
+  db.transaction(() => {
+    db.prepare("UPDATE about_sections SET eyebrow='Cơ cấu SOL DREAM EDUCATION',content=?,section_style='tab',active=1,updated_at=datetime('now','localtime') WHERE location='page' AND title='Bộ máy tổ chức'")
+      .run(officialTeamStructureContent);
+    const vision = db.prepare("SELECT id,content FROM about_sections WHERE location='page' AND title='Tầm nhìn & Sứ mệnh' LIMIT 1").get();
+    if (vision) {
+      const content = String(vision.content || '')
+        .replace(/<blockquote\b[^>]*>[\s\S]*?Kỷ nguyên vươn mình[\s\S]*?<\/blockquote>/gi, '')
+        .trim();
+      db.prepare("UPDATE about_sections SET content=?,updated_at=datetime('now','localtime') WHERE id=?").run(content, vision.id);
+    }
+    const sloganContent = '<p><strong>SOL DREAM:</strong> Kỷ nguyên vươn mình – Trí tuệ Việt, Tương lai toàn cầu.</p>';
+    const slogan = db.prepare("SELECT id FROM about_sections WHERE location='page' AND title='Slogan SOL DREAM' LIMIT 1").get();
+    if (slogan) {
+      db.prepare("UPDATE about_sections SET eyebrow='Thông điệp SOL DREAM',content=?,section_style='direct-answer',sort_order=0,active=1,updated_at=datetime('now','localtime') WHERE id=?")
+        .run(sloganContent, slogan.id);
+    } else {
+      db.prepare("INSERT INTO about_sections (location,eyebrow,title,content,section_style,sort_order,active) VALUES ('page','Thông điệp SOL DREAM','Slogan SOL DREAM',?,'direct-answer',0,1)")
+        .run(sloganContent);
+    }
+    db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutTreeNavigationKey, '1');
   })();
 }
 

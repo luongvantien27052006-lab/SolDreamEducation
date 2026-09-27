@@ -16,15 +16,22 @@ test('introduction sections are database-backed and indexed for chatbot answers'
 });
 
 test('official introduction content is available as three editable tabs', () => {
-  const tabs = getAboutSections('page').filter((section) => section.section_style === 'tab');
+  const sections = getAboutSections('page');
+  const tabs = sections.filter((section) => section.section_style === 'tab');
   assert.deepEqual(tabs.map((section) => section.title), ['Lời chào', 'Tầm nhìn & Sứ mệnh', 'Bộ máy tổ chức']);
   assert.match(tabs[0].content, /Tiến sĩ Đào Duy Thắng/);
   assert.match(tabs[0].content, /\/img\/dao-duy-thang\.jpg/);
   assert.ok(tabs[0].content.indexOf('/img/dao-duy-thang.jpg') < tabs[0].content.indexOf('Gửi những thế hệ trẻ'));
-  assert.match(tabs[1].content, /Kỷ nguyên vươn mình/);
+  const slogan = sections.find((section) => section.title === 'Slogan SOL DREAM');
+  assert.ok(slogan);
+  assert.match(slogan.content, /Kỷ nguyên vươn mình/);
+  assert.doesNotMatch(tabs[1].content, /Kỷ nguyên vươn mình/);
   assert.match(tabs[2].content, /\/img\/nguyen-huynh-nhu\.jpg/);
   assert.match(tabs[2].content, /\/img\/pham-vuong-kha-tran\.jpg/);
   assert.match(tabs[2].content, /\/img\/dao-duy-thang\.jpg/);
+  assert.ok(tabs[2].content.indexOf('/img/dao-duy-thang.jpg') < tabs[2].content.indexOf('/img/nguyen-huynh-nhu.jpg'));
+  assert.match(tabs[2].content, /Thạc sĩ Đại học Seoul/);
+  assert.doesNotMatch(tabs[2].content, /Nguyễn Huỳnh Như[\s\S]{0,180}Đại học Woosong/);
   assert.match(tabs[2].content, /Khối chuyên môn/);
   assert.match(tabs[2].content, /Khối tư vấn/);
   assert.match(tabs[2].content, /Khối kinh doanh/);
@@ -35,6 +42,17 @@ test('director portrait sits above the letter on mobile and lets desktop text fl
   const css = fs.readFileSync(path.join(__dirname, '..', 'public', 'css', 'style.css'), 'utf8');
   assert.match(css, /about-tabs__panel--greeting \.about-tabs__content>figure:first-child\{float:right;/);
   assert.match(css, /@media\(max-width:640px\)[\s\S]*about-tabs__panel--greeting \.about-tabs__content>figure:first-child\{float:none;/);
+});
+
+test('mobile introduction navigation uses the company tree mark without horizontal overflow', () => {
+  const root = path.join(__dirname, '..');
+  const css = fs.readFileSync(path.join(root, 'public', 'css', 'style.css'), 'utf8');
+  const view = fs.readFileSync(path.join(root, 'views', 'about.ejs'), 'utf8');
+  assert.match(view, /about-slogan[\s\S]*logo-mark\.png[\s\S]*knowledge-hero/);
+  assert.match(view, /about-tabs__tree-mark/);
+  assert.match(css, /@media\(max-width:640px\)[\s\S]*about-tabs__list::before/);
+  assert.match(css, /about-tabs__tree-mark[\s\S]*display:grid/);
+  assert.doesNotMatch(css, /@media\(max-width:640px\)[^}]*\.about-tabs__list\{[^}]*overflow-x:auto/);
 });
 
 test('Admin provides add, edit, visibility and delete controls for introduction content', () => {
