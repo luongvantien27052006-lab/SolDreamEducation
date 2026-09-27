@@ -12,8 +12,8 @@ const { sanitizeRichHtml } = require('../lib/contentSanitizer');
 const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
-const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalUniversityCover, attachmentMarkup } = require('../lib/researchBot');
-const { generateEditorialDraft, generateUniversityProfileDraft, universityDraftCoverage, suggestResearchKeywords } = require('../lib/editorialAi');
+const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalUniversityCover, attachmentMarkup, sourceAttributionMarkup } = require('../lib/researchBot');
+const { generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords } = require('../lib/editorialAi');
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent');
@@ -790,11 +790,9 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     const draft = isUniversityProfile
       ? await generateUniversityProfileDraft(draftInput)
       : await generateEditorialDraft(draftInput);
-    if (isUniversityProfile && (!draft.aiAvailable || !universityDraftCoverage(draft))) {
-      throw new Error(draft.aiError || 'Nguồn hoặc AI chưa tạo được hồ sơ trường đầy đủ; mục vẫn được giữ trong hàng chờ.');
-    }
-    if (!isUniversityProfile && !draft.aiAvailable) {
-      throw new Error(draft.aiError || 'AI chưa tạo được bản dịch đầy đủ; mục vẫn được giữ trong hàng chờ.');
+    const usableDraftLength = String(draft.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().length;
+    if (usableDraftLength < 100 || (!draft.aiAvailable && !draft.hasSourceContent)) {
+      throw new Error(draft.aiError || 'Nguồn chưa cung cấp đủ nội dung thực tế để tạo bài.');
     }
     let fetchedCover = await coverImageForPage(page);
     let externalCover = null;
@@ -825,7 +823,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
       const relatedMarkup = relatedGuides.length
         ? `<h2>Cẩm nang liên quan đến trường</h2><ul>${relatedGuides.map((guide) => `<li><a href="/tin-tuc/${guide.slug}">${guide.title}</a></li>`).join('')}</ul>`
         : '';
-      const draftContent = sanitizeRichHtml(`${draft.content}${attachmentMarkup(draft.attachments, page.url)}${relatedMarkup}`);
+      const draftContent = sanitizeRichHtml(`${draft.content}${attachmentMarkup(draft.attachments, page.url)}${relatedMarkup}${sourceAttributionMarkup(page.sourceUrls || page.url)}`);
       const slug = uniqueSlug(db, slugify(draft.title), 0, target);
       let result;
       if (target === 'programs') {

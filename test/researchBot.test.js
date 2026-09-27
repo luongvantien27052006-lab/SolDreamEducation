@@ -9,7 +9,8 @@ const {
   extractUniversityResourceCandidates,
   extractOfficialUniversityWebsite, extractClientRedirect,
   extractMediaFromHtml, extractFaqsFromHtml, extractAttachmentsFromHtml, parseRobots, classifySection, requiresManualApproval, fingerprint, optimizeCrawledItem,
-  parseWikimediaImageResults, parseOpenverseImageResults,
+  parseWikimediaImageResults, parseOpenverseImageResults, attachmentMarkup, sourceAttributionMarkup,
+  shouldExpandEditorialResearch, enrichSparseEditorialSource,
 } = require('../lib/researchBot');
 const { isKoreaStudyRelevant, isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { placementForPath, localSqlDate } = require('../lib/sitePopup');
@@ -33,6 +34,49 @@ test('crawler extracts official FAQ schema and safe page media', () => {
     imageUrl: 'https://official.example/assets/guide.jpg', videoUrl: 'https://cdn.example/guide.mp4',
   });
   assert.deepEqual(extractFaqsFromHtml(html), [{ question: 'Visa D-2 cần gì?', answer: 'Hồ sơ phụ thuộc chương trình và cơ quan tiếp nhận.' }]);
+});
+
+test('article source links are rendered once at the end after attachments', () => {
+  const attachments = attachmentMarkup([{ url: 'https://official.example/files/guide.pdf', titleVi: 'Hướng dẫn' }], 'https://official.example/notice/1');
+  const source = sourceAttributionMarkup(['https://official.example/notice/1']);
+  const article = `<p>Nội dung bài viết.</p>${attachments}${source}`;
+  assert.match(article, /Tệp đính kèm chính thức[\s\S]*Nguồn bài viết/);
+  assert.equal((article.match(/href="https:\/\/official\.example\/notice\/1"/g) || []).length, 1);
+  assert.ok(article.endsWith(source));
+});
+
+test('short or empty source content triggers keyword research while substantial content does not', () => {
+  assert.equal(shouldExpandEditorialResearch('', false), true);
+  assert.equal(shouldExpandEditorialResearch('Thông báo tuyển sinh chỉ có một dòng ngắn.', false), true);
+  assert.equal(shouldExpandEditorialResearch('Thông tin tuyển sinh, điều kiện và lịch nộp hồ sơ. '.repeat(30), false), false);
+  assert.equal(shouldExpandEditorialResearch('Thông tin tổng quan của trường. '.repeat(30), true), true);
+  assert.equal(shouldExpandEditorialResearch('Thông tin tổng quan, ngành học, học phí và tuyển sinh quốc tế. '.repeat(40), true), false);
+});
+
+test('keyword fallback merges grounded external facts and preserves every source URL', async () => {
+  const page = await enrichSparseEditorialSource({ title: 'Đại học Hannam', url: 'https://original.example/school', suggested_section: 'Thông tin trường' }, {
+    name: 'Danh mục trường', keywords: 'Hannam University international admission',
+  }, {
+    url: 'https://original.example/school', sourceUrls: ['https://original.example/school'], title: 'Đại học Hannam',
+    text: 'Một đoạn giới thiệu rất ngắn.', html: '', media: {}, faqs: [], attachments: [],
+  }, {
+    school: true,
+    externalSearch: async (query) => {
+      assert.match(query.keywords, /Hannam University/);
+      return {
+        text: 'Trường công bố chương trình tuyển sinh quốc tế, danh sách ngành học, lịch nhận hồ sơ, học phí và học bổng theo từng kỳ. '.repeat(8),
+        urls: ['https://www.hannam.ac.kr/admission', 'https://www.studyinkorea.go.kr/hannam'],
+        provider: 'test-search',
+      };
+    },
+  });
+  assert.match(page.rawText, /DỮ LIỆU TÌM KIẾM MỞ RỘNG/);
+  assert.deepEqual(page.sourceUrls, [
+    'https://original.example/school',
+    'https://www.hannam.ac.kr/admission',
+    'https://www.studyinkorea.go.kr/hannam',
+  ]);
+  assert.equal(page.discovery.externalSearchProvider, 'test-search');
 });
 
 test('crawler keeps official attachments and rejects files hosted by third parties', () => {
@@ -152,14 +196,15 @@ test('deep university discovery prioritizes notices and follows CMS detail links
   assert.ok(rows.some((row) => row.kind === 'academics'));
 });
 
-test('search-index fallback is always marked for manual review', () => {
+test('search-index fallback can create an article from facts with source attribution', () => {
   const item = optimizeCrawledItem({
     title: 'Thông báo tuyển sinh quốc tế mới nhất', url: 'https://official.go.kr/notice/10',
     excerpt: 'Thông báo chính thức được phát hiện qua chỉ mục của đúng website cơ quan ban hành và cần quản trị viên đối chiếu.',
     suggestedSection: 'Du học Hàn Quốc', discoveryMode: 'official-search-index',
   }, { name: 'Nguồn chính thức', source_type: 'ministry' });
   assert.match(item.optimizationNote, /chỉ mục tìm kiếm/);
-  assert.match(item.optimizationNote, /bắt buộc quản trị viên duyệt/i);
+  assert.match(item.optimizationNote, /dữ kiện thực tế/i);
+  assert.doesNotMatch(item.optimizationNote, /bắt buộc quản trị viên duyệt/i);
 });
 
 test('crawler discovers official sitemap and RSS URLs for deep pages', () => {

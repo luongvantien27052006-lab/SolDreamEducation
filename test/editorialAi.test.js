@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, sourceFidelityReport, sourceBlockCoverageReport } = require('../lib/editorialAi');
+const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, usableDraftContent, fallbackDraft } = require('../lib/editorialAi');
 
 function comprehensiveDraft() {
   const headings = [
@@ -35,6 +35,24 @@ test('universityDraftCoverage rejects untranslated Hangul', () => {
   assert.equal(universityDraftCoverage(draft), false);
 });
 
+test('partial official information creates a draft without missing-data boilerplate', () => {
+  const sourceText = `[MÃ SRC-0001 | NHÓM GENERAL | THỨ TỰ 1]\nThông báo tuyển sinh dành cho sinh viên quốc tế được nhận hồ sơ từ ngày 01/10/2026 đến ngày 30/10/2026.\n\n[MÃ SRC-0002 | NHÓM FEES | THỨ TỰ 2]\nLệ phí xét hồ sơ là 100.000 won và nộp trực tuyến cùng đơn đăng ký.`;
+  const draft = fallbackDraft({ title: 'Thông báo tuyển sinh quốc tế', sourceText, section: 'Cẩm nang & Thông tin' });
+  assert.equal(draft.hasSourceContent, true);
+  assert.match(draft.content, /01\/10\/2026/);
+  assert.match(draft.content, /100\.000 won/);
+  assert.doesNotMatch(draft.content, /chưa xác minh|nguồn chính thức không công bố|thông tin cần kiểm tra/i);
+});
+
+test('missing-data notices are removed while real crawled facts remain usable', () => {
+  const source = meaningfulSourceText('Dữ liệu được đối chiếu qua chỉ mục tìm kiếm; bắt buộc duyệt thủ công.\nNguồn chính thức không công bố học phí.\nThời gian nhận hồ sơ từ 01/10/2026 đến 30/10/2026 dành cho sinh viên quốc tế.');
+  assert.doesNotMatch(source, /bắt buộc duyệt thủ công|không công bố/i);
+  assert.match(source, /01\/10\/2026/);
+  const content = usableDraftContent('<p>Nguồn chính thức không công bố mức phí.</p><h2>Lịch nhận hồ sơ</h2><p>Thời gian nhận hồ sơ từ 01/10/2026 đến 30/10/2026 dành cho sinh viên quốc tế và được nộp trực tuyến theo hướng dẫn của trường.</p>');
+  assert.equal(content.usable, true);
+  assert.doesNotMatch(content.cleaned, /không công bố/i);
+});
+
 test('parses OpenAI web-search text and official citations', () => {
   const parsed = parseOpenAiWebSearchResponse({
     output: [{ type: 'message', content: [{ type: 'output_text', text: '{"items":[]}', annotations: [
@@ -53,6 +71,22 @@ test('keeps only search results from the configured official hostname', () => {
   assert.equal(items.length, 1);
   assert.equal(items[0].discoveryProvider, 'openai-web-search');
   assert.equal(items[0].discoveryMode, 'official-search-index');
+});
+
+test('external research keeps grounded public sources and rejects social/search-result URLs', () => {
+  const response = {
+    text: 'Dữ kiện từ https://www.studyinkorea.go.kr/ko/plan/scholarship.do và https://www.google.com/search?q=hoc+bong',
+    candidates: [{ groundingMetadata: { groundingChunks: [
+      { web: { uri: 'https://www.hannam.ac.kr/kor/guide/notice.html' } },
+      { web: { uri: 'https://facebook.com/unverified-post' } },
+    ] } }],
+  };
+  assert.deepEqual(extractGeminiGroundingUrls(response), [
+    'https://www.studyinkorea.go.kr/ko/plan/scholarship.do',
+    'https://www.hannam.ac.kr/kor/guide/notice.html',
+  ]);
+  assert.equal(isUsefulExternalResearchUrl('https://overseas.mofa.go.kr/vn-vi/index.do'), true);
+  assert.equal(isUsefulExternalResearchUrl('https://www.youtube.com/watch?v=1'), false);
 });
 
 test('turns provider billing errors into useful admin diagnostics', () => {
