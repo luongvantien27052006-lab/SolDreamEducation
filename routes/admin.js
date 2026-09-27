@@ -12,7 +12,7 @@ const { sanitizeRichHtml } = require('../lib/contentSanitizer');
 const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
-const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalUniversityCover, attachmentMarkup, sourceAttributionMarkup } = require('../lib/researchBot');
+const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalContentCover, attachmentMarkup, editorialSourceUrls } = require('../lib/researchBot');
 const { generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords } = require('../lib/editorialAi');
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
@@ -796,25 +796,45 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     }
     let fetchedCover = await coverImageForPage(page);
     let externalCover = null;
-    if (!fetchedCover && isUniversityProfile) {
-      externalCover = await searchExternalUniversityCover({ title: draft.title, subtitle: draft.subtitle });
+    if (!fetchedCover) {
+      externalCover = await searchExternalContentCover({
+        title: draft.title,
+        subtitle: draft.subtitle,
+        keywords: `${item.title || ''} ${item.source_name || ''}`,
+        sourceUrl: page.url,
+      }, { school: isUniversityProfile });
       fetchedCover = externalCover?.cachedImageUrl || '';
     }
     const isStudyProgram = item.suggested_section === STUDY_CATEGORY || draft.category === STUDY_CATEGORY;
     const target = isUniversityProfile || isStudyProgram || req.body.target === 'program' ? 'programs' : 'posts';
-    const sourceUrls = normalizeSourceUrls((page.sourceUrls || [page.url]).join('\n'));
+    const sourceUrls = normalizeSourceUrls(editorialSourceUrls(page.sourceUrls || [], page.url, 3).join('\n'));
+    const preparedRelatedGuides = [];
+    if (target === 'programs') {
+      for (const guide of (draft.relatedGuides || [])) {
+        const existing = db.prepare("SELECT id,slug FROM posts WHERE published=0 AND lower(title)=lower(?) ORDER BY id DESC LIMIT 1").get(guide.title);
+        let guideCover = null;
+        if (!existing) {
+          guideCover = await searchExternalContentCover({
+            title: guide.title,
+            keywords: `${draft.title || ''} ${guide.focusKeyword || ''}`,
+            sourceUrl: guide.sourceUrl || page.url,
+          });
+        }
+        preparedRelatedGuides.push({ ...guide, existing, guideCover });
+      }
+    }
     const transactionResult = db.transaction(() => {
       const relatedGuides = [];
       if (target === 'programs') {
-        for (const guide of (draft.relatedGuides || [])) {
-          let record = db.prepare("SELECT id,slug FROM posts WHERE published=0 AND lower(title)=lower(?) ORDER BY id DESC LIMIT 1").get(guide.title);
+        for (const guide of preparedRelatedGuides) {
+          let record = guide.existing;
           if (!record) {
             const guideSlug = uniqueSlug(db, slugify(guide.title), 0, 'posts');
             const guideResult = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,cover_image,source_urls,seo_title,meta_description,focus_keyword,published,noindex,created_at,updated_at)
-              VALUES (?,?,?,?,?,'',?,?,?,?,0,0,datetime('now','localtime'),datetime('now','localtime'))`)
-              .run(guide.title, guideSlug, guide.excerpt, sanitizeRichHtml(guide.content), 'Cẩm nang du học', normalizeSourceUrls(guide.sourceUrl), guide.seoTitle, guide.metaDescription, guide.focusKeyword);
+              VALUES (?,?,?,?,?,?,?,?,?,?,0,0,datetime('now','localtime'),datetime('now','localtime'))`)
+              .run(guide.title, guideSlug, guide.excerpt, sanitizeRichHtml(guide.content), 'Cẩm nang du học', guide.guideCover?.cachedImageUrl || '', normalizeSourceUrls(guide.sourceUrl), guide.seoTitle, guide.metaDescription, guide.focusKeyword);
             const guideId = Number(guideResult.lastInsertRowid);
-            db.prepare('UPDATE posts SET cover_image=? WHERE id=?').run(`/anh-cam-nang/${guideId}.svg`, guideId);
+            if (!guide.guideCover?.cachedImageUrl) db.prepare('UPDATE posts SET cover_image=? WHERE id=?').run(`/anh-cam-nang/${guideId}.svg`, guideId);
             record = { id: guideId, slug: guideSlug };
           }
           relatedGuides.push({ ...record, title: guide.title });
@@ -823,7 +843,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
       const relatedMarkup = relatedGuides.length
         ? `<h2>Cẩm nang liên quan đến trường</h2><ul>${relatedGuides.map((guide) => `<li><a href="/tin-tuc/${guide.slug}">${guide.title}</a></li>`).join('')}</ul>`
         : '';
-      const draftContent = sanitizeRichHtml(`${draft.content}${attachmentMarkup(draft.attachments, page.url)}${relatedMarkup}${sourceAttributionMarkup(page.sourceUrls || page.url)}`);
+      const draftContent = sanitizeRichHtml(`${draft.content}${attachmentMarkup(draft.attachments, page.url)}${relatedMarkup}`);
       const slug = uniqueSlug(db, slugify(draft.title), 0, target);
       let result;
       if (target === 'programs') {
