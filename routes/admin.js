@@ -13,7 +13,7 @@ const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
 const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalContentCover, attachmentMarkup, editorialSourceUrls } = require('../lib/researchBot');
-const { generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft, cleanResearchAnnotations, visibleCharacterCount } = require('../lib/editorialAi');
+const { MINIMUM_EDITORIAL_CHARACTERS, generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft, cleanResearchAnnotations, visibleCharacterCount } = require('../lib/editorialAi');
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent');
@@ -812,7 +812,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     if (!draft.aiAvailable) throw new Error(draft.aiError || 'AI chưa tạo được bài biên tập hoàn chỉnh; dữ liệu thu thập vẫn được giữ riêng trong mục Nghiên cứu.');
     const cleanDraftContent = sanitizeRichHtml(cleanResearchAnnotations(draft.content));
     const savedDraftLength = visibleCharacterCount(cleanDraftContent);
-    if (savedDraftLength < 7000) throw new Error(`Bản nháp chỉ còn ${savedDraftLength.toLocaleString('vi-VN')} ký tự thông tin sau khi làm sạch; cần tối thiểu 7.000 ký tự.`);
+    if (savedDraftLength < MINIMUM_EDITORIAL_CHARACTERS) throw new Error(`Bản nháp chỉ còn ${savedDraftLength.toLocaleString('vi-VN')} ký tự thông tin sau khi làm sạch; cần tối thiểu ${MINIMUM_EDITORIAL_CHARACTERS.toLocaleString('vi-VN')} ký tự.`);
     let fetchedCover = await coverImageForPage(page);
     let externalCover = null;
     if (!fetchedCover) {

@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { universityDraftCoverage, universityDraftCoverageReport, enrichEditorialDraftInput, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, cleanResearchAnnotations, visibleCharacterCount, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
+const { MINIMUM_EDITORIAL_CHARACTERS, universityDraftCoverage, universityDraftCoverageReport, enrichEditorialDraftInput, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, cleanResearchAnnotations, visibleCharacterCount, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
 
 function comprehensiveDraft() {
   const headings = [
@@ -29,15 +29,16 @@ test('strict generated university profiles require at least 1,800 words and ever
   assert.ok(report.missingGroups.includes('chương trình tiếng Hàn'));
 });
 
-test('university profile quality gate enforces 7,000 visible characters', () => {
+test('editorial quality gate enforces a 2,000-character minimum', () => {
+  assert.equal(MINIMUM_EDITORIAL_CHARACTERS, 2000);
   const short = {
     title: 'Thông tin Đại học Kaya',
     excerpt: 'Tổng quan về chương trình đào tạo của trường.',
     content: '<h2>Tổng quan</h2><p>' + 'Trường cung cấp chương trình đào tạo cho sinh viên quốc tế. '.repeat(20) + '</p>',
   };
-  const report = universityDraftCoverageReport(short, { minimumWords: 1, minimumHeadings: 1, minimumGroups: 1, minimumCharacters: 7000 });
-  assert.ok(report.characterCount < 7000);
-  assert.equal(report.minimumCharacters, 7000);
+  const report = universityDraftCoverageReport(short, { minimumWords: 1, minimumHeadings: 1, minimumGroups: 1, minimumCharacters: MINIMUM_EDITORIAL_CHARACTERS });
+  assert.ok(report.characterCount < MINIMUM_EDITORIAL_CHARACTERS);
+  assert.equal(report.minimumCharacters, MINIMUM_EDITORIAL_CHARACTERS);
   assert.equal(report.complete, false);
 });
 
@@ -50,7 +51,7 @@ test('bot research labels are removed while the factual text remains in the draf
   assert.match(draft, /được thành lập năm 1993 tại Gimhae/);
   assert.match(draft, /đào tạo bậc cử nhân, thạc sĩ và tiến sĩ/);
   assert.equal(visibleCharacterCount('<p>Đại học Kaya &amp; sinh viên</p>'), 'Đại học Kaya & sinh viên'.length);
-  assert.equal(usableDraftContent(draft, 7000).usable, false);
+  assert.equal(usableDraftContent(draft, MINIMUM_EDITORIAL_CHARACTERS).usable, false);
 });
 
 test('universityDraftCoverage rejects untranslated Hangul', () => {
