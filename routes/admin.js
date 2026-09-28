@@ -13,7 +13,7 @@ const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
 const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalContentCover, attachmentMarkup, editorialSourceUrls } = require('../lib/researchBot');
-const { MINIMUM_EDITORIAL_CHARACTERS, generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft, cleanResearchAnnotations, visibleCharacterCount } = require('../lib/editorialAi');
+const { MINIMUM_EDITORIAL_CHARACTERS, UNIVERSITY_MINIMUM_CHARACTERS, generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft, cleanResearchAnnotations, visibleCharacterCount, universityDraftCoverageReport } = require('../lib/editorialAi');
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent');
@@ -812,7 +812,12 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     if (!draft.aiAvailable) throw new Error(draft.aiError || 'AI chưa tạo được bài biên tập hoàn chỉnh; dữ liệu thu thập vẫn được giữ riêng trong mục Nghiên cứu.');
     const cleanDraftContent = sanitizeRichHtml(cleanResearchAnnotations(draft.content));
     const savedDraftLength = visibleCharacterCount(cleanDraftContent);
-    if (savedDraftLength < MINIMUM_EDITORIAL_CHARACTERS) throw new Error(`Bản nháp chỉ còn ${savedDraftLength.toLocaleString('vi-VN')} ký tự thông tin sau khi làm sạch; cần tối thiểu ${MINIMUM_EDITORIAL_CHARACTERS.toLocaleString('vi-VN')} ký tự.`);
+    const minimumDraftCharacters = isUniversityProfile ? UNIVERSITY_MINIMUM_CHARACTERS : MINIMUM_EDITORIAL_CHARACTERS;
+    if (savedDraftLength < minimumDraftCharacters) throw new Error(`Bản nháp chỉ còn ${savedDraftLength.toLocaleString('vi-VN')} ký tự thông tin sau khi làm sạch; cần tối thiểu ${minimumDraftCharacters.toLocaleString('vi-VN')} ký tự.`);
+    if (isUniversityProfile) {
+      const profileQuality = universityDraftCoverageReport({ ...draft, content: cleanDraftContent });
+      if (!profileQuality.complete) throw new Error(`Hồ sơ trường chưa đạt chuẩn chuyên sâu: ${profileQuality.wordCount} từ, ${profileQuality.headingCount} đề mục, ${profileQuality.coveredGroups} nhóm nội dung.`);
+    }
     let fetchedCover = await coverImageForPage(page);
     let externalCover = null;
     if (!fetchedCover) {
@@ -828,7 +833,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     const target = isUniversityProfile || isStudyProgram || req.body.target === 'program' ? 'programs' : 'posts';
     const sourceUrls = normalizeSourceUrls(editorialSourceUrls(draft.researchSourceUrls || page.sourceUrls || [], page.url, 3).join('\n'));
     const preparedRelatedGuides = [];
-    if (target === 'programs') {
+    if (target === 'programs' && !isUniversityProfile) {
       for (const guide of (draft.relatedGuides || [])) {
         const existing = db.prepare("SELECT id,slug FROM posts WHERE published=0 AND lower(title)=lower(?) ORDER BY id DESC LIMIT 1").get(guide.title);
         let guideCover = null;
@@ -862,14 +867,20 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
       const relatedMarkup = relatedGuides.length
         ? `<h2>Cẩm nang liên quan đến trường</h2><ul>${relatedGuides.map((guide) => `<li><a href="/tin-tuc/${guide.slug}">${guide.title}</a></li>`).join('')}</ul>`
         : '';
-      const draftContent = sanitizeRichHtml(`${cleanDraftContent}${attachmentMarkup(draft.attachments, page.url)}${relatedMarkup}`);
+      const draftContent = isUniversityProfile
+        ? sanitizeRichHtml(cleanDraftContent)
+        : sanitizeRichHtml(`${cleanDraftContent}${attachmentMarkup(draft.attachments, page.url)}${relatedMarkup}`);
       const slug = uniqueSlug(db, slugify(draft.title), 0, target);
       let result;
       if (target === 'programs') {
         const programCategory = isUniversityProfile ? SCHOOL_CATEGORY : STUDY_CATEGORY;
-        result = db.prepare(`INSERT INTO programs (title,subtitle,slug,excerpt,content,category,cover_image,source_urls,seo_title,meta_description,focus_keyword,published,noindex,created_at,updated_at)
-          VALUES (?,?,?,?,?,?,?,?,?,?,?,0,0,datetime('now','localtime'),datetime('now','localtime'))`)
-          .run(draft.title, draft.subtitle || '', slug, draft.excerpt, draftContent, programCategory, fetchedCover || '', sourceUrls, draft.seoTitle, draft.metaDescription, draft.focusKeyword);
+        result = db.prepare(`INSERT INTO programs (title,subtitle,slug,excerpt,content,category,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,published,noindex,created_at,updated_at)
+          VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,0,0,datetime('now','localtime'),datetime('now','localtime'))`)
+          .run(draft.title, draft.subtitle || '', slug, draft.excerpt, draftContent, programCategory, fetchedCover || '',
+            isUniversityProfile ? 'Ban biên tập SOL DREAM EDUCATION' : '',
+            isUniversityProfile ? 'Biên tập và đối chiếu nguồn chính thức' : '',
+            isUniversityProfile ? '/gioi-thieu' : '',
+            sourceUrls, draft.seoTitle, draft.metaDescription, draft.focusKeyword);
         const programId = Number(result.lastInsertRowid);
         if (!fetchedCover) db.prepare('UPDATE programs SET cover_image=? WHERE id=?').run(`/anh-truong/${programId}.svg`, programId);
         if (externalCover) db.prepare('UPDATE programs SET cover_source_url=?,cover_attribution=? WHERE id=?')

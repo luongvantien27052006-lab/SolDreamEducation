@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { MINIMUM_EDITORIAL_CHARACTERS, universityDraftCoverage, universityDraftCoverageReport, enrichEditorialDraftInput, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, cleanResearchAnnotations, visibleCharacterCount, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
+const { MINIMUM_EDITORIAL_CHARACTERS, UNIVERSITY_MINIMUM_CHARACTERS, UNIVERSITY_MINIMUM_WORDS, UNIVERSITY_MINIMUM_HEADINGS, UNIVERSITY_MINIMUM_GROUPS, universityDraftCoverage, universityDraftCoverageReport, enrichEditorialDraftInput, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, cleanResearchAnnotations, visibleCharacterCount, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
 
 function comprehensiveDraft() {
   const headings = [
@@ -27,6 +27,23 @@ test('strict generated university profiles require at least 1,800 words and ever
   assert.equal(report.complete, false);
   assert.ok(report.wordCount >= 900);
   assert.ok(report.missingGroups.includes('chương trình tiếng Hàn'));
+});
+
+test('university drafts use the same deep profile thresholds as the reviewed school articles', () => {
+  assert.equal(UNIVERSITY_MINIMUM_CHARACTERS, 9000);
+  assert.equal(UNIVERSITY_MINIMUM_WORDS, 1800);
+  assert.equal(UNIVERSITY_MINIMUM_HEADINGS, 10);
+  assert.equal(UNIVERSITY_MINIMUM_GROUPS, 8);
+  const report = universityDraftCoverageReport({
+    title: 'Đại học kiểm thử',
+    excerpt: 'Hồ sơ tuyển sinh dành cho sinh viên quốc tế.',
+    content: '<h2>Tổng quan</h2><p>' + 'Thông tin tuyển sinh quốc tế có căn cứ. '.repeat(300) + '</p>',
+  });
+  assert.equal(report.minimumCharacters, UNIVERSITY_MINIMUM_CHARACTERS);
+  assert.equal(report.minimumWords, UNIVERSITY_MINIMUM_WORDS);
+  assert.equal(report.minimumHeadings, UNIVERSITY_MINIMUM_HEADINGS);
+  assert.equal(report.minimumGroups, UNIVERSITY_MINIMUM_GROUPS);
+  assert.equal(report.complete, false);
 });
 
 test('editorial quality gate enforces a 2,000-character minimum', () => {
@@ -173,7 +190,7 @@ test('sparse draft sources are expanded by keyword while source metadata stays c
     ...input,
     sourceUrls: ['https://kaya.ac.kr/admission', 'https://studyinkorea.go.kr/kaya', 'https://example.org/kaya-guide'],
   }, { externalSearch: async () => { searched = true; return null; } });
-  assert.equal(searched, false);
+  assert.equal(searched, true);
   assert.equal(capped.sourceUrls.length, 3);
 });
 

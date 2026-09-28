@@ -26,7 +26,7 @@ test('legacy school cards use complete Vietnamese official-source profiles', () 
     assert.equal(row.noindex, 0);
     assert.equal(universityDraftCoverage(row), true, `${slug} does not meet the full-profile coverage standard`);
     assert.doesNotMatch(`${row.title} ${row.subtitle} ${row.excerpt} ${row.content}`, /[가-힣]/);
-    assert.ok(String(row.source_urls).split(/\r?\n/).filter(Boolean).length >= 4, `${slug} needs at least four official sources`);
+    assert.equal(String(row.source_urls).split(/\r?\n/).filter(Boolean).length, 3, `${slug} must keep exactly three official sources in metadata`);
     assert.ok(row.seo_title && row.meta_description && row.author_name, `${slug} is missing publication metadata`);
     assert.ok(faqCount.get(String(row.id)).count >= 4, `${slug} is missing generated FAQs`);
   }

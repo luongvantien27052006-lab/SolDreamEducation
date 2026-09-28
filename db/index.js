@@ -656,6 +656,17 @@ if (progCount === 0) {
   if (result.applied) console.log('[db] Rebuilt incomplete school profiles:', result.changed.length);
 }
 
+// Bring every remaining public school profile up to the same deep editorial
+// standard, while preserving its existing cover and keeping sources in
+// metadata instead of rendering a source report at the end of the article.
+{
+  const { applyRemainingSchoolProfileRepair } = require('../scripts/repair-remaining-school-profiles');
+  const result = process.env.SKIP_REMAINING_SCHOOL_PROFILE_AUTO_MIGRATION === '1'
+    ? { applied: false, reason: 'explicitly-skipped' }
+    : applyRemainingSchoolProfileRepair(db);
+  if (result.applied) console.log('[db] Rebuilt remaining school profiles:', result.changed.length);
+}
+
 // Hồ sơ trường công khai phải dẫn thẳng về website của trường, không dùng
 // trang tổng hợp làm nguồn nội dung tuyển sinh.
 {
