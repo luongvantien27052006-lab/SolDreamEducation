@@ -644,6 +644,18 @@ if (progCount === 0) {
   }
 }
 
+// Repair three crawler-created school profiles that were either hidden for
+// sparse data or published with an English focus keyword and mixed degree
+// levels. The updater matches stable slugs, keeps existing cover images and
+// only publishes after all three production rows are present.
+{
+  const { applyIncompleteSchoolProfileRepair } = require('../scripts/repair-incomplete-school-profiles');
+  const result = process.env.SKIP_INCOMPLETE_SCHOOL_PROFILE_AUTO_MIGRATION === '1'
+    ? { applied: false, reason: 'explicitly-skipped' }
+    : applyIncompleteSchoolProfileRepair(db);
+  if (result.applied) console.log('[db] Rebuilt incomplete school profiles:', result.changed.length);
+}
+
 // Hồ sơ trường công khai phải dẫn thẳng về website của trường, không dùng
 // trang tổng hợp làm nguồn nội dung tuyển sinh.
 {
