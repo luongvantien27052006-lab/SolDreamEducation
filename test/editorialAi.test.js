@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, usableDraftContent, fallbackDraft } = require('../lib/editorialAi');
+const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, usableDraftContent, fallbackDraft } = require('../lib/editorialAi');
 
 function comprehensiveDraft() {
   const headings = [
@@ -53,6 +53,16 @@ test('missing-data notices are removed while real crawled facts remain usable', 
   assert.doesNotMatch(content.cleaned, /không công bố/i);
 });
 
+test('generated Markdown is normalized to HTML and visible source lists are removed', () => {
+  const normalized = normalizeEditorialHtml('## Điều kiện\n**Học lực:** tốt nghiệp THPT.\n- Nộp bảng điểm\n- Nộp hộ chiếu');
+  assert.match(normalized, /<h2>Điều kiện<\/h2>/);
+  assert.match(normalized, /<strong>Học lực:<\/strong>/);
+  assert.match(normalized, /<ul><li>Nộp bảng điểm<\/li><li>Nộp hộ chiếu<\/li><\/ul>/);
+  assert.doesNotMatch(normalized, /##|\*\*/);
+  const clean = removeArticleSourceList('<p>Nội dung chính.</p><h2>Nguồn bài viết</h2><ul><li><a href="https://example.com">https://example.com</a></li></ul>');
+  assert.equal(clean, '<p>Nội dung chính.</p>');
+});
+
 test('parses OpenAI web-search text and official citations', () => {
   const parsed = parseOpenAiWebSearchResponse({
     output: [{ type: 'message', content: [{ type: 'output_text', text: '{"items":[]}', annotations: [
@@ -87,6 +97,7 @@ test('external research keeps grounded public sources and rejects social/search-
   ]);
   assert.equal(isUsefulExternalResearchUrl('https://overseas.mofa.go.kr/vn-vi/index.do'), true);
   assert.equal(isUsefulExternalResearchUrl('https://www.youtube.com/watch?v=1'), false);
+  assert.equal(isUsefulExternalResearchUrl('https://vertexaisearch.cloud.google.com/grounding-api-redirect/opaque'), false);
 });
 
 test('turns provider billing errors into useful admin diagnostics', () => {

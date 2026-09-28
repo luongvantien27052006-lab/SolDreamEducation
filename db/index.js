@@ -771,4 +771,31 @@ if (!db.prepare('SELECT 1 FROM faqs WHERE question=?').get(serviceFaqQuestion)) 
     .run('Du học', serviceFaqQuestion, 'SOL DREAM EDUCATION đào tạo tiếng Hàn từ nền tảng đến giao tiếp và đồng hành tư vấn du học Hàn Quốc. Nội dung hỗ trợ gồm định hướng chương trình, chọn trường, chuẩn bị hồ sơ và tra cứu thông tin đã công bố; điều kiện, chi phí và thời hạn được xác nhận theo từng trường hợp.', '', 5);
 }
 
+// Các bản nháp cũ từng nối toàn bộ URL nguồn vào cuối nội dung. Từ phiên bản
+// mới, nguồn chỉ được lưu trong cột source_urls (tối đa ba URL trực tiếp), còn
+// bài hiển thị phải là nội dung biên tập sạch.
+{
+  const migrationKey = 'editorial_source_metadata_only_v1';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    const { removeArticleSourceList } = require('../lib/editorialAi');
+    const technicalHost = /(?:^|\.)vertexaisearch\.cloud\.google\.com$|(?:^|\.)googleusercontent\.com$/i;
+    const cleanSourceUrls = (value) => [...new Set(String(value || '').split(/[\r\n,]+/)
+      .map((url) => url.trim()).filter((url) => {
+        try { return new URL(url).protocol === 'https:' && !technicalHost.test(new URL(url).hostname); }
+        catch (_) { return false; }
+      }))].slice(0, 3).join('\n');
+    db.transaction(() => {
+      for (const table of ['posts', 'programs']) {
+        const rows = db.prepare(`SELECT id,content,source_urls FROM ${table}
+          WHERE content LIKE '%Nguồn bài viết%' OR content LIKE '%article-sources%'
+             OR source_urls LIKE '%vertexaisearch.cloud.google.com%'`).all();
+        const update = db.prepare(`UPDATE ${table} SET content=?,source_urls=?,updated_at=datetime('now','localtime') WHERE id=?`);
+        rows.forEach((row) => update.run(removeArticleSourceList(row.content), cleanSourceUrls(row.source_urls), row.id));
+      }
+      db.prepare('INSERT INTO system_meta (key,value,updated_at) VALUES (?,?,datetime(\'now\',\'localtime\'))')
+        .run(migrationKey, '1');
+    })();
+  }
+}
+
 module.exports = db;

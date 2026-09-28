@@ -9,8 +9,8 @@ const {
   extractUniversityResourceCandidates,
   extractOfficialUniversityWebsite, extractClientRedirect,
   extractMediaFromHtml, extractFaqsFromHtml, extractAttachmentsFromHtml, parseRobots, classifySection, requiresManualApproval, fingerprint, optimizeCrawledItem,
-  parseWikimediaImageResults, parseOpenverseImageResults, attachmentMarkup, sourceAttributionMarkup,
-  shouldExpandEditorialResearch, enrichSparseEditorialSource,
+  parseGoogleImageResults, parseWikimediaImageResults, parseOpenverseImageResults, attachmentMarkup,
+  shouldExpandEditorialResearch, enrichSparseEditorialSource, editorialSourceUrls,
 } = require('../lib/researchBot');
 const { isKoreaStudyRelevant, isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { placementForPath, localSqlDate } = require('../lib/sitePopup');
@@ -36,13 +36,22 @@ test('crawler extracts official FAQ schema and safe page media', () => {
   assert.deepEqual(extractFaqsFromHtml(html), [{ question: 'Visa D-2 cần gì?', answer: 'Hồ sơ phụ thuộc chương trình và cơ quan tiếp nhận.' }]);
 });
 
-test('article source links are rendered once at the end after attachments', () => {
+test('article keeps official attachments but source URLs stay in limited admin metadata', () => {
   const attachments = attachmentMarkup([{ url: 'https://official.example/files/guide.pdf', titleVi: 'Hướng dẫn' }], 'https://official.example/notice/1');
-  const source = sourceAttributionMarkup(['https://official.example/notice/1']);
-  const article = `<p>Nội dung bài viết.</p>${attachments}${source}`;
-  assert.match(article, /Tệp đính kèm chính thức[\s\S]*Nguồn bài viết/);
-  assert.equal((article.match(/href="https:\/\/official\.example\/notice\/1"/g) || []).length, 1);
-  assert.ok(article.endsWith(source));
+  const urls = editorialSourceUrls([
+    'https://vertexaisearch.cloud.google.com/grounding-api-redirect/opaque',
+    'https://official.example/notice/1',
+    'https://official.example/notice/2',
+    'https://official.example/notice/3',
+    'https://official.example/notice/4',
+  ], 'https://official.example/notice/1');
+  assert.match(attachments, /Tệp đính kèm chính thức/);
+  assert.doesNotMatch(attachments, /Nguồn bài viết/);
+  assert.deepEqual(urls, [
+    'https://official.example/notice/1',
+    'https://official.example/notice/2',
+    'https://official.example/notice/3',
+  ]);
 });
 
 test('short or empty source content triggers keyword research while substantial content does not', () => {
@@ -145,6 +154,24 @@ test('external school-image search keeps attributable matching campus photos', (
   }] }, { title: 'Đại học Wonkwang', subtitle: 'Wonkwang University' });
   assert.equal(openverse.length, 1);
   assert.equal(openverse[0].sourceUrl, 'https://photos.example/wonkwang-campus');
+});
+
+test('Google image results keep only large images that match the article subject', () => {
+  const rows = parseGoogleImageResults({ items: [
+    {
+      title: 'Hannam University campus in Daejeon', snippet: 'Main campus building',
+      link: 'https://images.hannam.ac.kr/campus.jpg', mime: 'image/jpeg',
+      image: { contextLink: 'https://www.hannam.ac.kr/campus', width: 1600, height: 900 },
+    },
+    {
+      title: 'Unrelated stock image', snippet: 'Generic classroom',
+      link: 'https://stock.example/classroom.jpg', mime: 'image/jpeg',
+      image: { contextLink: 'https://stock.example/item', width: 1600, height: 900 },
+    },
+  ] }, { title: 'Đại học Hannam', subtitle: 'Hannam University' });
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].sourceUrl, 'https://www.hannam.ac.kr/campus');
+  assert.equal(rows[0].provider, 'Google Programmable Search');
 });
 
 test('only school and study-program research requires manual approval', () => {
