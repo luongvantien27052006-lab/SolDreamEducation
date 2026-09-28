@@ -142,8 +142,10 @@ GEMINI_CACHE_TTL_SECONDS=7200
 2. Railway → New Project → Deploy from GitHub repo.
 3. Trong **Variables**, thêm: `SITE_URL`, `ADMIN_PASSWORD`, `SESSION_SECRET`, `NODE_ENV=production`.
 4. Railway tự chạy `npm install` và `npm start`.
-5. **Lưu ý dữ liệu:** SQLite lưu trong file. Trên Railway hãy gắn **Volume** vào thư mục `db/`
-   (đặt `DATABASE_PATH=/data/data.sqlite` và mount volume ở `/data`) để dữ liệu không mất khi redeploy.
+5. **Lưu ý dữ liệu:** SQLite và ảnh tải lên cần nằm trên Railway Volume để không mất khi redeploy.
+   Gắn một Volume tại `/data`, rồi đặt `DATABASE_PATH=/data/data.sqlite` và
+   `UPLOADS_DIR=/data/uploads`. Volume được mount khi service chạy; Railway CLI có thể dùng để
+   nạp bản sao SQLite và thư mục ảnh vào Volume trước khi chuyển ứng dụng sang các đường dẫn này.
 
 ### Cách B — VPS (Ubuntu + Nginx)
 ```bash
@@ -154,9 +156,8 @@ NODE_ENV=production SITE_URL=https://soldream.edu.vn node server.js
 Cấu hình Nginx reverse proxy về `http://localhost:3000` và cài SSL (Let's Encrypt) để có HTTPS.
 
 
-> **Ảnh bài viết:** ảnh tải lên được lưu trong `public/uploads/`. Trên Railway/serverless, hãy
-> gắn **Volume** cho cả `db/` và `public/uploads/` (hoặc dùng dịch vụ lưu ảnh như Cloudinary/S3)
-> để ảnh không mất khi redeploy — giống lưu ý với SQLite ở trên.
+> **Ảnh bài viết:** mặc định ảnh tải lên lưu tại `public/uploads/`. Có thể đặt `UPLOADS_DIR`
+> sang một thư mục bền vững; trên Railway dùng `/data/uploads` cùng Volume `/data` với SQLite.
 
 ### Đổi sang PostgreSQL (khi cần quy mô lớn)
 Dự án dùng SQLite cho gọn nhẹ. Nếu muốn PostgreSQL: thay `db/index.js` bằng driver `pg`,

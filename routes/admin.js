@@ -17,6 +17,7 @@ const { generateEditorialDraft, generateUniversityProfileDraft, suggestResearchK
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent');
+const { UPLOADS_DIR } = require('../lib/storagePaths');
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || (process.env.NODE_ENV === 'production' ? '' : 'soldream@2026');
 const layout = 'admin/layout';
@@ -62,9 +63,7 @@ function allowLogin(ip) {
 }
 
 // ---------- Upload setup (multer) ----------
-const PUBLIC_DIR = path.join(__dirname, '..', 'public');
-const UPLOAD_DIR = path.join(PUBLIC_DIR, 'uploads');
-fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+const UPLOAD_DIR = UPLOADS_DIR;
 
 const EXTENSION_BY_MIME = Object.freeze({
   'image/jpeg': '.jpg',
@@ -132,7 +131,12 @@ function uploadEditorMedia(fieldName) {
 }
 function removeUpload(coverUrl) {
   if (!coverUrl || !coverUrl.startsWith('/uploads/')) return;
-  try { fs.unlinkSync(path.join(PUBLIC_DIR, coverUrl)); } catch (e) { /* ignore */ }
+  try {
+    const relativePath = coverUrl.slice('/uploads/'.length);
+    const filePath = path.resolve(UPLOAD_DIR, relativePath);
+    if (!filePath.startsWith(`${UPLOAD_DIR}${path.sep}`)) return;
+    fs.unlinkSync(filePath);
+  } catch (e) { /* ignore */ }
 }
 
 function isEnabled(value) { return value === '1' || value === 1 || value === true; }

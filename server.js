@@ -1,6 +1,7 @@
 'use strict';
 require('dotenv').config();
 const path = require('path');
+const fs = require('fs');
 const crypto = require('crypto');
 const express = require('express');
 const session = require('express-session');
@@ -8,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 
 const db = require('./db');
+const { UPLOADS_DIR } = require('./lib/storagePaths');
 const { seoDefaults, buildRobotsTxt } = require('./lib/seo');
 const publicRoutes = require('./routes/public');
 const adminRoutes = require('./routes/admin');
@@ -52,7 +54,6 @@ try {
 // Asset version (busts browser cache automatically whenever CSS/JS change on disk)
 let ASSET_VER;
 try {
-  const fs = require('fs');
   const files = ['css/style.css', 'css/admin.css', 'css/chatbot.css', 'js/site.js', 'js/admin-rich-editor.js', 'js/admin-content.js', 'js/chatbot.js'];
   ASSET_VER = String(Math.floor(Math.max(...files.map((file) => fs.statSync(path.join(__dirname, 'public', file)).mtimeMs))));
 } catch (e) { ASSET_VER = String(Date.now()); }
@@ -106,6 +107,7 @@ app.get('/healthz', (req, res) => res.status(200).type('text/plain').send('ok'))
 app.use(createBotProtection());
 
 // Static
+app.use('/uploads', express.static(UPLOADS_DIR, { maxAge: '7d' }));
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '7d' }));
 
 // Clear MIME/caching signals help crawlers and browsers process public pages consistently.
