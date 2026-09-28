@@ -787,7 +787,7 @@ router.post('/nghien-cuu/:id/website-truong', requireAdmin, (req, res, next) => 
   return res.redirect('/admin/nghien-cuu?flash=' + encodeURIComponent(officialUrl ? 'Đã lưu website chính thức của trường' : 'Đã xóa website trường'));
 });
 router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next) => {
-  const item = db.prepare(`SELECT i.*,s.name source_name,s.url source_url,s.source_type,s.crawl_delay_ms FROM research_items i JOIN research_sources s ON s.id=i.source_id WHERE i.id=?`).get(req.params.id); if (!item) return next();
+  const item = db.prepare(`SELECT i.*,s.name source_name,s.url source_url,s.source_type,s.keywords source_keywords,s.crawl_delay_ms FROM research_items i JOIN research_sources s ON s.id=i.source_id WHERE i.id=?`).get(req.params.id); if (!item) return next();
   try {
     const page = await buildEditorialSource(item, item);
     const isUniversityProfile = item.suggested_section === SCHOOL_CATEGORY
@@ -799,6 +799,8 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     const draftInput = {
       title: item.title, sourceUrl: page.url, sourceUrls: page.sourceUrls || [page.url], sourceText: page.text,
       sourceClassification: page.classification,
+      sourceName: item.source_name,
+      keywords: `${item.title || ''} ${item.source_keywords || ''}`.trim(),
       section: item.suggested_section, sourceFaqs: page.faqs || [], sourceAttachments: page.attachments || [],
     };
     const draft = isUniversityProfile
@@ -824,7 +826,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     }
     const isStudyProgram = item.suggested_section === STUDY_CATEGORY || draft.category === STUDY_CATEGORY;
     const target = isUniversityProfile || isStudyProgram || req.body.target === 'program' ? 'programs' : 'posts';
-    const sourceUrls = normalizeSourceUrls(editorialSourceUrls(page.sourceUrls || [], page.url, 3).join('\n'));
+    const sourceUrls = normalizeSourceUrls(editorialSourceUrls(draft.researchSourceUrls || page.sourceUrls || [], page.url, 3).join('\n'));
     const preparedRelatedGuides = [];
     if (target === 'programs') {
       for (const guide of (draft.relatedGuides || [])) {

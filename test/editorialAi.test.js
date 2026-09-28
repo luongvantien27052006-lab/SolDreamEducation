@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, cleanResearchAnnotations, visibleCharacterCount, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
+const { universityDraftCoverage, universityDraftCoverageReport, enrichEditorialDraftInput, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, cleanResearchAnnotations, visibleCharacterCount, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
 
 function comprehensiveDraft() {
   const headings = [
@@ -142,6 +142,38 @@ test('external research keeps grounded public sources and rejects social/search-
   assert.equal(isUsefulExternalResearchUrl('https://overseas.mofa.go.kr/vn-vi/index.do'), true);
   assert.equal(isUsefulExternalResearchUrl('https://www.youtube.com/watch?v=1'), false);
   assert.equal(isUsefulExternalResearchUrl('https://vertexaisearch.cloud.google.com/grounding-api-redirect/opaque'), false);
+});
+
+test('sparse draft sources are expanded by keyword while source metadata stays capped at three URLs', async () => {
+  const input = {
+    title: 'Học phí Đại học Kaya', sourceUrl: 'https://kaya.ac.kr/admission',
+    sourceUrls: ['https://kaya.ac.kr/admission'], sourceName: 'Đại học Kaya',
+    keywords: 'Đại học Kaya học phí học bổng tuyển sinh quốc tế', sourceText: 'Thông tin học phí được công bố theo từng chương trình.',
+  };
+  let observed;
+  const enriched = await enrichEditorialDraftInput(input, {
+    externalSearch: async (query) => {
+      observed = query;
+      return {
+        text: 'Dữ kiện về học phí và học bổng theo từng chương trình. '.repeat(30),
+        urls: ['https://kaya.ac.kr/admission', 'https://studyinkorea.go.kr/kaya', 'https://example.org/kaya-guide'],
+        provider: 'test-search',
+      };
+    },
+  });
+  assert.match(observed.keywords, /Đại học Kaya học phí/);
+  assert.deepEqual(observed.existingUrls, ['https://kaya.ac.kr/admission']);
+  assert.deepEqual(enriched.sourceUrls, ['https://kaya.ac.kr/admission', 'https://studyinkorea.go.kr/kaya', 'https://example.org/kaya-guide']);
+  assert.match(enriched.sourceText, /Dữ kiện về học phí và học bổng/);
+  assert.equal(enriched.externalResearchProvider, 'test-search');
+
+  let searched = false;
+  const capped = await enrichEditorialDraftInput({
+    ...input,
+    sourceUrls: ['https://kaya.ac.kr/admission', 'https://studyinkorea.go.kr/kaya', 'https://example.org/kaya-guide'],
+  }, { externalSearch: async () => { searched = true; return null; } });
+  assert.equal(searched, false);
+  assert.equal(capped.sourceUrls.length, 3);
 });
 
 test('turns provider billing errors into useful admin diagnostics', () => {
