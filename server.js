@@ -44,6 +44,7 @@ try {
   const handbookRepair = repairPublishedHandbookLanguage();
   const handbookAudit = auditPublishedHandbooks();
   if (handbookRepair.updated) console.log(`[content] clarified source status in ${handbookRepair.updated} handbook posts`);
+  if (handbookRepair.hiddenUntranslated) console.log(`[content] hid ${handbookRepair.hiddenUntranslated} handbook posts with untranslated titles; records retained for review`);
   console.log(`[content] handbook audit: ${handbookAudit.total} published, ${handbookAudit.short} short, ${handbookAudit.missingSource} without source, ${handbookAudit.vague} vague source notes`);
   const indexResult = syncWebsiteKnowledge({ force: true });
   console.log(`[chat] knowledge index ready: ${indexResult.documents} documents, ${indexResult.questions} questions`);

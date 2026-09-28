@@ -13,7 +13,7 @@ const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
 const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalContentCover, attachmentMarkup, editorialSourceUrls } = require('../lib/researchBot');
-const { generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords } = require('../lib/editorialAi');
+const { generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft } = require('../lib/editorialAi');
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent');
@@ -795,6 +795,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
       ? await generateUniversityProfileDraft(draftInput)
       : await generateEditorialDraft(draftInput);
     const usableDraftLength = String(draft.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().length;
+    if (!isVietnameseDraft(draft)) throw new Error(draft.aiError || 'Bản nháp chưa đạt yêu cầu tiếng Việt; hệ thống chưa lưu để xuất bản.');
     if (usableDraftLength < 100 || (!draft.aiAvailable && !draft.hasSourceContent)) {
       throw new Error(draft.aiError || 'Nguồn chưa cung cấp đủ nội dung thực tế để tạo bài.');
     }

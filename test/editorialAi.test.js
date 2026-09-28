@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, usableDraftContent, fallbackDraft } = require('../lib/editorialAi');
+const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
 
 function comprehensiveDraft() {
   const headings = [
@@ -42,6 +42,26 @@ test('partial official information creates a draft without missing-data boilerpl
   assert.match(draft.content, /01\/10\/2026/);
   assert.match(draft.content, /100\.000 won/);
   assert.doesNotMatch(draft.content, /chưa xác minh|nguồn chính thức không công bố|thông tin cần kiểm tra/i);
+});
+
+test('Vietnamese language gate rejects English fallback drafts and accepts Vietnamese editorial copy', () => {
+  const english = fallbackDraft({
+    title: 'Seoul Foreign Resident Center Media Content Production Participant Recruitment',
+    sourceText: 'Application Schedule 2026-09-22 to 2026-10-09. Education Schedule 2026-10-11 to 2026-11-15. Participants will create media content for the center.',
+  });
+  assert.equal(isVietnameseDraft(english), false);
+
+  assert.equal(isVietnameseDraft({
+    title: 'Seoul Foreign Resident Center Media Content Production Participant Recruitment 2026',
+    excerpt: 'English · Tiếng Việt · Cổng thông tin Người nước ngoài Seoul · Languages',
+    content: '<h2>Application Schedule</h2><p>2026-09-22 to 2026-10-09. Education Schedule: 2026-10-11 to 2026-11-15.</p>',
+  }), false, 'Vietnamese navigation fragments must not make an English article publishable');
+
+  const vietnamese = fallbackDraft({
+    title: 'Lịch đăng ký lớp tiếng Hàn tại Seoul',
+    sourceText: 'Trung tâm tiếp nhận hồ sơ đăng ký từ ngày 01/10/2026 đến hết ngày 10/10/2026. Lớp học dành cho người nước ngoài đang sinh sống tại Seoul và được tổ chức vào cuối tuần. Học viên cần hoàn thành biểu mẫu trực tuyến trước hạn đăng ký.',
+  });
+  assert.equal(isVietnameseDraft(vietnamese), true);
 });
 
 test('missing-data notices are removed while real crawled facts remain usable', () => {
