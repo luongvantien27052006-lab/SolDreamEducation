@@ -13,7 +13,7 @@ const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
 const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalContentCover, attachmentMarkup, editorialSourceUrls } = require('../lib/researchBot');
-const { generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft } = require('../lib/editorialAi');
+const { generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft, cleanResearchAnnotations, visibleCharacterCount } = require('../lib/editorialAi');
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent');
@@ -322,7 +322,12 @@ router.post('/tin-tuc/moi', requireAdmin, uploadCover, (req, res) => {
 router.get('/tin-tuc/:id/sua', requireAdmin, (req, res, next) => {
   const post = db.prepare('SELECT * FROM posts WHERE id = ?').get(req.params.id);
   if (!post) return next();
-  res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post, error: null });
+  const notice = req.query.ai === '1'
+    ? 'Bot đã tạo bản nháp. Nội dung bài chỉ chứa thông tin; nguồn và trạng thái xử lý được lưu riêng trong mục Nghiên cứu. Hãy rà soát trước khi duyệt.'
+    : req.query.ai === '0'
+      ? 'Bản nháp được tạo từ dữ kiện nguồn đã làm sạch vì AI hiện không khả dụng. Ghi chú xử lý được lưu riêng trong mục Nghiên cứu; hãy rà soát trước khi duyệt.'
+      : null;
+  res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post, error: null, notice });
 });
 
 router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
@@ -402,7 +407,12 @@ router.get('/du-hoc/:id/sua', requireAdmin, (req, res, next) => {
   if (!program) return next();
   program.category = canonicalProgramCategory(program.category);
   const isSchool = program.category === SCHOOL_CATEGORY;
-  res.render('admin/programs-form', { layout, title: isSchool ? 'Sửa thông tin trường' : 'Sửa chương trình du học', active: isSchool ? 'schools' : 'programs', mode: 'edit', program, error: null });
+  const notice = req.query.ai === '1'
+    ? 'Bot đã tạo bản nháp. Nội dung bài chỉ chứa thông tin; nguồn và trạng thái xử lý được lưu riêng trong mục Nghiên cứu. Hãy rà soát trước khi duyệt.'
+    : req.query.ai === '0'
+      ? 'Bản nháp được tạo từ dữ kiện nguồn đã làm sạch vì AI hiện không khả dụng. Ghi chú xử lý được lưu riêng trong mục Nghiên cứu; hãy rà soát trước khi duyệt.'
+      : null;
+  res.render('admin/programs-form', { layout, title: isSchool ? 'Sửa thông tin trường' : 'Sửa chương trình du học', active: isSchool ? 'schools' : 'programs', mode: 'edit', program, error: null, notice });
 });
 
 router.post('/du-hoc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
@@ -794,11 +804,13 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     const draft = isUniversityProfile
       ? await generateUniversityProfileDraft(draftInput)
       : await generateEditorialDraft(draftInput);
-    const usableDraftLength = String(draft.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().length;
+    draft.content = cleanResearchAnnotations(draft.content || '');
+    const usableDraftLength = visibleCharacterCount(draft.content);
     if (!isVietnameseDraft(draft)) throw new Error(draft.aiError || 'Bản nháp chưa đạt yêu cầu tiếng Việt; hệ thống chưa lưu để xuất bản.');
-    if (usableDraftLength < 100 || (!draft.aiAvailable && !draft.hasSourceContent)) {
-      throw new Error(draft.aiError || 'Nguồn chưa cung cấp đủ nội dung thực tế để tạo bài.');
-    }
+    if (!draft.aiAvailable) throw new Error(draft.aiError || 'AI chưa tạo được bài biên tập hoàn chỉnh; dữ liệu thu thập vẫn được giữ riêng trong mục Nghiên cứu.');
+    const cleanDraftContent = sanitizeRichHtml(cleanResearchAnnotations(draft.content));
+    const savedDraftLength = visibleCharacterCount(cleanDraftContent);
+    if (savedDraftLength < 7000) throw new Error(`Bản nháp chỉ còn ${savedDraftLength.toLocaleString('vi-VN')} ký tự thông tin sau khi làm sạch; cần tối thiểu 7.000 ký tự.`);
     let fetchedCover = await coverImageForPage(page);
     let externalCover = null;
     if (!fetchedCover) {
@@ -848,7 +860,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
       const relatedMarkup = relatedGuides.length
         ? `<h2>Cẩm nang liên quan đến trường</h2><ul>${relatedGuides.map((guide) => `<li><a href="/tin-tuc/${guide.slug}">${guide.title}</a></li>`).join('')}</ul>`
         : '';
-      const draftContent = sanitizeRichHtml(`${draft.content}${attachmentMarkup(draft.attachments, page.url)}${relatedMarkup}`);
+      const draftContent = sanitizeRichHtml(`${cleanDraftContent}${attachmentMarkup(draft.attachments, page.url)}${relatedMarkup}`);
       const slug = uniqueSlug(db, slugify(draft.title), 0, target);
       let result;
       if (target === 'programs') {

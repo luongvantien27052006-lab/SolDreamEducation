@@ -3,6 +3,7 @@
   <a class="btn2 btn2-ghost" href="/admin/du-hoc?category=<%= encodeURIComponent(program.category==='Thông tin trường'?'Thông tin trường':'Chương trình du học') %>">← Quay lại</a>
 </div>
 <% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
+<% if (typeof notice !== 'undefined' && notice) { %><div class="flash"><%= notice %></div><% } %>
 <form method="post" action="<%= mode==='create' ? '/admin/du-hoc/moi' : '/admin/du-hoc/'+program.id+'/sua' %>" enctype="multipart/form-data" class="panel form" data-content-form data-content-type="du-hoc">
   <div class="row2">
     <div class="f">

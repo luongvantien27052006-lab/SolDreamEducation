@@ -798,4 +798,72 @@ if (!db.prepare('SELECT 1 FROM faqs WHERE question=?').get(serviceFaqQuestion)) 
   }
 }
 
+// Remove flattened source-page UI/scripts and inline source-report labels from
+// articles imported by older crawler versions. Source URLs remain in metadata.
+{
+  const migrationKey = 'clean_legacy_article_scrape_artifacts_v2';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    const { cleanExistingArticleContent } = require('../lib/articleBodyCleanup');
+    const rows = db.prepare('SELECT id,content FROM posts').all();
+    const replacements = rows
+      .map((row) => {
+        const content = cleanExistingArticleContent(row.content);
+        return content === row.content ? null : { ...row, content };
+      })
+      .filter(Boolean);
+    const update = db.prepare('UPDATE posts SET content=? WHERE id=?');
+    db.transaction(() => {
+      replacements.forEach((row) => update.run(row.content, row.id));
+      db.prepare('INSERT INTO system_meta (key,value,updated_at) VALUES (?,?,datetime(\'now\',\'localtime\'))')
+        .run(migrationKey, String(replacements.length));
+    })();
+    if (replacements.length) console.log(`[db] cleaned crawler artifacts from ${replacements.length} article(s)`);
+  }
+}
+
+// Older posts also used loose <br>-based copy and mixed real content with
+// generic verification disclaimers; this pass removes those editorial artifacts.
+{
+  const migrationKey = 'clean_legacy_article_report_artifacts_v3';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    const { cleanExistingArticleContent } = require('../lib/articleBodyCleanup');
+    const rows = db.prepare('SELECT id,content FROM posts').all();
+    const replacements = rows
+      .map((row) => {
+        const content = cleanExistingArticleContent(row.content);
+        return content === row.content ? null : { ...row, content };
+      })
+      .filter(Boolean);
+    const update = db.prepare('UPDATE posts SET content=? WHERE id=?');
+    db.transaction(() => {
+      replacements.forEach((row) => update.run(row.content, row.id));
+      db.prepare('INSERT INTO system_meta (key,value,updated_at) VALUES (?,?,datetime(\'now\',\'localtime\'))')
+        .run(migrationKey, String(replacements.length));
+    })();
+    if (replacements.length) console.log(`[db] removed legacy report text from ${replacements.length} article(s)`);
+  }
+}
+
+// Final cleanup for remaining legacy table placeholders and source-only notes.
+{
+  const migrationKey = 'clean_legacy_article_report_artifacts_v4';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    const { cleanExistingArticleContent } = require('../lib/articleBodyCleanup');
+    const rows = db.prepare('SELECT id,content FROM posts').all();
+    const replacements = rows
+      .map((row) => {
+        const content = cleanExistingArticleContent(row.content);
+        return content === row.content ? null : { ...row, content };
+      })
+      .filter(Boolean);
+    const update = db.prepare('UPDATE posts SET content=? WHERE id=?');
+    db.transaction(() => {
+      replacements.forEach((row) => update.run(row.content, row.id));
+      db.prepare('INSERT INTO system_meta (key,value,updated_at) VALUES (?,?,datetime(\'now\',\'localtime\'))')
+        .run(migrationKey, String(replacements.length));
+    })();
+    if (replacements.length) console.log(`[db] completed article cleanup on ${replacements.length} article(s)`);
+  }
+}
+
 module.exports = db;

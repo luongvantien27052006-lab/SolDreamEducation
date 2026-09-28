@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
+const { universityDraftCoverage, universityDraftCoverageReport, parseOpenAiWebSearchResponse, officialSearchItemsFromJson, searchProviderError, isUsefulExternalResearchUrl, extractGeminiGroundingUrls, sourceFidelityReport, sourceBlockCoverageReport, meaningfulSourceText, removeArticleSourceList, normalizeEditorialHtml, cleanResearchAnnotations, visibleCharacterCount, usableDraftContent, fallbackDraft, isVietnameseDraft } = require('../lib/editorialAi');
 
 function comprehensiveDraft() {
   const headings = [
@@ -27,6 +27,30 @@ test('strict generated university profiles require at least 1,800 words and ever
   assert.equal(report.complete, false);
   assert.ok(report.wordCount >= 900);
   assert.ok(report.missingGroups.includes('chương trình tiếng Hàn'));
+});
+
+test('university profile quality gate enforces 7,000 visible characters', () => {
+  const short = {
+    title: 'Thông tin Đại học Kaya',
+    excerpt: 'Tổng quan về chương trình đào tạo của trường.',
+    content: '<h2>Tổng quan</h2><p>' + 'Trường cung cấp chương trình đào tạo cho sinh viên quốc tế. '.repeat(20) + '</p>',
+  };
+  const report = universityDraftCoverageReport(short, { minimumWords: 1, minimumHeadings: 1, minimumGroups: 1, minimumCharacters: 7000 });
+  assert.ok(report.characterCount < 7000);
+  assert.equal(report.minimumCharacters, 7000);
+  assert.equal(report.complete, false);
+});
+
+test('bot research labels are removed while the factual text remains in the draft', () => {
+  const draft = cleanResearchAnnotations(`<h2>Kaya University</h2>
+    <p>DỮ LIỆU TÌM KIẾM MỞ RỘNG THEO TỪ KHÓA: NGUỒN NGHIÊN CỨU 1: Kaya University [Ranking + Tuition] - EduRank Dữ kiện: Trường được thành lập năm 1993 tại Gimhae, Hàn Quốc.</p>
+    <p>NGUỒN NGHIÊN CỨU 2: Kaya University - uniRank</p>
+    <p>Dữ kiện: Trường đào tạo bậc cử nhân, thạc sĩ và tiến sĩ ở nhiều lĩnh vực.</p>`);
+  assert.doesNotMatch(draft, /DỮ LIỆU TÌM KIẾM MỞ RỘNG|NGUỒN NGHIÊN CỨU|Dữ kiện:/i);
+  assert.match(draft, /được thành lập năm 1993 tại Gimhae/);
+  assert.match(draft, /đào tạo bậc cử nhân, thạc sĩ và tiến sĩ/);
+  assert.equal(visibleCharacterCount('<p>Đại học Kaya &amp; sinh viên</p>'), 'Đại học Kaya & sinh viên'.length);
+  assert.equal(usableDraftContent(draft, 7000).usable, false);
 });
 
 test('universityDraftCoverage rejects untranslated Hangul', () => {

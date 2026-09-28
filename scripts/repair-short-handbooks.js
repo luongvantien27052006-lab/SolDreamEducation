@@ -9,7 +9,7 @@ const { hasHangul } = require('../lib/visibleVietnamese');
 const {
   buildEditorialSource, finalizeEditorialSource, attachmentMarkup,
 } = require('../lib/researchBot');
-const { generateEditorialDraft, researchOfficialUrlViaSearch } = require('../lib/editorialAi');
+const { generateEditorialDraft, researchOfficialUrlViaSearch, cleanResearchAnnotations, visibleCharacterCount } = require('../lib/editorialAi');
 const { finalizePublishedContent } = require('../lib/publicationPipeline');
 const { syncWebsiteKnowledge } = require('../lib/websiteKnowledge');
 
@@ -117,16 +117,12 @@ const VERIFIED_REPAIRS = [
 
 const OFFICIAL_SHORT_IDS = [24, 92, 93, 94, 150, 166, 183, 195];
 
-function sourceBox(url) {
-  return `<section class="source-box"><h2>Nguồn chính thức và phạm vi cập nhật</h2><p>Nội dung được biên tập từ tài liệu công khai của cơ quan phát hành. Các mức phí, thời hạn và thủ tục có thể được cập nhật; hãy mở <a href="${url}" target="_blank" rel="noopener noreferrer">trang nguồn chính thức</a> trước khi thực hiện.</p></section>`;
-}
-
 function repairLegacyPosts() {
   const update = db.prepare(`UPDATE posts SET title=?,excerpt=?,content=?,category=?,source_urls=?,
     author_name='SOL DREAM EDUCATION',author_role='Ban biên tập cẩm nang',
     seo_title=?,meta_description=?,focus_keyword=?,updated_at=datetime('now','localtime') WHERE id=?`);
   for (const item of [...LEGACY_REPAIRS, ...VERIFIED_REPAIRS]) {
-    const content = sanitizeRichHtml(`${item.content}${sourceBox(item.sourceUrl)}`);
+    const content = sanitizeRichHtml(item.content);
     update.run(item.title, item.excerpt, content, item.category, item.sourceUrl,
       item.title.slice(0, 65), item.excerpt.slice(0, 165), item.title.split(':')[0].slice(0, 120), item.id);
     finalizePublishedContent('post', item.id, { sync: false, notify: false });
@@ -170,11 +166,12 @@ async function repairOfficialPost(postId) {
     sourceClassification: page.classification, section: 'Cẩm nang & Thông tin',
     sourceFaqs: page.faqs, sourceAttachments: page.attachments,
   });
+  draft.content = cleanResearchAnnotations(draft.content || '');
   const visible = stripHtml(draft.content);
   if (!draft.aiAvailable) throw new Error(draft.aiError || 'Gemini chưa tạo được bản biên tập.');
-  if (visible.length < 1500) throw new Error(`Bản mới vẫn quá ngắn (${visible.length} ký tự).`);
+  if (visibleCharacterCount(draft.content) < 7000) throw new Error(`Bản mới chỉ có ${visibleCharacterCount(draft.content).toLocaleString('vi-VN')} ký tự; cần tối thiểu 7.000 ký tự.`);
   if (hasHangul(`${draft.title} ${draft.excerpt} ${visible}`)) throw new Error('Bản mới vẫn còn tiếng Hàn.');
-  const content = sanitizeRichHtml(`${draft.content}${attachmentMarkup(draft.attachments, page.url)}${sourceBox(page.url)}`);
+  const content = sanitizeRichHtml(`${draft.content}${attachmentMarkup(draft.attachments, page.url)}`);
   db.prepare(`UPDATE posts SET title=?,excerpt=?,content=?,category='Cẩm nang du học',source_urls=?,
     author_name=?,author_role='Nguồn chính thức, SOL DREAM EDUCATION biên tập',seo_title=?,meta_description=?,
     focus_keyword=?,updated_at=datetime('now','localtime') WHERE id=?`).run(

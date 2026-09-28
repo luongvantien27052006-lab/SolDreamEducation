@@ -3,6 +3,7 @@
   <a class="btn2 btn2-ghost" href="/admin/tin-tuc">← Quay lại</a>
 </div>
 <% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
+<% if (typeof notice !== 'undefined' && notice) { %><div class="flash"><%= notice %></div><% } %>
 <form method="post" action="<%= mode==='create' ? '/admin/tin-tuc/moi' : '/admin/tin-tuc/'+post.id+'/sua' %>" enctype="multipart/form-data" class="panel form" data-content-form data-content-type="tin-tuc">
   <div class="f">
     <label>Tiêu đề *</label>
