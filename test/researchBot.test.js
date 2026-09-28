@@ -59,19 +59,24 @@ test('short or empty source content triggers keyword research while substantial 
   assert.equal(shouldExpandEditorialResearch('Thông báo tuyển sinh chỉ có một dòng ngắn.', false), true);
   assert.equal(shouldExpandEditorialResearch('Thông tin tuyển sinh, điều kiện và lịch nộp hồ sơ. '.repeat(30), false), false);
   assert.equal(shouldExpandEditorialResearch('Thông tin tổng quan của trường. '.repeat(30), true), true);
-  assert.equal(shouldExpandEditorialResearch('Thông tin tổng quan, ngành học, học phí và tuyển sinh quốc tế. '.repeat(40), true), false);
+  assert.equal(shouldExpandEditorialResearch('Thông tin tổng quan, ngành học, học phí và tuyển sinh quốc tế. '.repeat(40), true), true);
+  const detailedAdmissions = 'Tuyển sinh quốc tế năm 2027 nhận hồ sơ đến ngày 15/03/2027. Ứng viên tốt nghiệp THPT, TOPIK 3. Hồ sơ gồm hộ chiếu, bằng tốt nghiệp, học bạ và bảng điểm.';
+  assert.equal(shouldExpandEditorialResearch(detailedAdmissions.repeat(12), true), false);
 });
 
 test('keyword fallback merges grounded external facts and preserves every source URL', async () => {
   const page = await enrichSparseEditorialSource({ title: 'Đại học Hannam', url: 'https://original.example/school', suggested_section: 'Thông tin trường' }, {
     name: 'Danh mục trường', keywords: 'Hannam University international admission',
   }, {
-    url: 'https://original.example/school', sourceUrls: ['https://original.example/school'], title: 'Đại học Hannam',
-    text: 'Một đoạn giới thiệu rất ngắn.', html: '', media: {}, faqs: [], attachments: [],
+    url: 'https://original.example/school', sourceUrls: ['https://original.example/school', 'https://original.example/about', 'https://original.example/programs'], title: 'Đại học Hannam',
+    text: 'Giới thiệu tổng quan, ngành học, học phí và tuyển sinh quốc tế của trường. '.repeat(30), html: '', media: {}, faqs: [], attachments: [],
   }, {
     school: true,
     externalSearch: async (query) => {
       assert.match(query.keywords, /Hannam University/);
+      assert.match(query.keywords, /international student admission/i);
+      assert.match(query.requiredTopic, /điều kiện đầu vào/i);
+      assert.deepEqual(query.existingUrls, ['https://original.example/school']);
       return {
         text: 'Trường công bố chương trình tuyển sinh quốc tế, danh sách ngành học, lịch nhận hồ sơ, học phí và học bổng theo từng kỳ. '.repeat(8),
         urls: ['https://www.hannam.ac.kr/admission', 'https://www.studyinkorea.go.kr/hannam'],
@@ -218,7 +223,7 @@ test('deep university discovery prioritizes notices and follows CMS detail links
     <a href="/academics/departments">Departments and majors</a>
     <a href="/bbs/notice/view.do?nttId=991">2026 International admission update</a>`;
   const rows = extractUniversityResourceCandidates(html, 'https://www.sample.ac.kr/en/', 'notice');
-  assert.equal(rows[0].kind, 'notice');
+  assert.equal(rows[0].kind, 'admission');
   assert.match(rows[0].url, /nttId=991/);
   assert.ok(rows.some((row) => row.kind === 'academics'));
 });
