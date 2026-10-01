@@ -35,6 +35,9 @@ test('official introduction content is available as three editable tabs', () => 
   assert.match(tabs[2].content, /Khối chuyên môn/);
   assert.match(tabs[2].content, /Khối tư vấn/);
   assert.match(tabs[2].content, /Khối kinh doanh/);
+  assert.match(tabs[2].content, /Thạc sĩ Kinh doanh Quốc Tế, Đại học Woosong Hàn Quốc/);
+  assert.match(tabs[2].content, /Đạt chứng nhận “Xuất Sắc hoàn thành nghiệp vụ tư vấn Du học” do Sở GDDT Tp\.Hồ Chí Minh tổ chức/);
+  assert.doesNotMatch(tabs[2].content, /Phụ trách Khối tư vấn/);
   assert.doesNotMatch(tabs[2].content, /Khối Hành chính|Ban kiểm soát|Marketing/);
 });
 

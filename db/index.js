@@ -374,7 +374,7 @@ if (!aboutSectionsSeeded) db.prepare("INSERT INTO system_meta (key,value) VALUES
 const officialTeamStructureContent = `<p>SOL DREAM EDUCATION tổ chức đội ngũ theo ba khối trọng tâm, mỗi khối có một người phụ trách chuyên môn rõ ràng để phối hợp xuyên suốt quá trình đào tạo, tư vấn và phát triển hoạt động.</p>
   <div>
     <figure><img src="/img/dao-duy-thang.jpg" alt="Tiến sĩ Đào Duy Thắng, phụ trách Khối kinh doanh SOL DREAM EDUCATION" width="1706" height="2560"><figcaption><span>Khối kinh doanh</span><strong>Tiến sĩ Đào Duy Thắng</strong><span>Tiến sĩ Đại học Woosong<br>Chuyên ngành Quản trị học</span></figcaption></figure>
-    <figure><img src="/img/pham-vuong-kha-tran.jpg" alt="Thạc sĩ Phạm Vương Khả Trân, phụ trách Khối tư vấn SOL DREAM EDUCATION" width="354" height="472"><figcaption><span>Khối tư vấn</span><strong>Thạc sĩ Phạm Vương Khả Trân</strong><span>Phụ trách Khối tư vấn</span></figcaption></figure>
+    <figure><img src="/img/pham-vuong-kha-tran.jpg" alt="Thạc sĩ Phạm Vương Khả Trân, phụ trách Khối tư vấn SOL DREAM EDUCATION" width="354" height="472"><figcaption><span>Khối tư vấn</span><strong>Thạc sĩ Phạm Vương Khả Trân</strong><span>Thạc sĩ Kinh doanh Quốc Tế, Đại học Woosong Hàn Quốc</span><span>Đạt chứng nhận “Xuất Sắc hoàn thành nghiệp vụ tư vấn Du học” do Sở GDDT Tp.Hồ Chí Minh tổ chức</span></figcaption></figure>
     <figure><img src="/img/nguyen-huynh-nhu.jpg" alt="Thạc sĩ Nguyễn Huỳnh Như, phụ trách Khối chuyên môn SOL DREAM EDUCATION" width="1284" height="1268"><figcaption><span>Khối chuyên môn</span><strong>Thạc sĩ Nguyễn Huỳnh Như</strong><span>Thạc sĩ Đại học Seoul<br>Chuyên ngành Ngôn ngữ và Văn học Hàn Quốc</span></figcaption></figure>
   </div>`;
 const aboutTabsMigrationKey = 'about_official_tabs_20260925';
@@ -495,6 +495,28 @@ if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTreeNavigation
         .run(sloganContent);
     }
     db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutTreeNavigationKey, '1');
+  })();
+}
+
+// Update the consultant's credentials in existing databases without replacing
+// other team-tab content that may have been edited in Admin.
+const aboutKhaTranCredentialsKey = 'about_kha_tran_credentials_20261001_v1';
+if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutKhaTranCredentialsKey)) {
+  db.transaction(() => {
+    const team = db.prepare("SELECT id,content FROM about_sections WHERE location='page' AND title='Bộ máy tổ chức' LIMIT 1").get();
+    if (team) {
+      const certificate = 'Đạt chứng nhận “Xuất Sắc hoàn thành nghiệp vụ tư vấn Du học” do Sở GDDT Tp.Hồ Chí Minh tổ chức';
+      const content = String(team.content || '');
+      if (!content.includes(certificate)) {
+        const consultantPattern = /(<strong>Thạc sĩ Phạm Vương Khả Trân<\/strong>\s*)<span>[^<]*<\/span>/i;
+        const updated = content.replace(consultantPattern, (_match, name) =>
+          `${name}<span>Thạc sĩ Kinh doanh Quốc Tế, Đại học Woosong Hàn Quốc</span><span>${certificate}</span>`);
+        if (updated !== content) {
+          db.prepare("UPDATE about_sections SET content=?,updated_at=datetime('now','localtime') WHERE id=?").run(updated, team.id);
+        }
+      }
+    }
+    db.prepare('INSERT INTO system_meta (key,value) VALUES (?,?)').run(aboutKhaTranCredentialsKey, '1');
   })();
 }
 
