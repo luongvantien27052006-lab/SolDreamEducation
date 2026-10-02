@@ -20,6 +20,11 @@
     </div>
   </div>
   <div class="f">
+    <label>Ngày đăng hiển thị</label>
+    <input type="date" name="publication_date" value="<%= post.publication_date || String(post.created_at || '').slice(0,10) %>">
+    <small class="muted">Có thể chọn ngày đăng khác ngày lưu bài. Để trống khi tạo bài mới để dùng ngày hiện tại; ngày cập nhật vẫn phản ánh lần chỉnh sửa gần nhất.</small>
+  </div>
+  <div class="f">
     <label>Ảnh bìa bài viết</label>
     <div class="cover-box">
       <div class="cover-preview" id="coverWrap" <%= post.cover_image ? '' : 'style="display:none"' %>>

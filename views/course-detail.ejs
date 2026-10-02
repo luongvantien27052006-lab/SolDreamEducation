@@ -39,6 +39,17 @@
       <h2 id="course-faq-title">Câu hỏi thường gặp về <%= course.name %></h2>
       <% courseFaqs.forEach(function(faq, index){ %><details class="faq-item" <%= index === 0 ? 'open' : '' %>><summary><%= faq.question %></summary><p class="section-lead"><%= faq.answer %></p></details><% }); %>
     </section>
+    <% if (/tiếng anh|english/i.test(`${course.language || ''} ${course.name || ''}`)) { %>
+      <aside class="recruitment-callout" aria-labelledby="recruitment-callout-title">
+        <img class="recruitment-callout__image" src="/img/tuyen-dung-giao-vien-tieng-anh-v2.png" alt="SOL DREAM tuyển dụng giáo viên dạy tiếng Anh">
+        <div class="recruitment-callout__body">
+          <span class="eyebrow">Cơ hội nghề nghiệp</span>
+          <h2 id="recruitment-callout-title">SOL DREAM tuyển 05 giáo viên dạy tiếng Anh</h2>
+          <p>Hình thức toàn thời gian cố định, làm việc tại TP.HCM hoặc Cẩm Mỹ, Đồng Nai.</p>
+          <a class="btn btn-primary" href="/tin-tuc/tuyen-dung-giao-vien-day-tieng-anh">Xem tin tuyển dụng</a>
+        </div>
+      </aside>
+    <% } %>
     <aside class="source-note"><strong>Lưu ý:</strong> <%= courseNotice %></aside>
     <p style="margin-top:28px"><a href="/#lienhe" class="btn btn-primary">Đăng ký tư vấn lớp học</a></p>
   </div>

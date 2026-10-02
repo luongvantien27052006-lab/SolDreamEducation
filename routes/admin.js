@@ -7,7 +7,7 @@ const multer = require('multer');
 const router = express.Router();
 const db = require('../db');
 const { requireAdmin } = require('../lib/auth');
-const { slugify, uniqueSlug, decorate, normalizeSourceUrls, normalizeOptionalUrl, programPublicPath } = require('../lib/util');
+const { slugify, uniqueSlug, decorate, normalizeSourceUrls, normalizeOptionalUrl, dateInputToLocalDateTime, programPublicPath } = require('../lib/util');
 const { sanitizeRichHtml } = require('../lib/contentSanitizer');
 const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
@@ -301,7 +301,7 @@ router.get('/tin-tuc', requireAdmin, (req, res) => {
 });
 
 router.get('/tin-tuc/moi', requireAdmin, (req, res) => {
-  res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { category: 'Tin tức', cover: 'p1', published: 1 }, error: null });
+  res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { category: 'Tin tức', cover: 'p1', published: 1, publication_date: req.query.date || '' }, error: null });
 });
 
 router.post('/tin-tuc/moi', requireAdmin, uploadCover, (req, res) => {
@@ -309,11 +309,13 @@ router.post('/tin-tuc/moi', requireAdmin, uploadCover, (req, res) => {
   const back = (error) => res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: b, error });
   if (req.uploadError) { return back(req.uploadError); }
   if (!b.title || !b.title.trim()) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Vui lòng nhập tiêu đề.'); }
+  const publicationDate = dateInputToLocalDateTime(b.publication_date);
+  if (publicationDate === null) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Ngày đăng không hợp lệ. Vui lòng chọn ngày theo lịch.'); }
   const slug = uniqueSlug(db, b.slug && b.slug.trim() ? slugify(b.slug) : slugify(b.title));
   const coverImage = req.file ? '/uploads/' + req.file.filename : null;
   const result = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,cover,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,noindex,published,created_at,updated_at)
-              VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now','localtime'),datetime('now','localtime'))`)
-    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), (b.category||'Tin tức').trim(), b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0);
+              VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,COALESCE(NULLIF(?,''),datetime('now','localtime')),datetime('now','localtime'))`)
+    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), (b.category||'Tin tức').trim(), b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '');
   if (isEnabled(b.published)) finalizePublishedContent('post', result.lastInsertRowid, { notify: true });
   if (isEnabled(b.published) && !isEnabled(b.noindex)) queueIndexNow([`/tin-tuc/${slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
   res.redirect('/admin/tin-tuc?flash=Đã thêm bài viết');
@@ -337,6 +339,8 @@ router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   const back = (error) => res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post: { ...existing, ...b }, error });
   if (req.uploadError) { return back(req.uploadError); }
   if (!b.title || !b.title.trim()) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Vui lòng nhập tiêu đề.'); }
+  const publicationDate = dateInputToLocalDateTime(b.publication_date);
+  if (publicationDate === null) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Ngày đăng không hợp lệ. Vui lòng chọn ngày theo lịch.'); }
 
   const base = b.slug && b.slug.trim() ? slugify(b.slug) : slugify(b.title);
   const slug = uniqueSlug(db, base, existing.id);
@@ -344,8 +348,8 @@ router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   if (b.remove_cover === '1' && existing.cover_image) { removeUpload(existing.cover_image); coverImage = null; }
   if (req.file) { if (existing.cover_image) removeUpload(existing.cover_image); coverImage = '/uploads/' + req.file.filename; }
 
-  db.prepare(`UPDATE posts SET title=?, slug=?, excerpt=?, content=?, category=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, published=?, updated_at=datetime('now','localtime') WHERE id=?`)
-    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), (b.category||'Tin tức').trim(), b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, existing.id);
+  db.prepare(`UPDATE posts SET title=?, slug=?, excerpt=?, content=?, category=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, published=?, created_at=COALESCE(NULLIF(?,''),created_at), updated_at=datetime('now','localtime') WHERE id=?`)
+    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), (b.category||'Tin tức').trim(), b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '', existing.id);
   finalizePublishedContent('post', existing.id, { notify: isEnabled(b.published) });
   queueIndexNow([`/tin-tuc/${existing.slug}`, `/tin-tuc/${slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
   res.redirect('/admin/tin-tuc?flash=Đã cập nhật bài viết');
