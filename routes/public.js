@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const PINNED_NEWS_POST_SLUG = 'tuyen-dung-giao-vien-day-tieng-anh';
 const db = require('../db');
 const { decorate, programPublicPath, slugify } = require('../lib/util');
 const {
@@ -105,7 +106,9 @@ router.get('/anh-truong/:id.svg', (req, res, next) => {
 
 // Home
 router.get('/', (req, res) => {
-  const posts = db.prepare('SELECT * FROM posts WHERE published = 1 ORDER BY datetime(created_at) DESC LIMIT 3').all().map(decorate);
+  const posts = db.prepare(`SELECT * FROM posts WHERE published = 1
+    ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC LIMIT 3`)
+    .all(PINNED_NEWS_POST_SLUG).map(decorate);
   const programs = db.prepare('SELECT * FROM programs WHERE published = 1 ORDER BY sort_order ASC, id ASC LIMIT 6').all().map(decorate);
   const testimonials = db.prepare('SELECT * FROM testimonials WHERE published = 1 ORDER BY sort_order ASC, id ASC LIMIT 8').all();
   const courses = getCourses();
@@ -282,7 +285,9 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
 
 // News listing
 router.get('/tin-tuc', (req, res) => {
-  const posts = db.prepare('SELECT * FROM posts WHERE published = 1 ORDER BY datetime(created_at) DESC').all().map(decorate);
+  const posts = db.prepare(`SELECT * FROM posts WHERE published = 1
+    ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC`)
+    .all(PINNED_NEWS_POST_SLUG).map(decorate);
   const url = abs('/tin-tuc');
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org', '@graph': [{
