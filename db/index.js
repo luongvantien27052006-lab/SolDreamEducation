@@ -150,6 +150,34 @@ CREATE TABLE IF NOT EXISTS research_items (
   FOREIGN KEY(source_id) REFERENCES research_sources(id) ON DELETE CASCADE
 );
 CREATE INDEX IF NOT EXISTS idx_research_items_status ON research_items(status, created_at DESC);
+CREATE TABLE IF NOT EXISTS research_ai_batches (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE,
+  model TEXT NOT NULL,
+  input_file_name TEXT NOT NULL DEFAULT '',
+  state TEXT NOT NULL DEFAULT 'SUBMITTED',
+  last_error TEXT NOT NULL DEFAULT '',
+  created_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now','localtime'))
+);
+CREATE INDEX IF NOT EXISTS idx_research_ai_batches_state ON research_ai_batches(state, created_at);
+CREATE TABLE IF NOT EXISTS research_ai_batch_items (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  batch_id INTEGER NOT NULL,
+  research_item_id INTEGER NOT NULL,
+  request_key TEXT NOT NULL UNIQUE,
+  input_json TEXT NOT NULL DEFAULT '{}',
+  status TEXT NOT NULL DEFAULT 'SUBMITTED',
+  prompt_tokens INTEGER NOT NULL DEFAULT 0,
+  output_tokens INTEGER NOT NULL DEFAULT 0,
+  last_error TEXT NOT NULL DEFAULT '',
+  created_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now','localtime')),
+  FOREIGN KEY(batch_id) REFERENCES research_ai_batches(id) ON DELETE CASCADE,
+  FOREIGN KEY(research_item_id) REFERENCES research_items(id) ON DELETE CASCADE,
+  UNIQUE(batch_id, research_item_id)
+);
+CREATE INDEX IF NOT EXISTS idx_research_ai_batch_items_state ON research_ai_batch_items(batch_id, status);
 CREATE TABLE IF NOT EXISTS testimonials (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
@@ -310,6 +338,10 @@ if (!_researchItemCols.includes('source_text')) db.exec("ALTER TABLE research_it
 if (!_researchItemCols.includes('source_data_json')) db.exec("ALTER TABLE research_items ADD COLUMN source_data_json TEXT NOT NULL DEFAULT '{}'");
 if (!_researchItemCols.includes('source_content_hash')) db.exec("ALTER TABLE research_items ADD COLUMN source_content_hash TEXT NOT NULL DEFAULT ''");
 if (!_researchItemCols.includes('source_captured_at')) db.exec("ALTER TABLE research_items ADD COLUMN source_captured_at TEXT NOT NULL DEFAULT ''");
+db.exec("CREATE INDEX IF NOT EXISTS idx_research_content_hash ON research_items(source_content_hash) WHERE source_content_hash<>''");
+const _researchBatchItemCols = db.prepare("PRAGMA table_info(research_ai_batch_items)").all().map(c => c.name);
+if (!_researchBatchItemCols.includes('prompt_tokens')) db.exec('ALTER TABLE research_ai_batch_items ADD COLUMN prompt_tokens INTEGER NOT NULL DEFAULT 0');
+if (!_researchBatchItemCols.includes('output_tokens')) db.exec('ALTER TABLE research_ai_batch_items ADD COLUMN output_tokens INTEGER NOT NULL DEFAULT 0');
 const _leadCols = db.prepare("PRAGMA table_info(leads)").all().map(c => c.name);
 if (!_leadCols.includes('email')) db.exec("ALTER TABLE leads ADD COLUMN email TEXT NOT NULL DEFAULT ''");
 if (!_leadCols.includes('lead_type')) db.exec("ALTER TABLE leads ADD COLUMN lead_type TEXT NOT NULL DEFAULT 'course'");
@@ -908,6 +940,24 @@ if (!db.prepare('SELECT 1 FROM faqs WHERE question=?').get(serviceFaqQuestion)) 
         .run(migrationKey, String(replacements.length));
     })();
     if (replacements.length) console.log(`[db] completed article cleanup on ${replacements.length} article(s)`);
+  }
+}
+
+// Set the English-teacher recruitment post's requested publication date once.
+// Keep the post's original update timestamp so this only changes its displayed
+// publication date and does not suggest the content itself was edited then.
+{
+  const migrationKey = 'recruitment_english_teacher_publication_date_20260903_v1';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    const post = db.prepare('SELECT id FROM posts WHERE slug=?').get('tuyen-dung-giao-vien-day-tieng-anh');
+    if (post) {
+      db.transaction(() => {
+        db.prepare("UPDATE posts SET created_at='2026-09-03 12:00:00' WHERE id=?").run(post.id);
+        db.prepare('INSERT INTO system_meta (key,value,updated_at) VALUES (?,?,datetime(\'now\',\'localtime\'))')
+          .run(migrationKey, '2026-09-03');
+      })();
+      console.log('[db] applied recruitment post publication date 2026-09-03');
+    }
   }
 }
 

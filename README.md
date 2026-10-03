@@ -117,21 +117,19 @@ Google xem GEO/AEO là một cách gọi trong ngành; nền tảng vẫn là SE
 | `PORT` | Cổng chạy (mặc định 3000) |
 | `DATABASE_PATH` | (tuỳ chọn) đường dẫn file SQLite |
 | `INDEXNOW_KEY` | (tuỳ chọn) khóa IndexNow riêng. Nếu để trống, hệ thống tự tạo một khóa ổn định và lưu trong SQLite. |
-| `GEMINI_CACHE_DOCUMENT_PATH` | Đường dẫn tới tài liệu hướng dẫn biên soạn cố định dùng cho Gemini Context Caching. Nên là tài liệu lớn hơn 32k token. |
-| `GEMINI_CACHE_TTL_SECONDS` | TTL cache theo giây; mặc định `7200` (2 giờ). |
 | `GEMINI_FALLBACK_BACKOFF_MS` | Thời gian chờ đầu tiên trước khi chuyển model; mặc định `1000` ms. |
 | `GEMINI_FALLBACK_MAX_BACKOFF_MS` | Giới hạn exponential backoff; mặc định `2000` ms. |
+| `GEMINI_EDITOR_MAX_TPM` | Ngân sách token ước tính theo phút cho các lượt biên tập đồng bộ; mặc định `120000`. |
+| `GEMINI_EDITOR_MAX_CONCURRENT` | Số yêu cầu biên tập Gemini đồng thời trong một tiến trình; mặc định `1`. |
+| `GEMINI_EDITOR_REQUEST_INTERVAL_MS` | Khoảng cách tối thiểu giữa các lượt gọi cùng model; mặc định `4200` ms (Flash thường tối thiểu `12500` ms). |
+| `GEMINI_EDITOR_BATCH_SIZE` | Số bài tối đa trong một JSONL batch; mặc định `25`, tối đa `100`. |
+| `GEMINI_EDITOR_BATCH_MODEL` | Model dùng cho xử lý biên tập bất đồng bộ; mặc định lấy model chính trong cấu hình biên tập. |
 
-### Context Caching và fallback Gemini
+### Tối ưu chi phí và giới hạn tốc độ Gemini
 
-Đặt tài liệu hướng dẫn cố định vào một file UTF-8 rồi cấu hình, ví dụ:
+Lượt biên tập không tạo `CachedContent` và không nạp tài liệu hướng dẫn 348 KB vào prompt. Tiêu chuẩn biên tập đang dùng được giữ gọn trong mã; kiểm tra ngôn ngữ, độ dài, nguồn và độ bao phủ dữ kiện vẫn chạy sau phản hồi. Hàng chờ biên tập gom các bài đủ điều kiện thành JSONL, tải lên Gemini Batch API, lưu mã job cùng dữ liệu chờ trong SQLite, rồi worker thăm dò kết quả định kỳ và chỉ xuất bản những bản đạt các kiểm tra hiện hành. Batch API là bất đồng bộ (thời gian mục tiêu có thể tới 24 giờ) và Google niêm yết mức giá bằng 50% lượt gọi tiêu chuẩn; không bảo đảm mọi batch hoàn tất ngay. Gateway cũng giới hạn lượt gọi đồng bộ theo ngân sách TPM ước tính, số yêu cầu đồng thời và khoảng nghỉ từng model; giới hạn này tính theo tiến trình, không phải giới hạn toàn cụm nhiều replica.
 
-```env
-GEMINI_CACHE_DOCUMENT_PATH=D:/sol-dream-education/sol-dream/data/editorial-cache-guide.md
-GEMINI_CACHE_TTL_SECONDS=7200
-```
-
-`lib/geminiGateway.js` kiểm tra cache từ xa theo dấu vân tay tài liệu, tạo cache riêng cho từng model và tự tạo lại khi cache hết hạn. Khi gặp `429`, `RESOURCE_EXHAUSTED`, lỗi quá tải hoặc timeout, thứ tự fallback là `gemini-3.5-flash-lite` → `gemini-3.5-flash` → `gemini-3.6-flash`, với backoff 1–2 giây. Nội dung thay đổi theo từng bài vẫn được gửi trong `contents`; chỉ tài liệu hướng dẫn cố định được cache.
+Crawler chuyển trang thành văn bản sạch trước khi gọi mô hình, loại bỏ script/style/navigation/header/footer và lưu dấu vân tay SHA-256 để không biên tập lặp nội dung đã thu thập. Hàng chờ tự đăng chỉ nhận dữ liệu trong vòng 7 ngày; bài cũ được đánh dấu bỏ qua. Ghi chú biên tập lớn chỉ còn là tài liệu tham khảo nội bộ, không được gửi tự động cho Gemini.
 
 ---
 

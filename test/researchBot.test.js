@@ -10,7 +10,7 @@ const {
   extractOfficialUniversityWebsite, extractClientRedirect,
   extractMediaFromHtml, extractFaqsFromHtml, extractAttachmentsFromHtml, parseRobots, classifySection, requiresManualApproval, fingerprint, optimizeCrawledItem,
   parseGoogleImageResults, parseWikimediaImageResults, parseOpenverseImageResults, attachmentMarkup,
-  shouldExpandEditorialResearch, enrichSparseEditorialSource, editorialSourceUrls,
+  shouldExpandEditorialResearch, enrichSparseEditorialSource, editorialSourceUrls, sourceContentHash, researchItemIsFresh,
 } = require('../lib/researchBot');
 const { isKoreaStudyRelevant, isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { placementForPath, localSqlDate } = require('../lib/sitePopup');
@@ -250,14 +250,24 @@ test('crawler discovers official sitemap and RSS URLs for deep pages', () => {
   assert.equal(extractFeedEntries(feed, 'https://sample.ac.kr/')[0].kind, 'notice');
 });
 
-test('page extraction keeps table structure, contact footer and publication date', () => {
-  const html = `<html><head><meta property="article:published_time" content="2026-09-20T09:00:00+09:00"></head><body>
+test('page extraction keeps article tables but excludes scripts, navigation and footer boilerplate', () => {
+  const html = `<html><head><meta property="article:published_time" content="2026-09-20T09:00:00+09:00"><style>.secret{}</style></head><body>
+    <header>Site header</header><nav>Navigation menu</nav><script>window.secret='raw script text';</script>
     <main><h1>Admissions</h1><table><tr><th>Program</th><th>Deadline</th></tr><tr><td>Bachelor</td><td>2026-11-01</td></tr></table></main>
-    <footer><address>admission@sample.ac.kr · +82 2 123 4567</address></footer></body></html>`;
+    <footer><address>admission@sample.ac.kr · +82 2 123 4567</address><p>Footer links</p></footer></body></html>`;
   const text = structuredTextFromHtml(html);
   assert.match(text, /Program\s*\|\s*Deadline/);
-  assert.match(text, /admission@sample\.ac\.kr/);
+  assert.doesNotMatch(text, /Site header|Navigation menu|raw script text|Footer links|admission@sample/);
+  assert.doesNotMatch(text, /<\/?(?:main|table|script|style|footer)\b/i);
   assert.equal(extractPublishedDate(html), '2026-09-20');
+});
+
+test('content hashes ignore casing and whitespace and freshness is limited to seven days', () => {
+  const now = Date.parse('2026-10-03T12:00:00Z');
+  assert.equal(sourceContentHash('Visa  D-2\n tuyển sinh'), sourceContentHash('visa d-2 tuyển sinh'));
+  assert.equal(researchItemIsFresh({ published_at: '2026-10-01', created_at: '2026-10-03' }, now), true);
+  assert.equal(researchItemIsFresh({ published_at: '2026-09-25', created_at: '2026-10-03' }, now), false);
+  assert.equal(researchItemIsFresh({ published_at: '', created_at: '2026-09-25' }, now), false);
 });
 
 test('classifies every cleaned notice block before editorial generation without truncating it', () => {
