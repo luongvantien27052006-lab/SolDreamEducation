@@ -1,72 +1,492 @@
 {
-  "updated_at": "2026-08-27",
-  "notice": "Lịch học, học phí và ưu đãi có thể thay đổi theo thời điểm mở lớp. Vui lòng xác nhận với SOL DREAM EDUCATION trước khi đăng ký.",
+  "updated_at": "2026-10-13",
+  "notice": "Mức học phí áp dụng theo Bảng học phí tiếng Hàn SDE 2026. Ưu đãi và lịch khai giảng thay đổi theo từng chiến dịch tuyển sinh; vui lòng xác nhận mức phí, lịch học và điều kiện áp dụng với SOL DREAM EDUCATION trước khi đăng ký.",
   "courses": [
     {
       "id": "giao-tiep-giao-vien-han",
-      "name": "Tiếng Hàn giao tiếp cùng giáo viên Hàn Quốc",
-      "blufSummary": "Khóa giao tiếp cùng giáo viên Hàn Quốc dành cho học viên muốn luyện nói và phản xạ trực tiếp. Chương trình hiện giới thiệu hai buổi học thử miễn phí; lịch học, thời lượng, học phí và trình độ đầu vào cần được xác nhận khi đăng ký.",
-      "audience": "Học viên muốn luyện nói và phản xạ trực tiếp với người bản ngữ",
-      "description": "Môi trường luyện nói với giáo viên Hàn Quốc; chương trình hiện giới thiệu 2 buổi học thử.",
-      "price": "Miễn phí 2 buổi học thử",
+      "name": "Giao tiếp Sơ cấp cùng giáo viên Hàn Quốc",
+      "blufSummary": "Lớp giao tiếp Sơ cấp học 16 buổi (24 giờ) với 100% giáo viên Hàn Quốc. Lớp 4–6 học viên, tối thiểu 4 người để khai giảng; học phí 3.490.000 VNĐ.",
+      "audience": "Học viên muốn bắt đầu giao tiếp tiếng Hàn và luyện phản xạ trực tiếp với giáo viên Hàn Quốc",
+      "description": "Lớp giao tiếp Sơ cấp tập trung thời gian nói, phản xạ và tương tác trực tiếp với giáo viên Hàn Quốc. Theo bảng học phí SDE 2026, lớp gồm 16 buổi, mỗi buổi 90 phút; sĩ số 4–6 học viên và tối thiểu 4 học viên để mở lớp.",
+      "price": "3.490.000 VNĐ",
       "language": "Tiếng Hàn",
-      "financials": { "priceVndTotal": 0, "priceNote": "Miễn phí 2 buổi học thử; chưa công bố học phí khóa" },
-      "requirements": { "entryLevel": null, "topikRequired": null, "status": "Kiểm tra mục tiêu và trình độ trước khi xếp lớp" }
+      "financials": {
+        "priceVndTotal": 3490000,
+        "priceNote": "Theo Bảng học phí SDE 2026; lịch khai giảng và ưu đãi xác nhận theo từng chiến dịch.",
+        "tuition2026": {
+          "code": "Giao tiếp Sơ cấp",
+          "track": "speaking",
+          "sessions": 16,
+          "minutesPerSession": 90,
+          "totalHours": 24,
+          "instructors": "100% giáo viên Hàn Quốc",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Tài liệu lớp"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Sơ cấp",
+        "topikRequired": null,
+        "status": "Xác nhận trình độ và lịch khai giảng trước khi xếp lớp"
+      },
+      "lastUpdated": "2026-10-13"
     },
     {
       "id": "tieng-han-giao-tiep",
-      "name": "Lớp tiếng Hàn giao tiếp",
-      "blufSummary": "Lớp tiếng Hàn giao tiếp tập trung phản xạ nghe nói cho người muốn trò chuyện tự tin. Website chưa công bố học phí, thời lượng và trình độ đầu vào; học viên cần được kiểm tra năng lực và xác nhận lịch mở lớp trước khi đăng ký.",
-      "audience": "Người muốn tăng phản xạ nghe và nói theo các chủ đề thực tế",
-      "description": "Rèn luyện phản xạ nghe - nói theo chủ đề, hướng tới khả năng trò chuyện tự tin với người Hàn.",
-      "price": "Liên hệ để nhận học phí",
+      "name": "Giao tiếp Trung cấp 1 cùng giáo viên Hàn Quốc",
+      "blufSummary": "Lớp giao tiếp Trung cấp 1 học 16 buổi (24 giờ), 100% giáo viên Hàn Quốc; sĩ số 4–6, tối thiểu 4 học viên để mở lớp. Học phí 3.690.000 VNĐ.",
+      "audience": "Học viên trình độ sơ trung cấp muốn tăng phản xạ nghe nói cùng giáo viên Hàn Quốc",
+      "description": "Lớp Giao tiếp TC1 dành cho học viên đã có nền tảng giao tiếp cơ bản, luyện nói và phản xạ theo tình huống. Theo bảng học phí SDE 2026, lớp gồm 16 buổi x 90 phút, 100% giáo viên Hàn Quốc; sĩ số 4–6 và tối thiểu 4 học viên để mở lớp.",
+      "price": "3.690.000 VNĐ",
       "language": "Tiếng Hàn",
-      "financials": { "priceVndTotal": null, "priceNote": "Chưa công bố" },
-      "requirements": { "entryLevel": null, "topikRequired": null, "status": "Kiểm tra trình độ trước khi xếp lớp" }
+      "financials": {
+        "priceVndTotal": 3690000,
+        "priceNote": "Theo Bảng học phí SDE 2026; lịch khai giảng và ưu đãi xác nhận theo từng chiến dịch.",
+        "tuition2026": {
+          "code": "Giao tiếp TC1",
+          "track": "speaking",
+          "sessions": 16,
+          "minutesPerSession": 90,
+          "totalHours": 24,
+          "instructors": "100% giáo viên Hàn Quốc",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Tài liệu lớp"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Trung cấp 1 hoặc tương đương",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp theo trình độ trước khi đăng ký"
+      },
+      "lastUpdated": "2026-10-13"
     },
     {
       "id": "tieng-han-so-cap-1",
-      "name": "Tiếng Hàn sơ cấp 1",
-      "blufSummary": "Tiếng Hàn sơ cấp 1 dành cho người mới bắt đầu, xây dựng nền tảng Hangul và ngữ pháp cơ bản. Học phí công bố là 2.020.000 VND trọn khóa; thời lượng, lịch học, giáo trình và điều kiện ưu đãi cần được xác nhận trước khi đăng ký.",
+      "name": "Tiếng Hàn Sơ cấp 1 – SC1A",
+      "blufSummary": "Lớp SC1A dành cho người mới bắt đầu, học 16 buổi (24 giờ) với giáo viên Việt Nam. Sĩ số 3–6, tối thiểu 3 học viên để khai giảng; học phí 1.890.000 VNĐ, tài liệu Vitamin.",
       "audience": "Người mới bắt đầu học tiếng Hàn",
-      "description": "Xây dựng nền tảng bảng chữ cái Hangul, phát âm và ngữ pháp cơ bản.",
-      "price": "2.020.000 VNĐ trọn khóa",
+      "description": "SC1A xây nền tảng từ số 0 với Hangul, phát âm, từ vựng, ngữ pháp và nghe – nói cơ bản. Lớp do giáo viên Việt Nam giảng dạy; theo bảng học phí SDE 2026 gồm 16 buổi x 90 phút, tổng 24 giờ. Đây là lộ trình ngắn để người mới dễ bắt đầu.",
+      "price": "1.890.000 VNĐ",
       "language": "Tiếng Hàn",
-      "financials": { "priceVndTotal": 2020000, "priceNote": "Trọn khóa theo dữ liệu công bố ngày 27/08/2026" },
-      "requirements": { "entryLevel": "Người mới bắt đầu", "topikRequired": null, "status": "Không công bố yêu cầu TOPIK đầu vào" }
+      "financials": {
+        "priceVndTotal": 1890000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 3 học viên để mở lớp, sĩ số 3–6. Tài liệu: Vitamin.",
+        "tuition2026": {
+          "code": "SC1A",
+          "track": "foundation",
+          "sessions": 16,
+          "minutesPerSession": 90,
+          "totalHours": 24,
+          "instructors": "Giáo viên Việt Nam",
+          "classSize": "3–6",
+          "minimumStudents": 3,
+          "materials": "Vitamin"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Người mới bắt đầu",
+        "topikRequired": null,
+        "status": "Lớp nền tảng; xác nhận lịch khai giảng trước khi đăng ký"
+      },
+      "lastUpdated": "2026-10-13"
     },
     {
       "id": "tieng-han-cap-toc",
       "name": "Lớp tiếng Hàn cấp tốc",
-      "blufSummary": "Lớp tiếng Hàn cấp tốc dành cho học viên cần tăng trình độ để chuẩn bị hồ sơ du học. Chương trình tập trung mục tiêu TOPIK; học phí, thời lượng, trình độ đầu vào và cấp TOPIK mục tiêu được xác định sau khi kiểm tra hồ sơ.",
+      "blufSummary": "Lớp tiếng Hàn cấp tốc dành cho học viên cần tăng trình độ để chuẩn bị hồ sơ du học. Mức học phí và thời lượng của lớp cấp tốc chưa có trong bảng học phí SDE 2026; cần xác nhận sau khi kiểm tra mục tiêu và trình độ.",
       "audience": "Học viên cần tăng tốc trình độ để chuẩn bị hồ sơ du học",
-      "description": "Lộ trình rút gọn, tập trung mục tiêu tiếng Hàn và TOPIK phục vụ kế hoạch du học Hàn Quốc.",
+      "description": "Lộ trình rút gọn, tập trung mục tiêu tiếng Hàn và TOPIK phục vụ kế hoạch du học Hàn Quốc. Lớp cấp tốc không nằm trong danh sách mức phí của Bảng học phí tiếng Hàn SDE 2026; thời lượng, học phí và trình độ đầu vào được xác định sau khi kiểm tra mục tiêu.",
       "price": "Liên hệ để nhận học phí",
       "language": "Tiếng Hàn",
-      "financials": { "priceVndTotal": null, "priceNote": "Chưa công bố" },
-      "requirements": { "entryLevel": null, "topikRequired": null, "status": "Xác định sau khi kiểm tra mục tiêu du học và trình độ" }
+      "financials": {
+        "priceVndTotal": null,
+        "priceNote": "Bảng học phí SDE 2026 không liệt kê lớp cấp tốc; liên hệ trung tâm để xác nhận."
+      },
+      "requirements": {
+        "entryLevel": null,
+        "topikRequired": null,
+        "status": "Xác định sau khi kiểm tra mục tiêu du học và trình độ"
+      }
     },
     {
       "id": "phat-am-tieng-han",
-      "name": "Lớp phát âm tiếng Hàn",
-      "blufSummary": "Lớp phát âm tiếng Hàn dành cho học viên muốn sửa lỗi cùng giáo viên Hàn Quốc. Website chưa công bố học phí, thời lượng hoặc trình độ tối thiểu; học viên cần được kiểm tra phát âm và xác nhận lịch mở lớp trước khi đăng ký.",
+      "name": "Luyện phát âm tiếng Hàn",
+      "blufSummary": "Lớp luyện phát âm chuyên sâu gồm 6 buổi (9 giờ), do giáo viên Hàn Quốc và trợ giảng Việt Nam hướng dẫn. Sĩ số 4–6, tối thiểu 4 học viên để mở lớp; học phí 1.490.000 VNĐ.",
       "audience": "Học viên muốn chỉnh phát âm và nói rõ ràng, tự nhiên hơn",
-      "description": "Chỉnh phát âm cùng giáo viên Hàn Quốc, tập trung độ chính xác và sự tự nhiên khi nói.",
-      "price": "Liên hệ để nhận học phí",
+      "description": "Sáu buổi chuyên sâu cùng giáo viên Hàn Quốc và trợ giảng Việt Nam, tập trung khẩu hình, phụ âm/nguyên âm, 받침, nối âm, biến âm, ngữ điệu và sửa lỗi cá nhân. Mỗi buổi 90 phút; sĩ số 4–6 và tối thiểu 4 học viên để mở lớp.",
+      "price": "1.490.000 VNĐ",
       "language": "Tiếng Hàn",
-      "financials": { "priceVndTotal": null, "priceNote": "Chưa công bố" },
-      "requirements": { "entryLevel": null, "topikRequired": null, "status": "Kiểm tra phát âm trước khi xếp lớp" }
+      "financials": {
+        "priceVndTotal": 1490000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 4 học viên để mở lớp, sĩ số 4–6. Tài liệu lớp.",
+        "tuition2026": {
+          "code": "Luyện phát âm",
+          "track": "speaking",
+          "sessions": 6,
+          "minutesPerSession": 90,
+          "totalHours": 9,
+          "instructors": "Giáo viên Hàn Quốc + trợ giảng Việt Nam",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Tài liệu lớp"
+        }
+      },
+      "requirements": {
+        "entryLevel": null,
+        "topikRequired": null,
+        "status": "Tư vấn nội dung và lịch lớp trước khi đăng ký"
+      },
+      "lastUpdated": "2026-10-13"
     },
     {
       "id": "tieng-anh-giao-tiep",
       "name": "Tiếng Anh giao tiếp",
-      "blufSummary": "Lớp tiếng Anh giao tiếp dành cho học viên muốn phát triển ngoại ngữ thứ hai. Chương trình hướng đến kỹ năng giao tiếp thực tế; website chưa công bố học phí, thời lượng và trình độ đầu vào nên cần xác nhận trực tiếp trước khi đăng ký.",
+      "blufSummary": "Lớp tiếng Anh giao tiếp dành cho học viên muốn phát triển ngoại ngữ thứ hai. Website chưa công bố học phí, thời lượng và trình độ đầu vào nên cần xác nhận trực tiếp trước khi đăng ký.",
       "audience": "Học viên muốn trang bị thêm ngoại ngữ thứ hai",
       "description": "Lớp giao tiếp tiếng Anh hỗ trợ học viên phát triển thêm kỹ năng ngoại ngữ.",
       "price": "Liên hệ để nhận học phí",
       "language": "Tiếng Anh",
-      "financials": { "priceVndTotal": null, "priceNote": "Chưa công bố" },
-      "requirements": { "entryLevel": null, "certificateRequired": null, "status": "Kiểm tra trình độ tiếng Anh trước khi xếp lớp; TOEIC hoặc IELTS chỉ áp dụng khi chương trình cụ thể yêu cầu" }
+      "financials": {
+        "priceVndTotal": null,
+        "priceNote": "Chưa công bố"
+      },
+      "requirements": {
+        "entryLevel": null,
+        "certificateRequired": null,
+        "status": "Kiểm tra trình độ tiếng Anh trước khi xếp lớp; TOEIC hoặc IELTS chỉ áp dụng khi chương trình cụ thể yêu cầu"
+      }
+    },
+    {
+      "id": "tieng-han-so-cap-1-sc1b",
+      "name": "Tiếng Hàn Sơ cấp 1 – SC1B",
+      "blufSummary": "Lớp SC1B học 20 buổi (30 giờ), giáo viên Việt Nam hướng dẫn nền tảng tiếng Hàn. Sĩ số 3–6, tối thiểu 3 học viên để khai giảng; học phí 2.190.000 VNĐ, tài liệu Vitamin.",
+      "audience": "Học viên cần lộ trình xây nền tảng tiếng Hàn với thời lượng đầy đủ hơn",
+      "description": "SC1B thuộc nhóm lớp xây nền tảng SC1A–SC1B, tập trung Hangul, phát âm, từ vựng, ngữ pháp và nghe – nói cơ bản với giáo viên Việt Nam. Theo bảng học phí SDE 2026 gồm 20 buổi x 90 phút, tổng 30 giờ.",
+      "price": "2.190.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 2190000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 3 học viên để mở lớp, sĩ số 3–6. Tài liệu: Vitamin.",
+        "tuition2026": {
+          "code": "SC1B",
+          "track": "foundation",
+          "sessions": 20,
+          "minutesPerSession": 90,
+          "totalHours": 30,
+          "instructors": "Giáo viên Việt Nam",
+          "classSize": "3–6",
+          "minimumStudents": 3,
+          "materials": "Vitamin"
+        }
+      },
+      "requirements": {
+        "entryLevel": null,
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký từ cấp SC1B"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "tieng-han-so-cap-2-sc2a",
+      "name": "Tiếng Hàn Sơ cấp 2 – SC2A",
+      "blufSummary": "Lớp SC2A học 22 buổi (33 giờ), trung bình 15 buổi với giáo viên Việt và 7 với giáo viên Hàn. Sĩ số 4–6, tối thiểu 4 học viên; học phí 2.590.000 VNĐ, tài liệu Vitamin.",
+      "audience": "Học viên muốn tiếp tục tiếng Hàn sơ cấp theo lộ trình xen kẽ giáo viên Việt – Hàn",
+      "description": "SC2A bắt đầu mô hình học xen kẽ: trung bình 2 buổi với giáo viên Việt Nam rồi 1 buổi với giáo viên Hàn Quốc. Giáo viên Việt củng cố ngữ pháp, từ vựng và cấu trúc; giáo viên Hàn tập trung phát âm, nghe, phản xạ và giao tiếp thực tế. Phân bổ thực tế theo tổng số buổi của cấp.",
+      "price": "2.590.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 2590000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 4 học viên để mở lớp, sĩ số 4–6. Tài liệu: Vitamin.",
+        "tuition2026": {
+          "code": "SC2A",
+          "track": "foundation",
+          "sessions": 22,
+          "minutesPerSession": 90,
+          "totalHours": 33,
+          "instructors": "15 buổi GV Việt + 7 buổi GV Hàn",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Vitamin"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký; mô hình Việt – Hàn xen kẽ"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "tieng-han-so-cap-2-sc2b",
+      "name": "Tiếng Hàn Sơ cấp 2 – SC2B",
+      "blufSummary": "Lớp SC2B học 24 buổi (36 giờ), gồm 16 buổi giáo viên Việt và 8 buổi giáo viên Hàn. Sĩ số 4–6, tối thiểu 4 học viên; học phí 2.890.000 VNĐ, tài liệu Vitamin.",
+      "audience": "Học viên muốn tiếp tục nâng nền tảng tiếng Hàn sơ cấp theo lộ trình xen kẽ Việt – Hàn",
+      "description": "SC2B tiếp tục mô hình xen kẽ giáo viên Việt Nam và Hàn Quốc; giáo viên Việt củng cố ngữ pháp, từ vựng và cấu trúc, giáo viên Hàn tập trung phát âm, nghe, phản xạ và giao tiếp thực tế.",
+      "price": "2.890.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 2890000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 4 học viên để mở lớp, sĩ số 4–6. Tài liệu: Vitamin.",
+        "tuition2026": {
+          "code": "SC2B",
+          "track": "foundation",
+          "sessions": 24,
+          "minutesPerSession": 90,
+          "totalHours": 36,
+          "instructors": "16 buổi GV Việt + 8 buổi GV Hàn",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Vitamin"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký; mô hình Việt – Hàn xen kẽ"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "tieng-han-trung-cap-3-tc3a",
+      "name": "Tiếng Hàn Trung cấp 3 – TC3A",
+      "blufSummary": "Lớp TC3A học 24 buổi (36 giờ), gồm 16 buổi giáo viên Việt và 8 buổi giáo viên Hàn; sĩ số 4–6, tối thiểu 4 học viên. Học phí 2.990.000 VNĐ, tài liệu Seoul.",
+      "audience": "Học viên muốn tiếp tục lộ trình tiếng Hàn trung cấp với giáo viên Việt – Hàn",
+      "description": "TC3A tiếp tục mô hình xen kẽ Việt – Hàn ở trình độ trung cấp, tăng khả năng diễn đạt, nghe hiểu, đọc hiểu, thảo luận và sử dụng tiếng Hàn tự nhiên hơn.",
+      "price": "2.990.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 2990000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 4 học viên để mở lớp, sĩ số 4–6. Tài liệu: Seoul.",
+        "tuition2026": {
+          "code": "TC3A",
+          "track": "foundation",
+          "sessions": 24,
+          "minutesPerSession": 90,
+          "totalHours": 36,
+          "instructors": "16 buổi GV Việt + 8 buổi GV Hàn",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Seoul"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký; mô hình Việt – Hàn xen kẽ"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "tieng-han-trung-cap-3-tc3b",
+      "name": "Tiếng Hàn Trung cấp 3 – TC3B",
+      "blufSummary": "Lớp TC3B học 26 buổi (39 giờ), gồm 18 buổi giáo viên Việt và 8 buổi giáo viên Hàn; sĩ số 4–6, tối thiểu 4 học viên. Học phí 3.190.000 VNĐ, tài liệu Seoul.",
+      "audience": "Học viên muốn củng cố và mở rộng tiếng Hàn trung cấp với giáo viên Việt – Hàn",
+      "description": "TC3B tiếp tục mô hình xen kẽ Việt – Hàn ở trình độ trung cấp, tăng khả năng diễn đạt, nghe hiểu, đọc hiểu, thảo luận và sử dụng tiếng Hàn tự nhiên hơn.",
+      "price": "3.190.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 3190000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 4 học viên để mở lớp, sĩ số 4–6. Tài liệu: Seoul.",
+        "tuition2026": {
+          "code": "TC3B",
+          "track": "foundation",
+          "sessions": 26,
+          "minutesPerSession": 90,
+          "totalHours": 39,
+          "instructors": "18 buổi GV Việt + 8 buổi GV Hàn",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Seoul"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký; mô hình Việt – Hàn xen kẽ"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "tieng-han-trung-cap-4-tc4a",
+      "name": "Tiếng Hàn Trung cấp 4 – TC4A",
+      "blufSummary": "Lớp TC4A học 28 buổi (42 giờ), gồm 19 buổi giáo viên Việt và 9 buổi giáo viên Hàn; sĩ số 4–6, tối thiểu 4 học viên. Học phí 3.490.000 VNĐ, tài liệu Seoul.",
+      "audience": "Học viên muốn phát triển khả năng sử dụng tiếng Hàn trung cấp trong học tập và giao tiếp",
+      "description": "TC4A tiếp tục mô hình xen kẽ Việt – Hàn, tăng khả năng diễn đạt, nghe hiểu, đọc hiểu, thảo luận và sử dụng tiếng Hàn tự nhiên hơn.",
+      "price": "3.490.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 3490000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 4 học viên để mở lớp, sĩ số 4–6. Tài liệu: Seoul.",
+        "tuition2026": {
+          "code": "TC4A",
+          "track": "foundation",
+          "sessions": 28,
+          "minutesPerSession": 90,
+          "totalHours": 42,
+          "instructors": "19 buổi GV Việt + 9 buổi GV Hàn",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Seoul"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký; mô hình Việt – Hàn xen kẽ"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "tieng-han-trung-cap-4-tc4b",
+      "name": "Tiếng Hàn Trung cấp 4 – TC4B",
+      "blufSummary": "Lớp TC4B học 30 buổi (45 giờ), gồm 20 buổi giáo viên Việt và 10 buổi giáo viên Hàn; sĩ số 4–6, tối thiểu 4 học viên. Học phí 3.690.000 VNĐ, tài liệu Seoul.",
+      "audience": "Học viên muốn tiếp tục nâng cao trình độ tiếng Hàn trung cấp",
+      "description": "TC4B tiếp tục mô hình xen kẽ Việt – Hàn, tăng khả năng diễn đạt, nghe hiểu, đọc hiểu, thảo luận và sử dụng tiếng Hàn tự nhiên hơn.",
+      "price": "3.690.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 3690000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 4 học viên để mở lớp, sĩ số 4–6. Tài liệu: Seoul.",
+        "tuition2026": {
+          "code": "TC4B",
+          "track": "foundation",
+          "sessions": 30,
+          "minutesPerSession": 90,
+          "totalHours": 45,
+          "instructors": "20 buổi GV Việt + 10 buổi GV Hàn",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Seoul"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký; mô hình Việt – Hàn xen kẽ"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "luyen-topik-1",
+      "name": "Luyện TOPIK I",
+      "blufSummary": "Lớp luyện TOPIK I học 18 buổi (27 giờ) với giáo viên Việt Nam; sĩ số 3–8, tối thiểu 3 học viên để mở lớp. Học phí 2.190.000 VNĐ, tài liệu lớp.",
+      "audience": "Học viên cần củng cố nền tảng nghe – đọc và chiến thuật làm bài TOPIK I",
+      "description": "TOPIK I tập trung nền tảng Nghe – Đọc và chiến thuật làm bài. Lớp gồm 18 buổi x 90 phút, do giáo viên Việt Nam hướng dẫn; sĩ số 3–8 học viên và tối thiểu 3 học viên để mở lớp.",
+      "price": "2.190.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 2190000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 3 học viên để mở lớp, sĩ số 3–8. Tài liệu lớp.",
+        "tuition2026": {
+          "code": "TOPIK I",
+          "track": "topik",
+          "sessions": 18,
+          "minutesPerSession": 90,
+          "totalHours": 27,
+          "instructors": "Giáo viên Việt Nam",
+          "classSize": "3–8",
+          "minimumStudents": 3,
+          "materials": "Tài liệu lớp"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp theo trình độ",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "luyen-topik-cap-3",
+      "name": "Luyện TOPIK cấp 3",
+      "blufSummary": "Lớp luyện TOPIK cấp 3 học 24 buổi (36 giờ) với giáo viên Việt Nam; sĩ số 3–8, tối thiểu 3 học viên để khai giảng. Học phí 2.990.000 VNĐ, tài liệu lớp.",
+      "audience": "Học viên có mục tiêu đạt TOPIK cấp 3",
+      "description": "Lớp luyện TOPIK cấp 3 tập trung mục tiêu điểm số, luyện đề, Nghe – Đọc – Viết và chữa lỗi theo từng giai đoạn. Lớp gồm 24 buổi x 90 phút do giáo viên Việt Nam hướng dẫn.",
+      "price": "2.990.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 2990000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 3 học viên để mở lớp, sĩ số 3–8. Tài liệu lớp.",
+        "tuition2026": {
+          "code": "TOPIK cấp 3",
+          "track": "topik",
+          "sessions": 24,
+          "minutesPerSession": 90,
+          "totalHours": 36,
+          "instructors": "Giáo viên Việt Nam",
+          "classSize": "3–8",
+          "minimumStudents": 3,
+          "materials": "Tài liệu lớp"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp theo trình độ",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "luyen-topik-cap-4",
+      "name": "Luyện TOPIK cấp 4",
+      "blufSummary": "Lớp luyện TOPIK cấp 4 học 24 buổi (36 giờ) với giáo viên Việt Nam; sĩ số 3–8, tối thiểu 3 học viên để khai giảng. Học phí 3.190.000 VNĐ, tài liệu lớp.",
+      "audience": "Học viên có mục tiêu đạt TOPIK cấp 4",
+      "description": "Lớp luyện TOPIK cấp 4 tập trung mục tiêu điểm số, luyện đề, Nghe – Đọc – Viết và chữa lỗi theo từng giai đoạn. Lớp gồm 24 buổi x 90 phút do giáo viên Việt Nam hướng dẫn.",
+      "price": "3.190.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 3190000,
+        "priceNote": "Theo Bảng học phí SDE 2026; tối thiểu 3 học viên để mở lớp, sĩ số 3–8. Tài liệu lớp.",
+        "tuition2026": {
+          "code": "TOPIK cấp 4",
+          "track": "topik",
+          "sessions": 24,
+          "minutesPerSession": 90,
+          "totalHours": 36,
+          "instructors": "Giáo viên Việt Nam",
+          "classSize": "3–8",
+          "minimumStudents": 3,
+          "materials": "Tài liệu lớp"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Kiểm tra/xếp lớp theo trình độ",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp trước khi đăng ký"
+      },
+      "lastUpdated": "2026-10-13"
+    },
+    {
+      "id": "giao-tiep-trung-cap-2",
+      "name": "Giao tiếp Trung cấp 2 cùng giáo viên Hàn Quốc",
+      "blufSummary": "Lớp giao tiếp Trung cấp 2 học 16 buổi (24 giờ), 100% giáo viên Hàn Quốc; sĩ số 4–6 và tối thiểu 4 học viên để khai giảng. Học phí 3.890.000 VNĐ.",
+      "audience": "Học viên muốn tăng khả năng giao tiếp ở trình độ trung cấp",
+      "description": "Lớp Giao tiếp TC2 luyện nói, phản xạ và tương tác trực tiếp với giáo viên Hàn Quốc. Theo bảng học phí SDE 2026, lớp gồm 16 buổi x 90 phút; sĩ số 4–6 học viên và tối thiểu 4 học viên để mở lớp.",
+      "price": "3.890.000 VNĐ",
+      "language": "Tiếng Hàn",
+      "financials": {
+        "priceVndTotal": 3890000,
+        "priceNote": "Theo Bảng học phí SDE 2026; lịch khai giảng và ưu đãi xác nhận theo từng chiến dịch.",
+        "tuition2026": {
+          "code": "Giao tiếp TC2",
+          "track": "speaking",
+          "sessions": 16,
+          "minutesPerSession": 90,
+          "totalHours": 24,
+          "instructors": "100% giáo viên Hàn Quốc",
+          "classSize": "4–6",
+          "minimumStudents": 4,
+          "materials": "Tài liệu lớp"
+        }
+      },
+      "requirements": {
+        "entryLevel": "Trung cấp 2 hoặc tương đương",
+        "topikRequired": null,
+        "status": "Kiểm tra/xếp lớp theo trình độ trước khi đăng ký"
+      },
+      "lastUpdated": "2026-10-13"
     }
   ]
 }

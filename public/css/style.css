@@ -753,3 +753,10 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .lead-popup__choices button{border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink-2);padding:10px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
 .lead-popup__choices button:hover{border-color:var(--persimmon);color:var(--persimmon)}
 @media(max-width:560px){.lead-popup__choices{grid-template-columns:1fr}}
+
+
+/* Pricing sheet: keep all source columns readable on desktop and scrollable on narrow screens. */
+.course-tuition-table{min-width:1180px}
+.course-tuition-table caption{text-align:left;padding:12px 14px;color:var(--ink-2);font-weight:700}
+.course-tuition-table td:first-child{min-width:190px}
+.course-tuition-table td:nth-child(8){min-width:170px}

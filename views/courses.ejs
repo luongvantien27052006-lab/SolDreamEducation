@@ -4,28 +4,74 @@
     <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <span>Khóa học</span></nav>
     <header class="knowledge-hero">
       <span class="eyebrow">Đào tạo ngoại ngữ</span>
-      <h1>Khóa học tại SOL DREAM EDUCATION</h1>
-      <p>SOL DREAM EDUCATION đào tạo tiếng Hàn từ nền tảng, giao tiếp, phát âm đến lộ trình cấp tốc chuẩn bị du học; đồng thời có lớp tiếng Anh giao tiếp cho học viên cần thêm ngoại ngữ thứ hai.</p>
-      <div class="source-meta"><strong>Đơn vị đào tạo:</strong> SOL DREAM EDUCATION · <strong>Cập nhật:</strong> 27/08/2026</div>
+      <h1>Khóa học và học phí tiếng Hàn 2026</h1>
+      <p>SOL DREAM EDUCATION đào tạo từ nền tảng, trung cấp, TOPIK đến giao tiếp và phát âm. Mỗi mức học phí bên dưới liên kết tới trang chi tiết của đúng lớp trong danh mục khóa học.</p>
+      <div class="source-meta"><strong>Đơn vị đào tạo:</strong> SOL DREAM EDUCATION · <strong>Bảng học phí:</strong> SDE 2026<% if (updatedDateLabel) { %> · <strong>Cập nhật website:</strong> <%= updatedDateLabel %><% } %></div>
     </header>
 
     <section class="direct-answer" aria-labelledby="course-answer-title">
-      <p class="direct-answer__label" id="course-answer-title">Trả lời nhanh</p>
-      <p><strong>Nên chọn khóa học nào?</strong> Người mới bắt đầu có thể chọn Tiếng Hàn sơ cấp 1; người cần luyện phản xạ chọn lớp giao tiếp; người chuẩn bị du học trong thời gian ngắn có thể tìm hiểu lớp cấp tốc. SOL DREAM EDUCATION sẽ kiểm tra mục tiêu và trình độ trước khi tư vấn lớp phù hợp.</p>
+      <p class="direct-answer__label" id="course-answer-title">Bảng học phí theo lớp</p>
+      <p><strong>Chọn lớp theo trình độ và mục tiêu.</strong> Người mới bắt đầu có thể tìm hiểu SC1A hoặc SC1B; các lớp từ SC2A trở đi áp dụng lộ trình xen kẽ giáo viên Việt – Hàn. Lịch khai giảng và xếp lớp được xác nhận trước khi đăng ký.</p>
     </section>
 
-    <div class="knowledge-grid course-knowledge-grid">
-      <% courses.forEach(function(course){ %>
-      <article class="knowledge-card" id="<%= course.id %>">
-        <div class="knowledge-card__top"><span><%= course.language %></span><span>Khóa học</span></div>
-        <h2><a href="<%= course.url %>"><%= course.name %></a></h2>
-        <p class="section-lead"><%= course.bluf %></p>
-        <p class="knowledge-card__fact"><strong>Phù hợp với:</strong> <%= course.audience %></p>
-        <p class="knowledge-card__fact"><strong>Học phí:</strong> <%= course.price %></p>
-        <a class="knowledge-card__link" href="<%= course.url %>">Xem nội dung và học phí →</a>
-      </article>
-      <% }); %>
-    </div>
+    <% tuitionGroups.forEach(function(group) { %>
+    <section class="knowledge-section course-tuition-group" aria-labelledby="tuition-<%= group.courses[0].financials.tuition2026.track %>">
+      <h2 id="tuition-<%= group.courses[0].financials.tuition2026.track %>"><%= group.title %></h2>
+      <div class="knowledge-table-wrap">
+        <table class="knowledge-table course-tuition-table">
+          <caption>Bảng học phí tiếng Hàn SDE 2026 — học phí theo lớp</caption>
+          <thead><tr>
+            <th scope="col">Mã lớp / khóa học</th><th scope="col">Buổi</th><th scope="col">Thời lượng</th><th scope="col">Tổng giờ</th>
+            <th scope="col">Cơ cấu giáo viên</th><th scope="col">Sĩ số</th><th scope="col">Tối thiểu mở lớp</th><th scope="col">Học phí</th><th scope="col">Tài liệu</th>
+          </tr></thead>
+          <tbody>
+            <% group.courses.forEach(function(course) { const spec = course.financials.tuition2026; %>
+            <tr>
+              <td><strong><%= spec.code %></strong><br><a href="<%= course.url %>"><%= course.name %></a></td>
+              <td><%= spec.sessions %> buổi</td>
+              <td><%= spec.minutesPerSession %> phút/buổi</td>
+              <td><%= spec.totalHours %> giờ</td>
+              <td><%= spec.instructors %></td>
+              <td><%= spec.classSize %> học viên</td>
+              <td><%= spec.minimumStudents %> học viên</td>
+              <td><strong><%= course.price %></strong><br><a href="<%= course.url %>">Chi tiết lớp →</a></td>
+              <td><%= spec.materials %></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <% }); %>
+
+    <section class="knowledge-section">
+      <h2>Lộ trình và cách tổ chức lớp</h2>
+      <ul>
+        <li><strong>SC1A–SC1B:</strong> giáo viên Việt hướng dẫn từ nền tảng, tập trung Hangul, phát âm, từ vựng, ngữ pháp và nghe – nói cơ bản.</li>
+        <li><strong>Từ SC2A đến TC4B:</strong> trung bình 2 buổi với giáo viên Việt xen kẽ 1 buổi với giáo viên Hàn; số buổi thực tế phân bổ theo tổng thời lượng của từng cấp.</li>
+        <li><strong>TOPIK:</strong> TOPIK I tập trung nền tảng Nghe – Đọc và chiến thuật làm bài; TOPIK cấp 3 và 4 luyện mục tiêu điểm số, đề, Nghe – Đọc – Viết và chữa lỗi.</li>
+        <li><strong>Giao tiếp:</strong> ba cấp Sơ cấp, Trung cấp 1 và Trung cấp 2 học trực tiếp với giáo viên Hàn Quốc; sĩ số nhỏ để tăng thời gian nói và phản xạ.</li>
+        <li><strong>Xếp lớp:</strong> kiểm tra trình độ với lớp từ SC1B trở lên, lớp TOPIK và giao tiếp.</li>
+      </ul>
+    </section>
+
+    <% if (otherCourses.length) { %>
+    <section class="knowledge-section">
+      <h2>Khóa học khác</h2>
+      <p class="section-lead">Các khóa dưới đây vẫn có trang thông tin riêng. Lớp tiếng Hàn cấp tốc chưa có mức phí trong bảng SDE 2026; học phí tiếng Anh cần xác nhận trực tiếp.</p>
+      <div class="knowledge-grid course-knowledge-grid">
+        <% otherCourses.forEach(function(course) { %>
+        <article class="knowledge-card" id="<%= course.id %>">
+          <div class="knowledge-card__top"><span><%= course.language %></span><span>Khóa học</span></div>
+          <h3><a href="<%= course.url %>"><%= course.name %></a></h3>
+          <p class="section-lead"><%= course.blufSummary || course.description %></p>
+          <p class="knowledge-card__fact"><strong>Học phí:</strong> <%= course.price %></p>
+          <a class="knowledge-card__link" href="<%= course.url %>">Xem nội dung khóa học →</a>
+        </article>
+        <% }); %>
+      </div>
+    </section>
+    <% } %>
 
     <aside class="source-note"><strong>Lưu ý:</strong> <%= courseNotice %></aside>
   </div>

@@ -561,15 +561,28 @@ if (db.prepare('SELECT COUNT(*) c FROM testimonials').get().c === 0) {
   })();
 }
 
-// Course catalogue starts from the verified JSON dataset and is editable in Admin afterwards.
-if (db.prepare('SELECT COUNT(*) c FROM courses').get().c === 0) {
-  const courseData = require('../data/courses.json');
-  const insertCourse = db.prepare(`INSERT INTO courses (id,slug,name,bluf_summary,audience,description,price,language,financials_json,requirements_json,sort_order,published,last_updated)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`);
-  db.transaction((rows) => rows.forEach((course, index) => insertCourse.run(
+// Apply the 2026 Korean tuition catalogue once to both fresh and persistent SQLite databases.
+const courseData = require('../data/courses.json');
+const courseCatalogVersion = 'sde-korean-tuition-2026-v1';
+if (!db.prepare('SELECT 1 FROM system_meta WHERE key=? AND value=?').get('course_catalog_version', courseCatalogVersion)) {
+  const isEmptyCatalog = db.prepare('SELECT COUNT(*) c FROM courses').get().c === 0;
+  const coursesToSync = isEmptyCatalog
+    ? courseData.courses
+    : courseData.courses.filter((course) => course.financials?.tuition2026);
+  const upsertCourse = db.prepare(`INSERT INTO courses (id,slug,name,bluf_summary,audience,description,price,language,financials_json,requirements_json,sort_order,published,last_updated)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+    ON CONFLICT(id) DO UPDATE SET
+      slug=excluded.slug,name=excluded.name,bluf_summary=excluded.bluf_summary,audience=excluded.audience,
+      description=excluded.description,price=excluded.price,language=excluded.language,
+      financials_json=excluded.financials_json,requirements_json=excluded.requirements_json,
+      sort_order=excluded.sort_order,last_updated=excluded.last_updated,updated_at=datetime('now','localtime')`);
+  db.transaction((rows) => rows.forEach((course) => upsertCourse.run(
     course.id, course.slug || course.id, course.name, course.blufSummary || '', course.audience || '', course.description || '',
-    course.price || '', course.language || 'Tiếng Hàn', JSON.stringify(course.financials || {}), JSON.stringify(course.requirements || {}), index, 1, course.lastUpdated || courseData.updated_at || ''
-  )))(courseData.courses);
+    course.price || '', course.language || 'Tiếng Hàn', JSON.stringify(course.financials || {}), JSON.stringify(course.requirements || {}),
+    courseData.courses.indexOf(course), 1, course.lastUpdated || courseData.updated_at || ''
+  )))(coursesToSync);
+  db.prepare(`INSERT INTO system_meta (key,value,updated_at) VALUES ('course_catalog_version',?,datetime('now','localtime'))
+    ON CONFLICT(key) DO UPDATE SET value=excluded.value,updated_at=excluded.updated_at`).run(courseCatalogVersion);
 }
 for (const [column, definition] of Object.entries({
   author_url: "TEXT NOT NULL DEFAULT ''",

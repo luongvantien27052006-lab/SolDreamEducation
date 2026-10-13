@@ -493,7 +493,13 @@ router.post('/khoa-hoc/:id/sua', requireAdmin, (req, res, next) => {
   const row = db.prepare('SELECT * FROM courses WHERE id=?').get(req.params.id); if (!row) return next();
   const b = req.body; if (!String(b.name || '').trim()) return res.redirect(`/admin/khoa-hoc/${row.id}/sua`);
   const slug = uniqueCourseSlug(slugify(b.slug || b.name), row.id);
-  const financials = { priceVndTotal: b.price_vnd_total === '' ? null : (Number(b.price_vnd_total) || null), priceNote: String(b.price_note || '').trim() };
+  let existingFinancials = {};
+  try { existingFinancials = JSON.parse(row.financials_json || '{}'); } catch (_) {}
+  const financials = {
+    ...existingFinancials,
+    priceVndTotal: b.price_vnd_total === '' ? null : (Number(b.price_vnd_total) || null),
+    priceNote: String(b.price_note || '').trim(),
+  };
   const { language, requirements } = courseRequirementInput(b);
   db.prepare(`UPDATE courses SET slug=?,name=?,bluf_summary=?,audience=?,description=?,price=?,language=?,financials_json=?,requirements_json=?,sort_order=?,published=?,last_updated=?,updated_at=datetime('now','localtime') WHERE id=?`)
     .run(slug, b.name.trim(), String(b.bluf_summary || '').trim(), String(b.audience || '').trim(), String(b.description || '').trim(), String(b.price || '').trim(), language, JSON.stringify(financials), JSON.stringify(requirements), Number(b.sort_order) || 0, isEnabled(b.published) ? 1 : 0, String(b.last_updated || '').slice(0, 10), row.id);

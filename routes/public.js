@@ -106,10 +106,24 @@ router.get('/anh-truong/:id.svg', (req, res, next) => {
 
 // Home
 router.get('/', (req, res) => {
+  // The homepage is an editorial selection, not the latest raw scraper output.
+  // Keep the recruitment notice first when it is published, then show verified
+  // Vietnamese stories that fit the journey presented on the page.
+  const homepagePostSlugs = [
+    PINNED_NEWS_POST_SLUG,
+    'toi-da-tim-thay-chinh-minh-giua-xu-lanh-han-quoc',
+    'chuong-trinh-hoc-bong-chinh-phu-gks-tai-han-quoc',
+    'thong-tin-ve-buoi-dinh-huong-sinh-vien-quoc-te-hoc-ky-1-nam-2018-tai-dai-hoc-dongyang',
+  ];
   const posts = db.prepare(`SELECT * FROM posts WHERE published = 1
-    ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC LIMIT 3`)
-    .all(PINNED_NEWS_POST_SLUG).map(decorate);
-  const programs = db.prepare('SELECT * FROM programs WHERE published = 1 ORDER BY sort_order ASC, id ASC LIMIT 6').all().map(decorate);
+    AND slug IN (${homepagePostSlugs.map(() => '?').join(',')})
+    ORDER BY CASE slug ${homepagePostSlugs.map((_, index) => `WHEN ? THEN ${index}`).join(' ')} ELSE 99 END`)
+    .all(...homepagePostSlugs, ...homepagePostSlugs).map(decorate);
+  const homepageSchoolSlugs = ['dai-hoc-quoc-gia-seoul', 'dai-hoc-yonsei', 'dai-hoc-korea', 'dai-hoc-woosong'];
+  const programs = db.prepare(`SELECT * FROM programs WHERE published = 1
+    AND slug IN (${homepageSchoolSlugs.map(() => '?').join(',')})
+    ORDER BY CASE slug ${homepageSchoolSlugs.map((_, index) => `WHEN ? THEN ${index}`).join(' ')} ELSE 99 END`)
+    .all(...homepageSchoolSlugs, ...homepageSchoolSlugs).map(decorate);
   const testimonials = db.prepare('SELECT * FROM testimonials WHERE published = 1 ORDER BY sort_order ASC, id ASC LIMIT 8').all();
   const courses = getCourses();
   const homepageStats = getHomepageStats();
@@ -132,7 +146,7 @@ router.get('/', (req, res) => {
       })),
     },
   });
-  res.render('home', { posts, programs, testimonials, homepageStats, homepageStatsSource, homepageAboutSections, jsonLd, showChatHint: true });
+  res.render('home', { posts, programs, testimonials, homepageStats, homepageStatsSource, homepageAboutSections, jsonLd, showChatHint: false, homeExperience: true });
 });
 
 router.get('/tro-ly-du-hoc', (req, res) => {
@@ -218,6 +232,20 @@ router.get('/cuoc-song-han-quoc', (req, res) => {
 // Course hub: exposes course information as crawlable text instead of home-page cards only.
 router.get('/khoa-hoc', (req, res) => {
   const courses = getCourses();
+  const courseTracks = [
+    { key: 'foundation', title: 'Nền tảng và trung cấp' },
+    { key: 'topik', title: 'Luyện thi TOPIK' },
+    { key: 'speaking', title: 'Giao tiếp và phát âm' },
+  ];
+  const tuitionOrder = ['SC1A', 'SC1B', 'SC2A', 'SC2B', 'TC3A', 'TC3B', 'TC4A', 'TC4B', 'TOPIK I', 'TOPIK cấp 3', 'TOPIK cấp 4', 'Giao tiếp Sơ cấp', 'Giao tiếp TC1', 'Giao tiếp TC2', 'Luyện phát âm'];
+  const tuitionGroups = courseTracks.map((track) => ({
+    title: track.title,
+    courses: courses.filter((course) => course.financials?.tuition2026?.track === track.key)
+      .sort((a, b) => tuitionOrder.indexOf(a.financials.tuition2026.code) - tuitionOrder.indexOf(b.financials.tuition2026.code)),
+  })).filter((track) => track.courses.length);
+  const otherCourses = courses.filter((course) => !course.financials?.tuition2026);
+  const updatedDate = getCourseUpdatedDate();
+  const updatedDateLabel = updatedDate ? updatedDate.split('-').reverse().join('/') : '';
   const url = abs('/khoa-hoc');
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org',
@@ -245,9 +273,12 @@ router.get('/khoa-hoc', (req, res) => {
   });
   res.render('courses', {
     courses,
+    tuitionGroups,
+    otherCourses,
+    updatedDateLabel,
     courseNotice: getCourseNotice(),
-    title: 'Khóa học tiếng Hàn tại TP.HCM | SOL DREAM EDUCATION',
-    description: 'Các khóa tiếng Hàn sơ cấp, giao tiếp, phát âm và cấp tốc tại SOL DREAM EDUCATION, Tân Phú, TP.HCM.',
+    title: 'Học phí tiếng Hàn 2026 tại TP.HCM | SOL DREAM EDUCATION',
+    description: 'Tra cứu bảng học phí tiếng Hàn SDE 2026 theo lớp: sơ cấp, trung cấp, TOPIK, giao tiếp và phát âm, gồm số buổi, thời lượng, sĩ số và cơ cấu giáo viên.',
     canonical: url,
     jsonLd,
   });
