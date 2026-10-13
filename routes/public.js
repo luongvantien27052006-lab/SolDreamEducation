@@ -106,24 +106,10 @@ router.get('/anh-truong/:id.svg', (req, res, next) => {
 
 // Home
 router.get('/', (req, res) => {
-  // The homepage is an editorial selection, not the latest raw scraper output.
-  // Keep the recruitment notice first when it is published, then show verified
-  // Vietnamese stories that fit the journey presented on the page.
-  const homepagePostSlugs = [
-    PINNED_NEWS_POST_SLUG,
-    'toi-da-tim-thay-chinh-minh-giua-xu-lanh-han-quoc',
-    'chuong-trinh-hoc-bong-chinh-phu-gks-tai-han-quoc',
-    'thong-tin-ve-buoi-dinh-huong-sinh-vien-quoc-te-hoc-ky-1-nam-2018-tai-dai-hoc-dongyang',
-  ];
   const posts = db.prepare(`SELECT * FROM posts WHERE published = 1
-    AND slug IN (${homepagePostSlugs.map(() => '?').join(',')})
-    ORDER BY CASE slug ${homepagePostSlugs.map((_, index) => `WHEN ? THEN ${index}`).join(' ')} ELSE 99 END`)
-    .all(...homepagePostSlugs, ...homepagePostSlugs).map(decorate);
-  const homepageSchoolSlugs = ['dai-hoc-quoc-gia-seoul', 'dai-hoc-yonsei', 'dai-hoc-korea', 'dai-hoc-woosong'];
-  const programs = db.prepare(`SELECT * FROM programs WHERE published = 1
-    AND slug IN (${homepageSchoolSlugs.map(() => '?').join(',')})
-    ORDER BY CASE slug ${homepageSchoolSlugs.map((_, index) => `WHEN ? THEN ${index}`).join(' ')} ELSE 99 END`)
-    .all(...homepageSchoolSlugs, ...homepageSchoolSlugs).map(decorate);
+    ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC LIMIT 3`)
+    .all(PINNED_NEWS_POST_SLUG).map(decorate);
+  const programs = db.prepare('SELECT * FROM programs WHERE published = 1 ORDER BY sort_order ASC, id ASC LIMIT 6').all().map(decorate);
   const testimonials = db.prepare('SELECT * FROM testimonials WHERE published = 1 ORDER BY sort_order ASC, id ASC LIMIT 8').all();
   const courses = getCourses();
   const homepageStats = getHomepageStats();
@@ -146,7 +132,7 @@ router.get('/', (req, res) => {
       })),
     },
   });
-  res.render('home', { posts, programs, testimonials, homepageStats, homepageStatsSource, homepageAboutSections, jsonLd, showChatHint: false, homeExperience: true });
+  res.render('home', { posts, programs, testimonials, homepageStats, homepageStatsSource, homepageAboutSections, jsonLd, showChatHint: true });
 });
 
 router.get('/tro-ly-du-hoc', (req, res) => {

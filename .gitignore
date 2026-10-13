@@ -9,3 +9,4 @@ public/uploads/*
 !public/uploads/.gitkeep
 npm-debug.log*
 .DS_Store
+.local-restore-*/
