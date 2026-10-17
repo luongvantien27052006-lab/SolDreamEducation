@@ -32,7 +32,7 @@
 
       <section class="knowledge-section" id="chi-phi-dinh-luong">
         <h2>Chi phí du học <%= university.name %> 1 năm cần bao nhiêu tiền?</h2>
-        <p class="section-lead">Bảng dưới đây chuẩn hóa học phí hệ tiếng, ký túc xá và yêu cầu sổ đóng băng từ dữ liệu hiện có của <%= university.name %>. Giá trị VND là ước tính theo tỷ giá bán tham khảo 19,73 VND/KRW của Vietcombank ngày 27/08/2026, không phải báo giá thanh toán.</p>
+        <p class="section-lead">Bảng dưới đây tách học phí hệ tiếng, ký túc xá và yêu cầu sổ đóng băng từ nguồn đang có cho <%= university.name %>. <% if (university.financials.conversion && university.financials.conversion.rateVndPerKrw) { %>Khoản VND là ước tính theo tỷ giá tham khảo ghi tại nguồn (<%= university.financials.conversion.rateVndPerKrw %> VND/KRW, ngày <%= university.financials.conversion.asOf %>), không phải báo giá thanh toán.<% } else { %>Chưa quy đổi sang VND vì tỷ giá thanh toán thay đổi; kiểm tra số KRW trực tiếp với trường trước khi đóng học phí.<% } %></p>
         <div class="knowledge-table-wrap"><table class="geo-data-table">
           <thead><tr><th scope="col">Khoản phí</th><th scope="col">KRW/USD</th><th scope="col">Quy đổi VND</th><th scope="col">Điều kiện và phạm vi</th></tr></thead>
           <tbody>
@@ -100,6 +100,7 @@
         <h2 id="source-title">Nguồn và phạm vi thông tin</h2>
         <p class="section-lead">Thông tin được SOL DREAM EDUCATION tổng hợp để hỗ trợ học viên chọn trường và chuẩn bị hồ sơ du học Hàn Quốc. Nội dung không thay thế thông báo tuyển sinh chính thức; học phí, học bổng, ngành mở tuyển và kỳ nhập học sẽ được chuyên viên xác nhận lại theo thời điểm.</p>
         <% if (university.officialWebsite) { %><p><strong>Nguồn đối chiếu:</strong> <a href="<%= university.officialWebsite %>" target="_blank" rel="noopener noreferrer">Website chính thức của <%= university.english_name %></a>.</p><% } %>
+        <% if (university.sourceUrls && university.sourceUrls.length) { %><p><strong>Trang và hướng dẫn đã đối chiếu:</strong></p><ul><% university.sourceUrls.forEach(function(source){ %><li><a href="<%= source %>" target="_blank" rel="noopener noreferrer"><%= source %></a></li><% }); %></ul><% } %>
         <p><strong>Ngày cập nhật dữ liệu:</strong> <%= university.updatedDateDisplay %>. <%= university.sourceNotice %></p>
       </section>
     </div>

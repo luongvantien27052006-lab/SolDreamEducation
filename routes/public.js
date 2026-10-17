@@ -18,6 +18,7 @@ const { generateLlmsTxt } = require('../lib/llms');
 const { getHomepageStats, getHomepageStatsSource } = require('../lib/homepageStats');
 const { getAboutSections } = require('../lib/aboutContent');
 const koreaLife = require('../data/korea-life.json');
+const partnerSchools = require('../data/partner-schools.json').schools;
 
 function jsonLdScript(payload) {
   return `<script type="application/ld+json">${JSON.stringify(payload).replace(/</g, '\\u003c')}</script>`;
@@ -472,11 +473,12 @@ router.get('/truong-dai-hoc', (req, res) => {
       {
         '@type': 'Dataset', '@id': `${url}#dataset`, url,
         name: 'Bộ dữ liệu trường đại học Hàn Quốc của SOL DREAM EDUCATION',
-        description: `Bộ dữ liệu gồm ${universities.length + schoolPrograms.length} hồ sơ về tổng quan, ngành học, học phí, học bổng và ký túc xá.`,
+        description: `Bộ dữ liệu gồm ${partnerSchools.length} trường trong danh mục hợp tác 2026-2027 cùng ${universities.length + schoolPrograms.length} hồ sơ thông tin trường.`,
         creator: { '@id': `${SITE_URL}/#organization` },
-        dateModified: '2026-08-26', inLanguage: 'vi-VN',
+        dateModified: '2026-10-17', inLanguage: 'vi-VN',
         variableMeasured: ['Tên trường', 'Địa chỉ', 'Ngành học', 'Học phí', 'Học bổng', 'Ký túc xá'],
         hasPart: [
+          ...partnerSchools.map((school) => ({ '@type': 'EducationalOrganization', name: school.englishName, sameAs: school.website })),
           ...schoolPrograms.map((program) => ({ '@type': 'Dataset', name: program.title, url: abs(programPublicPath(program)) })),
           ...universities.map((university) => ({ '@type': 'Dataset', name: university.name, url: abs(university.url) })),
         ],
@@ -484,7 +486,7 @@ router.get('/truong-dai-hoc', (req, res) => {
     ],
   });
   res.render('universities-list', {
-    universities, schoolPrograms,
+    universities, schoolPrograms, partnerSchools,
     title: 'Thông tin trường đại học Hàn Quốc | SOL DREAM EDUCATION',
     description: 'Tra cứu thông tin trường đại học Hàn Quốc: ngành học, học phí, học bổng và ký túc xá do SOL DREAM EDUCATION tổng hợp.',
     canonical: url,

@@ -22,17 +22,28 @@
         "Daejeon",
         "Daedeok-gu"
       ],
-      "blufSummary": "Hannam University nằm tại Daejeon, có học phí hệ tiếng khoảng 5.200.000 KRW mỗi năm và ký túc xá 1.000.000–1.400.000 KRW mỗi 6 tháng. Trường có chứng nhận quản lý sinh viên; phân hạng visa, GPA đầu vào và sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "blufSummary": "Hannam University ở Daejeon có trong danh mục hợp tác SolDream 2026-2027. Hồ sơ gửi kèm chỉ ghi học phí tiếng 1.300.000 KRW/kỳ theo chính sách 2021; chưa có mức hiện hành được xác nhận, nên chi phí 2026-2027 cần kiểm tra lại với trường.",
       "topCategory": null,
       "financials": {
-        "tuitionKrwYear": 5200000,
-        "tuitionVndYear": 102600000,
-        "dormitoryHalfYear": { "minKrw": 1000000, "maxKrw": 1400000 },
-        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
-        "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
-        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+        "tuitionKrwYear": null,
+        "tuitionVndYear": null,
+        "dormitoryHalfYear": {
+          "minKrw": 1000000,
+          "maxKrw": 1400000
+        },
+        "kStudyDeposit": {
+          "amountUsd": null,
+          "status": "Chưa có dữ liệu xác minh"
+        },
+        "tuitionBasis": "Hồ sơ SolDream ghi mức 1.300.000 KRW/kỳ theo chính sách năm 2021; chưa có mức 2026-2027 được trường xác nhận.",
+        "conversion": null
       },
-      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "requirements": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequired": null,
+        "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn"
+      },
       "caseStudies": [],
       "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
       "sections": [
@@ -49,7 +60,7 @@
         {
           "id": "tuition",
           "title": "3. Học phí",
-          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Mức học phí: 1.300.000 won / kỳ (~5.200.000 won / năm).\n#### b) Học phí Chương trình Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Nhân văn, Kinh tế, Xã hội | 3.200.000 – 3.500.000 |\n| Kỹ thuật, Khoa học Tự nhiên | 4.000.000 – 4.400.000 |\n| Nghệ thuật & Thiết kế | 4.200.000 – 4.500.000 |\n#### c) Học phí Chương trình Sau Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Khoa Nhân văn & Xã hội | 4.300.000 – 4.800.000 |\n| Khoa Kỹ thuật & Tự nhiên | 5.300.000 – 5.900.000 |"
+          "content": "#### a) Học tiếng Hàn\n- Mức học phí tham khảo trong Hồ sơ giới thiệu SolDream 2026-2027: 1.300.000 KRW cho một kỳ 10 tuần.\n- Lưu ý ngay trong bảng phí: số liệu Hannam được ghi theo “Chính sách 2021”. Đây không phải báo giá đã xác nhận cho kỳ 2026-2027; cần lấy bảng phí mới từ trường trước khi nộp hồ sơ.\n#### b) Học phí chương trình chuyên ngành\n- Hồ sơ 2026-2027 gửi kèm chưa có bảng học phí chuyên ngành của Hannam. Mức theo ngành và kỳ nhập học cần xác nhận với trường."
         },
         {
           "id": "scholarships",
@@ -61,7 +72,13 @@
           "title": "5. Ký túc xá",
           "content": "- Cơ sở vật chất: Ký túc xá rộng rãi, an ninh tốt, tiện nghi đầy đủ (bàn, tủ, điều hòa, Wi-Fi, phòng tự học).\n- Chi phí ký túc xá: ~1.000.000 – 1.400.000 won / 6 tháng."
         }
-      ]
+      ],
+      "sourceUrls": [
+        "https://www.hannam.ac.kr/",
+        "https://www.studyinkorea.go.kr/ko/search/universityInfo.do?tab=univ-basic-info&univCd=100473"
+      ],
+      "lastUpdated": "2026-10-17",
+      "sourceNotice": "Mục phí tiếng Hàn trong hồ sơ SolDream 2026-2027 được ghi rõ là chính sách 2021; chưa dùng làm giá hiện hành. Website và thông tin cơ bản được đối chiếu với nguồn chính thức."
     },
     {
       "id": "woosong",
@@ -80,17 +97,28 @@
         "Daejeon",
         "Dong-gu"
       ],
-      "blufSummary": "Woosong University nằm tại Daejeon, có học phí hệ tiếng khoảng 4.800.000 KRW mỗi năm và ký túc xá 1.200.000–1.600.000 KRW mỗi 6 tháng. Trường nổi bật với SolBridge và Endicott; phân hạng visa, GPA đầu vào, TOPIK và sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "blufSummary": "Woosong University ở Daejeon có trong danh mục hợp tác SolDream 2026-2027. Học phí tiếng Hàn chính thức là 1.300.000 KRW/kỳ 10 tuần; mức cử nhân năm 2026 theo ngành dao động từ 6.792 đến 12.592 USD/năm trong các ngành được công bố dưới đây.",
       "topCategory": null,
       "financials": {
-        "tuitionKrwYear": 4800000,
-        "tuitionVndYear": 94700000,
-        "dormitoryHalfYear": { "minKrw": 1200000, "maxKrw": 1600000 },
-        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
-        "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
-        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+        "tuitionKrwYear": 5200000,
+        "tuitionVndYear": null,
+        "dormitoryHalfYear": {
+          "minKrw": 1200000,
+          "maxKrw": 1600000
+        },
+        "kStudyDeposit": {
+          "amountUsd": null,
+          "status": "Chưa có dữ liệu xác minh"
+        },
+        "tuitionBasis": "Khóa tiếng Hàn: 1.300.000 KRW/10 tuần, 200 giờ; bốn kỳ/năm theo Woosong Korean Language Institute.",
+        "conversion": null
       },
-      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "requirements": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequired": null,
+        "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn"
+      },
       "caseStudies": [],
       "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
       "sections": [
@@ -107,7 +135,7 @@
         {
           "id": "tuition",
           "title": "3. Học phí",
-          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Mức học phí: 1.200.000 won / kỳ (~4.800.000 won / năm).\n#### b) Học phí Chương trình Đại học\n| Trường / Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Chương trình giảng dạy tiếng Hàn | 3.200.000 – 3.800.000 |\n| Trường Quốc tế Endicott (SIS) | ~4.500.000 |\n| Trường Kinh doanh SolBridge (100% Tiếng Anh) | ~5.000.000 – 5.500.000 |\n#### c) Học phí Chương trình Sau Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Chương trình Cao học chung | 4.500.000 – 5.200.000 |\n| SolBridge MBA | ~6.000.000 – 7.000.000 |"
+          "content": "#### a) Học tiếng Hàn\n- Mức học phí: 1.300.000 KRW/kỳ 10 tuần (200 giờ); 5.200.000 KRW/năm nếu học đủ bốn kỳ.\n- Phí xét tuyển: 60.000 KRW. Hướng dẫn tiếng Hàn của trường còn liệt kê ký túc xá và bữa ăn 700.000 KRW/70 ngày cùng phí 20.000 KRW; các khoản này có thể thay đổi theo kỳ và không bao gồm bảo hiểm, giáo trình, chi tiêu cá nhân.\n#### b) Học phí chương trình cử nhân năm học 2026\n| Ngành | Học phí USD/năm |\n| --- | ---: |\n| Quản trị Khách sạn Thông minh | 6.792 |\n| Trí tuệ nhân tạo và Dữ liệu lớn | 7.794 |\n| Quản trị Kinh doanh | 12.592 |\n- Mức Quản trị Kinh doanh gồm các kỳ thu, đông, xuân và hè theo công bố của Woosong. Trường ghi thêm phí nhập học một lần và các khoản sinh hoạt riêng; các mức được điều chỉnh theo chính sách trường."
         },
         {
           "id": "scholarships",
@@ -119,7 +147,13 @@
           "title": "5. Ký túc xá",
           "content": "- Cơ sở vật chất: Hệ thống ký túc xá SolGeo, Pine Hall hiện đại, tiện nghi tiêu chuẩn quốc tế.\n- Chi phí ký túc xá: ~1.200.000 – 1.600.000 won / 6 tháng (bao gồm tiền ăn tùy gói)."
         }
-      ]
+      ],
+      "sourceUrls": [
+        "https://english.wsu.ac.kr/page/index.jsp?code=eng0302",
+        "https://wkli.wsu.ac.kr/story/page/index.jsp?code=wkli020101a"
+      ],
+      "lastUpdated": "2026-10-17",
+      "sourceNotice": "Học phí tiếng Hàn và cử nhân được đối chiếu với bảng phí 2026 của Woosong University và Woosong Korean Language Institute. Học bổng, ký túc xá, các khoản phí khác và điều kiện tuyển sinh cần xác nhận theo kỳ."
     },
     {
       "id": "hanyang",
@@ -139,17 +173,28 @@
         "Ansan",
         "Gyeonggi-do"
       ],
-      "blufSummary": "Hanyang University có cơ sở tại Seoul và Ansan; học phí hệ tiếng Seoul khoảng 7.200.000 KRW mỗi năm, ký túc xá 1.250.000–2.500.000 KRW mỗi 6 tháng. Trường mạnh về kỹ thuật; phân hạng visa, GPA đầu vào và mức sổ đóng băng chưa được tài liệu nguồn xác minh.",
+      "blufSummary": "Hanyang University có hai cơ sở trong danh mục SolDream 2026-2027. Học phí tiếng Hàn ERICA là 1.500.000 KRW/kỳ 10 tuần, gồm bảo hiểm; học phí cử nhân trong hồ sơ năm 2026 được xác nhận cho cơ sở Seoul và thay đổi theo khối ngành.",
       "topCategory": null,
       "financials": {
-        "tuitionKrwYear": 7200000,
-        "tuitionVndYear": 142100000,
-        "dormitoryHalfYear": { "minKrw": 1250000, "maxKrw": 2500000 },
-        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
-        "tuitionBasis": "Chương trình tiếng Hàn tại Seoul Campus; ERICA khoảng 5.450.000 KRW/năm",
-        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+        "tuitionKrwYear": 6000000,
+        "tuitionVndYear": null,
+        "dormitoryHalfYear": {
+          "minKrw": 1250000,
+          "maxKrw": 2500000
+        },
+        "kStudyDeposit": {
+          "amountUsd": null,
+          "status": "Chưa có dữ liệu xác minh"
+        },
+        "tuitionBasis": "Chương trình tiếng Hàn ERICA: 1.500.000 KRW/kỳ 10 tuần, đã gồm bảo hiểm; bốn kỳ tương đương khoảng 6.000.000 KRW nếu đăng ký đủ năm.",
+        "conversion": null
       },
-      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Học bổng có tiêu chí TOPIK riêng; chưa có điều kiện nhập học tối thiểu đã xác minh" },
+      "requirements": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequired": null,
+        "status": "Học bổng có tiêu chí TOPIK riêng; chưa có điều kiện nhập học tối thiểu đã xác minh"
+      },
       "caseStudies": [],
       "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
       "sections": [
@@ -166,7 +211,7 @@
         {
           "id": "tuition",
           "title": "3. Học phí",
-          "content": "#### a) Học phí Chương trình Tiếng Hàn\n- Seoul Campus: ~1.800.000 won / kỳ (~7.200.000 won / năm).\n- ERICA Campus: ~1.360.000 – 1.400.000 won / kỳ (~5.450.000 won / năm).\n- Phí xét tuyển / Phí nhập học: 100.000 – 150.000 won (đóng 1 lần\n#### b) Học phí Chương trình Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Nhân văn, Kinh tế, Xã hội | 4.100.000 – 4.600.000 |\n| Khoa học Tự nhiên, Thể dục | 5.300.000 – 5.950.000 |\n| Kỹ thuật, Điện toán | 6.200.000 – 7.370.000 |\n| Nghệ thuật & Y dược | 6.500.000 – 9.700.000 |\n#### c) Học phí Chương trình Sau Đại học\n| Chuyên ngành | Học phí (WON / kỳ) |\n| --- | --- |\n| Khoa Nhân văn & Xã hội / Quốc tế học | 5.900.000 – 6.900.000 |\n| Khoa Kỹ thuật, Tự nhiên & Y sinh | 7.000.000 – 8.400.000 |"
+          "content": "#### a) Tiếng Hàn tại Hanyang ERICA\n- Mức học phí: 1.500.000 KRW/kỳ 10 tuần, đã gồm bảo hiểm; học viên mới đóng phí đăng ký 100.000 KRW một lần.\n- Nếu học đủ bốn kỳ, tiền học ước tính 6.000.000 KRW/năm, chưa gồm phí đăng ký một lần và các khoản cá nhân.\n#### b) Học phí cử nhân tại cơ sở Seoul\n| Nhóm ngành | Học phí KRW/kỳ |\n| --- | ---: |\n| Nhân văn và xã hội | 5.279.000 |\n| Khoa học tự nhiên và thể thao | 6.150.000 |\n| Kỹ thuật | 6.960.000 |\n| Nghệ thuật | 6.976.000 |\n| Âm nhạc | 7.820.000 |\n- Đây là mức trong hướng dẫn tuyển sinh sinh viên quốc tế kỳ 1 năm 2026 của cơ sở Seoul; học phí có thể thay đổi theo chính sách của trường. Học phí cử nhân ERICA cần đối chiếu theo bảng ngành và kỳ tuyển sinh riêng."
         },
         {
           "id": "scholarships",
@@ -178,7 +223,14 @@
           "title": "5. Ký túc xá",
           "content": "- Cơ sở vật chất: Hiện đại, sạch sẽ, an ninh 24/7. Phòng trang bị đầy đủ bàn học, tủ quần áo, điều hòa, Wi-Fi. Tiện ích chung gồm có phòng tự học, phòng gym, phòng máy tính, phòng giặt, nhà ăn.\n- Chi phí ký túc xá: ~1.250.000 – 2.500.000 won / 6 tháng (tùy thuộc vào dạng phòng đơn, phòng đôi hoặc phòng 3-4 người tại Seoul Campus hay ERICA Campus)."
         }
-      ]
+      ],
+      "sourceUrls": [
+        "https://oia.hanyang.ac.kr/files/attach/filebox/2026/01/22/e15bd45bbe74d2a1041a6db3a4678625.pdf",
+        "https://ericaiie.hanyang.ac.kr/eng_korean-language-course/eng_kor-course/eng_kor-schedule",
+        "https://www.hanyang.ac.kr/web/eng/erica-campus1"
+      ],
+      "lastUpdated": "2026-10-17",
+      "sourceNotice": "Mức cử nhân Seoul lấy từ hướng dẫn tuyển sinh sinh viên quốc tế kỳ 1 năm 2026 của Hanyang; khóa tiếng ERICA đối chiếu với lịch và học phí chính thức 2026. Không quy đổi sang VND vì tỷ giá thanh toán thay đổi."
     },
     {
       "id": "daeduk",
@@ -203,12 +255,28 @@
       "financials": {
         "tuitionKrwYear": 4900000,
         "tuitionVndYear": 96700000,
-        "dormitoryHalfYear": { "minKrw": 1350000, "maxKrw": 1350000 },
-        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "dormitoryHalfYear": {
+          "minKrw": 1350000,
+          "maxKrw": 1350000
+        },
+        "kStudyDeposit": {
+          "amountUsd": null,
+          "status": "Chưa có dữ liệu xác minh"
+        },
         "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
-        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+        "conversion": {
+          "rateVndPerKrw": 19.73,
+          "asOf": "2026-08-27",
+          "isEstimate": true,
+          "basis": "Tỷ giá bán KRW tham khảo của Vietcombank"
+        }
       },
-      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "requirements": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequired": null,
+        "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn"
+      },
       "caseStudies": [],
       "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
       "sections": [
@@ -262,12 +330,28 @@
       "financials": {
         "tuitionKrwYear": 4400000,
         "tuitionVndYear": 86800000,
-        "dormitoryHalfYear": { "minKrw": 900000, "maxKrw": 1200000 },
-        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "dormitoryHalfYear": {
+          "minKrw": 900000,
+          "maxKrw": 1200000
+        },
+        "kStudyDeposit": {
+          "amountUsd": null,
+          "status": "Chưa có dữ liệu xác minh"
+        },
         "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
-        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+        "conversion": {
+          "rateVndPerKrw": 19.73,
+          "asOf": "2026-08-27",
+          "isEstimate": true,
+          "basis": "Tỷ giá bán KRW tham khảo của Vietcombank"
+        }
       },
-      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "requirements": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequired": null,
+        "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn"
+      },
       "caseStudies": [],
       "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
       "sections": [
@@ -321,12 +405,28 @@
       "financials": {
         "tuitionKrwYear": 4000000,
         "tuitionVndYear": 78900000,
-        "dormitoryHalfYear": { "minKrw": 800000, "maxKrw": 1000000 },
-        "kStudyDeposit": { "amountUsd": null, "status": "Chưa có dữ liệu xác minh" },
+        "dormitoryHalfYear": {
+          "minKrw": 800000,
+          "maxKrw": 1000000
+        },
+        "kStudyDeposit": {
+          "amountUsd": null,
+          "status": "Chưa có dữ liệu xác minh"
+        },
         "tuitionBasis": "Chương trình tiếng Hàn, 4 kỳ/năm",
-        "conversion": { "rateVndPerKrw": 19.73, "asOf": "2026-08-27", "isEstimate": true, "basis": "Tỷ giá bán KRW tham khảo của Vietcombank" }
+        "conversion": {
+          "rateVndPerKrw": 19.73,
+          "asOf": "2026-08-27",
+          "isEstimate": true,
+          "basis": "Tỷ giá bán KRW tham khảo của Vietcombank"
+        }
       },
-      "requirements": { "minGpa": null, "maxGapYears": null, "topikRequired": null, "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn" },
+      "requirements": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequired": null,
+        "status": "Chưa có điều kiện đầu vào đã xác minh trong tài liệu nguồn"
+      },
       "caseStudies": [],
       "caseStudyStatus": "Chưa có case study thực tế đủ GPA, thời gian xét visa và kỳ nhập học để công bố.",
       "sections": [
@@ -356,6 +456,66 @@
           "content": "- Cơ sở vật chất: Ký túc xá khép kín sạch sẽ, gần trường, trang bị bàn học, tủ quần áo, internet.\n- Chi phí ký túc xá: ~800.000 – 1.000.000 won / 6 tháng."
         }
       ]
+    },
+    {
+      "id": "sogang",
+      "name": "Trường Đại học Sogang",
+      "english_name": "Sogang University",
+      "korean_name": "서강대학교",
+      "aliases": [
+        "Sogang",
+        "Đại học Sogang",
+        "Sogang University",
+        "서강대학교"
+      ],
+      "location_terms": [
+        "Seoul",
+        "Mapo-gu"
+      ],
+      "officialWebsite": "https://www.sogang.ac.kr/",
+      "blufSummary": "Sogang University ở Seoul có trong danh mục hợp tác SolDream 2026-2027. Trung tâm Ngôn ngữ Hàn Sogang công bố cho năm 2026 mức 1.860.000 KRW/kỳ 10 tuần cho lớp sáng KGP200 và 1.800.000 KRW/kỳ cho lớp chiều KAP200; phí đăng ký học viên mới là 100.000 KRW.",
+      "topCategory": null,
+      "financials": {
+        "tuitionKrwYear": null,
+        "tuitionVndYear": null,
+        "dormitoryHalfYear": null,
+        "kStudyDeposit": {
+          "amountUsd": null,
+          "status": "Chưa có dữ liệu xác minh"
+        },
+        "tuitionBasis": "Học phí khác nhau theo lớp; xem giá theo từng khóa 10 tuần trong mục Học phí.",
+        "conversion": null
+      },
+      "requirements": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequired": null,
+        "status": "Cần kiểm tra hướng dẫn tuyển sinh của trường theo chương trình và kỳ đăng ký."
+      },
+      "sourceUrls": [
+        "https://klec.sogang.ac.kr/fro_end_eng/img/brochure_EN_2026.pdf",
+        "https://klec.sogang.ac.kr/?lang=eng&url=%2F3000%2F3000.php"
+      ],
+      "sourceNotice": "Học phí tiếng Hàn lấy từ hướng dẫn năm 2026 của Korean Language Education Center, Sogang University. Chưa nhập học phí chuyên ngành, ký túc xá hoặc tiêu chí visa khi chưa có bảng phù hợp được xác minh.",
+      "lastUpdated": "2026-10-17",
+      "caseStudies": [],
+      "sections": [
+        {
+          "id": "overview",
+          "title": "1. Thông tin chung",
+          "content": "- Tên tiếng Hàn: 서강대학교\n- Tên tiếng Anh: Sogang University\n- Loại hình: Đại học tư thục\n- Địa điểm: 35 Baekbeom-ro, Mapo-gu, Seoul.\n- Website: https://www.sogang.ac.kr/\n- Đơn vị đào tạo tiếng Hàn: Korean Language Education Center (KLEC)."
+        },
+        {
+          "id": "programs",
+          "title": "2. Chương trình đào tạo",
+          "content": "#### a) Khóa tiếng Hàn KGP200 buổi sáng\n- Khóa 10 tuần, 200 giờ, học từ thứ Hai đến thứ Sáu; tập trung giao tiếp tiếng Hàn thông dụng.\n#### b) Khóa tiếng Hàn KAP200 buổi chiều\n- Khóa 10 tuần, 200 giờ, học từ thứ Hai đến thứ Sáu.\n- Trung tâm công bố bốn kỳ mỗi năm. Lịch nhận hồ sơ và lịch học thay đổi theo kỳ; cần xem thông báo hiện hành."
+        },
+        {
+          "id": "tuition",
+          "title": "3. Học phí",
+          "content": "#### Học phí khóa tiếng Hàn năm 2026\n- Mức học phí: 1.800.000–1.860.000 KRW/kỳ 10 tuần tùy chương trình KAP200/KGP200; phí đăng ký học viên mới 100.000 KRW.\n| Chương trình | Thời lượng | Học phí KRW/kỳ | Phí đăng ký học viên mới |\n| --- | --- | ---: | ---: |\n| KGP200 buổi sáng | 10 tuần, 200 giờ | 1.860.000 | 100.000 |\n| KAP200 buổi chiều | 10 tuần, 200 giờ | 1.800.000 | 100.000 |\n- Học phí chuyên ngành, ký túc xá và các khoản cá nhân không nằm trong bảng trên. Phí và thời hạn đăng ký cần xác nhận lại với KLEC trước khi chuyển tiền."
+        }
+      ]
     }
   ],
   "pendingUniversityTemplates": [
@@ -367,8 +527,22 @@
       "city": "Seoul",
       "topCategory": null,
       "blufSummary": "Seoul National University nằm tại Seoul và nổi bật về nghiên cứu đa ngành. Học phí D4, D2, tổng chi phí năm đầu, GPA, TOPIK, phân hạng visa và sổ đóng băng trong mẫu này chưa có nguồn tuyển sinh 2026 được SOL DREAM EDUCATION xác minh nên chưa được công bố.",
-      "financials": { "tuitionD4KrwYear": null, "tuitionD2KrwYear": null, "tuitionVndEstimate": null, "dormitoryHalfYearKrw": null, "dormitoryVndEstimate": null, "kStudyDepositUsd": null, "insuranceKrwMonth": null, "livingCostMonthlyEstimateVnd": null },
-      "admissionCriteria": { "minGpa": null, "maxGapYears": null, "topikRequirementD4": null, "topikRequirementD2": null },
+      "financials": {
+        "tuitionD4KrwYear": null,
+        "tuitionD2KrwYear": null,
+        "tuitionVndEstimate": null,
+        "dormitoryHalfYearKrw": null,
+        "dormitoryVndEstimate": null,
+        "kStudyDepositUsd": null,
+        "insuranceKrwMonth": null,
+        "livingCostMonthlyEstimateVnd": null
+      },
+      "admissionCriteria": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequirementD4": null,
+        "topikRequirementD2": null
+      },
       "caseStudies": [],
       "verificationStatus": "Chưa kích hoạt: cần nguồn chính thức và case study được phép công bố",
       "lastUpdated": "2026-08"
@@ -381,8 +555,22 @@
       "city": "Seoul",
       "topCategory": null,
       "blufSummary": "Chung-Ang University có cơ sở tại Seoul và được biết đến với truyền thông, nghệ thuật cùng nhiều ngành đào tạo khác. Học phí D4, D2, GPA, TOPIK, phân hạng visa, sổ đóng băng và chi phí sinh hoạt năm 2026 chưa có nguồn được xác minh nên mẫu chưa được xuất bản.",
-      "financials": { "tuitionD4KrwYear": null, "tuitionD2KrwYear": null, "tuitionVndEstimate": null, "dormitoryHalfYearKrw": null, "dormitoryVndEstimate": null, "kStudyDepositUsd": null, "insuranceKrwMonth": null, "livingCostMonthlyEstimateVnd": null },
-      "admissionCriteria": { "minGpa": null, "maxGapYears": null, "topikRequirementD4": null, "topikRequirementD2": null },
+      "financials": {
+        "tuitionD4KrwYear": null,
+        "tuitionD2KrwYear": null,
+        "tuitionVndEstimate": null,
+        "dormitoryHalfYearKrw": null,
+        "dormitoryVndEstimate": null,
+        "kStudyDepositUsd": null,
+        "insuranceKrwMonth": null,
+        "livingCostMonthlyEstimateVnd": null
+      },
+      "admissionCriteria": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequirementD4": null,
+        "topikRequirementD2": null
+      },
       "caseStudies": [],
       "verificationStatus": "Chưa kích hoạt: cần nguồn chính thức và case study được phép công bố",
       "lastUpdated": "2026-08"
@@ -395,8 +583,22 @@
       "city": "Gyeongsan",
       "topCategory": null,
       "blufSummary": "Daegu University nằm tại Gyeongsan và có hệ đào tạo đa ngành. Học phí D4, D2, ký túc xá, bảo hiểm, sinh hoạt phí, GPA, TOPIK, phân hạng visa và sổ đóng băng năm 2026 chưa được tài liệu nguồn xác minh; hồ sơ mẫu chưa được đưa vào danh mục công khai.",
-      "financials": { "tuitionD4KrwYear": null, "tuitionD2KrwYear": null, "tuitionVndEstimate": null, "dormitoryHalfYearKrw": null, "dormitoryVndEstimate": null, "kStudyDepositUsd": null, "insuranceKrwMonth": null, "livingCostMonthlyEstimateVnd": null },
-      "admissionCriteria": { "minGpa": null, "maxGapYears": null, "topikRequirementD4": null, "topikRequirementD2": null },
+      "financials": {
+        "tuitionD4KrwYear": null,
+        "tuitionD2KrwYear": null,
+        "tuitionVndEstimate": null,
+        "dormitoryHalfYearKrw": null,
+        "dormitoryVndEstimate": null,
+        "kStudyDepositUsd": null,
+        "insuranceKrwMonth": null,
+        "livingCostMonthlyEstimateVnd": null
+      },
+      "admissionCriteria": {
+        "minGpa": null,
+        "maxGapYears": null,
+        "topikRequirementD4": null,
+        "topikRequirementD2": null
+      },
       "caseStudies": [],
       "verificationStatus": "Chưa kích hoạt: cần nguồn chính thức và case study được phép công bố",
       "lastUpdated": "2026-08"

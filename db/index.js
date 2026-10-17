@@ -454,6 +454,39 @@ if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(aboutTabsMigrationK
   })();
 }
 
+// Add the current profile's training and legal-information section to /gioi-thieu.
+// It is inserted once and stays editable through Admin without later restarts overwriting edits.
+{
+  const migrationKey = 'profile_legal_and_services_20261017_v1';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    db.transaction(() => {
+      const existing = db.prepare("SELECT id FROM about_sections WHERE location='page' AND title='Năng lực đào tạo và pháp lý' LIMIT 1").get();
+      if (!existing) {
+        db.prepare(`INSERT INTO about_sections
+          (location,eyebrow,title,content,section_style,sort_order,active)
+          VALUES ('page',? ,? ,? ,'tab',4,1)`)
+          .run('Theo hồ sơ giới thiệu 2026–2027', 'Năng lực đào tạo và pháp lý', `<p>SOL DREAM EDUCATION đào tạo tiếng Hàn từ nền tảng đến trung cấp, giao tiếp, phát âm và luyện TOPIK; đồng thời tư vấn chọn trường, ngành, lộ trình học tập, chuẩn bị hồ sơ và phỏng vấn theo chương trình.</p>
+            <h3>Giấy tờ pháp lý được công bố trong hồ sơ</h3>
+            <ul>
+              <li><strong>Công ty TNHH Sol-Dream Education:</strong> mã số thuế 0315637970; đăng ký ngày 22/04/2019 theo hồ sơ doanh nghiệp của công ty.</li>
+              <li><strong>Tư vấn du học:</strong> giấy chứng nhận số 1865/GCN-SGDĐT, ngày cấp 09/03/2026; hồ sơ ghi cơ quan cấp là Sở Giáo dục và Đào tạo TP. Hồ Chí Minh, thời hạn 05 năm.</li>
+              <li><strong>Đào tạo ngoại ngữ:</strong> Trung tâm Ngoại ngữ Ngôi Nhà Ước Mơ, quyết định số 4149/QĐ-SGDĐT, ngày cấp 24/08/2026; hồ sơ ghi cơ quan cấp là Sở Giáo dục và Đào tạo TP. Hồ Chí Minh.</li>
+            </ul>
+            <h3>Các bước đồng hành</h3>
+            <ol>
+              <li>Tư vấn nguyện vọng, học lực, năng lực tiếng Hàn và ngân sách gia đình.</li>
+              <li>Đối chiếu trường, ngành, điều kiện tuyển sinh và lịch nhận hồ sơ của từng kỳ.</li>
+              <li>Học tiếng Hàn, hoàn thiện hồ sơ và luyện phỏng vấn theo yêu cầu của chương trình.</li>
+              <li>Rà soát các khoản phải chuẩn bị trước xuất cảnh và hỗ trợ kết nối sau khi học viên sang Hàn Quốc theo phạm vi dịch vụ đã thống nhất.</li>
+            </ol>
+            <p class="source-meta">Nguồn: Hồ sơ giới thiệu SOL DREAM EDUCATION 2026–2027 do công ty cung cấp. Thông tin pháp lý được công bố theo hồ sơ; học viên có thể đề nghị xem bản giấy tờ gốc khi làm việc trực tiếp.</p>`);
+      }
+      db.prepare('INSERT INTO system_meta (key,value,updated_at) VALUES (?,?,datetime(\'now\',\'localtime\'))')
+        .run(migrationKey, '1');
+    })();
+  }
+}
+
 // Existing databases may already have the three tabs above. Add the supplied
 // director portrait once without replacing any later edits made in Admin.
 const aboutDirectorPortraitKey = 'about_director_portrait_20260925';
@@ -971,6 +1004,155 @@ if (!db.prepare('SELECT 1 FROM faqs WHERE question=?').get(serviceFaqQuestion)) 
       })();
       console.log('[db] applied recruitment post publication date 2026-09-03');
     }
+  }
+}
+
+// Publish the 2026-2027 Korea study guides from the supplied profile and official school/government references.
+// Existing pages are left untouched if an administrator has already created the same slug.
+{
+  const migrationKey = 'korea_study_guides_20261017_v1';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    const guides = [
+      {
+        title: 'Chi phí du học Hàn Quốc 2026–2027: phí dịch vụ và khoản cần dự trù',
+        slug: 'chi-phi-du-hoc-han-quoc-2026-2027',
+        excerpt: 'Hồ sơ SOL DREAM 2026–2027 liệt kê năm gói dịch vụ tại Việt Nam, lịch đóng ba đợt và các khoản trường Hàn Quốc thu riêng. Bài viết tách rõ từng phần để gia đình lập ngân sách.',
+        cover: 'p2', sort_order: 1,
+        content: `<p>Hồ sơ tuyển sinh SOL DREAM EDUCATION 2026–2027 ghi các gói dưới đây bằng triệu đồng. Các khoản trong bảng là chi phí dịch vụ, đào tạo và học phí BKC tại Việt Nam theo đúng phạm vi từng chương trình; học phí trường Hàn Quốc, ký túc xá và sinh hoạt không nằm trong tổng này.</p>
+          <h2>Các gói dịch vụ tại Việt Nam</h2>
+          <div><table><thead><tr><th>Chương trình</th><th>Dịch vụ và quản lý</th><th>Tiếng Hàn</th><th>BKC</th><th>Trước VAT</th><th>VAT</th><th>Tổng</th></tr></thead><tbody>
+          <tr><td>D4-1 · Học tiếng Hàn</td><td>54</td><td>32</td><td>0</td><td>86</td><td>4,32</td><td>90,32</td></tr>
+          <tr><td>D2-1 · Cao đẳng</td><td>54</td><td>64</td><td>0</td><td>118</td><td>4,32</td><td>122,32</td></tr>
+          <tr><td>D2-6 · Trao đổi</td><td>59</td><td>64</td><td>15</td><td>138</td><td>4,72</td><td>142,72</td></tr>
+          <tr><td>D2-2 · Đại học</td><td>54</td><td>0</td><td>0</td><td>54</td><td>4,32</td><td>58,32</td></tr>
+          <tr><td>E-Visa · Thạc sĩ</td><td>58</td><td>32</td><td>0</td><td>90</td><td>4,64</td><td>94,64</td></tr>
+          </tbody></table></div>
+          <p>Phí dịch vụ và quản lý được tính VAT 8%; học phí đào tạo tiếng Hàn và học phí BKC không tính VAT. Tiền học tiếng đã nằm trong gói D4-1, D2-1, D2-6 và E-Visa, không thu thêm lần nữa. Gói D2-2 chỉ gồm dịch vụ hồ sơ, không có đào tạo tiếng.</p>
+          <p>Ở chương trình D2-6, khoản dịch vụ và quản lý 59 triệu đồng gồm 54 triệu đồng dịch vụ hồ sơ và 5 triệu đồng quản lý tại Hàn Quốc trong kỳ đầu. Học phí một kỳ tại Cao đẳng Bách Khoa Sài Gòn (BKC) là 15 triệu đồng, được thu riêng theo phụ lục nhưng đã tính trong tổng gói D2-6 nêu trên.</p>
+          <h2>Lịch đóng theo hồ sơ</h2>
+          <div><table><thead><tr><th>Chương trình</th><th>Đợt 1</th><th>Đợt 2</th><th>Đợt 3</th></tr></thead><tbody>
+          <tr><td>D4-1</td><td>46,04</td><td>27</td><td>17,28</td></tr><tr><td>D2-1</td><td>46,2</td><td>55,6</td><td>20,52</td></tr>
+          <tr><td>D2-6</td><td>46,2</td><td>55,6</td><td>25,92</td></tr><tr><td>D2-2</td><td>21,6</td><td>21,6</td><td>15,12</td></tr>
+          <tr><td>E-Visa</td><td>51,44</td><td>27</td><td>16,2</td></tr></tbody></table></div>
+          <p>Các khoản trên tính bằng triệu đồng. Đợt 1 bắt đầu lộ trình; đợt 2 thu sau khi đạt phỏng vấn hoặc được trường tiếp nhận; đợt 3 thu khi có thị thực, trước xuất cảnh. Học phí BKC của D2-6 được đóng theo phụ lục riêng, ngoài ba đợt trong bảng.</p>
+          <h2>Các khoản cần dự trù riêng</h2>
+          <ul><li>Học phí, ký túc xá, bảo hiểm và các khoản do trường Hàn Quốc thông báo; phí chuyển tiền quốc tế.</li><li>Vé máy bay, đi lại, ăn ở, sinh hoạt cá nhân và lệ phí thi TOPIK.</li><li>Chi phí hồ sơ riêng như chứng minh tài chính, số dư duy trì, tái khám hoặc giấy tờ ngoài phạm vi tiêu chuẩn nếu hồ sơ cần.</li></ul>
+          <p>Hãy yêu cầu ghi rõ đơn vị thu, phạm vi dịch vụ và thời hạn trong hợp đồng hoặc phụ lục trước khi thanh toán. Học phí trường Hàn Quốc được trả theo thông báo của trường; mức học phí tham khảo cũng có thể thay đổi theo kỳ.</p>
+          <p><a href="/truong-dai-hoc">Tra cứu học phí tham khảo của một số trường đối tác →</a></p>`,
+        source_urls: 'https://www.studyinkorea.go.kr/en_US/plan/abroadExpenses.do\nhttps://studyinkorea.go.kr/ko/life/livingExpense.do',
+        seo_title: 'Chi phí du học Hàn Quốc 2026–2027: các khoản và lịch đóng',
+        meta_description: 'Bảng phí gói du học SOL DREAM 2026–2027, lịch thanh toán ba đợt và các khoản học phí, ký túc xá tại Hàn Quốc cần dự trù riêng.',
+        focus_keyword: 'chi phí du học Hàn Quốc 2026-2027',
+      },
+      {
+        title: 'Học phí trường đối tác Hàn Quốc: hệ tiếng và đại học năm 2026',
+        slug: 'hoc-phi-truong-doi-tac-han-quoc-2026',
+        excerpt: 'Tổng hợp học phí tiếng Hàn và một số mức cử nhân trong profile SOL DREAM, đối chiếu với hướng dẫn chính thức của Woosong, Sogang và Hanyang.',
+        cover: 'p3', sort_order: 2,
+        content: `<p>Học phí tiếng Hàn thường tính theo khóa 10 tuần, còn học phí cử nhân có thể công bố theo kỳ hoặc theo năm. Bảng sau tách hai loại chương trình và ghi rõ cơ sở áp dụng để tránh so sánh nhầm.</p>
+          <h2>Học tiếng Hàn</h2>
+          <div><table><thead><tr><th>Trường và cơ sở</th><th>Chương trình</th><th>Học phí / kỳ</th><th>Ghi chú</th></tr></thead><tbody>
+          <tr><td>Woosong</td><td>Khóa thường 200 giờ, 10 tuần</td><td>1.300.000 KRW</td><td>Phí xét tuyển 60.000 KRW theo hướng dẫn của trường</td></tr>
+          <tr><td>Sogang</td><td>KGP200 buổi sáng</td><td>1.860.000 KRW</td><td>10 tuần, 200 giờ; đăng ký mới 100.000 KRW</td></tr>
+          <tr><td>Sogang</td><td>KAP200 buổi chiều</td><td>1.800.000 KRW</td><td>10 tuần, 200 giờ; đăng ký mới 100.000 KRW</td></tr>
+          <tr><td>Hanyang ERICA</td><td>Khóa chuyên sâu tiếng Hàn</td><td>1.500.000 KRW</td><td>10 tuần, đã gồm bảo hiểm; phí đăng ký mới 100.000 KRW</td></tr>
+          <tr><td>Hannam</td><td>Khóa thường</td><td>1.300.000 KRW</td><td>Hồ sơ SolDream ghi “Chính sách 2021”; không dùng làm giá kỳ 2026-2027</td></tr>
+          </tbody></table></div>
+          <p>Mức Sogang trên lấy từ hướng dẫn KLEC năm 2026; Woosong Korean Language Institute và Hanyang ERICA cũng công bố học phí khóa tiếng theo kỳ. Với Hannam, tài liệu SolDream ghi rõ chính sách 2021 nên học viên cần xin báo giá mới trước khi chọn trường.</p>
+          <h2>Một số học phí cử nhân</h2>
+          <h3>Woosong University · học phí theo năm học 2026</h3>
+          <ul><li>Quản trị Khách sạn Thông minh: 6.792 USD/năm.</li><li>Trí tuệ nhân tạo và Dữ liệu lớn: 7.794 USD/năm.</li><li>Quản trị Kinh doanh: 12.592 USD/năm; trường ghi mức này gồm kỳ thu, đông, xuân và hè.</li></ul>
+          <h3>Hanyang University · cơ sở Seoul · kỳ 1 năm 2026</h3>
+          <ul><li>Nhân văn và xã hội: 5.279.000 KRW/kỳ.</li><li>Khoa học tự nhiên và thể thao: 6.150.000 KRW/kỳ.</li><li>Kỹ thuật: 6.960.000 KRW/kỳ.</li><li>Nghệ thuật: 6.976.000 KRW/kỳ; âm nhạc: 7.820.000 KRW/kỳ.</li></ul>
+          <p>Đây là học phí trường công bố trước học bổng và chưa gồm sinh hoạt, ký túc xá, phí nhập học hay khoản thu riêng. Mức Hanyang nêu rõ là cơ sở Seoul; ERICA có hướng dẫn riêng. Tỷ giá thanh toán thay đổi nên bài viết giữ nguyên đơn vị KRW/USD, không quy đổi thành VND.</p>
+          <p>Học phí trường Hàn Quốc không nằm trong gói dịch vụ SolDream tại Việt Nam. Trước khi nộp hồ sơ, hãy kiểm tra đúng cơ sở, ngành, kỳ học, học bổng và hạn đóng tiền trên thông báo chính thức mới nhất.</p>
+          <p><a href="/truong-dai-hoc/woosong">Hồ sơ Woosong</a> · <a href="/truong-dai-hoc/hanyang">Hồ sơ Hanyang</a> · <a href="/truong-dai-hoc/sogang">Hồ sơ Sogang</a></p>`,
+        source_urls: 'https://english.wsu.ac.kr/page/index.jsp?code=eng0302\nhttps://wkli.wsu.ac.kr/story/page/index.jsp?code=wkli020101a\nhttps://klec.sogang.ac.kr/fro_end_eng/img/brochure_EN_2026.pdf\nhttps://ericaiie.hanyang.ac.kr/eng_korean-language-course/eng_kor-course/eng_kor-schedule\nhttps://oia.hanyang.ac.kr/files/attach/filebox/2026/01/22/e15bd45bbe74d2a1041a6db3a4678625.pdf',
+        seo_title: 'Học phí trường Hàn Quốc năm 2026: tiếng Hàn và hệ cử nhân',
+        meta_description: 'So sánh học phí khóa tiếng Hàn và học phí cử nhân 2026 tại Woosong, Sogang, Hanyang Seoul, Hanyang ERICA và lưu ý mức Hannam theo chính sách 2021.',
+        focus_keyword: 'học phí đại học Hàn Quốc 2026',
+      },
+      {
+        title: 'D4-1 và D2-1, D2-2, D2-3, D2-6 khác nhau thế nào?',
+        slug: 'phan-biet-visa-du-hoc-han-quoc-d4-1-d2',
+        excerpt: 'Các mã này gắn với mục tiêu học tiếng, cao đẳng, cử nhân, thạc sĩ hoặc trao đổi. Chọn mã theo chương trình được trường tiếp nhận và yêu cầu của cơ quan cấp thị thực.',
+        cover: 'p1', sort_order: 3,
+        content: `<p>Trước khi chuẩn bị hồ sơ, hãy xác định chương trình học và cơ sở tiếp nhận. Study in Korea của Chính phủ Hàn Quốc xếp D-4 vào nhóm đào tạo không cấp bằng và D-2 vào nhóm chương trình cấp bằng hoặc một số chương trình học tập đặc thù.</p>
+          <div><table><thead><tr><th>Mã</th><th>Mục tiêu chính theo hệ thống chính thức</th><th>Đối chiếu với lộ trình trong hồ sơ SOL DREAM</th></tr></thead><tbody>
+          <tr><td>D-4-1</td><td>Đào tạo tiếng Hàn</td><td>Học tiếng Hàn tại trường trước khi chọn hoặc học tiếp chuyên ngành</td></tr>
+          <tr><td>D-2-1</td><td>Chương trình cao đẳng / associate degree</td><td>Du học cao đẳng</td></tr>
+          <tr><td>D-2-2</td><td>Chương trình cử nhân</td><td>Du học đại học</td></tr>
+          <tr><td>D-2-3</td><td>Chương trình thạc sĩ</td><td>Du học sau khi đã tốt nghiệp đại học</td></tr>
+          <tr><td>D-2-6</td><td>Sinh viên trao đổi</td><td>Chương trình trao đổi theo trường cử đi và trường tiếp nhận</td></tr>
+          </tbody></table></div>
+          <h2>Lưu ý khi đọc tên gói</h2>
+          <p>Hồ sơ SolDream dùng “E-Visa” làm tên gói tư vấn thạc sĩ và ghi mã D-2-3. “E-Visa” là tên gói trong tài liệu của đơn vị tư vấn, không phải mã thị thực du học riêng trong danh mục D-2/D-4 của Chính phủ Hàn Quốc.</p>
+          <p>Với trao đổi sinh viên, cổng Study in Korea nêu điều kiện là sinh viên đang học tại trường đối tác của trường Hàn Quốc dự kiến tiếp nhận. Hồ sơ SolDream mô tả chương trình liên kết với Cao đẳng Bách Khoa Sài Gòn; việc đủ điều kiện, trường tiếp nhận, học phí và hồ sơ cụ thể vẫn phụ thuộc thỏa thuận và xác nhận của hai trường trong kỳ đó.</p>
+          <h2>Hồ sơ và quyết định thị thực</h2>
+          <p>Nhóm giấy tờ, bằng chứng tài chính và yêu cầu bổ sung có thể khác theo loại chương trình, quốc tịch, cơ sở tiếp nhận và cơ quan đại diện xử lý hồ sơ. Nhận thư nhập học không đồng nghĩa chắc chắn được cấp thị thực. Hãy lấy danh sách giấy tờ từ trường và cơ quan tiếp nhận tại Việt Nam trước khi nộp.</p>
+          <p><a href="/du-hoc/chi-phi-du-hoc-han-quoc-2026-2027">Xem bảng chi phí và phạm vi từng gói →</a></p>`,
+        source_urls: 'https://studyinkorea.go.kr/ko/plan/visaAndStay.do\nhttps://studyinkorea.go.kr/ko/plan/schoolType.do?tab=other-programs',
+        seo_title: 'Visa du học Hàn Quốc D4-1, D2-1, D2-2, D2-3, D2-6',
+        meta_description: 'Phân biệt mã D4-1, D2-1, D2-2, D2-3 và D2-6 theo chương trình du học chính thức của Hàn Quốc; lưu ý tên gói E-Visa.',
+        focus_keyword: 'visa du học Hàn Quốc D4-1 D2-2',
+      },
+      {
+        title: 'Lộ trình học tiếng Hàn trước khi du học: 825 đến 1.405 tiết',
+        slug: 'lo-trinh-hoc-tieng-han-truoc-khi-du-hoc',
+        excerpt: 'Phụ lục SOL DREAM 2026–2027 mô tả hai lộ trình tiếng Hàn theo chương trình, từ sơ cấp, phỏng vấn đến học phần TOPIK; số tiết và thời lượng cần xếp theo hồ sơ từng học viên.',
+        cover: 'p2', sort_order: 4,
+        content: `<p>Khả năng tiếng Hàn cần được chuẩn bị theo mục tiêu học tập và yêu cầu của trường. Phụ lục đào tạo SOL DREAM 2026–2027 chia lộ trình thành nhóm D4-1/E-Visa và nhóm D2-1/D2-6; đây là kế hoạch đào tạo của trung tâm, không phải cam kết thay cho điều kiện đầu vào của trường Hàn Quốc.</p>
+          <h2>D4-1 và gói E-Visa: 825 tiết</h2>
+          <p>Kế hoạch chuẩn được hồ sơ mô tả trong khoảng 3–4 tháng, tối đa 4 tháng, gồm sơ cấp 1A, 1B, 2A, 2B; luyện phỏng vấn trường và luyện phỏng vấn lãnh sự. Phụ lục ghi một tiết học là 45 phút, lịch chuẩn 55 tiết mỗi tuần và kế hoạch khoảng 15 tuần.</p>
+          <h2>D2-1 và D2-6: tối thiểu 1.405 tiết</h2>
+          <p>Lộ trình này dự kiến 6–8 tháng. Sau bốn học phần sơ cấp, chương trình thêm trung cấp 1A, phỏng vấn trường, phỏng vấn lãnh sự, TOPIK I cấp độ 2 và phần TOPIK tăng cường/duy trì theo kế hoạch lớp và kỳ tuyển sinh. Mốc 1.405 tiết là mức tối thiểu ghi trong phụ lục; từng học viên có thể cần thời gian khác.</p>
+          <h2>Khóa tiếng đăng ký lẻ</h2>
+          <p>Hồ sơ cũng liệt kê các khóa sơ cấp, trung cấp, luyện TOPIK I, TOPIK cấp 3–4, giao tiếp và phát âm. Lịch chuẩn là ba buổi mỗi tuần, 90 phút mỗi buổi; sĩ số tối đa được ghi là 8 học viên cho lớp TOPIK và 10 học viên cho các lớp ngôn ngữ, giao tiếp, phát âm. Học phí từng khóa lẻ khác nhau và không cộng thêm vào phần đào tạo đã bao gồm trong gói du học.</p>
+          <ul><li>D4-1 và E-Visa: phần đào tạo tiếng trong gói 32 triệu đồng theo hồ sơ.</li><li>D2-1 và D2-6: phần đào tạo tiếng trong gói 64 triệu đồng theo hồ sơ.</li><li>D2-2: gói dịch vụ hồ sơ không bao gồm đào tạo tiếng Hàn.</li></ul>
+          <p>Hãy kiểm tra phiếu nhập học để biết ngày học, thời lượng, học phần, số tiết, giáo viên và khoản phí đã bao gồm. Nếu yêu cầu của trường hoặc lịch tuyển sinh thay đổi, trung tâm cần trao đổi lại kế hoạch đào tạo với học viên.</p>
+          <p><a href="/khoa-hoc">Xem các khóa tiếng Hàn đăng ký lẻ →</a></p>`,
+        source_urls: 'https://www.studyinkorea.go.kr/eng/plan/schoolType.do?tab=korean-language-institute\nhttps://studyinkorea.go.kr/ko/plan/visaAndStay.do',
+        seo_title: 'Lộ trình tiếng Hàn trước khi du học: số tiết và học phí',
+        meta_description: 'Tóm tắt lộ trình 825 và tối thiểu 1.405 tiết tiếng Hàn theo phụ lục SolDream 2026–2027 cùng lưu ý về học phần và học phí.',
+        focus_keyword: 'học tiếng Hàn trước khi du học Hàn Quốc',
+      },
+      {
+        title: '5 bước chuẩn bị hồ sơ du học Hàn Quốc từ chọn trường đến xuất cảnh',
+        slug: '5-buoc-chuan-bi-ho-so-du-hoc-han-quoc',
+        excerpt: 'Một lộ trình dễ theo dõi gồm xác định mục tiêu, đối chiếu trường và ngành, chuẩn bị hồ sơ, nhận kết quả tiếp nhận và làm thủ tục thị thực trước khi lên đường.',
+        cover: 'p1', sort_order: 5,
+        content: `<p>Chuẩn bị du học thường gồm nhiều việc diễn ra nối tiếp nhau. Study in Korea khuyến nghị tìm hiểu trường và ngành trước, nộp hồ sơ theo quy trình từng trường, nhận thư tiếp nhận rồi chuẩn bị hồ sơ thị thực. SOL DREAM mô tả các bước hỗ trợ học viên như sau.</p>
+          <ol><li><strong>Làm rõ mục tiêu:</strong> xác định bậc học, ngành quan tâm, kết quả học tập, năng lực tiếng Hàn và ngân sách dự kiến.</li>
+          <li><strong>Chọn trường và chương trình:</strong> so sánh cơ sở, ngành, yêu cầu đầu vào, lịch tuyển sinh, học phí, học bổng và ký túc xá từ thông báo chính thức.</li>
+          <li><strong>Chuẩn bị hồ sơ và năng lực:</strong> hoàn thiện giấy tờ học tập, tài chính, dịch thuật/hợp pháp hóa theo danh mục áp dụng; học tiếng và luyện phỏng vấn nếu chương trình yêu cầu.</li>
+          <li><strong>Nộp hồ sơ, chờ trường xét:</strong> nộp đúng thời gian, theo dõi yêu cầu bổ sung và chỉ thanh toán học phí trường theo hướng dẫn chính thức.</li>
+          <li><strong>Làm thị thực và chuẩn bị xuất cảnh:</strong> sau khi được trường cấp giấy tờ tiếp nhận, kiểm tra lại biểu mẫu, giấy tờ, lịch khám và thủ tục tại cơ quan tiếp nhận hồ sơ ở Việt Nam.</li></ol>
+          <p>Trong hồ sơ SolDream, các hạng mục sau tiếp nhận còn có hướng dẫn trước xuất cảnh và kết nối hỗ trợ tại Hàn Quốc theo phạm vi dịch vụ đã thống nhất. Học viên nên ghi rõ những hỗ trợ này trong hợp đồng hoặc phụ lục.</p>
+          <h2>Checklist trước khi chốt trường</h2>
+          <ul><li>Đúng tên trường và cơ sở tiếp nhận.</li><li>Đúng ngành, bậc học và mã chương trình.</li><li>Đủ điều kiện ngôn ngữ, học lực và tài chính theo kỳ hiện tại.</li><li>Đã tách học phí trường khỏi phí dịch vụ tư vấn.</li><li>Đã kiểm tra hạn nộp hồ sơ, khoản hoàn/hủy và lịch thanh toán bằng văn bản.</li></ul>
+          <p>Điều kiện, biểu mẫu và thời gian xử lý có thể khác nhau giữa các trường và kỳ tuyển sinh. Bài viết là khung chuẩn bị chung; thông báo của trường và cơ quan thị thực là căn cứ cho hồ sơ cụ thể.</p>
+          <p><a href="/truong-dai-hoc">Xem danh sách trường đối tác và website chính thức →</a></p>`,
+        source_urls: 'https://www.studyinkorea.go.kr/eng/plan/flowChart.do\nhttps://studyinkorea.go.kr/en_US/plan/visaAndStay.do',
+        seo_title: '5 bước chuẩn bị hồ sơ du học Hàn Quốc',
+        meta_description: 'Hướng dẫn năm bước chọn trường, nộp hồ sơ, nhận thư tiếp nhận và chuẩn bị thị thực du học Hàn Quốc theo cổng Study in Korea.',
+        focus_keyword: 'hồ sơ du học Hàn Quốc',
+      },
+    ];
+    const startOrder = db.prepare("SELECT COALESCE(MAX(sort_order),0)+1 AS n FROM programs WHERE category='Chương trình du học'").get().n;
+    const exists = db.prepare('SELECT 1 FROM programs WHERE slug=?');
+    const insert = db.prepare(`INSERT INTO programs
+      (title,subtitle,slug,excerpt,content,category,cover,source_urls,author_name,author_role,author_url,seo_title,meta_description,focus_keyword,noindex,sort_order,published,created_at,updated_at)
+      VALUES (@title,'',@slug,@excerpt,@content,'Chương trình du học',@cover,@source_urls,'Ban biên tập SOL DREAM EDUCATION','Biên soạn theo hồ sơ 2026–2027 và đối chiếu nguồn chính thức','/gioi-thieu',@seo_title,@meta_description,@focus_keyword,0,@sort_order,1,'2026-10-17 12:00:00','2026-10-17 12:00:00')`);
+    db.transaction(() => {
+      let offset = 0;
+      for (const guide of guides) {
+        if (exists.get(guide.slug)) continue;
+        insert.run({ ...guide, sort_order: startOrder + offset });
+        offset += 1;
+      }
+      db.prepare('INSERT INTO system_meta (key,value,updated_at) VALUES (?,?,datetime(\'now\',\'localtime\'))')
+        .run(migrationKey, '1');
+    })();
   }
 }
 

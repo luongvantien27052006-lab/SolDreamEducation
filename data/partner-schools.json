@@ -1,0 +1,28 @@
+{
+  "cycle": "2026-2027",
+  "source": "Danh mục trường hợp tác trong Hồ sơ giới thiệu SOL DREAM EDUCATION 2026-2027; tên, cơ sở và website được đối chiếu với trang chính thức của trường.",
+  "schools": [
+    { "name": "Đại học Woosong", "englishName": "Woosong University", "campus": "Daejeon", "type": "Đại học", "website": "https://english.wsu.ac.kr/", "profilePath": "/truong-dai-hoc/woosong" },
+    { "name": "Đại học Hannam", "englishName": "Hannam University", "campus": "Daejeon", "type": "Đại học", "website": "https://www.hannam.ac.kr/", "profilePath": "/truong-dai-hoc/hannam" },
+    { "name": "Đại học Daeduk", "englishName": "Daeduk University", "campus": "Daejeon", "type": "Đại học", "website": "https://www.ddu.ac.kr/", "profilePath": "/truong-dai-hoc/daeduk" },
+    { "name": "Cao đẳng Woosong", "englishName": "Woosong College", "campus": "Daejeon", "type": "Cao đẳng", "website": "https://www.wsi.ac.kr/site/main/intro/intro.html" },
+    { "name": "Đại học Hanyang, cơ sở Seoul", "englishName": "Hanyang University — Seoul Campus", "campus": "Seoul", "type": "Đại học", "website": "https://www.hanyang.ac.kr/web/eng", "profilePath": "/truong-dai-hoc/hanyang" },
+    { "name": "Đại học Hanyang, cơ sở ERICA", "englishName": "Hanyang University — ERICA Campus", "campus": "Ansan, Gyeonggi-do", "type": "Đại học", "website": "https://www.hanyang.ac.kr/web/eng/erica-campus1", "profilePath": "/truong-dai-hoc/hanyang" },
+    { "name": "Đại học Sookmyung", "englishName": "Sookmyung Women's University", "campus": "Seoul", "type": "Đại học", "website": "https://www.sookmyung.ac.kr/en/intro/installation-management.do" },
+    { "name": "Cao đẳng Kunjang", "englishName": "Kunjang University College", "campus": "Gunsan, Jeollabuk-do", "type": "Cao đẳng", "website": "https://global.kunjang.ac.kr/" },
+    { "name": "Đại học Quốc gia Kunsan", "englishName": "Kunsan National University", "campus": "Gunsan, Jeollabuk-do", "type": "Đại học quốc gia", "website": "https://www.kunsan.ac.kr/en/index.kunsan" },
+    { "name": "Đại học Gachon", "englishName": "Gachon University", "campus": "Seongnam và Incheon", "type": "Đại học", "website": "https://www.gachon.ac.kr/eng/index.do" },
+    { "name": "Cao đẳng Y tế Daejeon", "englishName": "Daejeon Health Institute of Technology", "campus": "Daejeon", "type": "Cao đẳng", "website": "https://www.hit.ac.kr/english/main" },
+    { "name": "Đại học Jeonju", "englishName": "Jeonju University", "campus": "Jeonju, Jeollabuk-do", "type": "Đại học", "website": "https://global.jj.ac.kr/global/intro/map.do" },
+    { "name": "Đại học Yonsei", "englishName": "Yonsei University", "campus": "Xác nhận cơ sở theo chương trình tuyển sinh", "type": "Đại học", "website": "https://www.yonsei.kr/en_sc/1820/subview.do" },
+    { "name": "Đại học Sogang", "englishName": "Sogang University", "campus": "Seoul", "type": "Đại học", "website": "https://klec.sogang.ac.kr/?lang=eng", "profilePath": "/truong-dai-hoc/sogang" },
+    { "name": "Đại học Shinhan", "englishName": "Shinhan University", "campus": "Uijeongbu và Dongducheon, Gyeonggi-do", "type": "Đại học", "website": "https://en.shinhan.ac.kr/en/3801/subview.do" },
+    { "name": "Đại học Hanbat", "englishName": "Hanbat National University", "campus": "Daejeon", "type": "Đại học quốc gia", "website": "https://www.hanbat.ac.kr/eng/sub01_02.do" },
+    { "name": "Đại học Pai Chai", "englishName": "Pai Chai University", "campus": "Daejeon", "type": "Đại học", "website": "https://www.pcu.ac.kr/kor" },
+    { "name": "Đại học Kookmin", "englishName": "Kookmin University", "campus": "Seoul", "type": "Đại học", "website": "https://english.kookmin.ac.kr/" },
+    { "name": "Đại học Gimhae", "englishName": "Gimhae University", "campus": "Gimhae, Gyeongsangnam-do", "type": "Đại học", "website": "https://www.gimhae.ac.kr/", "profilePath": "/truong-dai-hoc/gimhae" },
+    { "name": "Đại học Dong-A", "englishName": "Dong-A University", "campus": "Busan", "type": "Đại học", "website": "https://gra.donga.ac.kr/english/Main.do" },
+    { "name": "Đại học DongYang", "englishName": "Dongyang University", "campus": "Yeongju và Dongducheon", "type": "Đại học", "website": "https://www.dyu.ac.kr/", "profilePath": "/truong-dai-hoc/dongyang" },
+    { "name": "Đại học Kyung Hee", "englishName": "Kyung Hee University", "campus": "Seoul, Yongin và Namyangju", "type": "Đại học", "website": "https://khu.ac.kr/eng/user/contents/view.do?menuNo=300018" }
+  ]
+}

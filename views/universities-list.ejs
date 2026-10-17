@@ -8,8 +8,26 @@
       <span class="eyebrow">Tra cứu và chọn trường</span>
       <h1>Thông tin trường đại học Hàn Quốc</h1>
       <p>SOL DREAM EDUCATION tổng hợp thông tin chương trình, ngành học, học phí, học bổng và ký túc xá để học sinh dễ tra cứu và so sánh trước khi đăng ký.</p>
-      <div class="source-meta"><strong>Đơn vị tư vấn:</strong> SOL DREAM EDUCATION · <strong>Cập nhật:</strong> 26/08/2026</div>
+      <div class="source-meta"><strong>Đơn vị tư vấn:</strong> SOL DREAM EDUCATION · <strong>Cập nhật danh mục:</strong> 17/10/2026</div>
     </header>
+
+    <section aria-labelledby="partner-schools-title">
+      <h2 id="partner-schools-title" style="margin:36px 0 10px">Danh sách trường hợp tác 2026–2027</h2>
+      <p class="section-lead">Danh sách 22 trường dưới đây được chép từ Hồ sơ giới thiệu SOL DREAM EDUCATION 2026–2027. Tên trường, cơ sở và liên kết được đối chiếu với website chính thức; điều kiện tuyển sinh và học phí vẫn cần xem theo đúng ngành, cơ sở và kỳ nộp hồ sơ.</p>
+      <div class="knowledge-grid">
+        <% partnerSchools.forEach(function(school){ %>
+        <article class="knowledge-card">
+          <div class="knowledge-card__top"><span><%= school.type %></span><span><%= school.campus %></span></div>
+          <h3><%= school.name %></h3>
+          <p class="knowledge-card__en"><%= school.englishName %></p>
+          <div style="display:flex;flex-wrap:wrap;gap:0 16px">
+            <% if (school.profilePath) { %><a class="knowledge-card__link" style="margin-top:12px" href="<%= school.profilePath %>">Xem hồ sơ trên web →</a><% } %>
+            <a class="knowledge-card__link" style="margin-top:12px" href="<%= school.website %>" target="_blank" rel="noopener noreferrer">Website trường ↗</a>
+          </div>
+        </article>
+        <% }); %>
+      </div>
+    </section>
 
     <% if (schoolPrograms && schoolPrograms.length) { %>
     <section aria-labelledby="admin-school-title">
@@ -42,9 +60,10 @@
 
     <section class="source-box dataset-scope" aria-labelledby="dataset-title">
       <h2 id="dataset-title">Phạm vi bộ dữ liệu trường đại học</h2>
-      <p class="section-lead">Bộ dữ liệu hiện gồm <%= universities.length + schoolPrograms.length %> hồ sơ trường đại học Hàn Quốc. Mỗi hồ sơ trình bày tổng quan, ngành học, học phí, học bổng, ký túc xá và đường dẫn website chính thức khi tài liệu nguồn có cung cấp.</p>
+      <p class="section-lead">Trang này giới thiệu <%= partnerSchools.length %> trường trong danh mục hợp tác 2026–2027, <%= universities.length + schoolPrograms.length %> hồ sơ trường đang có thông tin chi tiết và đường dẫn tới website chính thức của các trường.</p>
       <ul>
-        <li><strong>Thực thể:</strong> <%= schoolPrograms.map(function(item){ return item.title; }).concat(universities.map(function(item){ return item.name; })).join('; ') %>.</li>
+        <li><strong>Danh mục hợp tác:</strong> <%= partnerSchools.map(function(item){ return item.name; }).join('; ') %>.</li>
+        <li><strong>Hồ sơ trường chi tiết:</strong> <%= schoolPrograms.map(function(item){ return item.title; }).concat(universities.map(function(item){ return item.name; })).join('; ') %>.</li>
         <li><strong>Trường dữ liệu chính:</strong> tên trường, địa chỉ, ngành học, học phí, học bổng và ký túc xá.</li>
         <li><strong>Mục đích:</strong> tra cứu và lập danh sách trường ban đầu; không thay thế thông báo tuyển sinh.</li>
       </ul>
