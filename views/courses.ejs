@@ -21,7 +21,7 @@
         <table class="knowledge-table course-tuition-table">
           <caption>Bảng học phí tiếng Hàn SDE 2026 — học phí theo lớp</caption>
           <thead><tr>
-            <th scope="col">Mã lớp / khóa học</th><th scope="col">Buổi</th><th scope="col">Thời lượng</th><th scope="col">Tổng giờ</th>
+            <th scope="col">Mã lớp / khóa học</th><th scope="col">Buổi</th><th scope="col">Thời lượng</th><th scope="col">Tổng giờ</th><th scope="col">Số tuần dự kiến</th>
             <th scope="col">Cơ cấu giáo viên</th><th scope="col">Sĩ số</th><th scope="col">Tối thiểu mở lớp</th><th scope="col">Học phí</th><th scope="col">Tài liệu</th>
           </tr></thead>
           <tbody>
@@ -31,6 +31,7 @@
               <td><%= spec.sessions %> buổi</td>
               <td><%= spec.minutesPerSession %> phút/buổi</td>
               <td><%= spec.totalHours %> giờ</td>
+              <td><%= spec.estimatedWeeks %> tuần</td>
               <td><%= spec.instructors %></td>
               <td><%= spec.classSize %> học viên</td>
               <td><%= spec.minimumStudents %> học viên</td>

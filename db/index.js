@@ -1156,4 +1156,156 @@ if (!db.prepare('SELECT 1 FROM faqs WHERE question=?').get(serviceFaqQuestion)) 
   }
 }
 
+// Complete the 2026–2027 company profile mapping without replacing administrator edits.
+{
+  const migrationKey = 'profile_complete_information_mapping_20261017_v1';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    db.transaction(() => {
+      const aboutSections = [
+        {
+          title: 'Giá trị và trải nghiệm học tập', sortOrder: 5,
+          content: `<h3>Giá trị SOL DREAM theo hồ sơ 2026–2027</h3>
+            <ul><li><strong>Học để làm chủ năng lực:</strong> xây nền tảng kiến thức và kỹ năng để người học chủ động trong học tập, công việc và cuộc sống.</li>
+            <li><strong>Hiểu bản thân để chọn hướng đi:</strong> nhìn lại điểm mạnh, mục tiêu và điều kiện cá nhân để chọn chương trình phù hợp.</li>
+            <li><strong>Kết nối để cùng tiến bộ:</strong> học tập trong cộng đồng tích cực, có sự phối hợp giữa học viên, gia đình và đội ngũ đồng hành.</li></ul>
+            <h3>Trải nghiệm trong quá trình chuẩn bị</h3>
+            <ul><li>Học trên lớp để xây kỹ năng, thói quen học tập và chuẩn bị phỏng vấn.</li>
+            <li>Tham gia hoạt động ngoại khóa và cuộc thi được tổ chức định kỳ theo kế hoạch của trung tâm.</li>
+            <li>Được hỗ trợ trong các bước giấy tờ, chuẩn bị xuất cảnh và kết nối tại Hàn Quốc trong phạm vi dịch vụ đã thống nhất.</li></ul>
+            <p class="source-meta">Nội dung tóm lược từ Hồ sơ giới thiệu SOL DREAM EDUCATION 2026–2027. Lịch và hoạt động thực tế có thể thay đổi theo kế hoạch từng khóa.</p>`
+        },
+        {
+          title: 'Địa chỉ và đầu mối liên hệ', sortOrder: 6,
+          content: `<h3>Liên hệ tại Việt Nam</h3>
+            <ul><li><strong>Trụ sở SOL DREAM EDUCATION:</strong> 89 đường S11, phường Tây Thạnh, TP. Hồ Chí Minh.</li>
+            <li><strong>Văn phòng Đồng Nai:</strong> Tổ 20, ấp Láng Lớn, xã Xuân Mỹ, huyện Cẩm Mỹ, Đồng Nai.</li>
+            <li><strong>Văn phòng miền Bắc:</strong> 98 đường Thủy Nguyên, khu đô thị Ecopark, Xuân Quan, Phụng Công, Hưng Yên.</li>
+            <li><strong>Hotline:</strong> 03 6464 8282 · <strong>Website:</strong> <a href="https://www.soldream.edu.vn">soldream.edu.vn</a> · <strong>Facebook:</strong> <a href="https://www.facebook.com/soldreamedu">facebook.com/soldreamedu</a>.</li>
+            <li><strong>Đầu mối miền Bắc theo hồ sơ:</strong> bà Trần Thị Quyên · 0914 200 687.</li></ul>
+            <h3>Đầu mối hỗ trợ tại Hàn Quốc</h3>
+            <p><strong>Ông Gu Bong Mo · COMMA Corporation</strong> — đầu mối hợp tác kinh doanh và hỗ trợ quản lý học viên tại Hàn Quốc theo hồ sơ giới thiệu.</p>
+            <ul><li>Địa chỉ: Phòng 202, số 23 Hanbat-daero 592beon-gil, Seo-gu, Daejeon, Hàn Quốc.</li>
+            <li>Điện thoại: <a href="tel:+827040790719">070-4079-0719</a> · Di động: <a href="tel:+821064090719">010-6409-0719</a>.</li>
+            <li>Email: <a href="mailto:didigi3@naver.com">didigi3@naver.com</a>.</li></ul>
+            <p class="source-meta">Địa chỉ và đầu mối được đăng theo hồ sơ do SOL DREAM EDUCATION cung cấp. Vui lòng liên hệ trước khi đến văn phòng hoặc sử dụng thông tin để gửi hồ sơ.</p>`
+        }
+      ];
+      const findAboutTab = db.prepare("SELECT id FROM about_sections WHERE location='page' AND title=? LIMIT 1");
+      const insertAboutTab = db.prepare(`INSERT INTO about_sections
+        (location,eyebrow,title,content,section_style,sort_order,active)
+        VALUES ('page','Theo hồ sơ giới thiệu 2026–2027',?,?,'tab',?,1)`);
+      for (const section of aboutSections) {
+        if (!findAboutTab.get(section.title)) insertAboutTab.run(section.title, section.content, section.sortOrder);
+      }
+
+      const legal = db.prepare("SELECT id,content FROM about_sections WHERE location='page' AND title='Năng lực đào tạo và pháp lý' LIMIT 1").get();
+      if (legal && !legal.content.includes('profile-service-stage-5')) {
+        let content = legal.content.replace(
+          'Rà soát các khoản phải chuẩn bị trước xuất cảnh và hỗ trợ kết nối sau khi học viên sang Hàn Quốc theo phạm vi dịch vụ đã thống nhất.',
+          'Rà soát hồ sơ, các khoản cần chuẩn bị và kế hoạch trước ngày xuất cảnh.'
+        );
+        content += `<h3 id="profile-service-stage-5">Giai đoạn 5 · Hỗ trợ tại Hàn Quốc</h3>
+          <p>Kết nối đầu mối tại Hàn Quốc và hỗ trợ quản lý học viên theo phạm vi dịch vụ đã thống nhất với gia đình.</p>`;
+        db.prepare("UPDATE about_sections SET content=?,updated_at=datetime('now','localtime') WHERE id=?").run(content, legal.id);
+      }
+
+      // Add only schedule metadata to the live course rows; retain every other stored/admin-edited field.
+      const courseRows = db.prepare('SELECT id,financials_json FROM courses').all();
+      const updateCourse = db.prepare("UPDATE courses SET financials_json=?,updated_at=datetime('now','localtime') WHERE id=?");
+      for (const row of courseRows) {
+        const source = courseData.courses.find((course) => course.id === row.id);
+        const weeks = source?.financials?.tuition2026?.estimatedWeeks;
+        if (!weeks) continue;
+        let financials;
+        try { financials = JSON.parse(row.financials_json || '{}'); } catch { financials = {}; }
+        if (!financials.tuition2026 || financials.tuition2026.estimatedWeeks === weeks) continue;
+        financials.tuition2026.estimatedWeeks = weeks;
+        updateCourse.run(JSON.stringify(financials), row.id);
+      }
+
+      // Add detail from the profile appendices to existing articles only once.
+      const appendProgramSection = db.prepare("SELECT id,content FROM programs WHERE slug=? LIMIT 1");
+      const updateProgramSection = db.prepare("UPDATE programs SET content=?,updated_at=datetime('now','localtime') WHERE id=?");
+      const articleAddenda = [
+        {
+          slug: 'chi-phi-du-hoc-han-quoc-2026-2027', marker: '<!-- profile-cost-inclusions-2026 -->',
+          html: `<!-- profile-cost-inclusions-2026 -->
+            <h2>Phạm vi khoản phí theo phụ lục</h2>
+            <h3>Các hạng mục đã gồm trong gói</h3>
+            <ul><li>Tư vấn lộ trình; hai bộ hồ sơ tiêu chuẩn gồm một bộ nộp trường và một bộ xin thị thực.</li>
+            <li>Sao y, dịch tiếng Anh, công chứng và hợp pháp hóa giấy tờ theo phạm vi bộ hồ sơ tiêu chuẩn.</li>
+            <li>Hỗ trợ quy trình xin thị thực; phí tiếp nhận KVAC, lệ phí thị thực, một lần khám sức khỏe tiêu chuẩn và chuyển phát hồ sơ tiêu chuẩn.</li>
+            <li>Đào tạo tiếng Hàn: D4-1 và E-Visa 32 triệu đồng; D2-1 và D2-6 64 triệu đồng. Gói D2-2 chỉ gồm dịch vụ hồ sơ, không gồm đào tạo tiếng.</li></ul>
+            <h3>Các khoản thanh toán riêng</h3>
+            <ul><li>Học phí đại học/tiếng tại trường Hàn Quốc, ký túc xá, bảo hiểm, khoản thu khác của trường và phí chuyển tiền.</li>
+            <li>TOPIK, vé máy bay, đi lại tại Hàn Quốc, ăn uống và sinh hoạt cá nhân.</li>
+            <li>Chứng minh tài chính hoặc duy trì số dư; khám lại; giấy tờ phát sinh ngoài bộ tiêu chuẩn; lớp TOPIK bổ sung ngoài phần khóa học đã bao gồm.</li>
+            <li>Hoạt động nhóm tự nguyện nếu có thông báo trước; chi phí cá nhân khác.</li></ul>
+            <p>Trường hợp phát sinh ngoài phạm vi tiêu chuẩn, phụ lục yêu cầu trao đổi và ghi rõ nội dung, số tiền, đơn vị nhận và thời hạn thanh toán; người học cần nhận chứng từ thu. Việc chờ lịch hoặc chuyến bay thay đổi không tự động làm phát sinh học phí trường; hãy căn cứ thông báo bằng văn bản của trường cho kỳ học cụ thể.</p>
+            <p><a href="/documents/sol-dream-profile-2026-2027.pdf">Tải hồ sơ giới thiệu SOL DREAM 2026–2027 (PDF) →</a></p>`
+        },
+        {
+          slug: 'lo-trinh-hoc-tieng-han-truoc-khi-du-hoc', marker: '<!-- profile-language-breakdown-2026 -->',
+          html: `<!-- profile-language-breakdown-2026 -->
+            <h2>Bảng phân bổ tiết học trong phụ lục 2026–2027</h2>
+            <p>Một tiết học dài 45 phút. Số tiết dưới đây là phân bổ kế hoạch trong hồ sơ; phần TOPIK ghi “đăng ký riêng” không tự động nằm trong tổng số tiết gói cơ bản.</p>
+            <div><table><thead><tr><th>Học phần</th><th>D4-1 / E-Visa</th><th>D2-1 / D2-6</th></tr></thead><tbody>
+            <tr><td>Sơ cấp 1A</td><td>110 tiết</td><td>110 tiết</td></tr><tr><td>Sơ cấp 1B</td><td>110 tiết</td><td>110 tiết</td></tr>
+            <tr><td>Sơ cấp 2A</td><td>220 tiết</td><td>220 tiết</td></tr><tr><td>Sơ cấp 2B</td><td>220 tiết</td><td>220 tiết</td></tr>
+            <tr><td>Trung cấp 1A</td><td>Không gồm</td><td>220 tiết</td></tr><tr><td>Phỏng vấn trường</td><td>55 tiết</td><td>55 tiết</td></tr>
+            <tr><td>Phỏng vấn lãnh sự</td><td>110 tiết</td><td>110 tiết</td></tr><tr><td>TOPIK I cấp 2</td><td>Đăng ký riêng</td><td>120 tiết</td></tr>
+            <tr><td>TOPIK nâng cao/duy trì</td><td>Đăng ký riêng</td><td>Tối thiểu 240 tiết</td></tr>
+            <tr><th>Tổng kế hoạch</th><th>825 tiết</th><th>Tối thiểu 1.405 tiết</th></tr></tbody></table></div>
+            <p>Phụ lục nêu lịch chuẩn 55 tiết mỗi tuần và tối thiểu hai lần phỏng vấn mô phỏng. D4-1/E-Visa dự kiến tối đa bốn tháng; D2-1/D2-6 dự kiến 6–8 tháng. Thời gian thực tế phụ thuộc đầu vào, lịch học, kỳ tuyển sinh và kế hoạch của từng lớp.</p>`
+        }
+      ];
+      for (const item of articleAddenda) {
+        const row = appendProgramSection.get(item.slug);
+        if (row && !row.content.includes(item.marker)) updateProgramSection.run(`${row.content}\n${item.html}`, row.id);
+      }
+
+      const programSlug = 'cac-chuong-trinh-du-hoc-han-quoc-trong-ho-so-sol-dream-2026';
+      const existingProgram = db.prepare('SELECT id FROM programs WHERE slug=?').get(programSlug);
+      if (!existingProgram) {
+        const sortOrder = db.prepare("SELECT COALESCE(MAX(sort_order),0)+1 AS n FROM programs WHERE category='Chương trình du học'").get().n;
+        db.prepare(`INSERT INTO programs
+          (title,subtitle,slug,excerpt,content,category,cover,source_urls,author_name,author_role,author_url,seo_title,meta_description,focus_keyword,noindex,sort_order,published,created_at,updated_at)
+          VALUES (@title,'',@slug,@excerpt,@content,'Chương trình du học','p2',@source_urls,'Ban biên tập SOL DREAM EDUCATION','Biên soạn theo hồ sơ 2026–2027 và đối chiếu Study in Korea','/gioi-thieu',@seo_title,@meta_description,@focus_keyword,0,@sort_order,1,datetime('now','localtime'),datetime('now','localtime'))`)
+          .run({
+            title: 'Các chương trình du học Hàn Quốc trong hồ sơ SOL DREAM 2026–2027',
+            slug: programSlug,
+            excerpt: 'Đối chiếu lộ trình D4-1, D2-1, D2-6, D2-2 và E-Visa (D2-3) theo bậc học, phần tiếng Hàn, khoản phí trong hồ sơ và điều kiện cần xác nhận với trường.',
+            content: `<p>Hồ sơ giới thiệu SOL DREAM EDUCATION 2026–2027 trình bày năm lộ trình. Mã chương trình chính thức, điều kiện tiếp nhận và thị thực cần đối chiếu với trường và cơ quan có thẩm quyền ở kỳ nộp hồ sơ; “E-Visa” là tên gói tư vấn trong hồ sơ, còn mã học thạc sĩ tương ứng được ghi là D-2-3.</p>
+              <div><table><thead><tr><th>Lộ trình</th><th>Mục tiêu theo hồ sơ</th><th>Phần tiếng trong gói</th><th>Tổng phí tại Việt Nam</th></tr></thead><tbody>
+              <tr><td>D4-1</td><td>Học tiếng Hàn tại trường</td><td>32 triệu đồng · kế hoạch 825 tiết</td><td>90,32 triệu đồng</td></tr>
+              <tr><td>D2-1</td><td>Cao đẳng</td><td>64 triệu đồng · tối thiểu 1.405 tiết</td><td>122,32 triệu đồng</td></tr>
+              <tr><td>D2-6</td><td>Trao đổi sinh viên qua chương trình BKC và trường tiếp nhận</td><td>64 triệu đồng · tối thiểu 1.405 tiết</td><td>142,72 triệu đồng, gồm 15 triệu đồng học phí một kỳ tại BKC theo phụ lục</td></tr>
+              <tr><td>D2-2</td><td>Cử nhân/đại học</td><td>Không gồm khóa tiếng Hàn trong gói</td><td>58,32 triệu đồng</td></tr>
+              <tr><td>E-Visa · D2-3</td><td>Thạc sĩ dành cho người đã tốt nghiệp đại học</td><td>32 triệu đồng · kế hoạch 825 tiết</td><td>94,64 triệu đồng</td></tr></tbody></table></div>
+              <p>Các tổng phí là số liệu trong hồ sơ cho dịch vụ, quản lý, đào tạo tiếng và khoản BKC được nêu ở từng gói; không phải tổng chi phí du học. Học phí trường Hàn Quốc, nơi ở, bảo hiểm theo yêu cầu trường, vé máy bay, sinh hoạt và khoản riêng được tách tại <a href="/du-hoc/chi-phi-du-hoc-han-quoc-2026-2027">bài chi phí du học</a>. Xem thêm <a href="/du-hoc/lo-trinh-hoc-tieng-han-truoc-khi-du-hoc">bảng tiết học</a> và <a href="/truong-dai-hoc">danh sách trường đối tác</a>.</p>
+              <h2>Lưu ý riêng cho từng lộ trình</h2>
+              <ul><li><strong>D4-1:</strong> lộ trình học tiếng tại cơ sở đào tạo tiếp nhận; thời lượng và yêu cầu đầu vào do trường quy định.</li>
+              <li><strong>D2-1:</strong> chương trình cao đẳng. Hồ sơ SOL DREAM mô tả cơ hội thực tập có lương từ học kỳ 2 hoặc 3 tùy trường, ngành và quy định áp dụng; đây không phải cam kết về việc làm hay thu nhập.</li>
+              <li><strong>D2-6:</strong> chương trình trao đổi cần xác nhận tình trạng sinh viên, thỏa thuận giữa trường cử đi và trường tiếp nhận, lịch học cùng các khoản phải trả cho kỳ cụ thể.</li>
+              <li><strong>D2-2:</strong> hệ cử nhân; gói dịch vụ trong hồ sơ không gồm học tiếng. Hãy kiểm tra yêu cầu ngôn ngữ trực tiếp với ngành và trường.</li>
+              <li><strong>E-Visa / D2-3:</strong> gói tư vấn thạc sĩ cho người đã có bằng đại học. Hồ sơ giới thiệu lịch học linh hoạt và không yêu cầu học tiếng trước trong một số trường hợp; điều kiện ngoại ngữ thực tế phụ thuộc trường, ngành và chương trình.</li></ul>
+              <h2>Thực tập và việc làm tại Hàn Quốc</h2>
+              <p>Việc sinh viên quốc tế làm thêm hoặc thực tập có lương phụ thuộc tình trạng lưu trú, trình độ tiếng Hàn, xác nhận của trường và giấy phép cần thiết trước khi bắt đầu. Không nên tính thu nhập dự kiến như khoản chắc chắn để bù học phí. Hãy xin xác nhận của văn phòng sinh viên quốc tế và cơ quan xuất nhập cảnh cho trường hợp cụ thể.</p>
+              <p><a href="https://was3.studyinkorea.go.kr/ko/work/aboutForeignerEmploymentSystem.do?tab=part-time">Study in Korea: điều kiện làm thêm của sinh viên quốc tế</a> · <a href="https://studyinkorea.go.kr/ko/life/residenceAndStayInfo.do?tab=job-seeker-visa">Study in Korea: quy định lưu trú và việc làm</a>.</p>
+              <p class="source-meta">Chi phí và cấu trúc gói được trích từ hồ sơ SOL DREAM EDUCATION 2026–2027, áp dụng đến khi có thông báo mới. Mức phí, kỳ tuyển sinh, điều kiện trường và chính sách thị thực cần xác nhận lại bằng văn bản trước khi đăng ký.</p>`,
+            source_urls: 'https://studyinkorea.go.kr/en_US/plan/visaAndStay.do\nhttps://was3.studyinkorea.go.kr/ko/work/aboutForeignerEmploymentSystem.do?tab=part-time\nhttps://studyinkorea.go.kr/ko/life/residenceAndStayInfo.do?tab=job-seeker-visa',
+            seo_title: 'Các chương trình du học Hàn Quốc SOL DREAM 2026–2027',
+            meta_description: 'So sánh D4-1, D2-1, D2-6, D2-2 và E-Visa/D2-3 theo hồ sơ SOL DREAM: mục tiêu, học tiếng, tổng phí và điều kiện cần xác nhận.',
+            focus_keyword: 'chương trình du học Hàn Quốc D4-1 D2-1 D2-2 D2-3 D2-6',
+            sort_order: sortOrder
+          });
+      }
+
+      db.prepare('INSERT INTO system_meta (key,value,updated_at) VALUES (?,?,datetime(\'now\',\'localtime\'))')
+        .run(migrationKey, '1');
+    })();
+    console.log('[db] completed 2026-2027 profile information mapping');
+  }
+}
+
 module.exports = db;

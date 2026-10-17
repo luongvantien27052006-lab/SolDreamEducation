@@ -21,6 +21,7 @@
       <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th>Hạng mục</th><th>Thông tin lớp</th></tr></thead><tbody>
         <tr><td>Mã lớp</td><td><%= spec.code %></td></tr>
         <tr><td>Số buổi</td><td><%= spec.sessions %> buổi, mỗi buổi <%= spec.minutesPerSession %> phút (<%= spec.totalHours %> giờ)</td></tr>
+        <tr><td>Lịch học dự kiến</td><td><%= spec.estimatedWeeks %> tuần, theo lịch chuẩn 3 buổi/tuần; thời lượng thực tế có thể điều chỉnh theo lịch lớp</td></tr>
         <tr><td>Cơ cấu giáo viên</td><td><%= spec.instructors %></td></tr>
         <tr><td>Sĩ số</td><td><%= spec.classSize %> học viên; tối thiểu <%= spec.minimumStudents %> học viên để mở lớp</td></tr>
         <tr><td>Tài liệu</td><td><%= spec.materials %></td></tr>
