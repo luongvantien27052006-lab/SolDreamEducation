@@ -2,18 +2,23 @@
 <section class="section" style="padding-top:56px">
   <div class="wrap">
     <nav class="crumbs" aria-label="breadcrumb" style="font-size:14px;color:var(--muted);margin-bottom:14px">
-      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span> <span>Cẩm nang du học Hàn Quốc</span>
+      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span> <span><%= currentTopic ? currentTopic.label : 'Cẩm nang & Thông tin' %></span>
     </nav>
     <div class="sec-head">
-      <span class="eyebrow">Cẩm nang du học</span>
-      <h1>Cẩm nang &amp; câu chuyện du học Hàn Quốc</h1>
-      <p>Kinh nghiệm, văn hóa và những chia sẻ thật từ hành trình du học Hàn.</p>
+      <span class="eyebrow">Cẩm nang &amp; Thông tin</span>
+      <h1><%= currentTopic ? currentTopic.label : 'Cẩm nang & Thông tin' %></h1>
+      <p><%= currentTopic ? currentTopic.description : 'Thông tin Hàn Quốc, cẩm nang sinh hoạt và hoạt động SOL DREAM được phân theo từng chủ đề để bạn dễ tìm.' %></p>
       <div class="source-meta"><strong>Đơn vị tư vấn và cung cấp thông tin:</strong> SOL DREAM EDUCATION · Nội dung được cập nhật theo từng chủ đề</div>
     </div>
     <section class="direct-answer list-direct-answer" aria-label="Giới thiệu thư viện tin tức">
       <p class="direct-answer__label">Trả lời nhanh</p>
-      <p><strong>Cẩm nang của SOL DREAM EDUCATION</strong> hỗ trợ học viên học tiếng, chọn ngành, chuẩn bị hồ sơ và thích nghi với đời sống tại Hàn Quốc. Mỗi nội dung ghi rõ ngày cập nhật và đơn vị phụ trách để học viên kiểm tra độ mới trước khi áp dụng.</p>
+      <p><strong>Bài viết của SOL DREAM EDUCATION</strong> được xếp vào ba chủ đề bên dưới. Chọn một chủ đề để xem đúng nội dung bạn cần; mỗi bài có ngày cập nhật và nguồn thông tin để đối chiếu.</p>
     </section>
+    <nav class="topic-tabs" aria-label="Chọn chủ đề bài viết">
+      <a href="/tin-tuc" class="<%= !selectedTopic ? 'is-active' : '' %>" aria-current="<%= !selectedTopic ? 'page' : 'false' %>">Tất cả <span><%= Object.values(topicCounts).reduce((total, count) => total + count, 0) %></span></a>
+      <% topics.forEach(function(topic) { %><a href="/tin-tuc?muc=<%= topic.id %>" class="<%= selectedTopic === topic.id ? 'is-active' : '' %>" aria-current="<%= selectedTopic === topic.id ? 'page' : 'false' %>"><%= topic.label %> <span><%= topicCounts[topic.id] || 0 %></span></a><% }); %>
+    </nav>
+    <% if (selectedTopic === 'cam-nang-sinh-hoat') { %><aside class="topic-feature"><strong>Cần một điểm bắt đầu?</strong> <a href="/cuoc-song-han-quoc">Xem cẩm nang sinh hoạt tại Hàn Quốc theo từng chủ đề →</a></aside><% } %>
     <div class="news-grid">
       <% posts.forEach(function(p){ %>
       <a class="post" href="/tin-tuc/<%= p.slug %>">
@@ -21,13 +26,13 @@
           <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= p.cover_image || '/img/research-cover.svg' %>" alt="<%= p.title %>" loading="lazy">
           <div class="post__date"><b><%= p.day %></b><span><%= p.monthYear %></span></div>
         </div>
-        <div class="post__body"><span class="post__cat"><%= p.category %></span>
+        <div class="post__body"><span class="post__cat"><%= p.topicLabel %></span>
           <h3><%= p.title %></h3>
           <p class="section-lead"><%= p.geoBluf %></p>
         </div>
       </a>
       <% }); %>
-      <% if (posts.length === 0) { %><p>Chưa có bài viết nào.</p><% } %>
+      <% if (posts.length === 0) { %><p>Chưa có bài viết trong chủ đề này.</p><% } %>
     </div>
   </div>
 </section>

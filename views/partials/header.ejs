@@ -15,17 +15,37 @@
         <li><a href="/gioi-thieu">Giới thiệu</a></li>
         <li><a href="/khoa-hoc">Khóa học <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
           <div class="dropdown">
+            <a href="/khoa-hoc">Tất cả khóa học và học phí</a>
+            <a href="/khoa-hoc#tuition-foundation">Sơ cấp &amp; trung cấp</a>
+            <a href="/khoa-hoc#tuition-topik">Luyện thi TOPIK</a>
+            <a href="/khoa-hoc#tuition-speaking">Giao tiếp &amp; phát âm</a>
+            <span class="dropdown__label">Từng khóa học</span>
             <% (typeof navigationCourses !== 'undefined' ? navigationCourses : []).forEach(function(course){ %>
               <a href="<%= course.url %>"><%= course.name %></a>
             <% }) %>
           </div>
         </li>
-        <li><a href="/du-hoc">Du học Hàn Quốc</a></li>
-        <li><a href="/truong-dai-hoc">Thông tin trường</a></li>
+        <li><a href="/du-hoc">Du học Hàn Quốc <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
+          <div class="dropdown">
+            <a href="/du-hoc">Tất cả chương trình và bài hướng dẫn</a>
+            <a href="/du-hoc/cac-chuong-trinh-du-hoc-han-quoc-trong-ho-so-sol-dream-2026">Các lộ trình du học</a>
+            <a href="/du-hoc/chi-phi-du-hoc-han-quoc-2026-2027">Chi phí và lịch thanh toán</a>
+            <a href="/du-hoc/phan-biet-visa-du-hoc-han-quoc-d4-1-d2">Hồ sơ &amp; visa</a>
+            <a href="/du-hoc/lo-trinh-hoc-tieng-han-truoc-khi-du-hoc">Chuẩn bị tiếng Hàn</a>
+          </div>
+        </li>
+        <li><a href="/truong-dai-hoc">Thông tin trường <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
+          <div class="dropdown">
+            <a href="/truong-dai-hoc#partner-schools-title">Trường đối tác SOL DREAM</a>
+            <a href="/truong-dai-hoc#admin-school-title">Hồ sơ và thông tin trường</a>
+            <a href="/du-hoc/hoc-phi-truong-doi-tac-han-quoc-2026">Học phí tiếng và đại học</a>
+          </div>
+        </li>
         <li><a href="/tin-tuc">Cẩm nang &amp; Thông tin <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
           <div class="dropdown">
-            <a href="/tin-tuc">Cẩm nang du học</a>
-            <a href="/cuoc-song-han-quoc">Sinh hoạt tại Hàn Quốc</a>
+            <a href="/tin-tuc?muc=thong-tin-han-quoc">Thông tin Hàn Quốc</a>
+            <a href="/tin-tuc?muc=cam-nang-sinh-hoat">Cẩm nang sinh hoạt</a>
+            <a href="/tin-tuc?muc=hoat-dong-soldream">Hoạt động SolDream</a>
           </div>
         </li>
         <li><a href="/cau-hoi-thuong-gap">FAQ</a></li>

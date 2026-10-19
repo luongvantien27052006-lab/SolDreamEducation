@@ -267,10 +267,15 @@
 <section class="section news" id="tintuc">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Cẩm nang du học</span>
-      <h2>Cẩm nang &amp; câu chuyện <span class="accent">du học Hàn</span></h2>
+      <span class="eyebrow">Cẩm nang &amp; Thông tin</span>
+      <h2>Thông tin hữu ích cho <span class="accent">hành trình du học Hàn</span></h2>
       <p class="section-lead">Cẩm nang của SOL DREAM EDUCATION hỗ trợ học viên học tiếng, chọn trường, chuẩn bị hồ sơ và thích nghi với đời sống Hàn Quốc. Các thông tin dễ thay đổi như visa, chi phí và tuyển sinh sẽ được chuyên viên xác nhận theo thời điểm và hồ sơ cụ thể.</p>
     </div>
+    <nav class="topic-tabs" aria-label="Chủ đề cẩm nang">
+      <a href="/tin-tuc?muc=thong-tin-han-quoc">Thông tin Hàn Quốc</a>
+      <a href="/tin-tuc?muc=cam-nang-sinh-hoat">Cẩm nang sinh hoạt</a>
+      <a href="/tin-tuc?muc=hoat-dong-soldream">Hoạt động SolDream</a>
+    </nav>
     <div class="news-grid">
       <% posts.forEach(function(p){ %>
       <a class="post reveal" href="/tin-tuc/<%= p.slug %>">
@@ -278,7 +283,7 @@
           <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= p.cover_image || '/img/research-cover.svg' %>" alt="<%= p.title %>" loading="lazy">
           <div class="post__date"><b><%= p.day %></b><span><%= p.monthYear %></span></div>
         </div>
-        <div class="post__body"><span class="post__cat"><%= p.category %></span>
+        <div class="post__body"><span class="post__cat"><%= p.topicLabel %></span>
           <h3><%= p.title %></h3>
           <p class="section-lead"><%= p.geoBluf %></p>
         </div>

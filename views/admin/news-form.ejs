@@ -1,6 +1,6 @@
 <div class="adm__head">
-  <div><h1><%= mode==='create' ? 'Thêm bài viết' : 'Sửa bài viết' %></h1><p>Nội dung sẽ hiển thị trong Cẩm nang du học Hàn Quốc trên website.</p></div>
-  <a class="btn2 btn2-ghost" href="/admin/tin-tuc">← Quay lại</a>
+  <div><h1><%= mode==='create' ? 'Thêm bài viết' : 'Sửa bài viết' %></h1><p>Chọn chủ đề để bài hiện đúng tab trên website.</p></div>
+  <a class="btn2 btn2-ghost" href="/admin/tin-tuc?muc=<%= post.topic || '' %>">← Quay lại</a>
 </div>
 <% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
 <% if (typeof notice !== 'undefined' && notice) { %><div class="flash"><%= notice %></div><% } %>
@@ -11,8 +11,10 @@
   </div>
   <div class="row2">
     <div class="f">
-      <label>Danh mục</label>
-      <input name="category" value="<%= post.category || 'Tin tức' %>" placeholder="Tin tức / Cẩm nang / Câu chuyện">
+      <label for="post-topic">Chủ đề hiển thị</label>
+      <select id="post-topic" name="topic" required>
+        <% topics.forEach(function(topic) { %><option value="<%= topic.id %>" <%= (post.topic || topics[0].id) === topic.id ? 'selected' : '' %>><%= topic.label %></option><% }); %>
+      </select>
     </div>
     <div class="f">
       <label>Đường dẫn (slug) — để trống sẽ tự tạo</label>

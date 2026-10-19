@@ -2,6 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 const Database = require('better-sqlite3');
+const { inferTopic, normalizeTopic, topicLabel } = require('../lib/contentTopics');
 
 const DB_PATH = process.env.DATABASE_PATH || path.join(__dirname, 'data.sqlite');
 fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
@@ -19,6 +20,7 @@ CREATE TABLE IF NOT EXISTS posts (
   excerpt    TEXT NOT NULL DEFAULT '',
   content    TEXT NOT NULL DEFAULT '',
   category   TEXT NOT NULL DEFAULT 'Tin tức',
+  topic      TEXT NOT NULL DEFAULT 'thong-tin-han-quoc',
   cover      TEXT NOT NULL DEFAULT 'p1',
   cover_image TEXT,
   author_name TEXT NOT NULL DEFAULT '',
@@ -134,6 +136,7 @@ CREATE TABLE IF NOT EXISTS research_items (
   published_at TEXT NOT NULL DEFAULT '',
   fingerprint TEXT NOT NULL UNIQUE,
   suggested_section TEXT NOT NULL DEFAULT 'Cẩm nang & Thông tin',
+  topic TEXT NOT NULL DEFAULT 'thong-tin-han-quoc',
   quality_score INTEGER NOT NULL DEFAULT 0,
   optimization_note TEXT NOT NULL DEFAULT '',
   media_json TEXT NOT NULL DEFAULT '{}',
@@ -301,6 +304,8 @@ if (!_cols.includes('cover_image')) {
   db.exec("ALTER TABLE posts ADD COLUMN cover_image TEXT");
   console.log('[db] migrated: added posts.cover_image');
 }
+if (!_cols.includes('topic')) db.exec("ALTER TABLE posts ADD COLUMN topic TEXT NOT NULL DEFAULT 'thong-tin-han-quoc'");
+db.exec('CREATE INDEX IF NOT EXISTS idx_posts_topic_public ON posts(topic,published,created_at)');
 for (const column of ['author_name', 'author_role', 'source_urls']) {
   if (!_cols.includes(column)) db.exec(`ALTER TABLE posts ADD COLUMN ${column} TEXT NOT NULL DEFAULT ''`);
 }
@@ -328,6 +333,8 @@ if (!_faqCols.includes('origin_type')) db.exec("ALTER TABLE faqs ADD COLUMN orig
 if (!_faqCols.includes('origin_id')) db.exec("ALTER TABLE faqs ADD COLUMN origin_id TEXT NOT NULL DEFAULT ''");
 db.exec('CREATE INDEX IF NOT EXISTS idx_faqs_origin ON faqs(origin_type, origin_id, generated)');
 const _researchItemCols = db.prepare("PRAGMA table_info(research_items)").all().map(c => c.name);
+if (!_researchItemCols.includes('topic')) db.exec("ALTER TABLE research_items ADD COLUMN topic TEXT NOT NULL DEFAULT 'thong-tin-han-quoc'");
+db.exec('CREATE INDEX IF NOT EXISTS idx_research_topic_status ON research_items(topic,status,created_at)');
 if (!_researchItemCols.includes('quality_score')) db.exec('ALTER TABLE research_items ADD COLUMN quality_score INTEGER NOT NULL DEFAULT 0');
 if (!_researchItemCols.includes('optimization_note')) db.exec("ALTER TABLE research_items ADD COLUMN optimization_note TEXT NOT NULL DEFAULT ''");
 if (!_researchItemCols.includes('media_json')) db.exec("ALTER TABLE research_items ADD COLUMN media_json TEXT NOT NULL DEFAULT '{}'");
@@ -1305,6 +1312,49 @@ if (!db.prepare('SELECT 1 FROM faqs WHERE question=?').get(serviceFaqQuestion)) 
         .run(migrationKey, '1');
     })();
     console.log('[db] completed 2026-2027 profile information mapping');
+  }
+}
+
+// One public topic taxonomy for handbook posts and scanned source items.
+{
+  const migrationKey = 'content_topics_20261019_v1';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    db.transaction(() => {
+      const updatePost = db.prepare('UPDATE posts SET topic=? WHERE id=?');
+      for (const post of db.prepare('SELECT id,title,excerpt,category,topic FROM posts').all()) {
+        const topic = inferTopic(post);
+        if (post.topic !== topic) updatePost.run(topic, post.id);
+      }
+      const updateResearch = db.prepare('UPDATE research_items SET topic=? WHERE id=?');
+      for (const item of db.prepare(`SELECT i.id,i.title,i.excerpt,i.suggested_section,i.topic,p.topic AS post_topic
+        FROM research_items i LEFT JOIN posts p ON p.id=i.published_post_id`).all()) {
+        const topic = normalizeTopic(item.post_topic) || inferTopic(item);
+        if (item.topic !== topic) updateResearch.run(topic, item.id);
+      }
+      db.prepare("INSERT INTO system_meta (key,value,updated_at) VALUES (?,? ,datetime('now','localtime'))")
+        .run(migrationKey, '1');
+    })();
+  }
+}
+
+// Publish editorial articles for profile details that previously appeared only in
+// About tabs, school/course tables, or the downloadable document.
+{
+  const migrationKey = 'profile_editorial_articles_20261019_v1';
+  if (!db.prepare('SELECT 1 FROM system_meta WHERE key=?').get(migrationKey)) {
+    const articles = require('../data/profileArticles');
+    const existing = db.prepare('SELECT id FROM posts WHERE slug=?');
+    const insert = db.prepare(`INSERT INTO posts
+      (title,slug,excerpt,content,category,topic,cover,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,noindex,published,created_at,updated_at)
+      VALUES (@title,@slug,@excerpt,@content,@category,@topic,'p1',@cover_image,'SOL DREAM EDUCATION','Biên soạn từ hồ sơ giới thiệu 2026–2027','/gioi-thieu',@source_urls,@seo_title,@meta_description,@focus_keyword,0,1,'2026-10-19 12:00:00','2026-10-19 12:00:00')`);
+    db.transaction(() => {
+      for (const article of articles) {
+        if (existing.get(article.slug)) continue;
+        insert.run({ ...article, category: topicLabel(article.topic), cover_image: article.cover_image || null });
+      }
+      db.prepare("INSERT INTO system_meta (key,value,updated_at) VALUES (?,? ,datetime('now','localtime'))")
+        .run(migrationKey, String(articles.length));
+    })();
   }
 }
 

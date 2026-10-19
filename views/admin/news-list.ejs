@@ -1,13 +1,17 @@
 <div class="adm__head">
-  <div><h1>Cẩm nang du học</h1><p>Quản lý hướng dẫn, kinh nghiệm và thông tin hỗ trợ hành trình du học Hàn Quốc.</p></div>
-  <a class="btn2 btn2-primary" href="/admin/tin-tuc/moi">+ Thêm bài viết</a>
+  <div><h1>Cẩm nang &amp; Thông tin</h1><p>Bài đăng được xếp theo cùng ba chủ đề đang hiển thị trên website.</p></div>
+  <a class="btn2 btn2-primary" href="/admin/tin-tuc/moi<%= filters.topic ? '?muc=' + filters.topic : '' %>">+ Thêm bài viết</a>
 </div>
 <% if (flash) { %><div class="flash"><%= flash %></div><% } %>
-<form class="content-filters" method="get">
+<nav class="adm-topic-tabs" aria-label="Lọc bài đăng theo chủ đề">
+  <a href="/admin/tin-tuc" class="<%= !filters.topic ? 'on' : '' %>" aria-current="<%= !filters.topic ? 'page' : 'false' %>">Tất cả <span><%= Object.values(topicCounts).reduce((total, count) => total + count, 0) %></span></a>
+  <% topics.forEach(function(topic) { %><a href="/admin/tin-tuc?muc=<%= topic.id %>" class="<%= filters.topic === topic.id ? 'on' : '' %>" aria-current="<%= filters.topic === topic.id ? 'page' : 'false' %>"><%= topic.label %> <span><%= topicCounts[topic.id] || 0 %></span></a><% }); %>
+</nav>
+<form class="content-filters content-filters--news" method="get">
+  <input type="hidden" name="muc" value="<%= filters.topic %>">
   <input name="q" value="<%= filters.q %>" placeholder="Tìm theo tiêu đề hoặc nội dung…">
   <select name="status"><option value="all">Mọi trạng thái</option><option value="published" <%= filters.status==='published'?'selected':'' %>>Đang hiển thị</option><option value="draft" <%= filters.status==='draft'?'selected':'' %>>Bản nháp</option><option value="noindex" <%= filters.status==='noindex'?'selected':'' %>>Noindex</option></select>
-  <select name="category"><option value="">Mọi danh mục</option><% categories.forEach(function(category){ %><option value="<%= category %>" <%= filters.category===category?'selected':'' %>><%= category %></option><% }) %></select>
-  <button class="btn2 btn2-primary" type="submit">Lọc</button><a class="btn2 btn2-ghost" href="/admin/tin-tuc">Đặt lại</a>
+  <button class="btn2 btn2-primary" type="submit">Lọc</button><a class="btn2 btn2-ghost" href="/admin/tin-tuc<%= filters.topic ? '?muc=' + filters.topic : '' %>">Đặt lại</a>
 </form>
 <div class="panel">
   <div class="tbl-scroll">
@@ -17,7 +21,7 @@
       <% posts.forEach(function(p){ %>
         <tr>
           <td><strong><%= p.title %></strong><br><small class="muted">/tin-tuc/<%= p.slug %></small><% if (p.noindex) { %><br><small class="warning-text">Không lập chỉ mục</small><% } %></td>
-          <td><span class="tag"><%= p.category %></span></td>
+          <td><span class="tag"><%= p.topicLabel %></span></td>
           <td><span class="quality-badge <%= p.quality.score>=75?'good':(p.quality.score>=55?'medium':'low') %>"><%= p.quality.score %>/100</span><br><small class="muted"><%= p.quality.words %> từ · <%= p.quality.sourceCount %> nguồn</small></td>
           <td><%= p.updatedDateFull %></td>
           <td><% if (p.published) { %><span class="pill on">Hiển thị</span><% } else { %><span class="pill off">Ẩn</span><% } %></td>
@@ -36,4 +40,4 @@
   </table>
   </div>
 </div>
-<% if (pagination.pages > 1) { %><nav class="pagination"><% for(var page=1;page<=pagination.pages;page++){ %><a class="<%= page===pagination.page?'on':'' %>" href="?q=<%= encodeURIComponent(filters.q) %>&status=<%= filters.status %>&category=<%= encodeURIComponent(filters.category) %>&page=<%= page %>"><%= page %></a><% } %></nav><% } %>
+<% if (pagination.pages > 1) { %><nav class="pagination"><% for(var page=1;page<=pagination.pages;page++){ %><a class="<%= page===pagination.page?'on':'' %>" href="?q=<%= encodeURIComponent(filters.q) %>&status=<%= filters.status %>&muc=<%= filters.topic %>&page=<%= page %>"><%= page %></a><% } %></nav><% } %>

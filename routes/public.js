@@ -17,6 +17,7 @@ const { INDEXNOW_KEY } = require('../lib/indexNow');
 const { generateLlmsTxt } = require('../lib/llms');
 const { getHomepageStats, getHomepageStatsSource } = require('../lib/homepageStats');
 const { getAboutSections } = require('../lib/aboutContent');
+const { TOPICS, normalizeTopic } = require('../lib/contentTopics');
 const koreaLife = require('../data/korea-life.json');
 const partnerSchools = require('../data/partner-schools.json').schools;
 
@@ -303,27 +304,40 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
 
 // News listing
 router.get('/tin-tuc', (req, res) => {
-  const posts = db.prepare(`SELECT * FROM posts WHERE published = 1
-    ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC`)
-    .all(PINNED_NEWS_POST_SLUG).map(decorate);
-  const url = abs('/tin-tuc');
+  const selectedTopic = normalizeTopic(req.query.muc);
+  const currentTopic = TOPICS.find((topic) => topic.id === selectedTopic) || null;
+  const posts = selectedTopic
+    ? db.prepare(`SELECT * FROM posts WHERE published = 1 AND topic = ?
+      ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC`)
+      .all(selectedTopic, PINNED_NEWS_POST_SLUG).map(decorate)
+    : db.prepare(`SELECT * FROM posts WHERE published = 1
+      ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC`)
+      .all(PINNED_NEWS_POST_SLUG).map(decorate);
+  const topicCounts = Object.fromEntries(db.prepare('SELECT topic, COUNT(*) count FROM posts WHERE published=1 GROUP BY topic').all()
+    .map((row) => [row.topic, row.count]));
+  const url = abs(selectedTopic ? `/tin-tuc?muc=${selectedTopic}` : '/tin-tuc');
+  const pageName = currentTopic?.label || 'Cẩm nang & Thông tin';
+  const pageDescription = currentTopic?.description || 'Cẩm nang, kinh nghiệm và câu chuyện du học Hàn Quốc từ SOL DREAM EDUCATION.';
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org', '@graph': [{
     '@type': 'CollectionPage', '@id': `${url}#page`, url,
-    name: 'Tin tức và cẩm nang từ SOL DREAM EDUCATION',
-    description: 'Cẩm nang, kinh nghiệm và câu chuyện du học Hàn Quốc từ SOL DREAM EDUCATION.',
+    name: `${pageName} | SOL DREAM EDUCATION`,
+    description: pageDescription,
     inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` }, publisher: { '@id': `${SITE_URL}/#organization` },
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: posts.map((post, index) => ({
         '@type': 'ListItem', position: index + 1, name: post.title, url: abs(`/tin-tuc/${post.slug}`),
       })),
-    }}, generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Cẩm nang du học', url: '/tin-tuc' }])],
+    }}, generateBreadcrumbSchema([
+      { name: 'Trang chủ', url: '/' }, { name: 'Cẩm nang & Thông tin', url: '/tin-tuc' },
+      ...(currentTopic ? [{ name: currentTopic.label, url: `/tin-tuc?muc=${selectedTopic}` }] : []),
+    ])],
   });
   res.render('news-list', {
-    posts,
-    title: 'Cẩm nang du học Hàn Quốc | SOL DREAM EDUCATION',
-    description: 'Cẩm nang, kinh nghiệm và câu chuyện du học Hàn Quốc từ Trung tâm Hàn ngữ Sol Dream Education.',
+    posts, topics: TOPICS, selectedTopic, currentTopic, topicCounts,
+    title: `${pageName} | SOL DREAM EDUCATION`,
+    description: pageDescription,
     canonical: url,
     jsonLd,
   });
@@ -339,7 +353,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
   const ogImg = post.cover_image ? abs(post.cover_image) : (process.env.OG_IMAGE || (SITE_URL + '/img/logo.png'));
   const publishedTime = isoDateTime(post.created_at);
   const modifiedTime = isoDateTime(post.updated_at || post.created_at);
-  const relatedPosts = db.prepare('SELECT * FROM posts WHERE published = 1 AND id != ? ORDER BY CASE WHEN category = ? THEN 0 ELSE 1 END, datetime(updated_at) DESC LIMIT 3').all(post.id, post.category).map(decorate);
+  const relatedPosts = db.prepare('SELECT * FROM posts WHERE published = 1 AND id != ? ORDER BY CASE WHEN topic = ? THEN 0 ELSE 1 END, datetime(updated_at) DESC LIMIT 3').all(post.id, post.topic).map(decorate);
   const relatedFaqs = getRelatedFaqs('post', post.id);
   setFreshnessHeaders(res, post.updated_at || post.created_at);
   const jsonLd = jsonLdScript({
@@ -347,12 +361,12 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
     '@graph': [
       { '@type': 'BreadcrumbList', itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: abs('/') },
-        { '@type': 'ListItem', position: 2, name: 'Cẩm nang du học', item: abs('/tin-tuc') },
+        { '@type': 'ListItem', position: 2, name: post.topicLabel, item: abs(`/tin-tuc?muc=${post.topic}`) },
         { '@type': 'ListItem', position: 3, name: post.title, item: url },
       ] },
       {
         '@type': 'Article', '@id': `${url}#article`, headline: post.title,
-        description: post.excerpt, image: [ogImg], articleSection: post.category,
+        description: post.excerpt, image: [ogImg], articleSection: post.topicLabel,
         wordCount: post.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true,
         datePublished: publishedTime,
         dateModified: modifiedTime,
@@ -577,7 +591,7 @@ router.get('/sitemap.xml', (req, res) => {
 });
 
 router.get('/feed.xml', (req, res) => {
-  const posts = db.prepare('SELECT title, slug, excerpt, content, category, updated_at, created_at FROM posts WHERE published = 1 AND noindex = 0').all();
+  const posts = db.prepare('SELECT title, slug, excerpt, content, category, topic, updated_at, created_at FROM posts WHERE published = 1 AND noindex = 0').all();
   const programs = db.prepare('SELECT title, slug, excerpt, content, category, updated_at, created_at FROM programs WHERE published = 1 AND noindex = 0').all();
   res.set('Cache-Control', 'public, max-age=900').type('application/rss+xml').send(generateRssXml({ posts, programs }));
 });

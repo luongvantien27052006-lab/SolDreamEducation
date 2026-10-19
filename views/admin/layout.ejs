@@ -18,6 +18,7 @@
     <nav class="adm__nav">
       <a href="/admin" class="<%= active==='dashboard'?'on':'' %>">📊 Bảng điều khiển</a>
       <a href="/admin/tin-tuc" class="<%= active==='news'?'on':'' %>">📰 Cẩm nang &amp; Thông tin</a>
+      <% if (active === 'news') { %><div class="adm__subnav"><% contentTopics.forEach(function(topic) { %><a href="/admin/tin-tuc?muc=<%= topic.id %>"><%= topic.label %></a><% }); %></div><% } %>
       <a href="/admin/khoa-hoc" class="<%= active==='courses'?'on':'' %>">📚 Khóa học</a>
       <a href="/admin/du-hoc?category=Chương trình du học" class="<%= active==='programs'?'on':'' %>">🎓 Du học Hàn Quốc</a>
       <a href="/admin/du-hoc?category=Thông tin trường" class="<%= active==='schools'?'on':'' %>">🏫 Thông tin trường</a>
@@ -26,6 +27,7 @@
       <a href="/admin/so-lieu-trang-chu" class="<%= active==='homepage-stats'?'on':'' %>">🔢 Số liệu trang chủ</a>
       <a href="/admin/gioi-thieu" class="<%= active==='about'?'on':'' %>">🪪 Giới thiệu website</a>
       <a href="/admin/nghien-cuu" class="<%= active==='research'?'on':'' %>">🤖 Dữ liệu &amp; AI</a>
+      <% if (active === 'research') { %><div class="adm__subnav"><% contentTopics.forEach(function(topic) { %><a href="/admin/nghien-cuu?muc=<%= topic.id %>"><%= topic.label %></a><% }); %></div><% } %>
       <a href="/admin/popup" class="<%= active==='popup'?'on':'' %>">▣ Pop-up</a>
       <a href="/admin/lien-he" class="<%= active==='leads'?'on':'' %>">☎ Yêu cầu liên hệ</a>
       <a href="/" target="_blank">🌐 Xem website</a>

@@ -18,6 +18,7 @@ const { finalizePublishedContent, removePublishedContent } = require('../lib/pub
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent');
 const { UPLOADS_DIR } = require('../lib/storagePaths');
+const { TOPICS, normalizeTopic, topicLabel } = require('../lib/contentTopics');
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || (process.env.NODE_ENV === 'production' ? '' : 'soldream@2026');
 const layout = 'admin/layout';
@@ -26,6 +27,7 @@ const loginAttempts = new Map();
 if (!ADMIN_PASSWORD) throw new Error('ADMIN_PASSWORD bắt buộc phải được cấu hình trong môi trường production.');
 
 router.use((req, res, next) => {
+  res.locals.contentTopics = TOPICS;
   if (req.method !== 'POST') return next();
   if (req.get('sec-fetch-site') === 'cross-site') return res.status(403).send('Yêu cầu quản trị không hợp lệ.');
   const origin = req.get('origin');
@@ -158,6 +160,7 @@ function listContent(table, req, orderBy) {
   const q = String(req.query.q || '').trim().slice(0, 120);
   const status = ['published', 'draft', 'noindex'].includes(req.query.status) ? req.query.status : 'all';
   const category = String(req.query.category || '').trim().slice(0, 80);
+  const topic = table === 'posts' ? normalizeTopic(req.query.muc) : '';
   const page = Math.max(1, Number.parseInt(req.query.page, 10) || 1);
   const perPage = 20;
   const where = [];
@@ -167,13 +170,14 @@ function listContent(table, req, orderBy) {
   if (status === 'draft') where.push('published = 0');
   if (status === 'noindex') where.push('noindex = 1');
   if (category) { where.push('category = ?'); params.push(category); }
+  if (topic) { where.push('topic = ?'); params.push(topic); }
   const clause = where.length ? `WHERE ${where.join(' AND ')}` : '';
   const total = db.prepare(`SELECT COUNT(*) c FROM ${table} ${clause}`).get(...params).c;
   const pages = Math.max(1, Math.ceil(total / perPage));
   const currentPage = Math.min(page, pages);
   const rows = db.prepare(`SELECT * FROM ${table} ${clause} ORDER BY ${orderBy} LIMIT ? OFFSET ?`).all(...params, perPage, (currentPage - 1) * perPage).map(withQuality);
   const categories = db.prepare(`SELECT DISTINCT category FROM ${table} WHERE category != '' ORDER BY category`).all().map((row) => row.category);
-  return { rows, categories, filters: { q, status, category }, pagination: { page: currentPage, pages, total } };
+  return { rows, categories, filters: { q, status, category, topic }, pagination: { page: currentPage, pages, total } };
 }
 
 function uniqueCourseSlug(base, ignoreId = '') {
@@ -297,28 +301,31 @@ router.get('/', requireAdmin, (req, res) => {
 // ---------- News CRUD ----------
 router.get('/tin-tuc', requireAdmin, (req, res) => {
   const result = listContent('posts', req, 'datetime(updated_at) DESC, id DESC');
-  res.render('admin/news-list', { layout, title: 'Quản lý tin tức', active: 'news', posts: result.rows, categories: result.categories, filters: result.filters, pagination: result.pagination, flash: req.query.flash || null });
+  const topicCounts = Object.fromEntries(db.prepare('SELECT topic,COUNT(*) count FROM posts GROUP BY topic').all().map((row) => [row.topic, row.count]));
+  res.render('admin/news-list', { layout, title: 'Quản lý tin tức', active: 'news', posts: result.rows, topics: TOPICS, topicCounts, categories: result.categories, filters: result.filters, pagination: result.pagination, flash: req.query.flash || null });
 });
 
 router.get('/tin-tuc/moi', requireAdmin, (req, res) => {
-  res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { category: 'Tin tức', cover: 'p1', published: 1, publication_date: req.query.date || '' }, error: null });
+  const topic = normalizeTopic(req.query.muc) || TOPICS[0].id;
+  res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { category: topicLabel(topic), topic, cover: 'p1', published: 1, publication_date: req.query.date || '' }, topics: TOPICS, error: null });
 });
 
 router.post('/tin-tuc/moi', requireAdmin, uploadCover, (req, res) => {
   const b = req.body;
-  const back = (error) => res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: b, error });
+  const topic = normalizeTopic(b.topic) || TOPICS[0].id;
+  const back = (error) => res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { ...b, topic }, topics: TOPICS, error });
   if (req.uploadError) { return back(req.uploadError); }
   if (!b.title || !b.title.trim()) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Vui lòng nhập tiêu đề.'); }
   const publicationDate = dateInputToLocalDateTime(b.publication_date);
   if (publicationDate === null) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Ngày đăng không hợp lệ. Vui lòng chọn ngày theo lịch.'); }
   const slug = uniqueSlug(db, b.slug && b.slug.trim() ? slugify(b.slug) : slugify(b.title));
   const coverImage = req.file ? '/uploads/' + req.file.filename : null;
-  const result = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,cover,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,noindex,published,created_at,updated_at)
-              VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,COALESCE(NULLIF(?,''),datetime('now','localtime')),datetime('now','localtime'))`)
-    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), (b.category||'Tin tức').trim(), b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '');
+  const result = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,topic,cover,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,noindex,published,created_at,updated_at)
+              VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,COALESCE(NULLIF(?,''),datetime('now','localtime')),datetime('now','localtime'))`)
+    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '');
   if (isEnabled(b.published)) finalizePublishedContent('post', result.lastInsertRowid, { notify: true });
   if (isEnabled(b.published) && !isEnabled(b.noindex)) queueIndexNow([`/tin-tuc/${slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
-  res.redirect('/admin/tin-tuc?flash=Đã thêm bài viết');
+  res.redirect(`/admin/tin-tuc?muc=${topic}&flash=Đã thêm bài viết`);
 });
 
 router.get('/tin-tuc/:id/sua', requireAdmin, (req, res, next) => {
@@ -329,14 +336,15 @@ router.get('/tin-tuc/:id/sua', requireAdmin, (req, res, next) => {
     : req.query.ai === '0'
       ? 'Bản nháp được tạo từ dữ kiện nguồn đã làm sạch vì AI hiện không khả dụng. Ghi chú xử lý được lưu riêng trong mục Nghiên cứu; hãy rà soát trước khi duyệt.'
       : null;
-  res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post, error: null, notice });
+  res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post, topics: TOPICS, error: null, notice });
 });
 
 router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   const existing = db.prepare('SELECT * FROM posts WHERE id = ?').get(req.params.id);
   if (!existing) { if (req.file) removeUpload('/uploads/' + req.file.filename); return next(); }
   const b = req.body;
-  const back = (error) => res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post: { ...existing, ...b }, error });
+  const topic = normalizeTopic(b.topic) || normalizeTopic(existing.topic) || TOPICS[0].id;
+  const back = (error) => res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post: { ...existing, ...b, topic }, topics: TOPICS, error });
   if (req.uploadError) { return back(req.uploadError); }
   if (!b.title || !b.title.trim()) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Vui lòng nhập tiêu đề.'); }
   const publicationDate = dateInputToLocalDateTime(b.publication_date);
@@ -348,31 +356,32 @@ router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   if (b.remove_cover === '1' && existing.cover_image) { removeUpload(existing.cover_image); coverImage = null; }
   if (req.file) { if (existing.cover_image) removeUpload(existing.cover_image); coverImage = '/uploads/' + req.file.filename; }
 
-  db.prepare(`UPDATE posts SET title=?, slug=?, excerpt=?, content=?, category=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, published=?, created_at=COALESCE(NULLIF(?,''),created_at), updated_at=datetime('now','localtime') WHERE id=?`)
-    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), (b.category||'Tin tức').trim(), b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '', existing.id);
+  db.prepare(`UPDATE posts SET title=?, slug=?, excerpt=?, content=?, category=?, topic=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, published=?, created_at=COALESCE(NULLIF(?,''),created_at), updated_at=datetime('now','localtime') WHERE id=?`)
+    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '', existing.id);
+  db.prepare("UPDATE research_items SET topic=?,updated_at=datetime('now','localtime') WHERE published_post_id=?").run(topic, existing.id);
   finalizePublishedContent('post', existing.id, { notify: isEnabled(b.published) });
   queueIndexNow([`/tin-tuc/${existing.slug}`, `/tin-tuc/${slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
-  res.redirect('/admin/tin-tuc?flash=Đã cập nhật bài viết');
+  res.redirect(`/admin/tin-tuc?muc=${topic}&flash=Đã cập nhật bài viết`);
 });
 
 router.post('/tin-tuc/:id/xoa', requireAdmin, (req, res) => {
-  const post = db.prepare('SELECT slug, cover_image FROM posts WHERE id = ?').get(req.params.id);
+  const post = db.prepare('SELECT slug, cover_image, topic FROM posts WHERE id = ?').get(req.params.id);
   if (post && post.cover_image) removeUpload(post.cover_image);
   db.prepare('DELETE FROM posts WHERE id = ?').run(req.params.id);
   removePublishedContent('post', req.params.id);
   if (post) queueIndexNow([`/tin-tuc/${post.slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
-  res.redirect('/admin/tin-tuc?flash=Đã xoá bài viết');
+  res.redirect(`/admin/tin-tuc?muc=${normalizeTopic(post?.topic)}&flash=Đã xoá bài viết`);
 });
 
 router.post('/tin-tuc/:id/toggle', requireAdmin, (req, res, next) => {
-  const post = db.prepare('SELECT id,slug,published,noindex FROM posts WHERE id=?').get(req.params.id);
+  const post = db.prepare('SELECT id,slug,published,noindex,topic FROM posts WHERE id=?').get(req.params.id);
   if (!post) return next();
   const published = post.published ? 0 : 1;
   // Bản nháp vừa được duyệt phải có thể lập chỉ mục ngay.
   db.prepare("UPDATE posts SET published=?, noindex=CASE WHEN ?=1 THEN 0 ELSE noindex END, updated_at=datetime('now','localtime') WHERE id=?").run(published, published, post.id);
   finalizePublishedContent('post', post.id, { notify: published === 1 });
   queueIndexNow([`/tin-tuc/${post.slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
-  return res.redirect('/admin/tin-tuc?flash=' + encodeURIComponent(published ? 'Đã xuất bản bài viết' : 'Đã chuyển bài về bản nháp'));
+  return res.redirect(`/admin/tin-tuc?muc=${normalizeTopic(post.topic)}&flash=` + encodeURIComponent(published ? 'Đã xuất bản bài viết' : 'Đã chuyển bài về bản nháp'));
 });
 
 // ================= STUDY-ABROAD PROGRAMS CRUD =================
@@ -732,6 +741,7 @@ router.post('/gioi-thieu/:id/xoa', requireAdmin, (req, res) => {
 
 // ---------- Official-source research and AI-assisted drafts ----------
 router.get('/nghien-cuu', requireAdmin, (req, res) => {
+  const selectedTopic = normalizeTopic(req.query.muc);
   const sources = db.prepare('SELECT * FROM research_sources ORDER BY id').all();
   const activeSources = sources.filter((source) => source.active);
   const sourceHealth = {
@@ -740,12 +750,15 @@ router.get('/nghien-cuu', requireAdmin, (req, res) => {
     blocked: activeSources.filter((source) => /robots\.txt|không cho phép thu thập/i.test(source.last_error || '')).length,
     failed: activeSources.filter((source) => source.last_error && !/robots\.txt|không cho phép thu thập/i.test(source.last_error)).length,
   };
-  const items = db.prepare(`SELECT i.id,i.source_id,i.title,i.url,i.excerpt,i.published_at,i.suggested_section,
+  const topicCounts = Object.fromEntries(db.prepare('SELECT topic,COUNT(*) count FROM research_items GROUP BY topic').all().map((row) => [row.topic, row.count]));
+  const items = db.prepare(`SELECT i.id,i.source_id,i.title,i.url,i.excerpt,i.published_at,i.suggested_section,i.topic,
     i.quality_score,i.optimization_note,i.official_url,i.published_post_id,i.published_program_id,i.status,
     i.source_captured_at,length(i.source_text) source_text_chars,i.created_at,i.updated_at,
     s.name source_name,s.source_type
     FROM research_items i JOIN research_sources s ON s.id=i.source_id
-    ORDER BY CASE i.status WHEN 'pending' THEN 0 WHEN 'converted' THEN 1 ELSE 2 END, datetime(i.created_at) DESC LIMIT 100`).all();
+    ${selectedTopic ? 'WHERE i.topic=?' : ''}
+    ORDER BY CASE i.status WHEN 'pending' THEN 0 WHEN 'converted' THEN 1 ELSE 2 END, datetime(i.created_at) DESC LIMIT 100`)
+    .all(...(selectedTopic ? [selectedTopic] : []));
   const suggestedKeywords = req.session.researchKeywordSuggestions || [];
   delete req.session.researchKeywordSuggestions;
   const chatIndex = {
@@ -755,7 +768,23 @@ router.get('/nghien-cuu', requireAdmin, (req, res) => {
     publishedPrograms: db.prepare('SELECT COUNT(*) c FROM programs WHERE published=1').get().c,
     indexedPrograms: db.prepare("SELECT COUNT(*) c FROM chat_knowledge_documents WHERE id GLOB 'program:*:summary'").get().c,
   };
-  res.render('admin/research', { layout, title: 'Dữ liệu & AI', active: 'research', sources, sourceHealth, items, suggestedKeywords, chatIndex, flash: req.query.flash || null });
+  res.render('admin/research', { layout, title: 'Dữ liệu & AI', active: 'research', sources, sourceHealth, items, topics: TOPICS, topicCounts, selectedTopic, suggestedKeywords, chatIndex, flash: req.query.flash || null });
+});
+router.post('/nghien-cuu/:id/chon-chu-de', requireAdmin, (req, res, next) => {
+  const topic = normalizeTopic(req.body.topic);
+  const item = db.prepare('SELECT id,published_post_id FROM research_items WHERE id=?').get(req.params.id);
+  if (!item) return next();
+  if (!topic) return res.status(400).send('Chủ đề không hợp lệ.');
+  db.transaction(() => {
+    db.prepare("UPDATE research_items SET topic=?,updated_at=datetime('now','localtime') WHERE id=?").run(topic, item.id);
+    if (item.published_post_id) {
+      db.prepare("UPDATE posts SET topic=?,category=?,updated_at=datetime('now','localtime') WHERE id=?")
+        .run(topic, topicLabel(topic), item.published_post_id);
+    }
+  })();
+  queueIndexNow(['/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
+  const returnTopic = normalizeTopic(req.body.muc) || topic;
+  res.redirect(`/admin/nghien-cuu?muc=${returnTopic}&flash=${encodeURIComponent('Đã cập nhật chủ đề')}`);
 });
 router.post('/nghien-cuu/lap-chi-muc', requireAdmin, (req, res) => {
   try {
@@ -864,9 +893,9 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
           let record = guide.existing;
           if (!record) {
             const guideSlug = uniqueSlug(db, slugify(guide.title), 0, 'posts');
-            const guideResult = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,cover_image,source_urls,seo_title,meta_description,focus_keyword,published,noindex,created_at,updated_at)
-              VALUES (?,?,?,?,?,?,?,?,?,?,0,0,datetime('now','localtime'),datetime('now','localtime'))`)
-              .run(guide.title, guideSlug, guide.excerpt, sanitizeRichHtml(guide.content), 'Cẩm nang du học', guide.guideCover?.cachedImageUrl || '', normalizeSourceUrls(guide.sourceUrl), guide.seoTitle, guide.metaDescription, guide.focusKeyword);
+            const guideResult = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,topic,cover_image,source_urls,seo_title,meta_description,focus_keyword,published,noindex,created_at,updated_at)
+              VALUES (?,?,?,?,?,?,?,?,?,?,?,0,0,datetime('now','localtime'),datetime('now','localtime'))`)
+              .run(guide.title, guideSlug, guide.excerpt, sanitizeRichHtml(guide.content), topicLabel(TOPICS[0].id), TOPICS[0].id, guide.guideCover?.cachedImageUrl || '', normalizeSourceUrls(guide.sourceUrl), guide.seoTitle, guide.metaDescription, guide.focusKeyword);
             const guideId = Number(guideResult.lastInsertRowid);
             if (!guide.guideCover?.cachedImageUrl) db.prepare('UPDATE posts SET cover_image=? WHERE id=?').run(`/anh-cam-nang/${guideId}.svg`, guideId);
             record = { id: guideId, slug: guideSlug };
@@ -896,9 +925,10 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
         if (externalCover) db.prepare('UPDATE programs SET cover_source_url=?,cover_attribution=? WHERE id=?')
           .run(externalCover.sourceUrl, externalCover.attribution, programId);
       } else {
-        result = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,cover_image,source_urls,seo_title,meta_description,focus_keyword,published,noindex,created_at,updated_at)
-          VALUES (?,?,?,?,?,?,?,?,?,?,0,0,datetime('now','localtime'),datetime('now','localtime'))`)
-          .run(draft.title, slug, draft.excerpt, draftContent, draft.category, fetchedCover || '', sourceUrls, draft.seoTitle, draft.metaDescription, draft.focusKeyword);
+        const topic = normalizeTopic(item.topic) || TOPICS[0].id;
+        result = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,topic,cover_image,source_urls,seo_title,meta_description,focus_keyword,published,noindex,created_at,updated_at)
+          VALUES (?,?,?,?,?,?,?,?,?,?,?,0,0,datetime('now','localtime'),datetime('now','localtime'))`)
+          .run(draft.title, slug, draft.excerpt, draftContent, topicLabel(topic), topic, fetchedCover || '', sourceUrls, draft.seoTitle, draft.metaDescription, draft.focusKeyword);
         const postId = Number(result.lastInsertRowid);
         if (!fetchedCover) db.prepare('UPDATE posts SET cover_image=? WHERE id=?').run(`/anh-cam-nang/${postId}.svg`, postId);
       }
