@@ -1,0 +1,301 @@
+[
+  {
+    "key": "courses-intro",
+    "zone": "home",
+    "title": "Lộ trình phù hợp cho mọi mục tiêu",
+    "content": "<p class=\"section-lead\">SOL DREAM EDUCATION có lộ trình cho người mới học Hangul, người cần luyện phản xạ giao tiếp, chỉnh phát âm hoặc tăng tốc TOPIK để chuẩn bị du học. Học viên nên chọn lớp theo trình độ hiện tại, mục tiêu sử dụng và thời gian dự kiến.</p><a href=\"/khoa-hoc\" class=\"course__link\">Xem bảng học phí tiếng Hàn 2026 →</a>",
+    "eyebrow": "Khóa học tiếng Hàn",
+    "sort_order": 0,
+    "active": 1
+  },
+  {
+    "key": "journey-intro",
+    "zone": "home",
+    "title": "Hành trình sang Hàn, 4 bước rõ ràng",
+    "content": "<p class=\"section-lead\">Lộ trình du học tại SOL DREAM EDUCATION gồm bốn giai đoạn: tư vấn trường ngành, học tiếng Hàn, chuẩn bị hồ sơ và visa, sau đó hỗ trợ trước khi nhập học. Chi tiết từng bước được điều chỉnh theo năng lực, ngân sách và kỳ tuyển sinh.</p>",
+    "eyebrow": "Du học Hàn Quốc",
+    "sort_order": 10,
+    "active": 1
+  },
+  {
+    "key": "why-intro",
+    "zone": "home",
+    "title": "Không chỉ dạy tiếng — chắp cánh tương lai",
+    "content": "<p>Chúng tôi đồng hành cùng học viên qua đội ngũ giáo viên, hoạt động giao lưu văn hóa, định hướng học bổng và hỗ trợ từ học tiếng đến nhập học.</p>",
+    "eyebrow": "Vì sao chọn Sol Dream",
+    "sort_order": 20,
+    "active": 1
+  },
+  {
+    "key": "testimonials-intro",
+    "zone": "home",
+    "title": "Học viên nói gì về Sol Dream",
+    "content": "<p>Lắng nghe những chia sẻ của học viên về quá trình học và chuẩn bị du học cùng SolDream.</p>",
+    "eyebrow": "Cảm nhận học viên",
+    "sort_order": 30,
+    "active": 1
+  },
+  {
+    "key": "news-intro",
+    "zone": "home",
+    "title": "Thông tin hữu ích cho hành trình du học Hàn",
+    "content": "<p class=\"section-lead\">Cẩm nang của SOL DREAM EDUCATION hỗ trợ học viên học tiếng, chọn trường, chuẩn bị hồ sơ và thích nghi với đời sống Hàn Quốc. Các thông tin dễ thay đổi như visa, chi phí và tuyển sinh sẽ được chuyên viên xác nhận theo thời điểm và hồ sơ cụ thể.</p>",
+    "eyebrow": "Cẩm nang &amp; Thông tin",
+    "sort_order": 40,
+    "active": 1
+  },
+  {
+    "key": "value-1",
+    "zone": "values",
+    "title": "Giáo viên chất lượng",
+    "content": "<p>Đội ngũ của chúng tôi giảng dạy gồm giáo viên Hàn Quốc bản ngữ và nhân sự cốt lõi có trình độ thạc sĩ, tiến sĩ. Sự phù hợp của lớp vẫn cần được đánh giá theo trình độ và mục tiêu từng học viên.</p>",
+    "eyebrow": "",
+    "sort_order": 0,
+    "active": 1
+  },
+  {
+    "key": "value-2",
+    "zone": "values",
+    "title": "Giao lưu văn hóa",
+    "content": "<p>Chúng tôi tổ chức hoạt động giao lưu văn hóa Hàn Quốc như một phần của môi trường học tập. Hoạt động giúp học viên tiếp cận ngôn ngữ trong bối cảnh thực tế; chủ đề và lịch tổ chức cần được xác nhận theo từng tháng.</p>",
+    "eyebrow": "",
+    "sort_order": 10,
+    "active": 1
+  },
+  {
+    "key": "value-3",
+    "zone": "values",
+    "title": "Săn học bổng",
+    "content": "<p>Dịch vụ định hướng học bổng hỗ trợ học viên tìm chương trình phù hợp và chuẩn bị hồ sơ theo năng lực. Học bổng phụ thuộc tiêu chí, ngân sách và kỳ tuyển sinh của từng trường; nội dung tư vấn không phải cam kết học viên sẽ được cấp.</p>",
+    "eyebrow": "",
+    "sort_order": 20,
+    "active": 1
+  },
+  {
+    "key": "value-4",
+    "zone": "values",
+    "title": "Cơ sở hiện đại",
+    "content": "<p>Chúng tôi có không gian học tập và trang thiết bị phục vụ đào tạo tại quận Tân Phú, TP.HCM. Người quan tâm có thể đến địa chỉ 89 đường S11 để tìm hiểu trực tiếp về phòng học, lịch lớp và điều kiện học tập.</p>",
+    "eyebrow": "",
+    "sort_order": 30,
+    "active": 1
+  },
+  {
+    "key": "value-5",
+    "zone": "values",
+    "title": "Đội ngũ trẻ &amp; nhiệt huyết",
+    "content": "<p>Đội ngũ của chúng tôi có cựu du học sinh Việt Nam từng học tập tại Hàn Quốc. Kinh nghiệm này được dùng để hỗ trợ học viên hình dung quá trình học tiếng, chuẩn bị hồ sơ và thích nghi trước kỳ nhập học.</p>",
+    "eyebrow": "",
+    "sort_order": 40,
+    "active": 1
+  },
+  {
+    "key": "value-6",
+    "zone": "values",
+    "title": "Đồng hành trọn gói",
+    "content": "<p>Chúng tôi hỗ trợ từ lựa chọn khóa tiếng Hàn, trường và ngành đến chuẩn bị hồ sơ và nhập học. Phạm vi công việc, thời gian và chi phí cụ thể cần được thống nhất theo chương trình dịch vụ và hồ sơ của học viên.</p>",
+    "eyebrow": "",
+    "sort_order": 50,
+    "active": 1
+  },
+  {
+    "key": "testimonials-note",
+    "zone": "home",
+    "title": "",
+    "content": "<p>Những chia sẻ trên phản ánh trải nghiệm riêng của từng học viên.</p>",
+    "eyebrow": "",
+    "sort_order": 50,
+    "active": 1
+  },
+  {
+    "key": "about-quote",
+    "zone": "home",
+    "title": "Đội ngũ Sol Dream",
+    "content": "<p>Chúng tôi là những du học sinh Việt Nam từng học tập tại Hàn — mang khát khao đưa nền giáo dục hàng đầu châu Á đến gần hơn với học sinh Việt.</p>",
+    "eyebrow": "Cựu du học sinh · Thạc sĩ · Tiến sĩ",
+    "sort_order": 60,
+    "active": 1
+  },
+  {
+    "key": "about-cta",
+    "zone": "home",
+    "title": "Tìm hiểu về SolDream",
+    "content": "",
+    "eyebrow": "",
+    "sort_order": 70,
+    "active": 1,
+    "link_url": "/gioi-thieu",
+    "link_label": "Tìm hiểu về SolDream"
+  },
+  {
+    "key": "consult-intro",
+    "zone": "consult",
+    "title": "Bắt đầu hành trình Hàn Quốc của bạn ngay hôm nay",
+    "content": "<p class=\"section-lead\">Để lại thông tin để được tư vấn lộ trình phù hợp và nhận thông báo mới nhất về khóa học, chương trình du học hoặc trường đại học Hàn Quốc.</p>",
+    "eyebrow": "Đăng ký tư vấn",
+    "sort_order": 0,
+    "active": 1
+  },
+  {
+    "key": "consult-form",
+    "zone": "consult",
+    "title": "Đăng ký tư vấn và nhận thông tin mới nhất miễn phí",
+    "content": "<p class=\"section-lead\">SOL DREAM EDUCATION sẽ liên hệ theo thông tin bạn cung cấp. Việc gửi biểu mẫu chưa phải đăng ký khóa học hay cam kết dịch vụ.</p>",
+    "eyebrow": "",
+    "sort_order": 10,
+    "active": 1
+  },
+  {
+    "key": "consult-label-name",
+    "zone": "labels",
+    "title": "Họ và tên",
+    "content": "",
+    "eyebrow": "",
+    "sort_order": 0,
+    "active": 1
+  },
+  {
+    "key": "consult-label-phone",
+    "zone": "labels",
+    "title": "Số điện thoại",
+    "content": "",
+    "eyebrow": "",
+    "sort_order": 10,
+    "active": 1
+  },
+  {
+    "key": "consult-label-email",
+    "zone": "labels",
+    "title": "Email liên hệ",
+    "content": "",
+    "eyebrow": "",
+    "sort_order": 20,
+    "active": 1
+  },
+  {
+    "key": "consult-label-interest",
+    "zone": "labels",
+    "title": "Bạn quan tâm",
+    "content": "",
+    "eyebrow": "",
+    "sort_order": 30,
+    "active": 1
+  },
+  {
+    "key": "consult-label-detail",
+    "zone": "labels",
+    "title": "Thông tin bạn muốn nhận",
+    "content": "",
+    "eyebrow": "",
+    "sort_order": 40,
+    "active": 1
+  },
+  {
+    "key": "consult-label-submit",
+    "zone": "labels",
+    "title": "Gửi đăng ký",
+    "content": "",
+    "eyebrow": "",
+    "sort_order": 50,
+    "active": 1
+  },
+  {
+    "key": "consult-consent",
+    "zone": "consult",
+    "title": "",
+    "content": "<p>Bằng việc gửi, bạn đồng ý được Sol Dream liên hệ tư vấn và gửi email khi có thông tin mới đúng với nội dung đã đăng ký.</p>",
+    "eyebrow": "",
+    "sort_order": 20,
+    "active": 1
+  },
+  {
+    "key": "chat-hint",
+    "zone": "labels",
+    "title": "Bạn cần tư vấn?",
+    "content": "<p>Hỏi trợ lý AI của Sol Dream</p>",
+    "eyebrow": "",
+    "sort_order": 60,
+    "active": 1
+  },
+  {
+    "key": "footer-brand",
+    "zone": "footer",
+    "title": "Sol Dream",
+    "content": "<p>Trung tâm Hàn ngữ &amp; du học Hàn Quốc — vun đắp tri thức, tiếp bước ước mơ, vững chắc tương lai.</p>\n          <a href=\"https://www.facebook.com/soldreamedu\" target=\"_blank\" rel=\"noopener\" aria-label=\"Facebook\">Facebook</a>\n          <a href=\"https://www.instagram.com/soldream.education/\" target=\"_blank\" rel=\"noopener\" aria-label=\"Instagram\">Instagram</a>\n          <a href=\"https://www.youtube.com/channel/UCg1e9UU_TwXfx031oqmUc5Q\" target=\"_blank\" rel=\"noopener\" aria-label=\"YouTube\">YouTube</a>\n          <a href=\"https://zalo.me/0364648282\" target=\"_blank\" rel=\"noopener\" aria-label=\"Zalo\">Zalo</a>\n        ",
+    "eyebrow": "",
+    "sort_order": 0,
+    "active": 1
+  },
+  {
+    "key": "footer-links",
+    "zone": "footer",
+    "title": "Liên kết nhanh",
+    "content": "<ul class=\"fl\">\n          <li><a href=\"/gioi-thieu\">Giới thiệu</a></li>\n          <li><a href=\"/khoa-hoc\">Khóa học tiếng Hàn</a></li>\n          <li><a href=\"/du-hoc\">Du học Hàn Quốc</a></li>\n          <li><a href=\"/truong-dai-hoc\">Thông tin trường đại học</a></li>\n          <li><a href=\"/tin-tuc?muc=thong-tin-han-quoc\">Thông tin Hàn Quốc</a></li>\n          <li><a href=\"/tin-tuc?muc=cam-nang-sinh-hoat\">Cẩm nang sinh hoạt</a></li>\n          <li><a href=\"/tin-tuc?muc=hoat-dong-soldream\">Hoạt động SolDream</a></li>\n          <li><a href=\"/cau-hoi-thuong-gap\">Câu hỏi thường gặp</a></li>\n          <li><a href=\"/tro-ly-du-hoc\">Trợ lý tư vấn du học AI</a></li>\n          <li><a href=\"/#lienhe\">Liên hệ</a></li>\n        </ul>",
+    "eyebrow": "",
+    "sort_order": 10,
+    "active": 1
+  },
+  {
+    "key": "footer-contact",
+    "zone": "footer",
+    "title": "Liên hệ",
+    "content": "<h5 class=\"footer__branch-title\">Trụ sở TP.HCM</h5>\n        <div class=\"contact-li\"><a href=\"https://www.google.com/maps/search/?api=1&amp;query=H%C3%A0n+Ng%E1%BB%AF+Sol+Dream+SDE%2C+89+%C4%91%C6%B0%E1%BB%9Dng+S11%2C+T%C3%A2y+Th%E1%BA%A1nh%2C+T%C3%A2n+Ph%C3%BA%2C+TP.HCM\" target=\"_blank\" rel=\"noopener noreferrer\">89 đường S11, P. Tây Thạnh, Q. Tân Phú, TP.HCM</a></div>\n        <div class=\"contact-li\"><a href=\"tel:+84364648282\">0364 648 282</a></div>\n        <div class=\"contact-li\"><a href=\"mailto:soldream.edu@gmail.com\">soldream.edu@gmail.com</a></div>\n        <div class=\"contact-li\"><span>T2–T6: 8:00–21:00 · T7: 8:00–12:00</span></div>\n        <h5 class=\"footer__branch-title footer__branch-title--secondary\">Điểm liên hệ Đồng Nai</h5>\n        <div class=\"contact-li\"><a href=\"https://www.google.com/maps/search/?api=1&amp;query=T%E1%BB%95+20%2C+%E1%BA%A5p+L%C3%A1ng+L%E1%BB%9Bn%2C+x%C3%A3+Xu%C3%A2n+M%E1%BB%B9%2C+huy%E1%BB%87n+C%E1%BA%A9m+M%E1%BB%B9%2C+%C4%90%E1%BB%93ng+Nai\" target=\"_blank\" rel=\"noopener noreferrer\">Tổ 20, ấp Láng Lớn, xã Xuân Mỹ, huyện Cẩm Mỹ, Đồng Nai</a></div>\n        <h5 class=\"footer__branch-title footer__branch-title--secondary\">Chi nhánh miền Bắc</h5>\n        <div class=\"contact-li\"><a href=\"https://www.google.com/maps/search/?api=1&amp;query=98%2C+%C4%91%C6%B0%E1%BB%9Dng+Th%E1%BB%A7y+Nguy%C3%AAn%2C+khu+%C4%91%C3%B4+th%E1%BB%8B+Ecopark%2C+Xu%C3%A2n+Quan%2C+Ph%E1%BB%A5ng+C%C3%B4ng%2C+H%C6%B0ng+Y%C3%AAn\" target=\"_blank\" rel=\"noopener noreferrer\">98, đường Thủy Nguyên, khu đô thị Ecopark, Xuân Quan, Phụng Công, Hưng Yên</a></div>\n        <div class=\"contact-li\"><span>T2–T6: 8:00–21:00 · T7: 8:00–12:00</span></div>\n      ",
+    "eyebrow": "",
+    "sort_order": 20,
+    "active": 1
+  },
+  {
+    "key": "footer-map",
+    "zone": "footer",
+    "title": "Bản đồ",
+    "content": "\n          <a href=\"https://www.google.com/maps/search/?api=1&amp;query=H%C3%A0n+Ng%E1%BB%AF+Sol+Dream+SDE%2C+89+%C4%91%C6%B0%E1%BB%9Dng+S11%2C+T%C3%A2y+Th%E1%BA%A1nh%2C+T%C3%A2n+Ph%C3%BA%2C+TP.HCM\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Mở vị trí Hàn Ngữ Sol Dream SDE trên Google Maps\">\n            <img src=\"/img/ban-do-sol-dream.png\" alt=\"Bản đồ vị trí Hàn Ngữ Sol Dream SDE tại đường S11, phường Tây Thạnh, quận Tân Phú, TP.HCM\" width=\"407\" height=\"156\" loading=\"lazy\">\n          </a>\n        ",
+    "eyebrow": "",
+    "sort_order": 30,
+    "active": 1
+  },
+  {
+    "key": "footer-bottom",
+    "zone": "footer-bottom",
+    "title": "",
+    "content": "<p>Copyrights © 2019 – SOL DREAM EDUCATION. All rights reserved.</p>",
+    "eyebrow": "",
+    "sort_order": 0,
+    "active": 1
+  },
+  {
+    "key": "hero-intro",
+    "zone": "home",
+    "title": "Học tiếng Hàn, chạm tới giấc mơ du học Hàn Quốc",
+    "content": "<p>Trung tâm Hàn ngữ Sol Dream Education — đào tạo tiếng Hàn cấp tốc, giao tiếp và đồng hành du học Hàn Quốc từ A–Z, cùng đội ngũ giáo viên Hàn Quốc và thạc sĩ, tiến sĩ giàu kinh nghiệm.</p>",
+    "eyebrow": "Tư vấn tuyển sinh du học Hàn Quốc",
+    "sort_order": 129,
+    "active": 1
+  },
+  {
+    "key": "about-badge",
+    "zone": "home",
+    "title": "2019",
+    "content": "<p>Năm thành lập<br>tại TP.HCM</p>",
+    "eyebrow": "",
+    "sort_order": 130,
+    "active": 1
+  },
+  {
+    "key": "consult-contact",
+    "zone": "consult",
+    "title": "",
+    "content": "\n        <a href=\"tel:0364648282\"><i></i><div>Hotline<br><b>0364 648 282</b></div></a>\n        <a href=\"mailto:soldream.edu@gmail.com\"><i></i><div>Email<br><b style=\"font-size:15px\">soldream.edu@gmail.com</b></div></a>\n      ",
+    "eyebrow": "",
+    "sort_order": 131,
+    "active": 1
+  },
+  {
+    "key": "consult-button",
+    "zone": "labels",
+    "title": "Đăng ký tư vấn",
+    "content": "",
+    "eyebrow": "",
+    "sort_order": 132,
+    "active": 1
+  }
+]

@@ -39,12 +39,14 @@ function detailRobots(item) {
 function setFreshnessHeaders(res, value) {
   const date = new Date(String(value || '').replace(' ', 'T'));
   if (!Number.isNaN(date.getTime())) res.set('Last-Modified', date.toUTCString());
-  res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+  res.set('Cache-Control', 'no-cache, must-revalidate');
 }
 
 function getRelatedFaqs(originType, originId) {
+ if(originType!=='course') { const table=originType==='post'?'posts':'programs';const row=db.prepare('SELECT faq_mode FROM '+table+' WHERE id=?').get(originId);if(!row||row.faq_mode==='off') return []; }
+
   return db.prepare(`SELECT id,question,answer,source_url FROM faqs
-    WHERE published=1 AND origin_type=? AND origin_id=? ORDER BY sort_order,id`).all(originType, String(originId));
+    WHERE published=1 AND origin_type=? AND origin_id=? AND (generated=0 OR origin_type='course' OR EXISTS(SELECT 1 FROM posts WHERE origin_type='post' AND CAST(posts.id AS TEXT)=origin_id AND faq_mode='auto') OR EXISTS(SELECT 1 FROM programs WHERE origin_type='program' AND CAST(programs.id AS TEXT)=origin_id AND faq_mode='auto')) ORDER BY sort_order,id`).all(originType, String(originId));
 }
 
 function escapeSvgText(value) {
@@ -135,7 +137,7 @@ router.get('/', (req, res) => {
       })),
     },
   });
-  res.render('home', { posts, programs, testimonials, homepageStats, homepageStatsSource, homepageAboutSections, jsonLd, showChatHint: true });
+  res.render('home', { homeCourses: courses.filter(c => ['giao-tiep-giao-vien-han','tieng-han-giao-tiep','tieng-han-so-cap-1','tieng-han-cap-toc','phat-am-tieng-han','tieng-anh-giao-tiep'].includes(c.slug)).slice(0,6), posts, programs, testimonials, homepageStats, homepageStatsSource, homepageAboutSections, jsonLd, showChatHint: true });
 });
 
 router.get('/tro-ly-du-hoc', (req, res) => {
@@ -298,7 +300,7 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
   ]);
   res.render('course-detail', {
     course, courseFaqs, courseNotice: getCourseNotice(),
-    title: `${course.name} | SOL DREAM EDUCATION`, description: course.blufSummary,
+    title: course.seoTitle || `${course.name} | SOL DREAM EDUCATION`, description: course.metaDescription || course.blufSummary,
     canonical: url, jsonLd,
   });
 });
@@ -443,7 +445,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
       ] },
       {
         '@type': 'Article', '@id': `${url}#article`, headline: program.title,
-        description: program.excerpt, image: [ogImg], articleSection: program.category,
+        description: program.excerpt, image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
         wordCount: program.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true,
         datePublished: publishedTime,
         dateModified: modifiedTime,
@@ -462,7 +464,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
     canonical: url,
     ogType: 'article',
     ogImage: ogImg,
-    ogImageAlt: program.title,
+    ogImageAlt: program.cover_alt || program.title,
     publishedTime,
     modifiedTime,
     robots: detailRobots(program),
@@ -525,7 +527,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
     setFreshnessHeaders(res, program.updated_at || program.created_at);
     const jsonLd = jsonLdScript({ '@context': 'https://schema.org', '@graph': [
       generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Thông tin trường', url: '/truong-dai-hoc' }, { name: program.title, url: programPublicPath(program) }]),
-      { '@type': 'Article', '@id': `${url}#article`, headline: program.title, description: program.excerpt, image: [ogImg], articleSection: program.category,
+      { '@type': 'Article', '@id': `${url}#article`, headline: program.title, description: program.excerpt, image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
         wordCount: program.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true, datePublished: publishedTime, dateModified: modifiedTime,
         author: authorEntity(program), publisher: { '@id': `${SITE_URL}/#organization` }, mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         ...(program.sourceLinks.length ? { citation: program.sourceLinks } : {}), ...(program.focus_keyword ? { keywords: program.focus_keyword } : {}) },
@@ -533,7 +535,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
     ] });
     return res.render('duhoc-detail', { program, relatedPrograms, relatedFaqs, isSchoolPage: true,
       title: program.seo_title || `${program.title} - Thông tin trường | SOL DREAM EDUCATION`, description: program.meta_description || program.excerpt,
-      canonical: url, ogType: 'article', ogImage: ogImg, ogImageAlt: program.title, publishedTime, modifiedTime, robots: detailRobots(program), jsonLd });
+      canonical: url, ogType: 'article', ogImage: ogImg, ogImageAlt: program.cover_alt || program.title, publishedTime, modifiedTime, robots: detailRobots(program), jsonLd });
   }
   const university = getUniversityById(req.params.id);
   if (!university) return next();

@@ -777,3 +777,6 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .topic-feature ul{margin-top:8px;padding-left:22px}
 [id^="tuition-"],#partner-schools-title,#admin-school-title{scroll-margin-top:105px}
 @media(max-width:560px){.topic-tabs{gap:8px}.topic-tabs a{padding:10px 12px;font-size:13px}}
+
+/* Editable content blocks */
+.about__cta{display:inline-flex;margin-top:18px;text-decoration:none}.why .feat p,.why .sec-head p{color:#f0e6f5}.cta__left p{color:#fff}.cover-caption{margin:-18px 0 28px;color:var(--muted);font-size:14px}.footer__grid>div{min-width:0}.footer__grid a{overflow-wrap:anywhere}.footer__grid img{max-width:100%;height:auto}.footer__grid p{line-height:1.7}.about__card>p{color:#fff;font-size:20px;font-weight:650;line-height:1.7}

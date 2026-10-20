@@ -7,7 +7,7 @@ const multer = require('multer');
 const router = express.Router();
 const db = require('../db');
 const { requireAdmin } = require('../lib/auth');
-const { slugify, uniqueSlug, decorate, normalizeSourceUrls, normalizeOptionalUrl, dateInputToLocalDateTime, programPublicPath } = require('../lib/util');
+const { slugify, uniqueSlug, decorate, normalizeSourceUrls, normalizeOptionalUrl, dateInputToLocalDateTime, programPublicPath, normalizeReferenceUrl } = require('../lib/util');
 const { sanitizeRichHtml } = require('../lib/contentSanitizer');
 const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
@@ -18,6 +18,8 @@ const { MINIMUM_EDITORIAL_CHARACTERS, UNIVERSITY_MINIMUM_CHARACTERS, generateEdi
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
 const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent');
+const { saveArticleOptions } = require('../lib/articleEditing');
+const { courseFinancials, syncCourseNarratives } = require('../lib/courseEditing');
 const { UPLOADS_DIR } = require('../lib/storagePaths');
 const { TOPICS, normalizeTopic, topicLabel } = require('../lib/contentTopics');
 
@@ -29,6 +31,9 @@ if (!ADMIN_PASSWORD) throw new Error('ADMIN_PASSWORD bắt buộc phải đượ
 
 router.use((req, res, next) => {
   res.locals.contentTopics = TOPICS;
+  res.locals.articleFaqs = [];
+  const editMatch = req.path.match(/^\/(tin-tuc|du-hoc)\/(\d+)\/sua$/);
+  if(editMatch) res.locals.articleFaqs = db.prepare('SELECT question,answer FROM faqs WHERE origin_type=? AND origin_id=? ORDER BY sort_order,id').all(editMatch[1]==='tin-tuc'?'post':'program',editMatch[2]);
   if (req.method !== 'POST') return next();
   if (req.get('sec-fetch-site') === 'cross-site') return res.status(403).send('Yêu cầu quản trị không hợp lệ.');
   const origin = req.get('origin');
@@ -42,7 +47,7 @@ router.use((req, res, next) => {
 // Any content mutation automatically refreshes the chatbot's persistent index
 // after the admin response has completed.
 router.use((req, res, next) => {
-  if (req.method === 'POST' && /^\/(tin-tuc|du-hoc|khoa-hoc|faq|nghien-cuu|cam-nhan|so-lieu-trang-chu|gioi-thieu)(?:\/|$)/.test(req.path)) {
+  if (req.method === 'POST' && /^\/(tin-tuc|du-hoc|khoa-hoc|faq|nghien-cuu|cam-nhan|so-lieu-trang-chu|gioi-thieu|noi-dung-chung)(?:\/|$)/.test(req.path)) {
     res.once('finish', () => {
       if (res.statusCode >= 400) return;
       try { syncWebsiteKnowledge({ force: true }); }
@@ -325,6 +330,7 @@ router.post('/tin-tuc/moi', requireAdmin, uploadCover, (req, res) => {
               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,COALESCE(NULLIF(?,''),datetime('now','localtime')),datetime('now','localtime'))`)
     .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '');
   db.prepare('UPDATE posts SET author_type=? WHERE id=?').run(b.author_type === 'person' ? 'person' : 'organization', result.lastInsertRowid);
+  saveArticleOptions('post', result.lastInsertRowid, b);
   if (isEnabled(b.published)) finalizePublishedContent('post', result.lastInsertRowid, { notify: true });
   if (isEnabled(b.published) && !isEnabled(b.noindex)) queueIndexNow([`/tin-tuc/${slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
   res.redirect(`/admin/tin-tuc?muc=${topic}&flash=Đã thêm bài viết`);
@@ -355,13 +361,14 @@ router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   const base = b.slug && b.slug.trim() ? slugify(b.slug) : slugify(b.title);
   const slug = uniqueSlug(db, base, existing.id);
   let coverImage = existing.cover_image;
-  if (b.remove_cover === '1' && existing.cover_image) { removeUpload(existing.cover_image); coverImage = null; }
-  if (req.file) { if (existing.cover_image) removeUpload(existing.cover_image); coverImage = '/uploads/' + req.file.filename; }
+  if (b.remove_cover === '1' && existing.cover_image) { coverImage = null; }
+  if (req.file) { coverImage = '/uploads/' + req.file.filename; }
 
   db.prepare(`UPDATE posts SET title=?, slug=?, excerpt=?, content=?, category=?, topic=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, published=?, created_at=COALESCE(NULLIF(?,''),created_at), updated_at=datetime('now','localtime') WHERE id=?`)
     .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '', existing.id);
   db.prepare('UPDATE posts SET author_type=? WHERE id=?').run(b.author_type === 'person' ? 'person' : 'organization', existing.id);
   db.prepare("UPDATE research_items SET topic=?,updated_at=datetime('now','localtime') WHERE published_post_id=?").run(topic, existing.id);
+  saveArticleOptions('post', existing.id, b);
   finalizePublishedContent('post', existing.id, { notify: isEnabled(b.published) });
   queueIndexNow([`/tin-tuc/${existing.slug}`, `/tin-tuc/${slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
   res.redirect(`/admin/tin-tuc?muc=${topic}&flash=Đã cập nhật bài viết`);
@@ -413,6 +420,7 @@ router.post('/du-hoc/moi', requireAdmin, uploadCover, (req, res) => {
   const result = db.prepare(`INSERT INTO programs (title,subtitle,slug,excerpt,content,category,cover,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,noindex,sort_order,published,created_at,updated_at)
               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now','localtime'),datetime('now','localtime'))`)
     .run(b.title.trim(), (b.subtitle||'').trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), category, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, parseInt(b.sort_order||'0',10)||0, isEnabled(b.published) ? 1 : 0);
+  saveArticleOptions('program', result.lastInsertRowid, b);
   if (isEnabled(b.published)) finalizePublishedContent('program', result.lastInsertRowid, { notify: true });
   if (isEnabled(b.published) && !isEnabled(b.noindex)) queueIndexNow([programPublicPath({ category, slug }), category === SCHOOL_CATEGORY ? '/truong-dai-hoc' : '/du-hoc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
   res.redirect(programAdminUrl(category, isSchool ? 'Đã thêm thông tin trường' : 'Đã thêm chương trình'));
@@ -442,13 +450,14 @@ router.post('/du-hoc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   if (!b.title || !b.title.trim()) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Vui lòng nhập tên chương trình.'); }
   const slug = uniqueSlug(db, b.slug && b.slug.trim() ? slugify(b.slug) : slugify(b.title), existing.id, 'programs');
   let coverImage = existing.cover_image;
-  if (b.remove_cover === '1' && existing.cover_image) { removeUpload(existing.cover_image); coverImage = null; }
-  if (req.file) { if (existing.cover_image) removeUpload(existing.cover_image); coverImage = '/uploads/' + req.file.filename; }
+  if (b.remove_cover === '1' && existing.cover_image) { coverImage = null; }
+  if (req.file) { coverImage = '/uploads/' + req.file.filename; }
   db.prepare(`UPDATE programs SET title=?, subtitle=?, slug=?, excerpt=?, content=?, category=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, sort_order=?, published=?, updated_at=datetime('now','localtime') WHERE id=?`)
     .run(b.title.trim(), (b.subtitle||'').trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), category, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, parseInt(b.sort_order||'0',10)||0, isEnabled(b.published) ? 1 : 0, existing.id);
   if (req.file || b.remove_cover === '1') {
     db.prepare("UPDATE programs SET cover_source_url='', cover_attribution='' WHERE id=?").run(existing.id);
   }
+  saveArticleOptions('program', existing.id, b);
   finalizePublishedContent('program', existing.id, { notify: isEnabled(b.published) });
   queueIndexNow([programPublicPath(existing), programPublicPath({ category, slug }), '/du-hoc', '/truong-dai-hoc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
   res.redirect(programAdminUrl(category, isSchool ? 'Đã cập nhật thông tin trường' : 'Đã cập nhật chương trình'));
@@ -486,10 +495,12 @@ router.post('/khoa-hoc/moi', requireAdmin, (req, res) => {
   const b = req.body;
   if (!String(b.name || '').trim()) return res.status(400).render('admin/course-form', { layout, title: 'Thêm khóa học', active: 'courses', mode: 'create', course: { ...b, financials: {}, requirements: {} }, error: 'Vui lòng nhập tên khóa học.' });
   const slug = uniqueCourseSlug(slugify(b.slug || b.name));
-  const financials = { priceVndTotal: b.price_vnd_total === '' ? null : (Number(b.price_vnd_total) || null), priceNote: String(b.price_note || '').trim() };
+  const financials = courseFinancials(b);
+  syncCourseNarratives(b, financials);
   const { language, requirements } = courseRequirementInput(b);
   db.prepare(`INSERT INTO courses (id,slug,name,bluf_summary,audience,description,price,language,financials_json,requirements_json,sort_order,published,last_updated)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`).run(slug, slug, b.name.trim(), String(b.bluf_summary || '').trim(), String(b.audience || '').trim(), String(b.description || '').trim(), String(b.price || '').trim(), language, JSON.stringify(financials), JSON.stringify(requirements), Number(b.sort_order) || 0, isEnabled(b.published) ? 1 : 0, String(b.last_updated || '').slice(0, 10));
+  db.prepare('UPDATE courses SET seo_title=?,meta_description=? WHERE id=?').run(String(b.seo_title||''),String(b.meta_description||''),slug);
   if (isEnabled(b.published)) finalizePublishedContent('course', slug, { notify: true });
   if (isEnabled(b.published)) queueIndexNow([`/khoa-hoc/${slug}`, '/khoa-hoc', '/sitemap.xml', '/llms.txt']);
   res.redirect('/admin/khoa-hoc?flash=' + encodeURIComponent('Đã thêm khóa học'));
@@ -507,14 +518,12 @@ router.post('/khoa-hoc/:id/sua', requireAdmin, (req, res, next) => {
   const slug = uniqueCourseSlug(slugify(b.slug || b.name), row.id);
   let existingFinancials = {};
   try { existingFinancials = JSON.parse(row.financials_json || '{}'); } catch (_) {}
-  const financials = {
-    ...existingFinancials,
-    priceVndTotal: b.price_vnd_total === '' ? null : (Number(b.price_vnd_total) || null),
-    priceNote: String(b.price_note || '').trim(),
-  };
+  const financials = courseFinancials(b, existingFinancials);
+  syncCourseNarratives(b, financials, existingFinancials);
   const { language, requirements } = courseRequirementInput(b);
   db.prepare(`UPDATE courses SET slug=?,name=?,bluf_summary=?,audience=?,description=?,price=?,language=?,financials_json=?,requirements_json=?,sort_order=?,published=?,last_updated=?,updated_at=datetime('now','localtime') WHERE id=?`)
     .run(slug, b.name.trim(), String(b.bluf_summary || '').trim(), String(b.audience || '').trim(), String(b.description || '').trim(), String(b.price || '').trim(), language, JSON.stringify(financials), JSON.stringify(requirements), Number(b.sort_order) || 0, isEnabled(b.published) ? 1 : 0, String(b.last_updated || '').slice(0, 10), row.id);
+  db.prepare('UPDATE courses SET seo_title=?,meta_description=? WHERE id=?').run(String(b.seo_title||''),String(b.meta_description||''),row.id);
   finalizePublishedContent('course', row.id, { notify: isEnabled(b.published) });
   queueIndexNow([`/khoa-hoc/${row.slug}`, `/khoa-hoc/${slug}`, '/khoa-hoc', '/sitemap.xml', '/llms.txt']);
   res.redirect('/admin/khoa-hoc?flash=' + encodeURIComponent('Đã cập nhật khóa học'));
@@ -595,8 +604,8 @@ router.get('/faq', requireAdmin, (req, res) => {
 router.get('/faq/moi', requireAdmin, (req, res) => res.render('admin/faq-form', { layout, title: 'Thêm FAQ', active: 'faq', mode: 'create', faq: { category: FAQ_CATEGORIES[0], published: 0, sort_order: 0 }, categories: FAQ_CATEGORIES, error: null }));
 router.post('/faq/moi', requireAdmin, (req, res) => {
   const b = req.body; const category = FAQ_CATEGORIES.includes(b.category) ? b.category : FAQ_CATEGORIES[0];
-  if (!String(b.question || '').trim() || !String(b.answer || '').trim()) return res.status(400).render('admin/faq-form', { layout, title: 'Thêm FAQ', active: 'faq', mode: 'create', faq: b, categories: FAQ_CATEGORIES, error: 'Vui lòng nhập câu hỏi và câu trả lời.' });
-  db.prepare('INSERT INTO faqs (category,question,answer,source_url,sort_order,published,generated) VALUES (?,?,?,?,?,?,0)').run(category, b.question.trim(), b.answer.trim(), normalizeOptionalUrl(b.source_url), Number(b.sort_order) || 0, isEnabled(b.published) ? 1 : 0);
+  if ((b.source_url && !normalizeReferenceUrl(b.source_url)) || !String(b.question || '').trim() || !String(b.answer || '').trim()) return res.status(400).render('admin/faq-form', { layout, title: 'Thêm FAQ', active: 'faq', mode: 'create', faq: b, categories: FAQ_CATEGORIES, error: 'Vui lòng nhập câu hỏi, câu trả lời và liên kết nguồn hợp lệ (https://... hoặc /du-hoc/...).' });
+  db.prepare('INSERT INTO faqs (category,question,answer,source_url,sort_order,published,generated) VALUES (?,?,?,?,?,?,0)').run(category, b.question.trim(), b.answer.trim(), normalizeReferenceUrl(b.source_url), Number(b.sort_order) || 0, isEnabled(b.published) ? 1 : 0);
   if (isEnabled(b.published)) queueIndexNow(['/cau-hoi-thuong-gap', '/sitemap.xml', '/llms.txt']);
   res.redirect('/admin/faq?flash=' + encodeURIComponent('Đã thêm FAQ'));
 });
@@ -608,7 +617,7 @@ router.post('/faq/:id/sua', requireAdmin, (req, res, next) => {
   const faq = db.prepare('SELECT * FROM faqs WHERE id=?').get(req.params.id); if (!faq) return next();
   const b = req.body; const category = FAQ_CATEGORIES.includes(b.category) ? b.category : FAQ_CATEGORIES[0];
   if (!String(b.question || '').trim() || !String(b.answer || '').trim()) return res.status(400).render('admin/faq-form', { layout, title: 'Sửa FAQ', active: 'faq', mode: 'edit', faq: { ...faq, ...b }, categories: FAQ_CATEGORIES, error: 'Vui lòng nhập câu hỏi và câu trả lời.' });
-  db.prepare("UPDATE faqs SET category=?,question=?,answer=?,source_url=?,sort_order=?,published=?,generated=0,updated_at=datetime('now','localtime') WHERE id=?").run(category, b.question.trim(), b.answer.trim(), normalizeOptionalUrl(b.source_url), Number(b.sort_order) || 0, isEnabled(b.published) ? 1 : 0, faq.id);
+  db.prepare("UPDATE faqs SET category=?,question=?,answer=?,source_url=?,sort_order=?,published=?,generated=0,updated_at=datetime('now','localtime') WHERE id=?").run(category, b.question.trim(), b.answer.trim(), normalizeReferenceUrl(b.source_url), Number(b.sort_order) || 0, isEnabled(b.published) ? 1 : 0, faq.id);
   queueIndexNow(['/cau-hoi-thuong-gap', '/sitemap.xml', '/llms.txt']);
   res.redirect('/admin/faq?flash=' + encodeURIComponent('Đã cập nhật FAQ'));
 });
@@ -1002,4 +1011,5 @@ router.get('/lien-he', requireAdmin, (req, res) => {
 });
 router.post('/lien-he/:id/status', requireAdmin, (req, res, next) => { const row = db.prepare('SELECT id FROM leads WHERE id=?').get(req.params.id); if (!row) return next(); const status = ['new','contacted','closed'].includes(req.body.status) ? req.body.status : 'contacted'; db.prepare("UPDATE leads SET status=?,updated_at=datetime('now','localtime') WHERE id=?").run(status, row.id); res.redirect('/admin/lien-he?flash=' + encodeURIComponent('Đã cập nhật yêu cầu')); });
 
+require('./contentEditingAdmin')(router, { uploadCover });
 module.exports = router;

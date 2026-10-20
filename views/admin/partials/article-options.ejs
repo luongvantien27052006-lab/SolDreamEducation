@@ -1,0 +1,10 @@
+<h2>Khối hiển thị và ảnh đại diện</h2>
+<div class="row2"><div class="f"><label>Alt ảnh bìa</label><input name="cover_alt" value="<%= item.cover_alt||'' %>"></div><div class="f"><label>Chú thích ảnh bìa</label><input name="cover_caption" value="<%= item.cover_caption||'' %>"></div></div>
+<label class="check"><input type="checkbox" name="show_summary" value="1" <%= item.show_summary?'checked':'' %>> Hiện tóm tắt đầu bài từ mô tả ngắn</label>
+<div class="f"><label>Tiêu đề khối tóm tắt</label><input name="summary_title" value="<%= item.summary_title||'Tóm tắt' %>"></div>
+<label class="check"><input type="checkbox" name="show_sources" value="1" <%= item.show_sources!==0?'checked':'' %>> Hiện khối nguồn khi có liên kết tham khảo</label>
+<div class="f"><label>Lời dẫn khối nguồn (có thể để trống)</label><textarea name="source_note" rows="2"><%= item.source_note||'' %></textarea></div>
+<div class="f"><label>FAQ của bài</label><select name="faq_mode"><option value="off" <%= (!item.faq_mode||item.faq_mode==='off')?'selected':'' %>>Tắt</option><option value="manual" <%= item.faq_mode==='manual'?'selected':'' %>>Biên tập tay bên dưới</option><option value="auto" <%= item.faq_mode==='auto'?'selected':'' %>>Tạo lại từ nội dung hiện hành</option></select></div>
+<details><summary>Biên tập FAQ riêng cho bài</summary><p>Chọn “Biên tập tay” để dùng các câu dưới đây. Hệ thống không tự ghi đè FAQ đã chỉnh tay.</p>
+<% const editorFaqs = typeof articleFaqs!=='undefined'?articleFaqs:[]; for(let i=0;i<Math.max(4,editorFaqs.length);i++){ const faq=editorFaqs[i]||{}; %><div class="f"><label>Câu hỏi <%= i+1 %></label><textarea name="faq_questions" rows="2"><%= faq.question||'' %></textarea><label>Câu trả lời</label><textarea name="faq_answers" rows="3"><%= faq.answer||'' %></textarea></div><% } %></details>
+<p class="muted">Lưu CMS sẽ bảo toàn văn phong, SEO và nội dung bạn nhập. Các khối tắt cũng bị loại khỏi FAQ schema. Dùng {{course-catalog}} trong bài học phí để hiển thị bảng lấy trực tiếp từ các khóa học.</p>

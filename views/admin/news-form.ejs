@@ -4,7 +4,7 @@
 </div>
 <% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
 <% if (typeof notice !== 'undefined' && notice) { %><div class="flash"><%= notice %></div><% } %>
-<form method="post" action="<%= mode==='create' ? '/admin/tin-tuc/moi' : '/admin/tin-tuc/'+post.id+'/sua' %>" enctype="multipart/form-data" class="panel form" data-content-form data-content-type="tin-tuc">
+<form method="post" action="<%= mode==='create' ? '/admin/tin-tuc/moi' : '/admin/tin-tuc/'+post.id+'/sua' %>" enctype="multipart/form-data" class="panel form" data-preview-type="post" data-content-form data-content-type="tin-tuc">
   <div class="f">
     <label>Tiêu đề *</label>
     <input name="title" value="<%= post.title || '' %>" required placeholder="VD: Du học Hàn Quốc 2026 cần chuẩn bị gì?">
@@ -80,8 +80,9 @@
   <div class="f">
     <label>Nguồn đối chiếu chính thức</label>
     <textarea name="source_urls" rows="3" placeholder="Mỗi dòng một URL, ví dụ: https://www.studyinkorea.go.kr/..."><%= post.source_urls || '' %></textarea>
-    <small class="muted">Ưu tiên website trường, Study in Korea, cơ quan chính phủ hoặc tài liệu gốc. Các URL sẽ hiển thị công khai và được khai báo trong Article schema.</small>
+    <small class="muted">Ưu tiên website trường, Study in Korea, cơ quan chính phủ hoặc tài liệu gốc. Các URL chỉ hiện trong khối nguồn khi bạn bật khối đó; liên kết có thật được dùng cho dữ liệu có cấu trúc.</small>
   </div>
+  <%- include('partials/article-options', { item: post }) %>
   <div class="form__actions">
     <button type="submit" class="btn2 btn2-primary"><%= mode==='create' ? 'Đăng bài' : 'Lưu thay đổi' %></button>
     <a href="/admin/tin-tuc" class="btn2 btn2-ghost">Huỷ</a>

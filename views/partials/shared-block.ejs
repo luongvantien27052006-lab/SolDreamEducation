@@ -1,0 +1,7 @@
+<% const sharedBlock = typeof block !== 'undefined' ? block : getBlock(blockKey); const tag = typeof heading === 'undefined' ? 'h2' : heading; %>
+<% if(sharedBlock.active){ %>
+<% if(sharedBlock.eyebrow){ %><span class="eyebrow"><%= sharedBlock.eyebrow %></span><% } %>
+<% if(sharedBlock.title && tag){ %><% if(tag==='h3'){ %><h3><%= sharedBlock.title %></h3><% } else if(tag==='h4'){ %><h4><%= sharedBlock.title %></h4><% } else { %><h2><%= sharedBlock.title %></h2><% } %><% } %>
+<%- sharedBlock.content %>
+<% if(sharedBlock.link_url){ %><a class="btn btn-primary about__cta" href="<%= sharedBlock.link_url %>"><%= sharedBlock.link_label || sharedBlock.title %><span aria-hidden="true"> →</span></a><% } %>
+<% } %>

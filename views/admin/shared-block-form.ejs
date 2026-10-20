@@ -1,0 +1,8 @@
+<div class="adm__head"><div><h1>Sửa <%= block.key %></h1><p>Vị trí: <%= block.zone %>. Nội dung đã lưu không bị mã nguồn mặc định ghi đè.</p></div><a href="/admin/noi-dung-chung" class="btn2 btn2-ghost">Quay lại</a></div>
+<% if(error){ %><div class="flash flash-err"><%= error %></div><% } %>
+<form class="panel form" method="post" action="/admin/noi-dung-chung/<%= block.key %>/sua">
+<div class="f"><label>Tiêu đề / nhãn</label><input name="title" value="<%= block.title %>"></div><div class="f"><label>Dòng trên tiêu đề</label><input name="eyebrow" value="<%= block.eyebrow %>"></div>
+<div class="f"><label>Nội dung</label><%- include('partials/rich-editor',{name:'content',value:block.content,placeholder:'Nhập nội dung hiển thị…'}) %></div>
+<div class="row2"><div class="f"><label>Nút: nhãn</label><input name="link_label" value="<%= block.link_label %>"></div><div class="f"><label>Nút: liên kết</label><input name="link_url" value="<%= block.link_url %>" placeholder="/gioi-thieu hoặc https://..."></div></div>
+<div class="row2"><div class="f"><label>Thứ tự trong nhóm</label><input name="sort_order" type="number" value="<%= block.sort_order %>"></div><div class="f"><label>Hiển thị</label><select name="active"><option value="1" <%= block.active?'selected':'' %>>Bật</option><option value="0" <%= !block.active?'selected':'' %>>Tắt</option></select></div></div>
+<div class="form__actions"><button type="submit" class="btn2 btn2-primary">Lưu</button><button type="submit" class="btn2 btn2-ghost" formaction="/admin/noi-dung-chung/<%= block.key %>/xem-truoc" formtarget="_blank">Xem trước, chưa lưu</button><a href="/admin/lich-su/shared_blocks/<%= block.key %>">Lịch sử</a></div></form>

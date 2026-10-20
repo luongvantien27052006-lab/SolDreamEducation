@@ -5,6 +5,7 @@
 </head>
 <body class="<%= typeof chatPageMode !== 'undefined' && chatPageMode ? 'chat-mode' : '' %>">
 <%- include('partials/header') %>
+<% if(typeof previewMode!=='undefined' && previewMode){ %><aside class="source-note" role="status">Bản xem trước — chưa lưu và chưa xuất bản.</aside><% } %>
 <%- body %>
 <% if (!(typeof hideFooter !== 'undefined' && hideFooter)) { %><%- include('partials/footer') %><% } %>
 <% if (!(typeof hideFloatingChat !== 'undefined' && hideFloatingChat)) { %><%- include('partials/chatbot') %><% } %>

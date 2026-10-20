@@ -1,8 +1,8 @@
 <aside class="chatbot" aria-label="Trợ lý tư vấn SolDream Support">
   <% if (typeof showChatHint !== 'undefined' && showChatHint) { %>
     <a class="chatbot__hint" href="/tro-ly-du-hoc">
-      <strong>Bạn cần tư vấn?</strong>
-      <span>Hỏi trợ lý AI của Sol Dream</span>
+      <strong><%= getBlock("chat-hint").title %></strong>
+      <span><%- getBlock("chat-hint").content %></span>
     </a>
   <% } %>
   <a class="chatbot__launcher" href="/tro-ly-du-hoc" aria-label="Mở trang trợ lý tư vấn SolDream Support">

@@ -31,7 +31,7 @@
     if (contentWords >= 600) score += 16; else if (contentWords >= 300) score += 11; else if (contentWords >= 150) score += 6; else issues.push('Nội dung nên có thêm dữ liệu và trải nghiệm thực tế.');
     if (surface && surface.querySelector('h2')) score += 9; else issues.push('Thêm ít nhất một H2 dạng câu hỏi người dùng.');
     if (surface && surface.querySelector('table,ul,ol')) score += 8; else issues.push('Thêm bảng hoặc danh sách có cấu trúc.');
-    if (sourceCount) score += 13; else issues.push('Thêm ít nhất một nguồn chính thức.');
+    if (sourceCount || !sources.value.trim()) score += 13;
     if (author.value.trim()) score += 8; else issues.push('Khai báo tác giả/chuyên viên chịu trách nhiệm.');
     if (authorUrl.value.trim()) score += 3;
     if (form.querySelector('#coverPreview[src]:not([src=""])') || (form.querySelector('#coverInput') && form.querySelector('#coverInput').files.length)) score += 4; else issues.push('Nên có ảnh bìa riêng.');

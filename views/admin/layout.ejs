@@ -26,6 +26,7 @@
       <a href="/admin/cam-nhan" class="<%= active==='testimonials'?'on':'' %>">💬 Cảm nhận học viên</a>
       <a href="/admin/so-lieu-trang-chu" class="<%= active==='homepage-stats'?'on':'' %>">🔢 Số liệu trang chủ</a>
       <a href="/admin/gioi-thieu" class="<%= active==='about'?'on':'' %>">🪪 Giới thiệu website</a>
+      <a href="/admin/noi-dung-chung" class="<%= active==='shared'?'on':'' %>">✏ Nội dung dùng chung</a>
       <a href="/admin/nghien-cuu" class="<%= active==='research'?'on':'' %>">🤖 Dữ liệu &amp; AI</a>
       <% if (active === 'research') { %><div class="adm__subnav"><% contentTopics.forEach(function(topic) { %><a href="/admin/nghien-cuu?muc=<%= topic.id %>"><%= topic.label %></a><% }); %></div><% } %>
       <a href="/admin/popup" class="<%= active==='popup'?'on':'' %>">▣ Pop-up</a>
@@ -43,5 +44,6 @@
 <% } %>
 <script src="/js/admin-rich-editor.js?v=<%= typeof assetVer !== 'undefined' ? assetVer : Date.now() %>"></script>
 <script src="/js/admin-content.js?v=<%= typeof assetVer !== 'undefined' ? assetVer : Date.now() %>"></script>
+<script src="/js/admin-preview.js?v=<%= typeof assetVer!=='undefined'?assetVer:Date.now() %>"></script>
 </body>
 </html>

@@ -1,0 +1,1 @@
+<% if(item.show_sources && item.sourceLinks.length){ %><section class="source-box"><h2>Nguồn tham khảo</h2><% if(item.source_note){ %><p><%= item.source_note %></p><% } %><ul><% item.sourceLinks.forEach(function(source){ %><li><a href="<%= source %>" target="_blank" rel="noopener noreferrer"><%= source %></a></li><% }); %></ul></section><% } %>

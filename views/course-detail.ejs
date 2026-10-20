@@ -15,16 +15,16 @@
         </ul>
       </div>
     </header>
-    <% if (course.financials && course.financials.tuition2026) { const spec = course.financials.tuition2026; %>
+    <% if (course.financials && (course.financials.tuition2026 || course.financials.classDetails)) { const spec = course.financials.tuition2026 || course.financials.classDetails; %>
     <section class="knowledge-section" aria-labelledby="class-specs-title">
       <h2 id="class-specs-title">Thông tin lớp theo bảng học phí SDE 2026</h2>
       <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th>Hạng mục</th><th>Thông tin lớp</th></tr></thead><tbody>
-        <tr><td>Mã lớp</td><td><%= spec.code %></td></tr>
-        <tr><td>Số buổi</td><td><%= spec.sessions %> buổi, mỗi buổi <%= spec.minutesPerSession %> phút (<%= spec.totalHours %> giờ)</td></tr>
-        <tr><td>Lịch học dự kiến</td><td><%= spec.estimatedWeeks %> tuần, theo lịch chuẩn 3 buổi/tuần; thời lượng thực tế có thể điều chỉnh theo lịch lớp</td></tr>
-        <tr><td>Cơ cấu giáo viên</td><td><%= spec.instructors %></td></tr>
-        <tr><td>Sĩ số</td><td><%= spec.classSize %> học viên; tối thiểu <%= spec.minimumStudents %> học viên để mở lớp</td></tr>
-        <tr><td>Tài liệu</td><td><%= spec.materials %></td></tr>
+        <% if(spec.code){ %><tr><td>Mã lớp</td><td><%= spec.code %></td></tr><% } %>
+        <% if(spec.sessions){ %><tr><td>Số buổi</td><td><%= spec.sessions %> buổi, mỗi buổi <%= spec.minutesPerSession %> phút (<%= spec.totalHours %> giờ)</td></tr><% } %>
+        <% if(spec.estimatedWeeks){ %><tr><td>Lịch học dự kiến</td><td><%= spec.estimatedWeeks %> tuần, theo lịch chuẩn 3 buổi/tuần; thời lượng thực tế có thể điều chỉnh theo lịch lớp</td></tr><% } %>
+        <% if(spec.instructors){ %><tr><td>Cơ cấu giáo viên</td><td><%= spec.instructors %></td></tr><% } %>
+        <tr><td>Sĩ số</td><td><%= spec.classSize %> học viên<% if(spec.minimumStudents!=null){ %>; tối thiểu <%= spec.minimumStudents %> học viên để mở lớp<% } %></td></tr>
+        <tr><td>Giáo trình</td><td><%= spec.textbook || '' %></td></tr><tr><td>Tài liệu bổ trợ</td><td><%= spec.textbook || '' %><br><%= spec.materials %></td></tr>
         <tr><td>Học phí</td><td><strong><%= course.price %></strong></td></tr>
       </tbody></table></div>
     </section>

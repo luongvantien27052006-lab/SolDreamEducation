@@ -1418,4 +1418,5 @@ db.exec(`
   const result = require('../lib/schoolNoticeMigration').applySchoolNoticePolicy(db);
   if (result) console.log('[research] weekly school notices', JSON.stringify(result));
 }
+require('../lib/contentEditingMigration').applyContentEditing(db);
 module.exports = db;

@@ -4,7 +4,7 @@
 </div>
 <% if (error) { %><div class="flash flash-err"><%= error %></div><% } %>
 <% if (typeof notice !== 'undefined' && notice) { %><div class="flash"><%= notice %></div><% } %>
-<form method="post" action="<%= mode==='create' ? '/admin/du-hoc/moi' : '/admin/du-hoc/'+program.id+'/sua' %>" enctype="multipart/form-data" class="panel form" data-content-form data-content-type="du-hoc">
+<form method="post" action="<%= mode==='create' ? '/admin/du-hoc/moi' : '/admin/du-hoc/'+program.id+'/sua' %>" enctype="multipart/form-data" class="panel form" data-preview-type="program" data-content-form data-content-type="du-hoc">
   <div class="row2">
     <div class="f">
       <label>Tên chương trình / trường *</label>
@@ -29,6 +29,7 @@
     </div>
   </div>
 
+<div class="f"><label>Ngày hiển thị</label><input name="publication_date" type="date" value="<%= String(program.created_at||'').slice(0,10) %>"></div>
   <div class="f">
     <label>Ảnh bìa chương trình / trường</label>
     <div class="cover-box">
@@ -92,6 +93,8 @@
     <small class="muted">Nguồn được hiển thị trên trang chi tiết và đưa vào dữ liệu có cấu trúc để người đọc và công cụ tìm kiếm đối chiếu.</small>
   </div>
 
+  <%- include('partials/article-options', { item: program }) %>
+<div class="f"><label>Loại tác giả</label><select name="author_type"><option value="organization" <%= program.author_type!=='person'?'selected':'' %>>Tổ chức / đơn vị</option><option value="person" <%= program.author_type==='person'?'selected':'' %>>Cá nhân</option></select></div>
   <div class="form__actions">
     <button type="submit" class="btn2 btn2-primary"><%= mode==='create' ? (program.category==='Thông tin trường'?'Thêm trường':'Thêm chương trình') : 'Lưu thay đổi' %></button>
     <a href="/admin/du-hoc?category=<%= encodeURIComponent(program.category==='Thông tin trường'?'Thông tin trường':'Chương trình du học') %>" class="btn2 btn2-ghost">Huỷ</a>
