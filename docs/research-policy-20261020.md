@@ -18,7 +18,7 @@ Theo yêu cầu: chỉ tìm thông tin trường có trong profile 2026–2027; 
 - Mỗi nguồn có `next_crawl_at_ms`, được chốt trước khi truy cập mạng và giữ nguyên qua khởi động lại. Lỗi đọc nguồn không gây vòng lặp tự quét liên tục.
 - Khởi tạo hạn tháng từ lần đọc gần nhất, không quét lại ngay chỉ vì triển khai cấu hình. Dữ liệu hiện tại có lần đọc gần nhất sáng 20/10; hạn tiếp theo là sáng 20/11/2026 (giờ Việt Nam).
 - Nút kiểm tra thủ công là thao tác chạy ngay theo yêu cầu quản trị viên và tính lại hạn tiếp theo của nguồn; vẫn bị giới hạn phạm vi nguồn.
-- Bộ hẹn giờ kiểm tra mốc trong SQLite mỗi phút; kiểm tra mốc không gọi web/AI. Hàng đợi biên tập giữ nhịp xử lý riêng để hoàn thiện dữ liệu đã tìm được, không mở một lượt khám phá nguồn mới.
+- Bộ hẹn giờ kiểm tra mốc trong SQLite mỗi phút; kiểm tra mốc không gọi web/AI. Hàng đợi nền không mở rộng tìm kiếm hoặc đọc thêm nguồn tháng ngoài lượt quét tháng; chỉ tiếp nhận nguồn tháng vừa được quét trong chính lượt đó. Kết quả Batch đã gửi vẫn được kiểm tra và hoàn thiện sau đó.
 - Cửa sổ nội dung cho nguồn tháng là 35 ngày, tránh bỏ sót toàn bộ thông báo từ đầu tháng vì giới hạn 7 ngày cũ. Nguồn trường giữ cửa sổ 7 ngày.
 - Không chạy tác vụ sửa ảnh cho tất cả trường mỗi lượt quét; chỉ bổ sung ảnh bài thuộc các nguồn vừa thực sự được quét.
 
