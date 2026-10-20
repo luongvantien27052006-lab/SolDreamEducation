@@ -33,9 +33,10 @@ function detailRobots(item) {
   return item.noindex ? 'noindex, follow, max-snippet:-1, max-image-preview:large' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
 }
 
-function setFreshnessHeaders(res, value) {
-  const date = new Date(String(value || '').replace(' ', 'T'));
-  if (!Number.isNaN(date.getTime())) res.set('Last-Modified', date.toUTCString());
+function setFreshnessHeaders(res) {
+  // Article timestamps do not describe the whole HTML: footer, shared copy and
+  // templates can change independently. Let Express validate the rendered ETag.
+  res.removeHeader('Last-Modified');
   res.set('Cache-Control', 'no-cache, must-revalidate');
 }
 
@@ -361,8 +362,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
   if (modifiedDate) post.updatedDateFull = modifiedDate;
   const relatedPosts = db.prepare('SELECT * FROM posts WHERE published = 1 AND id != ? ORDER BY CASE WHEN topic = ? THEN 0 ELSE 1 END, datetime(updated_at) DESC LIMIT 3').all(post.id, post.topic).map(decorate);
   const relatedFaqs = getRelatedFaqs('post', post.id);
-  if (modifiedTime.includes('T')) setFreshnessHeaders(res, modifiedTime);
-  else res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+  setFreshnessHeaders(res);
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org',
     '@graph': [
@@ -436,7 +436,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
   if (modifiedDate) program.updatedDateFull = modifiedDate;
   const relatedPrograms = db.prepare('SELECT * FROM programs WHERE published = 1 AND category = ? AND id != ? ORDER BY sort_order ASC, datetime(updated_at) DESC LIMIT 3').all(program.category, program.id).map(decorate);
   const relatedFaqs = getRelatedFaqs('program', program.id);
-  setFreshnessHeaders(res, modifiedTime);
+  setFreshnessHeaders(res);
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org',
     '@graph': [
@@ -527,7 +527,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
   if (modifiedDate) program.updatedDateFull = modifiedDate;
     const relatedPrograms = db.prepare("SELECT * FROM programs WHERE published=1 AND category='Thông tin trường' AND id!=? ORDER BY sort_order ASC,datetime(updated_at) DESC LIMIT 3").all(program.id).map(decorate);
     const relatedFaqs = getRelatedFaqs('program', program.id);
-    setFreshnessHeaders(res, modifiedTime);
+    setFreshnessHeaders(res);
     const jsonLd = jsonLdScript({ '@context': 'https://schema.org', '@graph': [
       generateBreadcrumbSchema([{ name: siteText("server.routes.public.058"), url: '/' }, { name: siteText("server.routes.public.059"), url: '/truong-dai-hoc' }, { name: program.title, url: programPublicPath(program) }]),
       { '@type': 'Article', '@id': `${url}#article`, headline: program.title, description: storedDescription(program), image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
@@ -542,6 +542,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
   }
   const university = getUniversityById(req.params.id);
   if (!university) return next();
+  setFreshnessHeaders(res);
   const url = abs(university.url);
   const universityFaqs = getUniversityFaqs(university);
   const advisor = getVerifiedAdvisor();

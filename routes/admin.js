@@ -9,6 +9,7 @@ const db = require('../db');
 const { requireAdmin } = require('../lib/auth');
 const { slugify, uniqueSlug, decorate, normalizeSourceUrls, normalizeOptionalUrl, dateInputToLocalDateTime, programPublicPath, normalizeReferenceUrl } = require('../lib/util');
 const { sanitizeRichHtml } = require('../lib/contentSanitizer');
+const { descriptionForSave } = require('../lib/seoDescription');
 const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
@@ -328,7 +329,7 @@ router.post('/tin-tuc/moi', requireAdmin, uploadCover, (req, res) => {
   const coverImage = req.file ? '/uploads/' + req.file.filename : null;
   const result = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,topic,cover,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,noindex,published,created_at,updated_at)
               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,COALESCE(NULLIF(?,''),datetime('now','localtime')),datetime('now','localtime'))`)
-    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeReferenceUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '');
+    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeReferenceUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), descriptionForSave(b), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '');
   db.prepare('UPDATE posts SET author_type=? WHERE id=?').run(b.author_type === 'person' ? 'person' : 'organization', result.lastInsertRowid);
   saveArticleOptions('post', result.lastInsertRowid, b);
   if (isEnabled(b.published)) finalizePublishedContent('post', result.lastInsertRowid, { notify: true });
@@ -365,7 +366,7 @@ router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   if (req.file) { coverImage = '/uploads/' + req.file.filename; }
 
   db.prepare(`UPDATE posts SET title=?, slug=?, excerpt=?, content=?, category=?, topic=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, published=?, created_at=COALESCE(NULLIF(?,''),created_at), updated_at=datetime('now','localtime') WHERE id=?`)
-    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeReferenceUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate && publicationDate.slice(0,10)!==String(existing.created_at).slice(0,10) ? publicationDate : '', existing.id);
+    .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeReferenceUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), descriptionForSave(b, existing), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate && publicationDate.slice(0,10)!==String(existing.created_at).slice(0,10) ? publicationDate : '', existing.id);
   db.prepare('UPDATE posts SET author_type=? WHERE id=?').run(b.author_type === 'person' ? 'person' : 'organization', existing.id);
   db.prepare("UPDATE research_items SET topic=?,updated_at=datetime('now','localtime') WHERE published_post_id=?").run(topic, existing.id);
   saveArticleOptions('post', existing.id, b);
@@ -419,7 +420,7 @@ router.post('/du-hoc/moi', requireAdmin, uploadCover, (req, res) => {
   const coverImage = req.file ? '/uploads/' + req.file.filename : null;
   const result = db.prepare(`INSERT INTO programs (title,subtitle,slug,excerpt,content,category,cover,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,noindex,sort_order,published,created_at,updated_at)
               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,datetime('now','localtime'),datetime('now','localtime'))`)
-    .run(b.title.trim(), (b.subtitle||'').trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), category, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeReferenceUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, parseInt(b.sort_order||'0',10)||0, isEnabled(b.published) ? 1 : 0);
+    .run(b.title.trim(), (b.subtitle||'').trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), category, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeReferenceUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), descriptionForSave(b), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, parseInt(b.sort_order||'0',10)||0, isEnabled(b.published) ? 1 : 0);
   saveArticleOptions('program', result.lastInsertRowid, b);
   if (isEnabled(b.published)) finalizePublishedContent('program', result.lastInsertRowid, { notify: true });
   if (isEnabled(b.published) && !isEnabled(b.noindex)) queueIndexNow([programPublicPath({ category, slug }), category === SCHOOL_CATEGORY ? '/truong-dai-hoc' : '/du-hoc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
@@ -453,7 +454,7 @@ router.post('/du-hoc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   if (b.remove_cover === '1' && existing.cover_image) { coverImage = null; }
   if (req.file) { coverImage = '/uploads/' + req.file.filename; }
   db.prepare(`UPDATE programs SET title=?, subtitle=?, slug=?, excerpt=?, content=?, category=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, sort_order=?, published=?, updated_at=datetime('now','localtime') WHERE id=?`)
-    .run(b.title.trim(), (b.subtitle||'').trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), category, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeReferenceUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, parseInt(b.sort_order||'0',10)||0, isEnabled(b.published) ? 1 : 0, existing.id);
+    .run(b.title.trim(), (b.subtitle||'').trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), category, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeReferenceUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), descriptionForSave(b, existing), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, parseInt(b.sort_order||'0',10)||0, isEnabled(b.published) ? 1 : 0, existing.id);
   if (req.file || b.remove_cover === '1') {
     db.prepare("UPDATE programs SET cover_source_url='', cover_attribution='' WHERE id=?").run(existing.id);
   }
