@@ -560,7 +560,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
         '@id': `${url}#article`,
         headline: siteText('school.article-headline',{v0:university.name}),
         description: university.description,
-        datePublished: university.updatedDate,
+        datePublished: university.firstPublishedAt || university.updatedDate,
         dateModified: university.updatedDate,
         inLanguage: 'vi-VN',
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
