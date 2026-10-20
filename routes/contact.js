@@ -5,6 +5,7 @@ const express = require('express');
 const crypto = require('crypto');
 const db = require('../db');
 const { notifyHotline } = require('../lib/leadNotifier');
+const {queueLeadEmail,requestDelivery}=require('../lib/leadEmailNotifier');
 const { cleanPath, getLeadContext } = require('../lib/leadContext');
 const {
   ContactSpamGuard, normalizePhone, isValidVietnamesePhone, isValidName, assessFormTiming,
@@ -60,10 +61,13 @@ router.post('/contact', async (req, res) => {
   if (duplicate) return res.status(200).json({ ok: true, duplicate: true, message: siteText("server.routes.contact.010") });
 
   const unsubscribeToken = crypto.randomBytes(24).toString('hex');
-  const result = db.prepare(`INSERT INTO leads
+  const result = db.transaction(()=>{const inserted=db.prepare(`INSERT INTO leads
     (name,phone,email,interest,interest_detail,lead_type,source_path,source_title,subscription_active,unsubscribe_token,status,notified)
     VALUES (?,?,?,?,?,?,?,?,1,?,'new',0)`)
     .run(name, phone, email, interest, interestDetail, leadType, sourcePath, sourceTitle, unsubscribeToken);
+    queueLeadEmail(inserted.lastInsertRowid);return inserted;
+  })();
+  requestDelivery();
   const lead = { id: result.lastInsertRowid, name, phone, email, interest, interest_detail: interestDetail, lead_type: leadType, source_path: sourcePath, source_title: sourceTitle };
   try { if (await notifyHotline(lead)) db.prepare('UPDATE leads SET notified=1 WHERE id=?').run(lead.id); }
   catch (error) { console.error('[lead] hotline notification failed:', error.message); }

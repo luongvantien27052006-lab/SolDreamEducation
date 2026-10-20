@@ -25,6 +25,7 @@ const { ensureKoreaScopeCleanup } = require('./lib/koreaDataCleanup');
 const SQLiteSessionStore = require('./lib/sqliteSessionStore');
 const { createBotProtection } = require('./lib/botProtection');
 const { startSubscriberNotificationWorker } = require('./lib/subscriberNotifier');
+const {startLeadEmailWorker}=require('./lib/leadEmailNotifier');
 const { getCourses } = require('./lib/courseKnowledge');
 const { repairPublishedHandbookLanguage, auditPublishedHandbooks } = require('./lib/handbookQuality');
 
@@ -172,4 +173,5 @@ app.listen(PORT, () => {
   console.log(`✅ Sol Dream đang chạy tại http://localhost:${PORT}  (admin: /admin)`);
   startResearchScheduler();
   startSubscriberNotificationWorker();
+  startLeadEmailWorker();
 });

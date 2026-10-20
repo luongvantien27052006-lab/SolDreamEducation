@@ -232,6 +232,21 @@ CREATE TABLE IF NOT EXISTS leads (
 );
 CREATE INDEX IF NOT EXISTS idx_leads_status ON leads(status, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_leads_phone_created ON leads(phone, created_at DESC);
+CREATE TABLE IF NOT EXISTS lead_email_notifications (
+  lead_id INTEGER PRIMARY KEY REFERENCES leads(id) ON DELETE CASCADE,
+  recipient TEXT NOT NULL,
+  idempotency_key TEXT NOT NULL UNIQUE,
+  status TEXT NOT NULL DEFAULT 'pending',
+  attempts INTEGER NOT NULL DEFAULT 0,
+  next_attempt_ms INTEGER NOT NULL DEFAULT 0,
+  lease_until_ms INTEGER NOT NULL DEFAULT 0,
+  provider_message_id TEXT NOT NULL DEFAULT '',
+  last_error TEXT NOT NULL DEFAULT '',
+  sent_at TEXT NOT NULL DEFAULT '',
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_lead_email_pending ON lead_email_notifications(status,next_attempt_ms);
 CREATE TABLE IF NOT EXISTS subscriber_notifications (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   lead_id INTEGER NOT NULL,

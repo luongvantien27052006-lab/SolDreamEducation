@@ -332,7 +332,13 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .cta__left .section-lead{color:#fff;font-weight:500}
 .cta__contacts{display:flex;flex-direction:column;gap:12px}
 .cta__contacts a{display:inline-flex;align-items:center;gap:12px;font-weight:600}
+.cta__contacts a{min-width:0;max-width:100%}
+.cta__contacts a>div{min-width:0;overflow-wrap:anywhere}
 .cta__contacts i{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.2);display:grid;place-items:center}
+.cta__contacts i{flex:0 0 40px;color:#fff}
+.cta__contacts a[href^="tel:"] i::before,.cta__contacts a[href^="mailto:"] i::before{content:"";display:block;width:22px;height:22px;background:currentColor;-webkit-mask:var(--contact-icon) center/contain no-repeat;mask:var(--contact-icon) center/contain no-repeat}
+.cta__contacts a[href^="tel:"] i{--contact-icon:url('/img/icons/contact-phone.svg')}
+.cta__contacts a[href^="mailto:"] i{--contact-icon:url('/img/icons/contact-email.svg')}
 .cta__contacts svg{width:19px;height:19px;color:#fff}
 .cta__contacts b{font-family:var(--font-disp);font-size:18px}
 .cta__form{background:#fff;padding:38px 34px;display:flex;flex-direction:column;gap:14px}
@@ -362,6 +368,12 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .footer ul.fl a:hover{color:#fff;padding-left:4px}
 .footer__branch-title{margin:0 0 12px;color:#fff;font-size:13px;font-weight:800;letter-spacing:.02em}
 .footer__branch-title--secondary{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
+/* Rich text keeps semantic headings after CMS sanitizing removes CSS classes. */
+.footer__contact{font-size:14px;line-height:1.7}
+.footer__contact h5{font-size:14px;line-height:1.5;color:#fff;margin:0 0 10px;font-weight:800}
+.footer__contact h5~h5{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18)}
+.footer__contact>div,.footer__contact>p{margin:0 0 10px}
+.footer__contact a{display:inline-block;line-height:1.7;overflow-wrap:anywhere}
 .footer .contact-li{display:flex;gap:10px;font-size:14px;margin-bottom:13px;align-items:flex-start}
 .footer .contact-li svg{width:17px;height:17px;color:var(--persimmon);flex-shrink:0;margin-top:3px}
 .footer__map{overflow:hidden;aspect-ratio:407/156;height:auto;margin-top:6px;border:1px solid rgba(255,255,255,.12);border-radius:14px}

@@ -1006,13 +1006,18 @@ router.post('/popup/:id/xoa', requireAdmin, (req, res, next) => {
 
 // ---------- Hotline contact requests ----------
 router.get('/lien-he', requireAdmin, (req, res) => {
-  const leads = db.prepare('SELECT * FROM leads ORDER BY CASE status WHEN \'new\' THEN 0 ELSE 1 END, datetime(created_at) DESC LIMIT 300').all();
+  const leads = db.prepare(`SELECT l.*,n.status email_status,n.recipient email_recipient,n.sent_at email_sent_at,n.last_error email_error,n.attempts email_attempts FROM leads l LEFT JOIN lead_email_notifications n ON n.lead_id=l.id ORDER BY CASE l.status WHEN 'new' THEN 0 ELSE 1 END,datetime(l.created_at) DESC LIMIT 300`).all();
   const leadGroups = [
     { key: 'study_abroad', title: 'Tư vấn chương trình du học', rows: leads.filter((lead) => lead.lead_type === 'study_abroad') },
     { key: 'course', title: 'Tư vấn khóa học', rows: leads.filter((lead) => !lead.lead_type || lead.lead_type === 'course') },
     { key: 'school_info', title: 'Đăng ký nhận thông tin trường', rows: leads.filter((lead) => lead.lead_type === 'school_info') },
   ];
-  res.render('admin/leads', { layout, title: 'Yêu cầu liên hệ', active: 'leads', leads, leadGroups, flash: req.query.flash || null });
+  res.render('admin/leads', { layout, title: 'Yêu cầu liên hệ', active: 'leads', leads, leadGroups, emailConfiguration:require('../lib/leadEmailNotifier').publicConfiguration(),flash: req.query.flash || null });
+});
+router.post('/lien-he/:id/gui-email',requireAdmin,(req,res,next)=>{
+  const lead=db.prepare('SELECT id FROM leads WHERE id=?').get(req.params.id);if(!lead)return next();
+  require('../lib/leadEmailNotifier').retryLeadEmail(lead.id);
+  res.redirect('/admin/lien-he?flash='+encodeURIComponent('Đã xếp lịch gửi thông báo email. Trạng thái sẽ được cập nhật sau khi gửi.'));
 });
 router.post('/lien-he/:id/status', requireAdmin, (req, res, next) => { const row = db.prepare('SELECT id FROM leads WHERE id=?').get(req.params.id); if (!row) return next(); const status = ['new','contacted','closed'].includes(req.body.status) ? req.body.status : 'contacted'; db.prepare("UPDATE leads SET status=?,updated_at=datetime('now','localtime') WHERE id=?").run(status, row.id); res.redirect('/admin/lien-he?flash=' + encodeURIComponent('Đã cập nhật yêu cầu')); });
 
