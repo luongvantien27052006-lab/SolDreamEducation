@@ -50,7 +50,7 @@
     if (editorStatus) editorStatus.textContent = contentWords.toLocaleString('vi-VN') + ' từ · ' + (surface ? surface.querySelectorAll('h2,h3').length : 0) + ' tiêu đề · ' + (surface ? surface.querySelectorAll('table').length : 0) + ' bảng. Có thể dán trực tiếp từ Word, Google Docs, Excel hoặc trang web.';
   }
   form.addEventListener('input', function () { dirty = true; window.clearTimeout(form._qualityTimer); form._qualityTimer = window.setTimeout(update, 120); });
-  form.addEventListener('submit', function () { dirty = false; });
+  form.addEventListener('submit', function (event) { if(event.submitter && event.submitter.formTarget === '_blank') return; dirty = false; });
   window.addEventListener('beforeunload', function (event) { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
   document.addEventListener('keydown', function (event) { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') { event.preventDefault(); dirty = false; form.requestSubmit(); } });
   update();

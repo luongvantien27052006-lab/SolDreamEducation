@@ -780,3 +780,5 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 
 /* Editable content blocks */
 .about__cta{display:inline-flex;margin-top:18px;text-decoration:none}.why .feat p,.why .sec-head p{color:#f0e6f5}.cta__left p{color:#fff}.cover-caption{margin:-18px 0 28px;color:var(--muted);font-size:14px}.footer__grid>div{min-width:0}.footer__grid a{overflow-wrap:anywhere}.footer__grid img{max-width:100%;height:auto}.footer__grid p{line-height:1.7}.about__card>p{color:#fff;font-size:20px;font-weight:650;line-height:1.7}
+
+.footer__grid ul{padding:0;list-style:none;margin:12px 0}.footer__grid li{margin:.45rem 0}.footer__grid>div:first-child a:not(.brand){display:inline-flex;margin:0 12px 8px 0}
