@@ -315,6 +315,10 @@ for (const [column, definition] of Object.entries({
   meta_description: "TEXT NOT NULL DEFAULT ''",
   focus_keyword: "TEXT NOT NULL DEFAULT ''",
   noindex: 'INTEGER NOT NULL DEFAULT 0',
+  first_published_at: "TEXT NOT NULL DEFAULT ''",
+  content_modified_at: "TEXT NOT NULL DEFAULT ''",
+  publication_clock_tracked: 'INTEGER NOT NULL DEFAULT 0',
+  author_type: "TEXT NOT NULL DEFAULT 'organization'",
 })) {
   if (!_cols.includes(column)) db.exec(`ALTER TABLE posts ADD COLUMN ${column} ${definition}`);
 }
@@ -1356,6 +1360,37 @@ if (!db.prepare('SELECT 1 FROM faqs WHERE question=?').get(serviceFaqQuestion)) 
         .run(migrationKey, String(articles.length));
     })();
   }
+}
+
+// Record actual UTC publication/content events from every writing path. Leave
+// unknown historical first-publication times empty rather than inventing them.
+db.exec(`
+  CREATE TRIGGER IF NOT EXISTS posts_publication_insert_utc AFTER INSERT ON posts BEGIN
+    UPDATE posts SET
+      publication_clock_tracked=1,
+      first_published_at=CASE WHEN NEW.published=1 AND NEW.first_published_at='' THEN strftime('%Y-%m-%dT%H:%M:%fZ','now') ELSE NEW.first_published_at END,
+      content_modified_at=CASE WHEN NEW.content_modified_at='' THEN strftime('%Y-%m-%dT%H:%M:%fZ','now') ELSE NEW.content_modified_at END
+    WHERE id=NEW.id;
+  END;
+  CREATE TRIGGER IF NOT EXISTS posts_publication_update_utc AFTER UPDATE OF published ON posts
+    WHEN OLD.published=0 AND NEW.published=1 AND NEW.first_published_at='' AND NEW.publication_clock_tracked=1 BEGIN
+    UPDATE posts SET first_published_at=strftime('%Y-%m-%dT%H:%M:%fZ','now'),
+      content_modified_at=strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id=NEW.id;
+  END;
+  CREATE TRIGGER IF NOT EXISTS posts_content_update_utc
+    AFTER UPDATE OF title,excerpt,content,cover_image,author_name,author_role,author_url,author_type,seo_title,meta_description,focus_keyword ON posts
+    WHEN NEW.title IS NOT OLD.title OR NEW.excerpt IS NOT OLD.excerpt OR NEW.content IS NOT OLD.content
+      OR NEW.cover_image IS NOT OLD.cover_image OR NEW.author_name IS NOT OLD.author_name
+      OR NEW.author_role IS NOT OLD.author_role OR NEW.author_url IS NOT OLD.author_url OR NEW.author_type IS NOT OLD.author_type
+      OR NEW.seo_title IS NOT OLD.seo_title OR NEW.meta_description IS NOT OLD.meta_description OR NEW.focus_keyword IS NOT OLD.focus_keyword BEGIN
+    UPDATE posts SET content_modified_at=strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id=NEW.id;
+  END;
+`);
+
+{
+  const { applyContentTopicAudit } = require('../lib/contentTopicAudit');
+  const result = applyContentTopicAudit(db, require('../data/content-topic-review-20261020.json'));
+  if (result) console.log('[db] reviewed content topics', JSON.stringify(result));
 }
 
 module.exports = db;

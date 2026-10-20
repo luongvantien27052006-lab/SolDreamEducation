@@ -131,6 +131,8 @@ a{color:inherit;text-decoration:none}
 .rich-editor__toolbar button:hover,.rich-editor__toolbar button.is-active,.rich-editor__image:hover{border-color:var(--persimmon)!important;color:var(--persimmon-d);background:#fff8fb!important}
 .rich-editor__surface,.rich-editor__source{width:100%;min-height:420px;padding:20px;border:0!important;border-radius:0!important;outline:0;overflow:auto;resize:vertical;font-size:16px;line-height:1.72;background:#fff}
 .rich-editor__surface:empty:before{content:attr(data-placeholder);color:#9b94a2;pointer-events:none}
+.rich-editor__surface a{color:#92254d;text-decoration:underline!important;text-underline-offset:3px}
+.rich-editor__surface a:focus-visible{outline:3px solid #92254d;outline-offset:3px}
 .rich-editor__source{display:none;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;white-space:pre;tab-size:2}
 .rich-editor__source:not([hidden]){display:block}
 .rich-editor__surface[hidden]{display:none}

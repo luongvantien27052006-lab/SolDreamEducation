@@ -323,6 +323,7 @@ router.post('/tin-tuc/moi', requireAdmin, uploadCover, (req, res) => {
   const result = db.prepare(`INSERT INTO posts (title,slug,excerpt,content,category,topic,cover,cover_image,author_name,author_role,author_url,source_urls,seo_title,meta_description,focus_keyword,noindex,published,created_at,updated_at)
               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,COALESCE(NULLIF(?,''),datetime('now','localtime')),datetime('now','localtime'))`)
     .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '');
+  db.prepare('UPDATE posts SET author_type=? WHERE id=?').run(b.author_type === 'person' ? 'person' : 'organization', result.lastInsertRowid);
   if (isEnabled(b.published)) finalizePublishedContent('post', result.lastInsertRowid, { notify: true });
   if (isEnabled(b.published) && !isEnabled(b.noindex)) queueIndexNow([`/tin-tuc/${slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);
   res.redirect(`/admin/tin-tuc?muc=${topic}&flash=Đã thêm bài viết`);
@@ -358,6 +359,7 @@ router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
 
   db.prepare(`UPDATE posts SET title=?, slug=?, excerpt=?, content=?, category=?, topic=?, cover=?, cover_image=?, author_name=?, author_role=?, author_url=?, source_urls=?, seo_title=?, meta_description=?, focus_keyword=?, noindex=?, published=?, created_at=COALESCE(NULLIF(?,''),created_at), updated_at=datetime('now','localtime') WHERE id=?`)
     .run(b.title.trim(), slug, (b.excerpt||'').trim(), sanitizeRichHtml(b.content), topicLabel(topic), topic, b.cover||'p1', coverImage, (b.author_name||'').trim(), (b.author_role||'').trim(), normalizeOptionalUrl(b.author_url), normalizeSourceUrls(b.source_urls), (b.seo_title||'').trim(), (b.meta_description||'').trim(), (b.focus_keyword||'').trim(), isEnabled(b.noindex) ? 1 : 0, isEnabled(b.published) ? 1 : 0, publicationDate || '', existing.id);
+  db.prepare('UPDATE posts SET author_type=? WHERE id=?').run(b.author_type === 'person' ? 'person' : 'organization', existing.id);
   db.prepare("UPDATE research_items SET topic=?,updated_at=datetime('now','localtime') WHERE published_post_id=?").run(topic, existing.id);
   finalizePublishedContent('post', existing.id, { notify: isEnabled(b.published) });
   queueIndexNow([`/tin-tuc/${existing.slug}`, `/tin-tuc/${slug}`, '/tin-tuc', '/feed.xml', '/sitemap.xml', '/llms.txt']);

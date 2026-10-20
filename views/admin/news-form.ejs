@@ -24,7 +24,7 @@
   <div class="f">
     <label>Ngày đăng hiển thị</label>
     <input type="date" name="publication_date" value="<%= post.publication_date || String(post.created_at || '').slice(0,10) %>">
-    <small class="muted">Có thể chọn ngày đăng khác ngày lưu bài. Để trống khi tạo bài mới để dùng ngày hiện tại; ngày cập nhật vẫn phản ánh lần chỉnh sửa gần nhất.</small>
+    <small class="muted">Ngày hiển thị cho bài viết. Thời điểm xuất bản thực được hệ thống lưu riêng; sửa ngày này không đổi thời điểm xuất bản lần đầu.</small>
   </div>
   <div class="f">
     <label>Ảnh bìa bài viết</label>
@@ -65,8 +65,12 @@
     <textarea name="excerpt" rows="2" placeholder="1–2 câu tóm tắt hiển thị ở thẻ tin tức..."><%= post.excerpt || '' %></textarea>
   </div>
   <div class="row2">
-    <div class="f"><label>Chuyên viên phụ trách (nếu có)</label><input name="author_name" value="<%= post.author_name || '' %>" placeholder="Để trống nếu dùng tên SOL DREAM EDUCATION"></div>
+    <div class="f"><label>Tên tác giả / đơn vị cung cấp thông tin</label><input name="author_name" value="<%= post.author_name || '' %>" placeholder="Để trống nếu dùng tên SOL DREAM EDUCATION"></div>
     <div class="f"><label>Vai trò / chuyên môn</label><input name="author_role" value="<%= post.author_role || '' %>" placeholder="VD: Chuyên viên tư vấn du học Hàn Quốc"></div>
+  </div>
+  <div class="f">
+    <label>Loại tác giả</label>
+    <select name="author_type"><option value="organization" <%= post.author_type !== 'person' ? 'selected' : '' %>>Tổ chức / đơn vị</option><option value="person" <%= post.author_type === 'person' ? 'selected' : '' %>>Cá nhân</option></select>
   </div>
   <div class="f">
     <label>Nội dung bài viết</label>

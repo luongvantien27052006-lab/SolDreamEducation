@@ -18,6 +18,7 @@ const { generateLlmsTxt } = require('../lib/llms');
 const { getHomepageStats, getHomepageStatsSource } = require('../lib/homepageStats');
 const { getAboutSections } = require('../lib/aboutContent');
 const { TOPICS, normalizeTopic } = require('../lib/contentTopics');
+const { articleDates, coverMetadata } = require('../lib/articleMetadata');
 const koreaLife = require('../data/korea-life.json');
 const partnerSchools = require('../data/partner-schools.json').schools;
 
@@ -351,11 +352,13 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
   if (post.noindex) res.set('X-Robots-Tag', 'noindex, follow');
   const url = abs('/tin-tuc/' + post.slug);
   const ogImg = post.cover_image ? abs(post.cover_image) : (process.env.OG_IMAGE || (SITE_URL + '/img/logo.png'));
-  const publishedTime = isoDateTime(post.created_at);
-  const modifiedTime = isoDateTime(post.updated_at || post.created_at);
+  const { publishedTime, modifiedTime, displayTime, modifiedDate } = articleDates(post);
+  const coverMeta = coverMetadata(post);
+  if (modifiedDate) post.updatedDateFull = modifiedDate;
   const relatedPosts = db.prepare('SELECT * FROM posts WHERE published = 1 AND id != ? ORDER BY CASE WHEN topic = ? THEN 0 ELSE 1 END, datetime(updated_at) DESC LIMIT 3').all(post.id, post.topic).map(decorate);
   const relatedFaqs = getRelatedFaqs('post', post.id);
-  setFreshnessHeaders(res, post.updated_at || post.created_at);
+  if (modifiedTime.includes('T')) setFreshnessHeaders(res, modifiedTime);
+  else res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org',
     '@graph': [
@@ -366,10 +369,10 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
       ] },
       {
         '@type': 'Article', '@id': `${url}#article`, headline: post.title,
-        description: post.excerpt, image: [ogImg], articleSection: post.topicLabel,
+        description: post.excerpt, image: [{ '@type': 'ImageObject', url: ogImg, description: coverMeta.alt, ...(coverMeta.caption ? { caption: coverMeta.caption } : {}), ...(coverMeta.width ? { width: coverMeta.width, height: coverMeta.height } : {}) }], articleSection: post.topicLabel,
         wordCount: post.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true,
-        datePublished: publishedTime,
-        dateModified: modifiedTime,
+        ...(publishedTime ? { datePublished: publishedTime } : {}),
+        ...(modifiedTime ? { dateModified: modifiedTime } : {}),
         author: authorEntity(post),
         publisher: { '@id': `${SITE_URL}/#organization`, '@type': 'EducationalOrganization', name: 'SOL DREAM EDUCATION', logo: { '@type': 'ImageObject', url: LOGO_URL } },
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -380,15 +383,15 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
     ],
   });
   res.render('news-detail', {
-    post, relatedPosts, relatedFaqs,
+    post, relatedPosts, relatedFaqs, coverMeta, displayTime, contentModifiedTime: modifiedTime,
     title: post.seo_title || `${post.title} - SOL DREAM EDUCATION`,
     description: post.meta_description || post.excerpt,
     canonical: url,
     ogType: 'article',
     ogImage: ogImg,
-    ogImageAlt: post.title,
+    ogImageAlt: coverMeta.alt,
     publishedTime,
-    modifiedTime,
+    modifiedTime: modifiedTime.includes('T') ? modifiedTime : '',
     robots: detailRobots(post),
     jsonLd
   });
@@ -585,13 +588,13 @@ router.get('/robots.txt', (req, res) => {
 
 // sitemap.xml (dynamic)
 router.get('/sitemap.xml', (req, res) => {
-  const posts = db.prepare('SELECT title, slug, cover_image, updated_at, created_at FROM posts WHERE published = 1 AND noindex = 0 ORDER BY datetime(created_at) DESC').all();
+  const posts = db.prepare('SELECT title, slug, cover_image, updated_at, created_at, content_modified_at FROM posts WHERE published = 1 AND noindex = 0 ORDER BY datetime(created_at) DESC').all();
   const programs = db.prepare('SELECT title, slug, category, cover_image, updated_at, created_at FROM programs WHERE published = 1 AND noindex = 0 ORDER BY sort_order ASC').all();
   res.set('Cache-Control', 'public, max-age=900').type('application/xml').send(generateSitemapXml({ posts, programs }));
 });
 
 router.get('/feed.xml', (req, res) => {
-  const posts = db.prepare('SELECT title, slug, excerpt, content, category, topic, updated_at, created_at FROM posts WHERE published = 1 AND noindex = 0').all();
+  const posts = db.prepare('SELECT title, slug, excerpt, content, category, topic, updated_at, created_at, first_published_at FROM posts WHERE published = 1 AND noindex = 0').all();
   const programs = db.prepare('SELECT title, slug, excerpt, content, category, updated_at, created_at FROM programs WHERE published = 1 AND noindex = 0').all();
   res.set('Cache-Control', 'public, max-age=900').type('application/rss+xml').send(generateRssXml({ posts, programs }));
 });
