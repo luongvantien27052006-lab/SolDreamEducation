@@ -846,8 +846,9 @@ router.post('/nghien-cuu/:id/website-truong', requireAdmin, (req, res, next) => 
 router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next) => {
   const item = db.prepare(`SELECT i.*,s.name source_name,s.url source_url,s.source_type,s.keywords source_keywords,s.crawl_delay_ms FROM research_items i JOIN research_sources s ON s.id=i.source_id WHERE i.id=?`).get(req.params.id); if (!item) return next();
   try {
-    const page = await buildEditorialSource(item, item);
-    const isSchoolNotice = sourcePolicy(item).group === 'schools';
+    const researchSource=db.prepare('SELECT * FROM research_sources WHERE id=?').get(item.source_id);
+    const page = await buildEditorialSource(item, researchSource);
+    const isSchoolNotice = sourcePolicy(researchSource).group === 'schools';
     const isUniversityProfile = !isSchoolNotice && (item.suggested_section === SCHOOL_CATEGORY
       || item.source_type === 'university-directory');
     const discoverySummary = page.discovery
@@ -856,6 +857,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
     if (isUniversityProfile && discoverySummary) db.prepare("UPDATE research_items SET optimization_note=?,updated_at=datetime('now','localtime') WHERE id=?").run(discoverySummary, item.id);
     const draftInput = {
       disableExternalResearch: isSchoolNotice,
+      guidanceScope: sourcePolicy(researchSource).group==='monthly',
       title: item.title, sourceUrl: page.url, sourceUrls: page.sourceUrls || [page.url], sourceText: page.text,
       sourceClassification: page.classification,
       sourceName: item.source_name,

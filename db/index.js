@@ -1419,4 +1419,5 @@ db.exec(`
   if (result) console.log('[research] weekly school notices', JSON.stringify(result));
 }
 require('../lib/contentEditingMigration').applyContentEditing(db);
+{ const result=require('../lib/guidanceScopeMigration').applyGuidanceScope(db);if(result)console.log('[research] living support guidance scope',JSON.stringify(result)); }
 module.exports = db;
