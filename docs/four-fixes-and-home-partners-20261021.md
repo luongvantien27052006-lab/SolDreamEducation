@@ -2,7 +2,9 @@
 
 ## Trạng thái bàn giao
 
-Mã nguồn đã hoàn thiện và kiểm thử. **Chưa triển khai được lên website công khai**: Railway trả `Deploys have been paused temporarily` khi tạo bản triển khai. Website đang phục vụ deployment `f9f7817a-01d8-4cf7-8050-4aa2dbf6fe70`, commit `0cf4505`.
+**Đã triển khai thành công và nghiệm thu trên website công khai ngày 21/10/2026.** Deployment `fd0dd466-0b5f-46e0-b363-ceb0663bc9da` chứa đầy đủ mã nguồn ở commit `765b64c`.
+
+Trước đó Railway tạm dừng build. Sau khi mở lại, thao tác redeploy ngày 21/10 đã chạy lại commit cũ `0cf4505` (deployment `4bd13aa8-bd22-429d-8d56-b00056e4166a`), nên trang chủ vẫn giữ danh sách cũ. Đã tạo deployment mới từ toàn bộ mã nguồn hiện hành, kiểm tra checksum của cả 22 file sửa/thêm: không có file sai khác hoặc thiếu.
 
 Thao tác thử nghiệm tạo/import, lưu và xuất bản chỉ thực hiện với SQLite riêng trong thư mục tạm. Không tạo bài thử trên website thật, không gửi email hay IndexNow từ môi trường thử.
 
@@ -45,7 +47,7 @@ Bổ sung `overflow-wrap: anywhere`, `min-width: 0`, giới hạn chiều rộng
 | `.source-box` | 353 / 497 px | 353 / 353 px |
 | Bảng rộng | 356 / 1022 px | 356 / 1022 px |
 
-Cuộn bảng đặt `scrollLeft=100` và vẫn cuộn được trong khung; tài liệu không bị kéo ngang. Hai trang du học cũng hết tràn URL trong bản CSS xem trước. Desktop kiểm tra ở 1440 px. Đây chưa phải kết quả nghiệm thu CSS đã triển khai lên website thật.
+Cuộn bảng đặt `scrollLeft=100` và vẫn cuộn được trong khung; tài liệu không bị kéo ngang. Hai trang du học cũng hết tràn URL. Desktop kiểm tra ở 1440 px. Sau deployment mới, đã đo lại cùng kết quả trên website thật bằng CSS được phục vụ từ máy chủ; không chèn CSS thử vào trình duyệt.
 
 ### 4. Tạo/import và SEO
 
@@ -71,7 +73,10 @@ Trong **Giao diện & nội dung trang → Danh mục trường hợp tác**, c�
 - Trình duyệt thật: lưu–mở lại mô tả SEO trong CMS test; đối chiếu HTML và OpenGraph; CMS ở desktop và 390 px.
 - Trang chủ test: sáu thẻ đúng tên, liên kết và ảnh/logo tải được; desktop và 390 px không tràn; nút xem đầy đủ đúng danh mục.
 - Đối chiếu DB thật với bản chụp trước thay đổi: **17 khóa học, 871 FAQ, tám bản ghi bài và hai bản ghi chương trình giữ nguyên từng trường dữ liệu**. Không viết lại FAQ.
-- Website công khai hiện hành: tám Article có ngày gốc đúng và mô tả HTML/OG khớp CMS; hai trang du học có footer và lời mở đầu hiện hành. Header cache cũ, CSS và khối trường trang chủ mới còn chờ triển khai.
+- Website công khai sau triển khai: **23/23** kiểm tra dữ liệu, JSON-LD, mô tả HTML/OG, nội dung chung và cache đạt. Tám Article giữ ngày gốc; hai trang du học có footer/lời mở đầu hiện hành; header không còn dùng ngày sửa bài làm `Last-Modified` của toàn bộ HTML.
+- Trang chủ thật ở 1440 px và 390 × 844: đúng sáu trường đã chọn, ảnh/logo tải được, sáu liên kết trả HTTP 200. Nút xem đầy đủ dẫn tới phần chứa đúng 22 mục trường/cơ sở.
+- CMS thật: mở được danh mục đối tác, có 22 trường `Hiển thị trên trang chủ`, đúng sáu trường đang bật; không sửa nội dung khi kiểm tra.
+- Bản chụp mới trước deployment: `/data/deploy-retry-before-20261021.json`. Đối chiếu sau deployment: **17 khóa học, 871 FAQ, toàn bộ 193 bài và 20 chương trình giữ nguyên từng trường dữ liệu**. Dataset đối tác chỉ được bổ sung trường cấu hình trang chủ; không thay học phí, thời lượng, chính sách hay ngày bài.
 
 Lệnh kiểm thử:
 
@@ -98,6 +103,12 @@ node --test --test-concurrency=1 test/researchBot.test.js test/editorialAi.test.
 
 Ảnh và dữ liệu nghiệm thu lưu trong `db/backups/four-fixes-*` và `db/backups/profile-partner-home-test-*` (không đưa các bản sao DB và ảnh kiểm thử vào deployment).
 
-## Việc cần hoàn tất khi Railway cho phép triển khai
+## Bằng chứng nghiệm thu deployment mới
 
-Triển khai commit hiện hành, kiểm tra lại tám Article và hai trang du học trên phản hồi công khai; đo Sogang ở 390 × 844; kiểm tra sáu thẻ trang chủ và nút danh mục; đối chiếu lại dữ liệu với `/data/four-fixes-before-20261021.json`. Không sửa ngày gốc hoặc FAQ để vượt qua nghiệm thu.
+- Railway: deployment `fd0dd466-0b5f-46e0-b363-ceb0663bc9da`, trạng thái `SUCCESS`.
+- Kết quả dữ liệu/JSON-LD/cached HTML: `db/backups/deploy-retry-live-audit.json` và `/data/four-fixes-live-audit-20261021.json`.
+- Kết quả checksum và mở CMS: `/data/deploy-retry-source-and-cms-20261021.json`.
+- Kiểm tra trang chủ: `db/backups/four-fixes-browser-home-live.json`.
+- Kiểm tra Sogang/hai trang du học: `db/backups/four-fixes-browser-live.json`.
+- Ảnh trang chủ thật: `db/backups/profile-partner-home-live-1440.png`, `db/backups/profile-partner-home-live-390.png`.
+- Ảnh nguồn Sogang thật: `db/backups/four-fixes-live-sogang-390.png`.
