@@ -22,7 +22,9 @@ LEAD_EMAIL_TO=thangdd@ueh.edu.vn
 
 `LEAD_EMAIL_FROM` có thể dùng `SUBSCRIBER_EMAIL_FROM` làm dự phòng khi đã cấu hình biến này. Trạng thái trên CMS ghi “Đã có cấu hình” khi có đủ biến; không coi việc nhập biến là bằng chứng email đã tới hộp thư. Chỉ đánh dấu gửi thành công sau khi Resend trả về mã email.
 
-Khi rà soát có 16 bản tin khách hàng cũ đang chờ trong `subscriber_notifications`. Phần bổ sung này chỉ cấu hình `LEAD_EMAIL_FROM`, không bật lại worker gửi 16 bản tin cũ. Hàng đợi cũ và thông tin đăng ký hiện có được giữ nguyên. Không tự gửi lại các đăng ký lịch sử khi khởi động.
+Khi rà soát có 16 bản tin khách hàng cũ đang chờ trong `subscriber_notifications`. Theo yêu cầu tiếp theo của người dùng, bổ sung `SUBSCRIBER_EMAIL_FROM` với cùng địa chỉ gửi đã có để khôi phục luồng email người đăng ký và cho phép xử lý cả 16 email đang chờ. `LEAD_EMAIL_FROM` và nơi nhận `LEAD_EMAIL_TO=thangdd@ueh.edu.vn` vẫn giữ nguyên.
+
+Hai worker chia sẻ giới hạn nhịp gọi Resend. Luồng bản tin được bổ sung khóa chống gửi trùng, trạng thái đang gửi có thời hạn khóa, mã email Resend và thời gian thử lại. Chỉ đánh dấu bản tin đã gửi khi có phản hồi chấp nhận từ dịch vụ. Không tự tạo thêm đăng ký để thử gửi; 16 email tồn đọng là các email thật đã được người dùng yêu cầu gửi.
 
 ## Rà soát
 
@@ -33,4 +35,4 @@ Khi rà soát có 16 bản tin khách hàng cũ đang chờ trong `subscriber_no
 
 ## File
 
-`db/index.js`, `lib/leadEmailNotifier.js`, `routes/contact.js`, `routes/admin.js`, `server.js`, `views/admin/leads.ejs`, `views/partials/footer.ejs`, `public/css/style.css`, `public/img/icons/contact-phone.svg`, `public/img/icons/contact-email.svg`, `.env.example`.
+`db/index.js`, `lib/leadEmailNotifier.js`, `lib/subscriberNotifier.js`, `lib/resendRateLimit.js`, `routes/contact.js`, `routes/admin.js`, `server.js`, `views/admin/leads.ejs`, `views/partials/footer.ejs`, `public/css/style.css`, `public/img/icons/contact-phone.svg`, `public/img/icons/contact-email.svg`, `.env.example`.

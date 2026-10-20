@@ -386,6 +386,10 @@ const _researchBatchItemCols = db.prepare("PRAGMA table_info(research_ai_batch_i
 if (!_researchBatchItemCols.includes('prompt_tokens')) db.exec('ALTER TABLE research_ai_batch_items ADD COLUMN prompt_tokens INTEGER NOT NULL DEFAULT 0');
 if (!_researchBatchItemCols.includes('output_tokens')) db.exec('ALTER TABLE research_ai_batch_items ADD COLUMN output_tokens INTEGER NOT NULL DEFAULT 0');
 const _leadCols = db.prepare("PRAGMA table_info(leads)").all().map(c => c.name);
+const subscriberNotificationColumns=db.prepare('PRAGMA table_info(subscriber_notifications)').all().map(c=>c.name);
+for(const [name,type] of Object.entries({provider_message_id:"TEXT NOT NULL DEFAULT ''",lease_until_ms:'INTEGER NOT NULL DEFAULT 0',next_attempt_ms:'INTEGER NOT NULL DEFAULT 0'})){
+  if(!subscriberNotificationColumns.includes(name))db.exec(`ALTER TABLE subscriber_notifications ADD COLUMN ${name} ${type}`);
+}
 if (!_leadCols.includes('email')) db.exec("ALTER TABLE leads ADD COLUMN email TEXT NOT NULL DEFAULT ''");
 if (!_leadCols.includes('lead_type')) db.exec("ALTER TABLE leads ADD COLUMN lead_type TEXT NOT NULL DEFAULT 'course'");
 if (!_leadCols.includes('interest_detail')) db.exec("ALTER TABLE leads ADD COLUMN interest_detail TEXT NOT NULL DEFAULT ''");
