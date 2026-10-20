@@ -332,6 +332,7 @@ for (const column of ['cover_source_url', 'cover_attribution']) {
 const _researchSourceCols = db.prepare("PRAGMA table_info(research_sources)").all().map(c => c.name);
 if (!_researchSourceCols.includes('crawl_delay_ms')) db.exec('ALTER TABLE research_sources ADD COLUMN crawl_delay_ms INTEGER NOT NULL DEFAULT 0');
 if (!_researchSourceCols.includes('auto_publish_non_school')) db.exec('ALTER TABLE research_sources ADD COLUMN auto_publish_non_school INTEGER NOT NULL DEFAULT 1');
+if (!_researchSourceCols.includes('next_crawl_at_ms')) db.exec('ALTER TABLE research_sources ADD COLUMN next_crawl_at_ms INTEGER NOT NULL DEFAULT 0');
 const _faqCols = db.prepare("PRAGMA table_info(faqs)").all().map(c => c.name);
 if (!_faqCols.includes('origin_type')) db.exec("ALTER TABLE faqs ADD COLUMN origin_type TEXT NOT NULL DEFAULT ''");
 if (!_faqCols.includes('origin_id')) db.exec("ALTER TABLE faqs ADD COLUMN origin_id TEXT NOT NULL DEFAULT ''");
@@ -1393,4 +1394,8 @@ db.exec(`
   if (result) console.log('[db] reviewed content topics', JSON.stringify(result));
 }
 
+{
+  const result = require('../lib/researchPolicyMigration').applyResearchPolicy(db);
+  if (result) console.log('[research] partner/monthly policy', JSON.stringify(result));
+}
 module.exports = db;

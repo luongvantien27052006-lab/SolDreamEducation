@@ -13,6 +13,7 @@ const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
 const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalContentCover, attachmentMarkup, editorialSourceUrls } = require('../lib/researchBot');
+const { sourcePolicy, nextCrawlLabel } = require('../lib/researchPolicy');
 const { MINIMUM_EDITORIAL_CHARACTERS, UNIVERSITY_MINIMUM_CHARACTERS, generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft, cleanResearchAnnotations, visibleCharacterCount, universityDraftCoverageReport } = require('../lib/editorialAi');
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
 const { isOfficialUniversityUrl } = require('../lib/koreaScope');
@@ -744,7 +745,8 @@ router.post('/gioi-thieu/:id/xoa', requireAdmin, (req, res) => {
 // ---------- Official-source research and AI-assisted drafts ----------
 router.get('/nghien-cuu', requireAdmin, (req, res) => {
   const selectedTopic = normalizeTopic(req.query.muc);
-  const sources = db.prepare('SELECT * FROM research_sources ORDER BY id').all();
+  const sources = db.prepare('SELECT * FROM research_sources ORDER BY id').all()
+    .map(source => ({ ...source, crawlPolicy: sourcePolicy(source), nextCrawlLabel: nextCrawlLabel(source) }));
   const activeSources = sources.filter((source) => source.active);
   const sourceHealth = {
     total: activeSources.length,
@@ -770,7 +772,8 @@ router.get('/nghien-cuu', requireAdmin, (req, res) => {
     publishedPrograms: db.prepare('SELECT COUNT(*) c FROM programs WHERE published=1').get().c,
     indexedPrograms: db.prepare("SELECT COUNT(*) c FROM chat_knowledge_documents WHERE id GLOB 'program:*:summary'").get().c,
   };
-  res.render('admin/research', { layout, title: 'Dữ liệu & AI', active: 'research', sources, sourceHealth, items, topics: TOPICS, topicCounts, selectedTopic, suggestedKeywords, chatIndex, flash: req.query.flash || null });
+  const schoolScanHours = Math.max(1, (Number(process.env.RESEARCH_BOT_INTERVAL_MS) || 7 * 24 * 3600000) / 3600000);
+  res.render('admin/research', { layout, title: 'Dữ liệu & AI', active: 'research', sources, sourceHealth, items, topics: TOPICS, topicCounts, selectedTopic, suggestedKeywords, chatIndex, schoolScanHours, flash: req.query.flash || null });
 });
 router.post('/nghien-cuu/:id/chon-chu-de', requireAdmin, (req, res, next) => {
   const topic = normalizeTopic(req.body.topic);
@@ -808,11 +811,12 @@ router.post('/nghien-cuu/chay', requireAdmin, async (req, res) => {
 router.post('/nghien-cuu/nguon', requireAdmin, (req, res) => {
   try {
     const url = new URL(String(req.body.url || '')); if (url.protocol !== 'https:') throw new Error('URL phải dùng HTTPS');
+    if (!sourcePolicy({ url: url.toString(), source_type: req.body.source_type || 'official' }).allowed) throw new Error('Chỉ thêm website trường trong profile hoặc nguồn thông báo chính thức đã chọn.');
     db.prepare('INSERT INTO research_sources (name,url,source_type,language,keywords,active,crawl_delay_ms,auto_publish_non_school) VALUES (?,?,?,?,?,1,?,?)').run(String(req.body.name || url.hostname).trim().slice(0, 160), url.toString(), String(req.body.source_type || 'official').slice(0, 60), String(req.body.language || 'vi').slice(0, 20), String(req.body.keywords || '').slice(0, 2000), Math.min(15000, Math.max(0, Number(req.body.crawl_delay_ms) || 0)), isEnabled(req.body.auto_publish_non_school) ? 1 : 0);
     res.redirect('/admin/nghien-cuu?flash=' + encodeURIComponent('Đã thêm nguồn chính thức'));
   } catch (error) { res.redirect('/admin/nghien-cuu?flash=' + encodeURIComponent(`Không thể thêm nguồn: ${error.message}`)); }
 });
-router.post('/nghien-cuu/nguon/:id/toggle', requireAdmin, (req, res, next) => { const row = db.prepare('SELECT id,active FROM research_sources WHERE id=?').get(req.params.id); if (!row) return next(); db.prepare("UPDATE research_sources SET active=?,updated_at=datetime('now','localtime') WHERE id=?").run(row.active ? 0 : 1, row.id); res.redirect('/admin/nghien-cuu?flash=' + encodeURIComponent('Đã đổi trạng thái nguồn')); });
+router.post('/nghien-cuu/nguon/:id/toggle', requireAdmin, (req, res, next) => { const row = db.prepare('SELECT * FROM research_sources WHERE id=?').get(req.params.id); if (!row) return next(); if (!row.active && !sourcePolicy(row).allowed) return res.redirect('/admin/nghien-cuu?flash=' + encodeURIComponent('Nguồn ngoài phạm vi trường trong profile và thông báo chính thức; không thể bật.')); db.prepare("UPDATE research_sources SET active=?,updated_at=datetime('now','localtime') WHERE id=?").run(row.active ? 0 : 1, row.id); res.redirect('/admin/nghien-cuu?flash=' + encodeURIComponent('Đã đổi trạng thái nguồn')); });
 router.post('/nghien-cuu/nguon/:id/tu-khoa', requireAdmin, (req, res, next) => { const row = db.prepare('SELECT id FROM research_sources WHERE id=?').get(req.params.id); if (!row) return next(); db.prepare("UPDATE research_sources SET keywords=?,crawl_delay_ms=?,auto_publish_non_school=?,updated_at=datetime('now','localtime') WHERE id=?").run(String(req.body.keywords || '').slice(0, 4000), Math.min(15000, Math.max(0, Number(req.body.crawl_delay_ms) || 0)), isEnabled(req.body.auto_publish_non_school) ? 1 : 0, row.id); res.redirect('/admin/nghien-cuu?flash=' + encodeURIComponent('Đã cập nhật từ khóa, độ trễ và chế độ tự đăng')); });
 router.post('/nghien-cuu/:id/bo-qua', requireAdmin, (req, res, next) => { const row = db.prepare('SELECT id FROM research_items WHERE id=?').get(req.params.id); if (!row) return next(); db.prepare("UPDATE research_items SET status='dismissed',updated_at=datetime('now','localtime') WHERE id=?").run(row.id); res.redirect('/admin/nghien-cuu?flash=' + encodeURIComponent('Đã bỏ qua mục này')); });
 router.post('/nghien-cuu/:id/website-truong', requireAdmin, (req, res, next) => {
