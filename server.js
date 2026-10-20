@@ -150,7 +150,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req,res,next)=>{ if(req.method==='GET'||req.method==='HEAD')res.set('Cache-Control','no-cache, must-revalidate'); Object.assign(res.locals, require('./lib/sharedBlocks').blockLocals()); next(); });
+app.use((req,res,next)=>{ Object.assign(res.locals, require('./lib/sharedBlocks').blockLocals()); next(); });
 
 // Routes
 app.use('/admin', adminRoutes);

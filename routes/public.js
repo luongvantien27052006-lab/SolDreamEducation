@@ -89,7 +89,7 @@ function sendDynamicEditorialCover(res, item, id, label) {
   const lines = titleLines.map((line, index) => `<text x="76" y="${274 + index * 57}" fill="#fff" font-family="Segoe UI,Arial,sans-serif" font-size="${titleSize}" font-weight="750">${escapeSvgText(line)}</text>`).join('');
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="${escapeSvgText(item.title)}"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="${colors[0]}"/><stop offset="1" stop-color="${colors[1]}"/></linearGradient><clipPath id="title-safe"><rect x="70" y="210" width="690" height="220" rx="8"/></clipPath></defs><rect width="1200" height="630" rx="36" fill="url(#g)"/><circle cx="1050" cy="92" r="230" fill="${colors[2]}" opacity=".17"/><path d="M0 505c230-135 405 65 635-48 225-110 385-25 565-105v278H0Z" fill="#fff" opacity=".08"/><g transform="translate(875 158) scale(.82)" fill="none" stroke="#fff" stroke-width="16" stroke-linejoin="round" opacity=".92"><path d="M150 0c45 28 92 51 150 63v137c0 110-72 185-150 220C72 385 0 310 0 200V63C58 51 105 28 150 0Z"/><path d="m76 211 48 48 102-113"/></g><g transform="translate(76 74)"><text x="0" y="44" fill="${colors[2]}" font-family="Segoe UI Light,Helvetica Neue,Arial,sans-serif" font-size="43" font-weight="300" letter-spacing="-2">Sol Dream</text><path d="M0 66h42M222 66h42" stroke="${colors[2]}" stroke-width="2"/><text x="55" y="72" fill="${colors[2]}" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="600" letter-spacing="8">EDUCATION</text></g><text x="76" y="194" fill="#fff" opacity=".78" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="600" letter-spacing="1.5">${escapeSvgText(label || item.category || 'Du học Hàn Quốc')}</text><g clip-path="url(#title-safe)">${lines}</g></svg>`;
   res.set('Content-Type', 'image/svg+xml; charset=utf-8');
-  res.set('Cache-Control', 'no-cache, must-revalidate');
+  res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
   return res.send(svg);
 }
 
@@ -360,7 +360,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
   const relatedPosts = db.prepare('SELECT * FROM posts WHERE published = 1 AND id != ? ORDER BY CASE WHEN topic = ? THEN 0 ELSE 1 END, datetime(updated_at) DESC LIMIT 3').all(post.id, post.topic).map(decorate);
   const relatedFaqs = getRelatedFaqs('post', post.id);
   if (modifiedTime.includes('T')) setFreshnessHeaders(res, modifiedTime);
-  else res.set('Cache-Control', 'no-cache, must-revalidate');
+  else res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org',
     '@graph': [
@@ -592,19 +592,19 @@ router.get('/robots.txt', (req, res) => {
 router.get('/sitemap.xml', (req, res) => {
   const posts = db.prepare('SELECT title, slug, cover_image, updated_at, created_at, content_modified_at FROM posts WHERE published = 1 AND noindex = 0 ORDER BY datetime(created_at) DESC').all();
   const programs = db.prepare('SELECT title, slug, category, cover_image, updated_at, created_at FROM programs WHERE published = 1 AND noindex = 0 ORDER BY sort_order ASC').all();
-  res.set('Cache-Control', 'no-cache, must-revalidate').type('application/xml').send(generateSitemapXml({ posts, programs }));
+  res.set('Cache-Control', 'public, max-age=60, must-revalidate').type('application/xml').send(generateSitemapXml({ posts, programs }));
 });
 
 router.get('/feed.xml', (req, res) => {
   const posts = db.prepare('SELECT title, slug, excerpt, content, category, topic, updated_at, created_at, first_published_at FROM posts WHERE published = 1 AND noindex = 0').all();
   const programs = db.prepare('SELECT title, slug, excerpt, content, category, updated_at, created_at FROM programs WHERE published = 1 AND noindex = 0').all();
-  res.set('Cache-Control', 'no-cache, must-revalidate').type('application/rss+xml').send(generateRssXml({ posts, programs }));
+  res.set('Cache-Control', 'public, max-age=60, must-revalidate').type('application/rss+xml').send(generateRssXml({ posts, programs }));
 });
 
 router.get('/llms.txt', (req, res) => {
   const posts = db.prepare('SELECT title,slug,excerpt FROM posts WHERE published=1 AND noindex=0 ORDER BY datetime(updated_at) DESC').all();
   const programs = db.prepare('SELECT title,slug,excerpt,category FROM programs WHERE published=1 AND noindex=0 ORDER BY sort_order ASC, datetime(updated_at) DESC').all();
-  res.set('Cache-Control', 'no-cache, must-revalidate').type('text/plain').send(generateLlmsTxt({ posts, programs }));
+  res.set('Cache-Control', 'public, max-age=60, must-revalidate').type('text/plain').send(generateLlmsTxt({ posts, programs }));
 });
 
 router.get('/indexnow-key.txt', (req, res, next) => {
