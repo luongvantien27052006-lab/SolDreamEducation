@@ -490,6 +490,9 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .source-note,.source-box{margin-top:34px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--persimmon);border-radius:14px;padding:20px 22px;color:var(--ink-2);font-size:14px}
 .knowledge-layout{display:grid;grid-template-columns:minmax(0,820px) 300px;gap:36px;align-items:start}
 .knowledge-main,.knowledge-sidebar{min-width:0}
+.partner-school__logo{background:#fff}
+.partner-school__logo .post__cover{object-fit:contain;padding:24px}
+.post .post__img>.partner-school__identity{display:flex;align-items:center;justify-content:center;height:100%;padding:28px;background:linear-gradient(135deg,#f9edf4,#eee7f8);color:var(--ink);font-weight:800;font-size:24px;text-align:center;overflow-wrap:anywhere}
 .knowledge-main>*,.knowledge-sidebar>*{min-width:0;max-width:100%}
 .source-box,.source-note{min-width:0;max-width:100%;overflow-wrap:anywhere}
 .source-box a,.source-note a,.article-body a{overflow-wrap:anywhere;word-break:normal}

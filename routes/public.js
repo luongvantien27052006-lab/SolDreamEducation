@@ -112,7 +112,11 @@ router.get('/', (req, res) => {
   const posts = db.prepare(`SELECT * FROM posts WHERE published = 1
     ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC LIMIT 3`)
     .all(PINNED_NEWS_POST_SLUG).map(decorate);
-  const programs = db.prepare('SELECT * FROM programs WHERE published = 1 ORDER BY sort_order ASC, id ASC LIMIT 6').all().map(decorate);
+  const homePartnerSchools = require('../lib/partnerSchools').buildPartnerCards(
+    require('../lib/siteContent').getDataset('partners').schools,
+    db.prepare("SELECT * FROM programs WHERE published=1 AND category='Thông tin trường' ORDER BY sort_order,id").all(),
+    getAllUniversities()
+  ).filter(school=>school.featured);
   const testimonials = db.prepare('SELECT * FROM testimonials WHERE published = 1 ORDER BY sort_order ASC, id ASC LIMIT 8').all();
   const courses = getCourses();
   const homepageStats = getHomepageStats();
@@ -135,7 +139,7 @@ router.get('/', (req, res) => {
       })),
     },
   });
-  res.render('home', { homeCourses: courses.filter(c => ['giao-tiep-giao-vien-han','tieng-han-giao-tiep','tieng-han-so-cap-1','tieng-han-cap-toc','phat-am-tieng-han','tieng-anh-giao-tiep'].includes(c.slug)).slice(0,6), posts, programs, testimonials, homepageStats, homepageStatsSource, homepageAboutSections, jsonLd, showChatHint: true });
+  res.render('home', { homeCourses: courses.filter(c => ['giao-tiep-giao-vien-han','tieng-han-giao-tiep','tieng-han-so-cap-1','tieng-han-cap-toc','phat-am-tieng-han','tieng-anh-giao-tiep'].includes(c.slug)).slice(0,6), posts, homePartnerSchools, testimonials, homepageStats, homepageStatsSource, homepageAboutSections, jsonLd, showChatHint: true });
 });
 
 router.get('/tro-ly-du-hoc', (req, res) => {

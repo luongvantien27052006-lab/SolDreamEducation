@@ -28,25 +28,26 @@
     <h2 class="reveal" style="text-align:center;font-size:clamp(24px,3.4vw,36px);margin:8px 0 34px"><%= schoolsIntro.title %></h2>
     <div class="section-lead reveal" style="text-align:center;max-width:760px;margin:-18px auto 34px"><%- schoolsIntro.content %></div>
     <% } %>
-    <div class="news-grid">
-      <% programs.forEach(function(pr){ %>
-      <a class="post reveal" href="<%= pr.category==='Thông tin trường'?'/truong-dai-hoc/':'/du-hoc/' %><%= pr.slug %>">
-        <div class="post__img <%= pr.cover_image ? '' : pr.cover %>">
-          <img class="post__cover<%= (!pr.cover_image || pr.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= pr.cover_image || '/img/research-cover.svg' %>" alt="<%= pr.title %>" loading="lazy">
+    <div class="news-grid" data-home-partner-schools>
+      <% homePartnerSchools.forEach(function(school){ %>
+      <a class="post reveal" href="<%= school.href %>" <% if(school.external){ %>target="_blank" rel="noopener noreferrer"<% } %>>
+        <div class="post__img<%= school.isLogo ? ' partner-school__logo' : '' %>">
+          <% if(school.image){ %><img class="post__cover" src="<%= school.image %>" alt="<%= school.name %>" loading="lazy"><% } else { %><div class="partner-school__identity"><%= school.englishName || school.name %></div><% } %>
         </div>
-        <div class="post__body"><span class="post__cat"><%= pr.categoryLabel %></span>
-          <h3><%= pr.title %></h3>
-          <p class="section-lead"><%= pr.geoBluf %></p>
-          <% if (pr.subtitle) { %><div class="prog__kr"><%= pr.subtitle %></div><% } %>
+        <div class="post__body"><span class="post__cat"><%= school.type %></span>
+          <h3><%= school.name %></h3>
+          <p class="section-lead"><%= school.description %></p>
+          <% if (school.englishName) { %><div class="prog__kr"><%= school.englishName %></div><% } %>
         </div>
       </a>
       <% }); %>
     </div>
-    <% if (programs && programs.length) { %>
+    <% if (homePartnerSchools.length) { %>
     <div style="text-align:center;margin-top:40px">
       <a href="<%= siteText("view.home-sections.journey.023") %>" class="btn btn-ghost"><%= siteText("view.home-sections.journey.024") %>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <% } %>
+  </div>
   </section>
 

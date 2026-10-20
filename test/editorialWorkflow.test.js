@@ -104,3 +104,21 @@ test('startup does not regenerate existing FAQs with either completed migration 
   const before=db.prepare('SELECT * FROM faqs ORDER BY id').all();
   for(const marker of ['1','editable-20261020']){upsert.run('course_tuition_2026_faqs',marker);assert.deepEqual(require('../lib/publicationPipeline').ensurePublicationPipeline(),{applied:false});assert.deepEqual(db.prepare('SELECT * FROM faqs ORDER BY id').all(),before);}
 });
+
+test('homepage shows profile schools; CMS can change selection and card copy without touching tuition',async()=>{
+  const original=db.prepare("SELECT content FROM site_datasets WHERE key='partners'").get().content;
+  const data=JSON.parse(original),courses=db.prepare('SELECT * FROM courses ORDER BY id').all();
+  const home=await request('/');assert.equal(home.status,200);
+  const grid=home.html.match(/data-home-partner-schools>([\s\S]*?)<\/div>\s*<div style="text-align:center/)[1];
+  for(const school of data.schools.filter(s=>s.featured))assert.ok(grid.includes(school.name),school.name);
+  assert.equal((grid.match(/<h3>/g)||[]).length,6);
+  assert.ok(home.html.includes('/truong-dai-hoc#partner-schools-title'));
+  const token=path=>Buffer.from(JSON.stringify(path)).toString('base64url');
+  const values={};values['values['+token(['schools','0','featured'])+']']='false';values['values['+token(['schools','0','description'])+']']='Lời dẫn trường được sửa qua CMS test.';
+  assert.equal((await request('/admin/du-lieu-trang/partners',{form:values})).status,302);
+  const saved=JSON.parse(db.prepare("SELECT content FROM site_datasets WHERE key='partners'").get().content);assert.equal(saved.schools[0].featured,false);assert.equal(saved.schools[0].description,'Lời dẫn trường được sửa qua CMS test.');
+  const changed=await request('/');assert.ok(!changed.html.match(/data-home-partner-schools>([\s\S]*?)<\/div>\s*<div style="text-align:center/)[1].includes('<h3>'+data.schools[0].name+'</h3>'));
+  require('../lib/partnerSchools').addPartnerHomepageFields(db);assert.equal(db.prepare("SELECT content FROM site_datasets WHERE key='partners'").get().content,JSON.stringify(saved));
+  assert.deepEqual(db.prepare('SELECT * FROM courses ORDER BY id').all(),courses);
+  db.prepare("UPDATE site_datasets SET content=? WHERE key='partners'").run(original);
+});
