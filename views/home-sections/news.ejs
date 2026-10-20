@@ -1,0 +1,31 @@
+<!-- ============ TIN TỨC ============ -->
+<section class="section news" id="tintuc">
+  <div class="wrap">
+    <div class="sec-head reveal"><%- include("../partials/shared-block", { blockKey: "news-intro" }) %></div>
+    <nav class="topic-tabs" aria-label="Chủ đề cẩm nang">
+      <a href="/tin-tuc?muc=thong-tin-han-quoc">Thông tin Hàn Quốc</a>
+      <a href="/tin-tuc?muc=cam-nang-sinh-hoat">Cẩm nang sinh hoạt</a>
+      <a href="/tin-tuc?muc=hoat-dong-soldream">Hoạt động SolDream</a>
+    </nav>
+    <div class="news-grid">
+      <% posts.forEach(function(p){ %>
+      <a class="post reveal" href="/tin-tuc/<%= p.slug %>">
+        <div class="post__img <%= p.cover_image ? '' : p.cover %>">
+          <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= p.cover_image || '/img/research-cover.svg' %>" alt="<%= p.title %>" loading="lazy">
+          <div class="post__date"><b><%= p.day %></b><span><%= p.monthYear %></span></div>
+        </div>
+        <div class="post__body"><span class="post__cat"><%= p.topicLabel %></span>
+          <h3><%= p.title %></h3>
+          <p class="section-lead"><%= p.geoBluf %></p>
+        </div>
+      </a>
+      <% }); %>
+      <% if (posts.length === 0) { %><p>Chưa có bài viết nào.</p><% } %>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="/tin-tuc" class="btn btn-ghost">Xem tất cả tin tức
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+

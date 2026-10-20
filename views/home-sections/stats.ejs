@@ -1,0 +1,17 @@
+<!-- ============ STATS ============ -->
+<% const visibleHomepageStats = typeof homepageStats !== 'undefined' ? homepageStats : []; %>
+<% if (visibleHomepageStats.length) { %>
+<section class="stats">
+  <% const homepageStatColumns = Math.max(1, Math.min(4, visibleHomepageStats.length)); %>
+  <div class="wrap" style="--stat-columns:<%= homepageStatColumns %>">
+    <% visibleHomepageStats.forEach(function(stat){ %>
+      <div class="stat reveal">
+        <b data-count="<%= stat.value_number %>" data-prefix="<%= stat.prefix || '' %>" data-suffix="<%= stat.suffix || '' %>"><%= stat.prefix || '' %><%= Number(stat.value_number || 0).toLocaleString('vi-VN') %><%= stat.suffix || '' %></b>
+        <span><%= stat.label %></span>
+      </div>
+    <% }) %>
+    <% if (visibleHomepageStats.length && typeof homepageStatsSource !== 'undefined' && homepageStatsSource) { %><p class="stats__source"><%= homepageStatsSource %></p><% } %>
+  </div>
+</section>
+<% } %>
+

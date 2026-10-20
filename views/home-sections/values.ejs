@@ -1,0 +1,8 @@
+<!-- ============ VÌ SAO CHỌN ============ -->
+<section class="section why">
+  <div class="wrap">
+    <div class="sec-head reveal"><%- include("../partials/shared-block", { blockKey: "why-intro" }) %></div>
+    <div class="why-grid"><% blockZone("values").forEach(function(block){ %><div class="feat reveal"><div class="feat__ic"><%- include("../partials/value-icon",{key:block.key}) %></div><%- include("../partials/shared-block", { block, heading: "h3" }) %></div><% }); %></div>
+  </div>
+</section>
+

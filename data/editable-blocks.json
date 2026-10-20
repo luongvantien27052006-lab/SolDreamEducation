@@ -1,47 +1,47 @@
 [
   {
     "key": "courses-intro",
-    "zone": "home",
+    "zone": "sections",
     "title": "Lộ trình phù hợp cho mọi mục tiêu",
     "content": "<p class=\"section-lead\">SOL DREAM EDUCATION có lộ trình cho người mới học Hangul, người cần luyện phản xạ giao tiếp, chỉnh phát âm hoặc tăng tốc TOPIK để chuẩn bị du học. Học viên nên chọn lớp theo trình độ hiện tại, mục tiêu sử dụng và thời gian dự kiến.</p><a href=\"/khoa-hoc\" class=\"course__link\">Xem bảng học phí tiếng Hàn 2026 →</a>",
     "eyebrow": "Khóa học tiếng Hàn",
-    "sort_order": 0,
-    "active": 1
-  },
-  {
-    "key": "journey-intro",
-    "zone": "home",
-    "title": "Hành trình sang Hàn, 4 bước rõ ràng",
-    "content": "<p class=\"section-lead\">Lộ trình du học tại SOL DREAM EDUCATION gồm bốn giai đoạn: tư vấn trường ngành, học tiếng Hàn, chuẩn bị hồ sơ và visa, sau đó hỗ trợ trước khi nhập học. Chi tiết từng bước được điều chỉnh theo năng lực, ngân sách và kỳ tuyển sinh.</p>",
-    "eyebrow": "Du học Hàn Quốc",
-    "sort_order": 10,
-    "active": 1
-  },
-  {
-    "key": "why-intro",
-    "zone": "home",
-    "title": "Không chỉ dạy tiếng — chắp cánh tương lai",
-    "content": "<p>Chúng tôi đồng hành cùng học viên qua đội ngũ giáo viên, hoạt động giao lưu văn hóa, định hướng học bổng và hỗ trợ từ học tiếng đến nhập học.</p>",
-    "eyebrow": "Vì sao chọn Sol Dream",
-    "sort_order": 20,
-    "active": 1
-  },
-  {
-    "key": "testimonials-intro",
-    "zone": "home",
-    "title": "Học viên nói gì về Sol Dream",
-    "content": "<p>Lắng nghe những chia sẻ của học viên về quá trình học và chuẩn bị du học cùng SolDream.</p>",
-    "eyebrow": "Cảm nhận học viên",
     "sort_order": 30,
     "active": 1
   },
   {
+    "key": "journey-intro",
+    "zone": "sections",
+    "title": "Hành trình sang Hàn, 4 bước rõ ràng",
+    "content": "<p class=\"section-lead\">Lộ trình du học tại SOL DREAM EDUCATION gồm bốn giai đoạn: tư vấn trường ngành, học tiếng Hàn, chuẩn bị hồ sơ và visa, sau đó hỗ trợ trước khi nhập học. Chi tiết từng bước được điều chỉnh theo năng lực, ngân sách và kỳ tuyển sinh.</p>",
+    "eyebrow": "Du học Hàn Quốc",
+    "sort_order": 40,
+    "active": 1
+  },
+  {
+    "key": "why-intro",
+    "zone": "sections",
+    "title": "Không chỉ dạy tiếng — chắp cánh tương lai",
+    "content": "<p>Chúng tôi đồng hành cùng học viên qua đội ngũ giáo viên, hoạt động giao lưu văn hóa, định hướng học bổng và hỗ trợ từ học tiếng đến nhập học.</p>",
+    "eyebrow": "Vì sao chọn Sol Dream",
+    "sort_order": 50,
+    "active": 1
+  },
+  {
+    "key": "testimonials-intro",
+    "zone": "sections",
+    "title": "Học viên nói gì về Sol Dream",
+    "content": "<p>Lắng nghe những chia sẻ của học viên về quá trình học và chuẩn bị du học cùng SolDream.</p>",
+    "eyebrow": "Cảm nhận học viên",
+    "sort_order": 60,
+    "active": 1
+  },
+  {
     "key": "news-intro",
-    "zone": "home",
+    "zone": "sections",
     "title": "Thông tin hữu ích cho hành trình du học Hàn",
     "content": "<p class=\"section-lead\">Cẩm nang của SOL DREAM EDUCATION hỗ trợ học viên học tiếng, chọn trường, chuẩn bị hồ sơ và thích nghi với đời sống Hàn Quốc. Các thông tin dễ thay đổi như visa, chi phí và tuyển sinh sẽ được chuyên viên xác nhận theo thời điểm và hồ sơ cụ thể.</p>",
     "eyebrow": "Cẩm nang &amp; Thông tin",
-    "sort_order": 40,
+    "sort_order": 70,
     "active": 1
   },
   {
@@ -129,11 +129,11 @@
   },
   {
     "key": "consult-intro",
-    "zone": "consult",
+    "zone": "sections",
     "title": "Bắt đầu hành trình Hàn Quốc của bạn ngay hôm nay",
     "content": "<p class=\"section-lead\">Để lại thông tin để được tư vấn lộ trình phù hợp và nhận thông báo mới nhất về khóa học, chương trình du học hoặc trường đại học Hàn Quốc.</p>",
     "eyebrow": "Đăng ký tư vấn",
-    "sort_order": 0,
+    "sort_order": 80,
     "active": 1
   },
   {
@@ -264,11 +264,11 @@
   },
   {
     "key": "hero-intro",
-    "zone": "home",
+    "zone": "sections",
     "title": "Học tiếng Hàn, chạm tới giấc mơ du học Hàn Quốc",
     "content": "<p>Trung tâm Hàn ngữ Sol Dream Education — đào tạo tiếng Hàn cấp tốc, giao tiếp và đồng hành du học Hàn Quốc từ A–Z, cùng đội ngũ giáo viên Hàn Quốc và thạc sĩ, tiến sĩ giàu kinh nghiệm.</p>",
     "eyebrow": "Tư vấn tuyển sinh du học Hàn Quốc",
-    "sort_order": 129,
+    "sort_order": 0,
     "active": 1
   },
   {
@@ -297,5 +297,23 @@
     "eyebrow": "",
     "sort_order": 132,
     "active": 1
+  },
+  {
+    "key": "stats-section",
+    "title": "Số liệu trang chủ",
+    "eyebrow": "",
+    "content": "",
+    "active": 1,
+    "zone": "sections",
+    "sort_order": 10
+  },
+  {
+    "key": "about-section",
+    "title": "Khối giới thiệu trang chủ",
+    "eyebrow": "",
+    "content": "",
+    "active": 1,
+    "zone": "sections",
+    "sort_order": 20
   }
 ]

@@ -1,0 +1,22 @@
+<!-- ============ GIỚI THIỆU ============ -->
+<section class="section about" id="gioithieu">
+  <div class="wrap">
+    <div class="about__visual reveal">
+      <div class="about__card">
+        <div class="kquote">“</div>
+        <%- getBlock("about-quote").content %>
+        <div class="sig"><i></i><div><b style="color:#fff"><%= getBlock("about-quote").title %></b><br><small><%= getBlock("about-quote").eyebrow %></small></div></div>
+      </div>
+      <% if(getBlock("about-badge").active){ %><div class="about__badge"><b><%= getBlock("about-badge").title %></b><span><%- getBlock("about-badge").content %></span></div><% } %>
+    </div>
+    <div class="about__body about__cms reveal">
+      <% (typeof homepageAboutSections !== 'undefined' ? homepageAboutSections : []).forEach(function(section){ %>
+        <% if (section.eyebrow) { %><span class="eyebrow"><%= section.eyebrow %></span><% } %>
+        <h2><%= section.title %></h2>
+        <%- section.content %>
+      <% }) %>
+      <%- include("../partials/shared-block", { blockKey: "about-cta" , heading: false }) %>
+    </div>
+  </div>
+</section>
+

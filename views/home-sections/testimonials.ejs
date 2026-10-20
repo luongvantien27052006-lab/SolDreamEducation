@@ -1,0 +1,22 @@
+<!-- ============ CẢM NHẬN ============ -->
+<section class="section tmn" id="cam-nhan-hoc-vien">
+  <div class="wrap">
+    <div class="sec-head reveal"><%- include("../partials/shared-block", { blockKey: "testimonials-intro" }) %></div>
+    <div class="tmn-grid">
+      <% (testimonials || []).forEach(function(item){ %>
+      <article class="tcard reveal">
+        <div class="stars" aria-label="<%= item.rating %> trên 5 sao">
+          <% for (let star = 0; star < item.rating; star += 1) { %><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 2.4 7.4H22l-6 4.4 2.3 7.4L12 16.9 5.7 21.2 8 13.8l-6-4.4h7.6L12 2Z"/></svg><% } %>
+        </div>
+        <blockquote>“<%= item.quote %>”</blockquote>
+        <div class="who">
+          <% if (item.avatar_image) { %><img src="<%= item.avatar_image %>" alt="Ảnh đại diện <%= item.name %>" loading="lazy"><% } else { %><i><%= item.initials || 'SD' %></i><% } %>
+          <div><b><%= item.name %></b><small><%= item.role %></small></div>
+        </div>
+      </article>
+      <% }); %>
+    </div>
+    <div class="testimonial-source"><%- include("../partials/shared-block", { blockKey: "testimonials-note" }) %></div>
+  </div>
+</section>
+
