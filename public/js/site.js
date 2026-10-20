@@ -5,7 +5,7 @@ function setMenu(open){
   document.body.classList.toggle('nav-open',open);
   menu.classList.toggle('open',open);
   burger.setAttribute('aria-expanded',String(open));
-  burger.setAttribute('aria-label',open?'Đóng menu':'Mở menu');
+  burger.setAttribute('aria-label',open?window.solDreamText("browser.site.001"):window.solDreamText("browser.site.002"));
 }
 function toggleMenu(){setMenu(!document.body.classList.contains('nav-open'));}
 if(burger&&menu){
@@ -111,23 +111,23 @@ if(journey){var journeyObserver=new IntersectionObserver(function(entries){entri
 
 // Consultation forms: the home form and the delayed content pop-up share one safe flow.
 document.querySelectorAll('[data-lead-form]').forEach(function(leadForm){
-  var formStartedAt=leadForm.querySelector('[name="formStartedAt"]'),button=leadForm.querySelector('[data-lead-submit]'),status=leadForm.querySelector('[data-lead-status]'),defaultButtonText=button?button.textContent:'Gửi đăng ký';
+  var formStartedAt=leadForm.querySelector('[name="formStartedAt"]'),button=leadForm.querySelector('[data-lead-submit]'),status=leadForm.querySelector('[data-lead-status]'),defaultButtonText=button?button.textContent:window.solDreamText("browser.site.003");
   var interestSelect=leadForm.querySelector('[data-interest-select]'),detailField=leadForm.querySelector('[data-interest-detail-field]'),detailInput=leadForm.querySelector('[data-interest-detail]'),detailLabel=leadForm.querySelector('[data-interest-detail-label]');
   function syncInterestDetail(){
     if(!interestSelect||!detailField||!detailInput)return;
     var value=interestSelect.value||'',isSchool=/thông tin trường/i.test(value),isStudy=/du học|chương trình/i.test(value),show=isSchool||isStudy;
     detailField.hidden=!show;detailInput.disabled=!show;detailInput.required=isSchool;
-    if(isSchool){detailLabel.textContent='Bạn muốn nhận thông tin trường nào?';detailInput.placeholder='Ví dụ: Đại học Hannam';}
-    else if(isStudy){detailLabel.textContent='Bạn muốn tìm hiểu chương trình hoặc kỳ tuyển sinh nào?';detailInput.placeholder='Ví dụ: Hệ tiếng kỳ tháng 9';}
+    if(isSchool){detailLabel.textContent=window.solDreamText("browser.site.004");detailInput.placeholder=window.solDreamText("browser.site.005");}
+    else if(isStudy){detailLabel.textContent=window.solDreamText("browser.site.006");detailInput.placeholder=window.solDreamText("browser.site.007");}
   }
   if(interestSelect){interestSelect.addEventListener('change',syncInterestDetail);syncInterestDetail();}
   if(formStartedAt)formStartedAt.value=String(Date.now());
   leadForm.addEventListener('submit',async function(event){
-    event.preventDefault();button.disabled=true;button.textContent='Đang gửi…';status.textContent='';
+    event.preventDefault();button.disabled=true;button.textContent=window.solDreamText("browser.site.008");status.textContent='';
     var data=Object.fromEntries(new FormData(leadForm).entries());data.sourcePath=location.pathname;var sent=false;
-    try{var response=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});var payload=await response.json();if(!response.ok)throw new Error(payload.error||'Không thể gửi yêu cầu.');status.textContent=payload.message;status.classList.add('success');leadForm.reset();sent=true;try{localStorage.setItem('soldream-lead-popup-completed',String(Date.now()));}catch(e){}}
-    catch(error){status.textContent=error.message+' Bạn có thể gọi Hotline 0364 648 282.';status.classList.remove('success');}
-    finally{button.disabled=sent;button.textContent=sent?'Đã gửi đăng ký':defaultButtonText;if(sent)setTimeout(syncInterestDetail,0);if(!sent&&formStartedAt)formStartedAt.value=String(Date.now());}
+    try{var response=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)});var payload=await response.json();if(!response.ok)throw new Error(payload.error||window.solDreamText("browser.site.009"));status.textContent=payload.message;status.classList.add('success');leadForm.reset();sent=true;try{localStorage.setItem('soldream-lead-popup-completed',String(Date.now()));}catch(e){}}
+    catch(error){status.textContent=error.message+window.solDreamText("browser.site.010");status.classList.remove('success');}
+    finally{button.disabled=sent;button.textContent=sent?window.solDreamText("browser.site.011"):defaultButtonText;if(sent)setTimeout(syncInterestDetail,0);if(!sent&&formStartedAt)formStartedAt.value=String(Date.now());}
   });
 });
 
@@ -135,7 +135,7 @@ document.querySelectorAll('[data-lead-form]').forEach(function(leadForm){
 document.querySelectorAll('main table').forEach(function(table){
   if(table.parentElement&&table.parentElement.classList.contains('table-scroll'))return;
   if(table.closest('.knowledge-table-wrap,.chatbot__table-wrap'))return;
-  var scroller=document.createElement('div');scroller.className='table-scroll';scroller.tabIndex=0;scroller.setAttribute('aria-label','Bảng thông tin, vuốt ngang để xem đầy đủ');
+  var scroller=document.createElement('div');scroller.className='table-scroll';scroller.tabIndex=0;scroller.setAttribute('aria-label',window.solDreamText("browser.site.012"));
   table.parentNode.insertBefore(scroller,table);scroller.appendChild(table);
 });
 

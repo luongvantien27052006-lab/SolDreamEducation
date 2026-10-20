@@ -4,9 +4,9 @@
     <div class="sec-head reveal"><%- include("../partials/shared-block", { blockKey: "courses-intro" }) %></div>
     <div class="card-grid"><% homeCourses.forEach(function(course){ const spec=course.financials.tuition2026 || course.financials.classDetails || {}; %>
 <article class="course reveal"><h3><%= course.name %></h3><p class="section-lead"><%= course.description %></p>
-<% if(spec.classSize){ %><p>Sĩ số: <strong><%= spec.classSize %> học viên</strong><% if(spec.minimumStudents){ %> · Tối thiểu mở lớp: <%= spec.minimumStudents %><% } %></p><% } %>
-<% if(spec.textbook){ %><p>Giáo trình: <%= spec.textbook %></p><% } %>
-<div class="course__foot"><div class="course__price"><%= course.price %></div><a class="course__link" href="<%= course.url %>">Chi tiết →</a></div></article><% }); %></div>
+<% if(spec.classSize){ %><p><%= siteText("view.home-sections.courses.001") %> <strong><%= spec.classSize %> <%= siteText("view.home-sections.courses.002") %></strong><% if(spec.minimumStudents){ %> <%= siteText("view.home-sections.courses.003") %> <%= spec.minimumStudents %><% } %></p><% } %>
+<% if(spec.textbook){ %><p><%= siteText("view.home-sections.courses.004") %> <%= spec.textbook %></p><% } %>
+<div class="course__foot"><div class="course__price"><%= course.price %></div><a class="course__link" href="<%= course.url %>"><%= siteText("view.home-sections.courses.005") %></a></div></article><% }); %></div>
   </div>
 </section>
 

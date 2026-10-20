@@ -1,24 +1,24 @@
 <main>
 <section class="section" style="padding-top:56px">
   <div class="wrap">
-    <nav class="crumbs" aria-label="breadcrumb" style="font-size:14px;color:var(--muted);margin-bottom:14px">
-      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span> <span><%= currentTopic ? currentTopic.label : 'Cẩm nang & Thông tin' %></span>
+    <nav class="crumbs" aria-label="<%= siteText("view.news-list.001") %>" style="font-size:14px;color:var(--muted);margin-bottom:14px">
+      <a href="<%= siteText("view.news-list.002") %>" style="color:var(--muted)"><%= siteText("view.news-list.003") %></a> <span>›</span> <span><%= currentTopic ? currentTopic.label : siteText("view.news-list.018") %></span>
     </nav>
     <div class="sec-head">
-      <span class="eyebrow">Cẩm nang &amp; Thông tin</span>
-      <h1><%= currentTopic ? currentTopic.label : 'Cẩm nang & Thông tin' %></h1>
-      <p><%= currentTopic ? currentTopic.description : 'Thông tin Hàn Quốc, cẩm nang sinh hoạt và hoạt động SOL DREAM được phân theo từng chủ đề để bạn dễ tìm.' %></p>
-      <div class="source-meta"><strong>Đơn vị tư vấn và cung cấp thông tin:</strong> SOL DREAM EDUCATION · Nội dung được cập nhật theo từng chủ đề</div>
+      <span class="eyebrow"><%= siteText("view.news-list.004") %></span>
+      <h1><%= currentTopic ? currentTopic.label : siteText("view.news-list.019") %></h1>
+      <p><%= currentTopic ? currentTopic.description : siteText("view.news-list.020") %></p>
+      <div class="source-meta"><strong><%= siteText("view.news-list.005") %></strong> <%= siteText("view.news-list.006") %></div>
     </div>
-    <section class="direct-answer list-direct-answer" aria-label="Giới thiệu thư viện tin tức">
-      <p class="direct-answer__label">Trả lời nhanh</p>
-      <p><strong>Bài viết của SOL DREAM EDUCATION</strong> được xếp vào ba chủ đề bên dưới. Chọn một chủ đề để xem đúng nội dung bạn cần; mỗi bài có ngày cập nhật và nguồn thông tin để đối chiếu.</p>
+    <section class="direct-answer list-direct-answer" aria-label="<%= siteText("view.news-list.007") %>">
+      <p class="direct-answer__label"><%= siteText("view.news-list.008") %></p>
+      <p><strong><%= siteText("view.news-list.009") %></strong> <%= siteText("view.news-list.010") %></p>
     </section>
-    <nav class="topic-tabs" aria-label="Chọn chủ đề bài viết">
-      <a href="/tin-tuc" class="<%= !selectedTopic ? 'is-active' : '' %>" aria-current="<%= !selectedTopic ? 'page' : 'false' %>">Tất cả <span><%= Object.values(topicCounts).reduce((total, count) => total + count, 0) %></span></a>
+    <nav class="topic-tabs" aria-label="<%= siteText("view.news-list.011") %>">
+      <a href="<%= siteText("view.news-list.012") %>" class="<%= !selectedTopic ? 'is-active' : '' %>" aria-current="<%= !selectedTopic ? 'page' : 'false' %>"><%= siteText("view.news-list.013") %> <span><%= Object.values(topicCounts).reduce((total, count) => total + count, 0) %></span></a>
       <% topics.forEach(function(topic) { %><a href="/tin-tuc?muc=<%= topic.id %>" class="<%= selectedTopic === topic.id ? 'is-active' : '' %>" aria-current="<%= selectedTopic === topic.id ? 'page' : 'false' %>"><%= topic.label %> <span><%= topicCounts[topic.id] || 0 %></span></a><% }); %>
     </nav>
-    <% if (selectedTopic === 'cam-nang-sinh-hoat') { %><aside class="topic-feature"><strong>Cần một điểm bắt đầu?</strong> <a href="/cuoc-song-han-quoc">Xem cẩm nang sinh hoạt tại Hàn Quốc theo từng chủ đề →</a></aside><% } %>
+    <% if (selectedTopic === 'cam-nang-sinh-hoat') { %><aside class="topic-feature"><strong><%= siteText("view.news-list.014") %></strong> <a href="<%= siteText("view.news-list.015") %>"><%= siteText("view.news-list.016") %></a></aside><% } %>
     <div class="news-grid">
       <% posts.forEach(function(p){ %>
       <a class="post" href="/tin-tuc/<%= p.slug %>">
@@ -32,7 +32,7 @@
         </div>
       </a>
       <% }); %>
-      <% if (posts.length === 0) { %><p>Chưa có bài viết trong chủ đề này.</p><% } %>
+      <% if (posts.length === 0) { %><p><%= siteText("view.news-list.017") %></p><% } %>
     </div>
   </div>
 </section>

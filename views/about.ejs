@@ -1,13 +1,13 @@
 <main>
 <article class="section knowledge-hub">
   <div class="wrap" style="max-width:920px">
-    <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <span>Giới thiệu</span></nav>
-    <% const aboutSloganSection = (aboutSections || []).find(function(section){ return section.title === 'Slogan SOL DREAM'; }); %>
+    <nav class="crumbs" aria-label="<%= siteText("view.about.001") %>"><a href="<%= siteText("view.about.002") %>"><%= siteText("view.about.003") %></a> <span>›</span> <span><%= siteText("view.about.004") %></span></nav>
+    <% const aboutSloganSection = (aboutSections || []).find(function(section){ return section.id === 10; }); %>
     <% if (aboutSloganSection) { %>
-      <aside class="about-slogan" aria-label="Slogan SOL DREAM EDUCATION">
+      <aside class="about-slogan" aria-label="<%= siteText("view.about.005") %>">
         <img src="/img/logo-mark.png" width="80" height="80" alt="" aria-hidden="true">
         <div>
-          <span><%= aboutSloganSection.eyebrow || 'Thông điệp SOL DREAM' %></span>
+          <span><%= aboutSloganSection.eyebrow || siteText("view.about.009") %></span>
           <%- aboutSloganSection.content %>
         </div>
       </aside>
@@ -19,7 +19,7 @@
         <h1><%= header.title %></h1>
         <%- header.content %>
       <% } %>
-      <% if (aboutPageDates.modifiedLabel) { %><div class="source-meta"><strong>Cập nhật:</strong> <time datetime="<%= aboutPageDates.modifiedTime %>"><%= aboutPageDates.modifiedLabel %></time></div><% } %>
+      <% if (aboutPageDates.modifiedLabel) { %><div class="source-meta"><strong><%= siteText("view.about.006") %></strong> <time datetime="<%= aboutPageDates.modifiedTime %>"><%= aboutPageDates.modifiedLabel %></time></div><% } %>
       <% if (download.active) { %>
         <p><a class="knowledge-card__link" href="<%= download.link_url %>" target="_blank" rel="noopener"><%= download.link_label %></a></p>
         <div class="source-meta"><%- download.content %></div>
@@ -27,10 +27,10 @@
     </header>
 
     <% const tabSections = (aboutSections || []).filter(function(section){ return section.section_style === 'tab'; }); %>
-    <% const regularSections = (aboutSections || []).filter(function(section){ return section.section_style !== 'tab' && section.title !== 'Slogan SOL DREAM'; }); %>
+    <% const regularSections = (aboutSections || []).filter(function(section){ return section.section_style !== 'tab' && section.id !== 10; }); %>
     <% if (tabSections.length) { %>
-      <section class="about-tabs" data-about-tabs aria-label="Nội dung giới thiệu SOL DREAM EDUCATION">
-        <div class="about-tabs__list" role="tablist" aria-label="Các mục giới thiệu">
+      <section class="about-tabs" data-about-tabs aria-label="<%= siteText("view.about.007") %>">
+        <div class="about-tabs__list" role="tablist" aria-label="<%= siteText("view.about.008") %>">
           <span class="about-tabs__tree-mark" aria-hidden="true"><img src="/img/logo-mark.png" width="62" height="62" alt=""></span>
           <% tabSections.forEach(function(section, index){ %>
             <button class="about-tabs__tab<%= index === 0 ? ' is-active' : '' %>" type="button" role="tab" id="about-tab-button-<%= section.id %>" aria-controls="about-tab-panel-<%= section.id %>" aria-selected="<%= index === 0 ? 'true' : 'false' %>" tabindex="<%= index === 0 ? '0' : '-1' %>" data-about-tab-target="about-tab-panel-<%= section.id %>"><%= section.title %></button>
@@ -38,7 +38,7 @@
         </div>
         <div class="about-tabs__panels">
           <% tabSections.forEach(function(section, index){ %>
-            <section class="about-tabs__panel<%= index === 0 ? ' is-active' : '' %><%= section.title === 'Lời chào' ? ' about-tabs__panel--greeting' : '' %><%= section.title === 'Bộ máy tổ chức' ? ' about-tabs__panel--organization' : '' %>" id="about-tab-panel-<%= section.id %>" role="tabpanel" tabindex="0" aria-labelledby="about-tab-button-<%= section.id %>">
+            <section class="about-tabs__panel<%= index === 0 ? ' is-active' : '' %><%= section.id === 7 ? ' about-tabs__panel--greeting' : '' %><%= section.id === 9 ? ' about-tabs__panel--organization' : '' %>" id="about-tab-panel-<%= section.id %>" role="tabpanel" tabindex="0" aria-labelledby="about-tab-button-<%= section.id %>">
               <% if (section.eyebrow) { %><span class="eyebrow"><%= section.eyebrow %></span><% } %>
               <h2><%= section.title %></h2>
               <div class="about-tabs__content"><%- section.content %></div>
@@ -51,7 +51,7 @@
     <% regularSections.forEach(function(section){ %>
       <% if (section.section_style === 'direct-answer') { %>
         <section class="direct-answer" aria-labelledby="about-section-<%= section.id %>">
-          <p class="direct-answer__label"><%= section.eyebrow || 'Trả lời nhanh' %></p>
+          <p class="direct-answer__label"><%= section.eyebrow || siteText("view.about.010") %></p>
           <h2 id="about-section-<%= section.id %>" class="sr-only"><%= section.title %></h2>
           <%- section.content %>
         </section>

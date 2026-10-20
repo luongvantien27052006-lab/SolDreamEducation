@@ -1,13 +1,13 @@
 <main>
 <article class="section" style="padding-top:56px">
   <div class="wrap" style="max-width:820px">
-    <nav class="crumbs" aria-label="breadcrumb" style="font-size:14px;color:var(--muted);margin-bottom:16px">
-      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span>
+    <nav class="crumbs" aria-label="<%= siteText("view.news-detail.001") %>" style="font-size:14px;color:var(--muted);margin-bottom:16px">
+      <a href="<%= siteText("view.news-detail.002") %>" style="color:var(--muted)"><%= siteText("view.news-detail.003") %></a> <span>›</span>
       <a href="/tin-tuc?muc=<%= post.topic %>" style="color:var(--muted)"><%= post.topicLabel %></a> <span>›</span> <span><%= post.title %></span>
     </nav>
     <span class="post__cat" style="color:var(--sky)"><%= post.topicLabel %></span>
     <h1 style="font-size:clamp(28px,4.4vw,44px);margin:12px 0 14px"><%= post.title %></h1>
-    <p class="source-meta" style="margin-bottom:26px"><strong><%= post.author_type==='person'?'Tác giả':'Đơn vị cung cấp thông tin' %>:</strong> <% if (post.author_url) { %><a href="<%= post.author_url %>" target="_blank" rel="author noopener noreferrer"><%= post.author_name || 'SOL DREAM EDUCATION' %></a><% } else { %><%= post.author_name || 'SOL DREAM EDUCATION' %><% } %><% if (post.author_role) { %> — <%= post.author_role %><% } %> · <strong>Ngày bài viết:</strong> <time datetime="<%= displayTime %>"><%= post.dateFull %></time> · <strong>Cập nhật:</strong> <time datetime="<%= contentModifiedTime %>"><%= post.updatedDateFull %></time></p>
+    <p class="source-meta" style="margin-bottom:26px"><strong><%= post.author_type==='person'?siteText("view.news-detail.012"):siteText("view.news-detail.013") %>:</strong> <% if (post.author_url) { %><a href="<%= post.author_url %>" target="_blank" rel="author noopener noreferrer"><%= post.author_name || 'SOL DREAM EDUCATION' %></a><% } else { %><%= post.author_name || 'SOL DREAM EDUCATION' %><% } %><% if (post.author_role) { %> — <%= post.author_role %><% } %> · <strong><%= siteText("view.news-detail.004") %></strong> <time datetime="<%= displayTime %>"><%= post.dateFull %></time> · <strong><%= siteText("view.news-detail.005") %></strong> <time datetime="<%= contentModifiedTime %>"><%= post.updatedDateFull %></time></p>
     <div class="post__img <%= post.cover_image ? '' : post.cover %>" style="height:300px;border-radius:20px;margin-bottom:30px">
       <img class="post__cover<%= (!post.cover_image || post.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= post.cover_image || '/img/research-cover.svg' %>" alt="<%= coverMeta.alt %>" <% if (coverMeta.width) { %>width="<%= coverMeta.width %>" height="<%= coverMeta.height %>"<% } %> style="border-radius:20px">
     </div>
@@ -19,19 +19,19 @@
     <%- include('partials/article-sources',{item:post}) %>
     <% if (relatedFaqs && relatedFaqs.length) { %>
     <section class="related-faq" aria-labelledby="article-faq-title">
-      <h2 id="article-faq-title">Câu hỏi thường gặp về nội dung này</h2>
+      <h2 id="article-faq-title"><%= siteText("view.news-detail.006") %></h2>
       <div class="faq-list"><% relatedFaqs.forEach(function(faq){ %><details class="faq-item"><summary><%= faq.question %></summary><div class="faq-answer"><p><%= faq.answer %></p></div></details><% }); %></div>
     </section>
     <% } %>
     <% if (relatedPosts.length) { %>
     <section class="related-content" aria-labelledby="related-news-title">
-      <h2 id="related-news-title">Bài viết liên quan</h2>
-      <ul><% relatedPosts.forEach(function(item){ %><li><a href="/tin-tuc/<%= item.slug %>"><%= item.title %></a><span><%= item.topicLabel %> · cập nhật <%= item.updatedDateFull %></span></li><% }); %></ul>
+      <h2 id="related-news-title"><%= siteText("view.news-detail.007") %></h2>
+      <ul><% relatedPosts.forEach(function(item){ %><li><a href="/tin-tuc/<%= item.slug %>"><%= item.title %></a><span><%= item.topicLabel %> <%= siteText("view.news-detail.008") %> <%= item.updatedDateFull %></span></li><% }); %></ul>
     </section>
     <% } %>
     <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--line)">
-      <a href="/tin-tuc?muc=<%= post.topic %>" class="btn btn-ghost">← Quay lại <%= post.topicLabel %></a>
-      <a href="/#lienhe" class="btn btn-primary" style="margin-left:8px">Đăng ký tư vấn</a>
+      <a href="/tin-tuc?muc=<%= post.topic %>" class="btn btn-ghost"><%= siteText("view.news-detail.009") %> <%= post.topicLabel %></a>
+      <a href="<%= siteText("view.news-detail.010") %>" class="btn btn-primary" style="margin-left:8px"><%= siteText("view.news-detail.011") %></a>
     </div>
   </div>
 </article>

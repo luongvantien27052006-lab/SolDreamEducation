@@ -7,23 +7,23 @@
     </div>
     <form class="cta__form" id="consultationForm" data-lead-form>
       <%- include("../partials/shared-block", { blockKey: "consult-form", heading: "h3" }) %>
-      <div class="field"><label for="ten"><%= getBlock("consult-label-name").title %></label><input id="ten" name="name" type="text" autocomplete="name" minlength="2" maxlength="100" required placeholder="Nguyễn Văn A"></div>
-      <div class="field"><label for="sdt"><%= getBlock("consult-label-phone").title %></label><input id="sdt" name="phone" type="tel" inputmode="tel" autocomplete="tel" minlength="9" maxlength="20" required placeholder="09xx xxx xxx"></div>
-      <div class="field"><label for="email"><%= getBlock("consult-label-email").title %></label><input id="email" name="email" type="email" autocomplete="email" maxlength="180" required placeholder="ban@example.com"></div>
+      <div class="field"><label for="ten"><%= getBlock("consult-label-name").title %></label><input id="ten" name="name" type="text" autocomplete="name" minlength="2" maxlength="100" required placeholder="<%= siteText("view.home-sections.consult.001") %>"></div>
+      <div class="field"><label for="sdt"><%= getBlock("consult-label-phone").title %></label><input id="sdt" name="phone" type="tel" inputmode="tel" autocomplete="tel" minlength="9" maxlength="20" required placeholder="<%= siteText("view.home-sections.consult.002") %>"></div>
+      <div class="field"><label for="email"><%= getBlock("consult-label-email").title %></label><input id="email" name="email" type="email" autocomplete="email" maxlength="180" required placeholder="<%= siteText("view.home-sections.consult.003") %>"></div>
       <div class="field"><label for="kh"><%= getBlock("consult-label-interest").title %></label>
         <select id="kh" name="interest" data-interest-select>
-          <option>Tiếng Hàn giao tiếp</option>
-          <option>Tiếng Hàn cấp tốc</option>
-          <option>Tiếng Hàn sơ cấp / trung cấp</option>
-          <option>Du học Hàn Quốc</option>
-          <option>Thông tin trường</option>
+          <option value="Tiếng Hàn giao tiếp"><%= siteText("view.home-sections.consult.004") %></option>
+          <option value="Tiếng Hàn cấp tốc"><%= siteText("view.home-sections.consult.005") %></option>
+          <option value="Tiếng Hàn sơ cấp / trung cấp"><%= siteText("view.home-sections.consult.006") %></option>
+          <option value="Du học Hàn Quốc"><%= siteText("view.home-sections.consult.007") %></option>
+          <option value="Thông tin trường"><%= siteText("view.home-sections.consult.008") %></option>
         </select>
       </div>
       <div class="field" data-interest-detail-field hidden>
         <label for="interest-detail" data-interest-detail-label><%= getBlock("consult-label-detail").title %></label>
-        <input id="interest-detail" name="interestDetail" type="text" maxlength="240" data-interest-detail placeholder="Nhập nội dung bạn muốn được tư vấn">
+        <input id="interest-detail" name="interestDetail" type="text" maxlength="240" data-interest-detail placeholder="<%= siteText("view.home-sections.consult.009") %>">
       </div>
-      <div class="field hp-field" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="field hp-field" aria-hidden="true"><label><%= siteText("view.home-sections.consult.010") %><input name="website" tabindex="-1" autocomplete="off"></label></div>
       <input type="hidden" name="formStartedAt" value="">
       <button class="btn btn-primary" type="submit" style="justify-content:center;width:100%" data-lead-submit><%= getBlock("consult-label-submit").title %></button>
       <p class="form-note" data-lead-status role="status" aria-live="polite"></p>

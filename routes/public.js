@@ -1,4 +1,5 @@
 'use strict';
+const {siteText}=require('../lib/siteContent');
 const express = require('express');
 const router = express.Router();
 const PINNED_NEWS_POST_SLUG = 'tuyen-dung-giao-vien-day-tieng-anh';
@@ -17,12 +18,12 @@ const { INDEXNOW_KEY } = require('../lib/indexNow');
 const { generateLlmsTxt } = require('../lib/llms');
 const { getHomepageStats, getHomepageStatsSource } = require('../lib/homepageStats');
 const { getAboutSections } = require('../lib/aboutContent');
-const { TOPICS, normalizeTopic } = require('../lib/contentTopics');
+const { TOPICS, getTopics, normalizeTopic } = require('../lib/contentTopics');
 const { articleDates, coverMetadata } = require('../lib/articleMetadata');
 const { storedDescription, automaticDescription } = require('../lib/seoDescription');
 const { aboutPageMetadata } = require('../lib/aboutPageMetadata');
-const koreaLife = require('../data/korea-life.json');
-const partnerSchools = require('../data/partner-schools.json').schools;
+
+
 
 function jsonLdScript(payload) {
   return `<script type="application/ld+json">${JSON.stringify(payload).replace(/</g, '\\u003c')}</script>`;
@@ -50,7 +51,7 @@ function escapeSvgText(value) {
 }
 
 function coverTitleLines(value) {
-  const words = String(value || 'Cẩm nang du học Hàn Quốc').trim().split(/\s+/u).filter(Boolean);
+  const words = String(value || siteText("cover.default")).trim().split(/\s+/u).filter(Boolean);
   const lines = [];
   let line = '';
   // Vietnamese uppercase glyphs and wide letters take more space than a raw
@@ -83,7 +84,7 @@ function sendDynamicEditorialCover(res, item, id, label) {
   const titleLines = coverTitleLines(item.title);
   const titleSize = titleLines.some((line) => line.length > 25) ? 40 : 44;
   const lines = titleLines.map((line, index) => `<text x="76" y="${274 + index * 57}" fill="#fff" font-family="Segoe UI,Arial,sans-serif" font-size="${titleSize}" font-weight="750">${escapeSvgText(line)}</text>`).join('');
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="${escapeSvgText(item.title)}"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="${colors[0]}"/><stop offset="1" stop-color="${colors[1]}"/></linearGradient><clipPath id="title-safe"><rect x="70" y="210" width="690" height="220" rx="8"/></clipPath></defs><rect width="1200" height="630" rx="36" fill="url(#g)"/><circle cx="1050" cy="92" r="230" fill="${colors[2]}" opacity=".17"/><path d="M0 505c230-135 405 65 635-48 225-110 385-25 565-105v278H0Z" fill="#fff" opacity=".08"/><g transform="translate(875 158) scale(.82)" fill="none" stroke="#fff" stroke-width="16" stroke-linejoin="round" opacity=".92"><path d="M150 0c45 28 92 51 150 63v137c0 110-72 185-150 220C72 385 0 310 0 200V63C58 51 105 28 150 0Z"/><path d="m76 211 48 48 102-113"/></g><g transform="translate(76 74)"><text x="0" y="44" fill="${colors[2]}" font-family="Segoe UI Light,Helvetica Neue,Arial,sans-serif" font-size="43" font-weight="300" letter-spacing="-2">Sol Dream</text><path d="M0 66h42M222 66h42" stroke="${colors[2]}" stroke-width="2"/><text x="55" y="72" fill="${colors[2]}" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="600" letter-spacing="8">EDUCATION</text></g><text x="76" y="194" fill="#fff" opacity=".78" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="600" letter-spacing="1.5">${escapeSvgText(label || item.category || 'Du học Hàn Quốc')}</text><g clip-path="url(#title-safe)">${lines}</g></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="${escapeSvgText(item.title)}"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="${colors[0]}"/><stop offset="1" stop-color="${colors[1]}"/></linearGradient><clipPath id="title-safe"><rect x="70" y="210" width="690" height="220" rx="8"/></clipPath></defs><rect width="1200" height="630" rx="36" fill="url(#g)"/><circle cx="1050" cy="92" r="230" fill="${colors[2]}" opacity=".17"/><path d="M0 505c230-135 405 65 635-48 225-110 385-25 565-105v278H0Z" fill="#fff" opacity=".08"/><g transform="translate(875 158) scale(.82)" fill="none" stroke="#fff" stroke-width="16" stroke-linejoin="round" opacity=".92"><path d="M150 0c45 28 92 51 150 63v137c0 110-72 185-150 220C72 385 0 310 0 200V63C58 51 105 28 150 0Z"/><path d="m76 211 48 48 102-113"/></g><g transform="translate(76 74)"><text x="0" y="44" fill="${colors[2]}" font-family="Segoe UI Light,Helvetica Neue,Arial,sans-serif" font-size="43" font-weight="300" letter-spacing="-2">${escapeSvgText(siteText('cover.brand'))}</text><path d="M0 66h42M222 66h42" stroke="${colors[2]}" stroke-width="2"/><text x="55" y="72" fill="${colors[2]}" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="600" letter-spacing="8">${escapeSvgText(siteText('cover.brand-line'))}</text></g><text x="76" y="194" fill="#fff" opacity=".78" font-family="Segoe UI,Arial,sans-serif" font-size="22" font-weight="600" letter-spacing="1.5">${escapeSvgText(label || item.category || 'Du học Hàn Quốc')}</text><g clip-path="url(#title-safe)">${lines}</g></svg>`;
   res.set('Content-Type', 'image/svg+xml; charset=utf-8');
   res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
   return res.send(svg);
@@ -94,7 +95,7 @@ router.get('/anh-cam-nang/:id.svg', (req, res, next) => {
   if (!Number.isInteger(id) || id < 1) return next();
   const post = db.prepare('SELECT id,title,category FROM posts WHERE id=?').get(id);
   if (!post) return next();
-  return sendDynamicEditorialCover(res, post, id, post.category || 'Cẩm nang du học');
+  return sendDynamicEditorialCover(res, post, id, post.category || siteText("cover.category"));
 });
 
 router.get('/anh-truong/:id.svg', (req, res, next) => {
@@ -102,7 +103,7 @@ router.get('/anh-truong/:id.svg', (req, res, next) => {
   if (!Number.isInteger(id) || id < 1) return next();
   const program = db.prepare('SELECT id,title,category FROM programs WHERE id=?').get(id);
   if (!program) return next();
-  return sendDynamicEditorialCover(res, program, id, 'HỒ SƠ TRƯỜNG HÀN QUỐC');
+  return sendDynamicEditorialCover(res, program, id, siteText("cover.school"));
 });
 
 // Home
@@ -121,13 +122,13 @@ router.get('/', (req, res) => {
     '@type': 'WebPage',
     '@id': `${abs('/')}#page`,
     url: abs('/'),
-    name: 'SOL DREAM EDUCATION - Trung tâm Hàn ngữ và Du học Hàn Quốc',
-    description: 'Thông tin khóa học tiếng Hàn và dịch vụ tư vấn du học Hàn Quốc tại SOL DREAM EDUCATION.',
+    name: siteText("server.routes.public.001"),
+    description: siteText("server.routes.public.002"),
     inLanguage: 'vi-VN',
     about: { '@id': `${SITE_URL}/#organization` },
     mainEntity: {
       '@type': 'ItemList',
-      name: 'Khóa học tại SOL DREAM EDUCATION',
+      name: siteText("server.routes.public.003"),
       itemListElement: courses.map((course, index) => ({
         '@type': 'ListItem', position: index + 1, name: course.name, url: abs(course.url),
       })),
@@ -141,16 +142,16 @@ router.get('/tro-ly-du-hoc', (req, res) => {
   const jsonLd = jsonLdScript([
     {
       '@context': 'https://schema.org', '@type': 'WebPage', '@id': `${url}#page`, url,
-      name: 'Trợ lý tư vấn du học Hàn Quốc SolDream Support',
-      description: 'Trợ lý tra cứu khóa học, trường đại học, chương trình du học Hàn Quốc và thông tin tư vấn đã công bố của SOL DREAM EDUCATION.',
+      name: siteText("server.routes.public.004"),
+      description: siteText("server.routes.public.005"),
       inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` },
       about: { '@id': `${SITE_URL}/#organization` },
     },
-    generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Trợ lý tư vấn du học', url: '/tro-ly-du-hoc' }]),
+    generateBreadcrumbSchema([{ name: siteText("server.routes.public.006"), url: '/' }, { name: siteText("server.routes.public.007"), url: '/tro-ly-du-hoc' }]),
   ]);
   res.render('chat-page', {
-    title: 'Trợ lý tư vấn du học Hàn Quốc | SOL DREAM EDUCATION',
-    description: 'Hỏi đáp về khóa học tiếng Hàn, trường đại học, học phí, học bổng, hồ sơ và chương trình du học Hàn Quốc cùng SolDream Support.',
+    title: siteText("server.routes.public.008"),
+    description: siteText("server.routes.public.009"),
     canonical: url,
     jsonLd,
     hideFloatingChat: true,
@@ -167,19 +168,19 @@ router.get('/gioi-thieu', (req, res) => {
   const jsonLd = jsonLdScript([
     {
       '@context': 'https://schema.org', '@type': 'AboutPage', '@id': `${url}#page`, url,
-      name: 'Giới thiệu SOL DREAM EDUCATION',
-      description: 'Thông tin nhận diện, dịch vụ, địa chỉ và phạm vi hoạt động của SOL DREAM EDUCATION.',
+      name: siteText("server.routes.public.010"),
+      description: siteText("server.routes.public.011"),
       inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` },
       mainEntity: { '@id': `${SITE_URL}/#organization` },
       ...(aboutPageDates.publishedTime ? {datePublished:aboutPageDates.publishedTime} : {}),
       ...(aboutPageDates.modifiedTime ? {dateModified:aboutPageDates.modifiedTime} : {}),
     },
-    generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Giới thiệu', url: '/gioi-thieu' }]),
+    generateBreadcrumbSchema([{ name: siteText("server.routes.public.012"), url: '/' }, { name: siteText("server.routes.public.013"), url: '/gioi-thieu' }]),
   ]);
   res.render('about', {
     aboutSections, aboutStories, aboutPageDates,
-    title: 'Giới thiệu SOL DREAM EDUCATION | Trung tâm Hàn ngữ & Du học Hàn Quốc',
-    description: 'SOL DREAM EDUCATION là trung tâm Hàn ngữ và tư vấn du học Hàn Quốc tại Tân Phú, TP.HCM, hoạt động từ năm 2019.',
+    title: siteText("server.routes.public.014"),
+    description: siteText("server.routes.public.015"),
     canonical: url,
     jsonLd,
   });
@@ -191,42 +192,43 @@ router.get('/cau-hoi-thuong-gap', (req, res) => {
   const jsonLd = jsonLdScript([
     {
       ...generateFAQSchema(faqs), '@id': `${url}#page`, url,
-      name: 'Câu hỏi thường gặp về khóa học và du học Hàn Quốc', inLanguage: 'vi-VN',
+      name: siteText("server.routes.public.016"), inLanguage: 'vi-VN',
       isPartOf: { '@id': `${SITE_URL}/#website` }, publisher: { '@id': `${SITE_URL}/#organization` },
     },
-    generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Câu hỏi thường gặp', url: '/cau-hoi-thuong-gap' }]),
+    generateBreadcrumbSchema([{ name: siteText("server.routes.public.017"), url: '/' }, { name: siteText("server.routes.public.018"), url: '/cau-hoi-thuong-gap' }]),
   ]);
   res.render('faq', {
     faqs,
     faqGroups: groupFaqs(faqs),
-    title: 'Câu hỏi thường gặp | SOL DREAM EDUCATION',
-    description: 'Giải đáp về khóa học tiếng Hàn, tư vấn du học, dữ liệu trường đại học và cách liên hệ SOL DREAM EDUCATION.',
+    title: siteText("server.routes.public.019"),
+    description: siteText("server.routes.public.020"),
     canonical: url,
     jsonLd,
   });
 });
 
 router.get('/cuoc-song-han-quoc', (req, res) => {
+  const koreaLife=require('../lib/siteContent').getDataset('korea-life');
   const url = abs('/cuoc-song-han-quoc');
-  const lifeFaqs = koreaLife.topics.map((topic) => ({ question: `${topic.title}: du học sinh cần lưu ý gì?`, answer: topic.summary }));
+  const lifeFaqs = koreaLife.topics.map((topic) => ({ question: siteText('life.faq-template',{v0:topic.title}), answer: topic.summary }));
   const jsonLd = jsonLdScript([
     { '@context': 'https://schema.org', '@type': 'WebPage', '@id': `${url}#page`, url, name: koreaLife.title,
       description: koreaLife.blufSummary, dateModified: koreaLife.lastUpdated, inLanguage: 'vi-VN',
       isPartOf: { '@id': `${SITE_URL}/#website` }, publisher: { '@id': `${SITE_URL}/#organization` },
       citation: [...new Set(koreaLife.topics.map((topic) => topic.sourceUrl))] },
     { ...generateFAQSchema(lifeFaqs), '@id': `${url}#faq`, url, inLanguage: 'vi-VN' },
-    generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Sinh hoạt tại Hàn Quốc', url: '/cuoc-song-han-quoc' }]),
+    generateBreadcrumbSchema([{ name: siteText("server.routes.public.021"), url: '/' }, { name: siteText("server.routes.public.022"), url: '/cuoc-song-han-quoc' }]),
   ]);
-  res.render('korea-life', { life: koreaLife, title: `${koreaLife.title} | SOL DREAM EDUCATION`, description: koreaLife.blufSummary, canonical: url, jsonLd });
+  res.render('korea-life', { life: koreaLife, title: siteText("server.routes.public.023",{v0:(koreaLife.title)}), description: koreaLife.blufSummary, canonical: url, jsonLd });
 });
 
 // Course hub: exposes course information as crawlable text instead of home-page cards only.
 router.get('/khoa-hoc', (req, res) => {
   const courses = getCourses();
   const courseTracks = [
-    { key: 'foundation', title: 'Nền tảng và trung cấp' },
-    { key: 'topik', title: 'Luyện thi TOPIK' },
-    { key: 'speaking', title: 'Giao tiếp và phát âm' },
+    { key: 'foundation', title: siteText("server.routes.public.024") },
+    { key: 'topik', title: siteText("server.routes.public.025") },
+    { key: 'speaking', title: siteText("server.routes.public.026") },
   ];
   const tuitionOrder = ['SC1A', 'SC1B', 'SC2A', 'SC2B', 'TC3A', 'TC3B', 'TC4A', 'TC4B', 'TOPIK I', 'TOPIK cấp 3', 'TOPIK cấp 4', 'Giao tiếp Sơ cấp', 'Giao tiếp TC1', 'Giao tiếp TC2', 'Luyện phát âm'];
   const tuitionGroups = courseTracks.map((track) => ({
@@ -243,13 +245,13 @@ router.get('/khoa-hoc', (req, res) => {
     '@graph': [
       {
         '@type': 'CollectionPage', '@id': `${url}#page`, url,
-        name: 'Khóa học tại SOL DREAM EDUCATION',
-        description: 'Danh sách khóa học tiếng Hàn và tiếng Anh tại SOL DREAM EDUCATION.',
+        name: siteText("server.routes.public.027"),
+        description: siteText("server.routes.public.028"),
         inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` },
         publisher: { '@id': `${SITE_URL}/#organization` }, mainEntity: { '@id': `${url}#list` },
       },
       {
-        '@type': 'ItemList', '@id': `${url}#list`, name: 'Danh sách khóa học tại SOL DREAM EDUCATION',
+        '@type': 'ItemList', '@id': `${url}#list`, name: siteText("server.routes.public.029"),
         itemListElement: courses.map((course, index) => ({
           '@type': 'ListItem', position: index + 1, url: abs(course.url),
         })),
@@ -259,7 +261,7 @@ router.get('/khoa-hoc', (req, res) => {
         description: course.description.slice(0, 60), url: abs(course.url),
         provider: { '@id': `${SITE_URL}/#organization` },
       })),
-      generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Khóa học', url: '/khoa-hoc' }]),
+      generateBreadcrumbSchema([{ name: siteText("server.routes.public.030"), url: '/' }, { name: siteText("server.routes.public.031"), url: '/khoa-hoc' }]),
     ],
   });
   res.render('courses', {
@@ -268,8 +270,8 @@ router.get('/khoa-hoc', (req, res) => {
     otherCourses,
     updatedDateLabel,
     courseNotice: getCourseNotice(),
-    title: 'Học phí tiếng Hàn 2026 tại TP.HCM | SOL DREAM EDUCATION',
-    description: 'Tra cứu bảng học phí tiếng Hàn SDE 2026 theo lớp: sơ cấp, trung cấp, TOPIK, giao tiếp và phát âm, gồm số buổi, thời lượng, sĩ số và cơ cấu giáo viên.',
+    title: siteText("server.routes.public.032"),
+    description: siteText("server.routes.public.033"),
     canonical: url,
     jsonLd,
   });
@@ -282,9 +284,9 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
   const price = Number(course.financials?.priceVndTotal);
   const generatedCourseFaqs = getRelatedFaqs('course', course.id);
   const courseFaqs = generatedCourseFaqs.length ? generatedCourseFaqs : [
-    { question: `${course.name} phù hợp với ai?`, answer: `${course.name} phù hợp với ${course.audience.toLowerCase()}. SOL DREAM EDUCATION kiểm tra mục tiêu, nền tảng hiện tại và thời gian dự kiến trước khi tư vấn lớp để học viên không đăng ký một lộ trình không phù hợp.` },
-    { question: `Học phí ${course.name} là bao nhiêu?`, answer: `${course.price}. ${course.financials.priceNote}. Lịch học, thời lượng, ưu đãi và khoản phí áp dụng cần được xác nhận trực tiếp với SOL DREAM EDUCATION tại thời điểm đăng ký.` },
-    { question: `${course.name} có yêu cầu ${course.entryExamLabel} đầu vào không?`, answer: `${course.entryExamRequirement || `Website chưa công bố yêu cầu ${course.entryExamLabel} đầu vào cho khóa học này.`} ${course.requirements.status}. Học viên sẽ được kiểm tra mục tiêu và trình độ thực tế trước khi xếp lớp.` },
+    {question:siteText('course.faq.audience-question',{v0:course.name}),answer:siteText('course.faq.audience-answer',{v0:course.name,v1:course.audience.toLowerCase()})},
+    {question:siteText('course.faq.fee-question',{v0:course.name}),answer:siteText('course.faq.fee-answer',{v0:course.price,v1:course.financials.priceNote})},
+    {question:siteText('course.faq.exam-question',{v0:course.name,v1:course.entryExamLabel}),answer:siteText('course.faq.exam-answer',{v0:course.entryExamRequirement||siteText('course.faq.exam-missing',{v0:course.entryExamLabel}),v1:course.requirements.status})},
   ];
   const jsonLd = jsonLdScript([
     {
@@ -296,7 +298,7 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
       ...(Number.isFinite(price) && price > 0 ? { offers: { '@type': 'Offer', price, priceCurrency: 'VND', url, availability: 'https://schema.org/InStock' } } : {}),
     },
     { ...generateFAQSchema(courseFaqs), '@id': `${url}#faq`, url, inLanguage: 'vi-VN' },
-    generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Khóa học', url: '/khoa-hoc' }, { name: course.name, url: course.url }]),
+    generateBreadcrumbSchema([{ name: siteText("server.routes.public.034"), url: '/' }, { name: siteText("server.routes.public.035"), url: '/khoa-hoc' }, { name: course.name, url: course.url }]),
   ]);
   res.render('course-detail', {
     course, courseFaqs, courseNotice: getCourseNotice(),
@@ -308,7 +310,7 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
 // News listing
 router.get('/tin-tuc', (req, res) => {
   const selectedTopic = normalizeTopic(req.query.muc);
-  const currentTopic = TOPICS.find((topic) => topic.id === selectedTopic) || null;
+  const currentTopic = getTopics().find((topic) => topic.id === selectedTopic) || null;
   const posts = selectedTopic
     ? db.prepare(`SELECT * FROM posts WHERE published = 1 AND topic = ?
       ORDER BY CASE WHEN slug = ? THEN 0 ELSE 1 END, datetime(created_at) DESC`)
@@ -319,12 +321,12 @@ router.get('/tin-tuc', (req, res) => {
   const topicCounts = Object.fromEntries(db.prepare('SELECT topic, COUNT(*) count FROM posts WHERE published=1 GROUP BY topic').all()
     .map((row) => [row.topic, row.count]));
   const url = abs(selectedTopic ? `/tin-tuc?muc=${selectedTopic}` : '/tin-tuc');
-  const pageName = currentTopic?.label || 'Cẩm nang & Thông tin';
-  const pageDescription = currentTopic?.description || 'Cẩm nang, kinh nghiệm và câu chuyện du học Hàn Quốc từ SOL DREAM EDUCATION.';
+  const pageName = currentTopic?.label || siteText("news.default-name");
+  const pageDescription = currentTopic?.description || siteText("news.default-description");
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org', '@graph': [{
     '@type': 'CollectionPage', '@id': `${url}#page`, url,
-    name: `${pageName} | SOL DREAM EDUCATION`,
+    name: siteText("server.routes.public.036",{v0:(pageName)}),
     description: pageDescription,
     inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` }, publisher: { '@id': `${SITE_URL}/#organization` },
     mainEntity: {
@@ -333,13 +335,13 @@ router.get('/tin-tuc', (req, res) => {
         '@type': 'ListItem', position: index + 1, name: post.title, url: abs(`/tin-tuc/${post.slug}`),
       })),
     }}, generateBreadcrumbSchema([
-      { name: 'Trang chủ', url: '/' }, { name: 'Cẩm nang & Thông tin', url: '/tin-tuc' },
+      { name: siteText("server.routes.public.037"), url: '/' }, { name: siteText("server.routes.public.038"), url: '/tin-tuc' },
       ...(currentTopic ? [{ name: currentTopic.label, url: `/tin-tuc?muc=${selectedTopic}` }] : []),
     ])],
   });
   res.render('news-list', {
-    posts, topics: TOPICS, selectedTopic, currentTopic, topicCounts,
-    title: `${pageName} | SOL DREAM EDUCATION`,
+    posts, topics: getTopics(), selectedTopic, currentTopic, topicCounts,
+    title: siteText("server.routes.public.039",{v0:(pageName)}),
     description: pageDescription,
     canonical: url,
     jsonLd,
@@ -365,7 +367,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'BreadcrumbList', itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: abs('/') },
+        { '@type': 'ListItem', position: 1, name: siteText("server.routes.public.040"), item: abs('/') },
         { '@type': 'ListItem', position: 2, name: post.topicLabel, item: abs(`/tin-tuc?muc=${post.topic}`) },
         { '@type': 'ListItem', position: 3, name: post.title, item: url },
       ] },
@@ -376,7 +378,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
         ...(publishedTime ? { datePublished: publishedTime } : {}),
         ...(modifiedTime ? { dateModified: modifiedTime } : {}),
         author: authorEntity(post),
-        publisher: { '@id': `${SITE_URL}/#organization`, '@type': 'EducationalOrganization', name: 'SOL DREAM EDUCATION', logo: { '@type': 'ImageObject', url: LOGO_URL } },
+        publisher: { '@id': `${SITE_URL}/#organization`, '@type': 'EducationalOrganization', name: siteText("server.routes.public.041"), logo: { '@type': 'ImageObject', url: LOGO_URL } },
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         ...(post.sourceLinks.length ? { citation: post.sourceLinks } : {}),
         ...(post.focus_keyword ? { keywords: post.focus_keyword } : {}),
@@ -386,7 +388,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
   });
   res.render('news-detail', {
     post, relatedPosts, relatedFaqs, coverMeta, displayTime, contentModifiedTime: modifiedTime,
-    title: post.seo_title || `${post.title} - SOL DREAM EDUCATION`,
+    title: post.seo_title || siteText("server.routes.public.063",{v0:(post.title)}),
     description: storedDescription(post),
     canonical: url,
     ogType: 'article',
@@ -405,17 +407,17 @@ router.get('/du-hoc', (req, res) => {
   const url = abs('/du-hoc');
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org', '@graph': [{ '@type': 'CollectionPage', '@id': `${url}#page`, url,
-    name: 'Chương trình du học Hàn Quốc | SOL DREAM EDUCATION',
-    description: 'Chương trình tư vấn du học Hàn Quốc, chọn trường, dự toán chi phí và chuẩn bị hồ sơ cùng SOL DREAM EDUCATION.',
+    name: siteText("server.routes.public.042"),
+    description: siteText("server.routes.public.043"),
     inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` }, publisher: { '@id': `${SITE_URL}/#organization` },
     mainEntity: { '@type': 'ItemList', itemListElement: programs.map((program, index) => ({
       '@type': 'ListItem', position: index + 1, name: program.title, url: abs(`/du-hoc/${program.slug}`),
-    })) } }, generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Du học Hàn Quốc', url: '/du-hoc' }])],
+    })) } }, generateBreadcrumbSchema([{ name: siteText("server.routes.public.044"), url: '/' }, { name: siteText("server.routes.public.045"), url: '/du-hoc' }])],
   });
   res.render('duhoc-list', {
     programs,
-    title: 'Chương trình du học Hàn Quốc | SOL DREAM EDUCATION',
-    description: 'Thông tin chương trình du học Hàn Quốc, điều kiện, chi phí và lộ trình hồ sơ do SOL DREAM EDUCATION tổng hợp.',
+    title: siteText("server.routes.public.046"),
+    description: siteText("server.routes.public.047"),
     canonical: url,
     jsonLd,
   });
@@ -439,8 +441,8 @@ router.get('/du-hoc/:slug', (req, res, next) => {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'BreadcrumbList', itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: abs('/') },
-        { '@type': 'ListItem', position: 2, name: 'Du học Hàn Quốc', item: abs('/du-hoc') },
+        { '@type': 'ListItem', position: 1, name: siteText("server.routes.public.048"), item: abs('/') },
+        { '@type': 'ListItem', position: 2, name: siteText("server.routes.public.049"), item: abs('/du-hoc') },
         { '@type': 'ListItem', position: 3, name: program.title, item: url },
       ] },
       {
@@ -459,7 +461,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
   });
   res.render('duhoc-detail', {
     program, relatedPrograms, relatedFaqs, isSchoolPage: false,
-    title: program.seo_title || `${program.title} - Du học Hàn Quốc | SOL DREAM EDUCATION`,
+    title: program.seo_title || siteText("server.routes.public.064",{v0:(program.title)}),
     description: storedDescription(program),
     canonical: url,
     ogType: 'article',
@@ -474,6 +476,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
 
 // Crawlable knowledge hub: detailed university profiles used by people and search AI.
 router.get('/truong-dai-hoc', (req, res) => {
+  const partnerSchools=require('../lib/siteContent').getDataset('partners').schools;
   const schoolPrograms = db.prepare("SELECT * FROM programs WHERE published=1 AND category='Thông tin trường' ORDER BY sort_order ASC,datetime(updated_at) DESC,id ASC").all().map(decorate);
   const dynamicKeys = new Set(schoolPrograms.map((item) => slugify(item.title).replace(/^(?:truong-)?dai-hoc-/, '')));
   const universities = getAllUniversities().filter((item) => !dynamicKeys.has(slugify(item.name).replace(/^(?:truong-)?dai-hoc-/, '')));
@@ -483,16 +486,16 @@ router.get('/truong-dai-hoc', (req, res) => {
     '@graph': [
       {
         '@type': 'CollectionPage', '@id': `${url}#page`, url,
-        name: 'Thông tin trường đại học Hàn Quốc | SOL DREAM EDUCATION',
-        description: 'Hồ sơ trường đại học Hàn Quốc do SOL DREAM EDUCATION tổng hợp: ngành học, học phí, học bổng và ký túc xá.',
+        name: siteText("server.routes.public.050"),
+        description: siteText("server.routes.public.051"),
         inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` }, publisher: { '@id': `${SITE_URL}/#organization` },
         mainEntity: { '@id': `${url}#dataset` },
       },
-      generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Trường đại học Hàn Quốc', url: '/truong-dai-hoc' }]),
+      generateBreadcrumbSchema([{ name: siteText("server.routes.public.052"), url: '/' }, { name: siteText("server.routes.public.053"), url: '/truong-dai-hoc' }]),
       {
         '@type': 'Dataset', '@id': `${url}#dataset`, url,
-        name: 'Bộ dữ liệu trường đại học Hàn Quốc của SOL DREAM EDUCATION',
-        description: `Bộ dữ liệu gồm ${partnerSchools.length} trường trong danh mục hợp tác 2026-2027 cùng ${universities.length + schoolPrograms.length} hồ sơ thông tin trường.`,
+        name: siteText("server.routes.public.054"),
+        description: siteText("server.routes.public.055",{v0:(partnerSchools.length),v1:(universities.length + schoolPrograms.length)}),
         creator: { '@id': `${SITE_URL}/#organization` },
         dateModified: '2026-10-17', inLanguage: 'vi-VN',
         variableMeasured: ['Tên trường', 'Địa chỉ', 'Ngành học', 'Học phí', 'Học bổng', 'Ký túc xá'],
@@ -506,8 +509,8 @@ router.get('/truong-dai-hoc', (req, res) => {
   });
   res.render('universities-list', {
     universities, schoolPrograms, partnerSchools,
-    title: 'Thông tin trường đại học Hàn Quốc | SOL DREAM EDUCATION',
-    description: 'Tra cứu thông tin trường đại học Hàn Quốc: ngành học, học phí, học bổng và ký túc xá do SOL DREAM EDUCATION tổng hợp.',
+    title: siteText("server.routes.public.056"),
+    description: siteText("server.routes.public.057"),
     canonical: url,
     jsonLd,
   });
@@ -526,7 +529,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
     const relatedFaqs = getRelatedFaqs('program', program.id);
     setFreshnessHeaders(res, modifiedTime);
     const jsonLd = jsonLdScript({ '@context': 'https://schema.org', '@graph': [
-      generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Thông tin trường', url: '/truong-dai-hoc' }, { name: program.title, url: programPublicPath(program) }]),
+      generateBreadcrumbSchema([{ name: siteText("server.routes.public.058"), url: '/' }, { name: siteText("server.routes.public.059"), url: '/truong-dai-hoc' }, { name: program.title, url: programPublicPath(program) }]),
       { '@type': 'Article', '@id': `${url}#article`, headline: program.title, description: storedDescription(program), image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
         wordCount: program.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true, datePublished: publishedTime, dateModified: modifiedTime,
         author: authorEntity(program), publisher: { '@id': `${SITE_URL}/#organization` }, mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -534,7 +537,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
       ...(relatedFaqs.length ? [{ ...generateFAQSchema(relatedFaqs), '@id': `${url}#faq`, url, inLanguage: 'vi-VN' }] : []),
     ] });
     return res.render('duhoc-detail', { program, relatedPrograms, relatedFaqs, isSchoolPage: true,
-      title: program.seo_title || `${program.title} - Thông tin trường | SOL DREAM EDUCATION`, description: storedDescription(program),
+      title: program.seo_title || siteText("server.routes.public.065",{v0:(program.title)}), description: storedDescription(program),
       canonical: url, ogType: 'article', ogImage: ogImg, ogImageAlt: program.cover_alt || program.title, publishedTime, modifiedTime, robots: detailRobots(program), jsonLd });
   }
   const university = getUniversityById(req.params.id);
@@ -547,15 +550,15 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
     ...(advisor ? [advisor] : []),
     { ...generateFAQSchema(universityFaqs), '@id': `${url}#faq`, url, inLanguage: 'vi-VN' },
     generateBreadcrumbSchema([
-      { name: 'Trang chủ', url: '/' },
-      { name: 'Trường đại học Hàn Quốc', url: '/truong-dai-hoc' },
+      { name: siteText("server.routes.public.060"), url: '/' },
+      { name: siteText("server.routes.public.061"), url: '/truong-dai-hoc' },
       { name: university.name, url: university.url },
     ]),
     {
         '@context': 'https://schema.org',
         '@type': 'Article',
         '@id': `${url}#article`,
-        headline: `${university.name}: ngành học, học phí, học bổng và ký túc xá`,
+        headline: siteText('school.article-headline',{v0:university.name}),
         description: university.description,
         datePublished: university.updatedDate,
         dateModified: university.updatedDate,
@@ -572,11 +575,11 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
     universityFaqs,
     advisor,
     relatedUniversities: getAllUniversities().filter((item) => item.id !== university.id).slice(0, 5),
-    title: `${university.name}: ngành học, học phí, học bổng | SOL DREAM EDUCATION`,
+    title: siteText("server.routes.public.062",{v0:(university.name)}),
     description: university.description,
     canonical: url,
     ogType: 'article',
-    ogImageAlt: `${university.name} - thông tin tuyển sinh và chi phí du học`,
+    ogImageAlt: siteText('school.og-alt',{v0:university.name}),
     publishedTime: `${university.updatedDate}T00:00:00+07:00`,
     modifiedTime: `${university.updatedDate}T00:00:00+07:00`,
     jsonLd,

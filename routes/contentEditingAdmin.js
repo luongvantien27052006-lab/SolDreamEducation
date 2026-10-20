@@ -3,8 +3,9 @@ const db=require('../db');const {requireAdmin}=require('../lib/auth');
 const {sanitizeRichHtml,decorate,normalizeReferenceUrl,normalizeSourceUrls,dateInputToLocalDateTime,fmtFull}=require('../lib/util');
 const {getBlocks}=require('../lib/sharedBlocks');const {articleOptions,manualFaqInput}=require('../lib/articleEditing');
 const {courseFinancials}=require('../lib/courseEditing');
-const tables=['posts','programs','courses','faqs','about_sections','shared_blocks','testimonials'];
+const tables=['posts','programs','courses','faqs','about_sections','shared_blocks','testimonials','site_copy','site_datasets'];
 module.exports=function(router,{uploadCover}){
+  require('../lib/siteContentAdmin')(router);
   router.get('/noi-dung-chung',requireAdmin,(req,res)=>res.render('admin/shared-blocks',{layout:'admin/layout',title:'Nội dung dùng chung',active:'shared',blocks:getBlocks(true),flash:req.query.flash||''}));
   router.get('/noi-dung-chung/:key/sua',requireAdmin,(req,res,next)=>{const block=db.prepare('SELECT * FROM shared_blocks WHERE key=?').get(req.params.key);if(!block)return next();res.render('admin/shared-block-form',{layout:'admin/layout',title:'Sửa nội dung dùng chung',active:'shared',block,error:null});});
   function input(body,existing){return {...existing,title:String(body.title||'').trim().slice(0,300),eyebrow:String(body.eyebrow||'').trim().slice(0,180),content:sanitizeRichHtml(body.content),link_url:normalizeReferenceUrl(body.link_url),link_label:String(body.link_label||'').trim().slice(0,180),sort_order:Math.max(-10000,Math.min(10000,Number(body.sort_order)||0)),active:body.active==='1'?1:0};}

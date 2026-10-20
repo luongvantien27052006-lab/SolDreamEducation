@@ -1,0 +1,4657 @@
+[
+  {
+    "key": "view.404.001",
+    "group_name": "Trang không tìm thấy",
+    "label": "div: 404",
+    "kind": "text",
+    "value": "404"
+  },
+  {
+    "key": "view.404.002",
+    "group_name": "Trang không tìm thấy",
+    "label": "h1: Không tìm thấy trang",
+    "kind": "text",
+    "value": "Không tìm thấy trang"
+  },
+  {
+    "key": "view.404.003",
+    "group_name": "Trang không tìm thấy",
+    "label": "p: Trang bạn tìm không tồn tại hoặc đã được di chuyển.",
+    "kind": "text",
+    "value": "Trang bạn tìm không tồn tại hoặc đã được di chuyển."
+  },
+  {
+    "key": "view.404.004",
+    "group_name": "Trang không tìm thấy",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.404.005",
+    "group_name": "Trang không tìm thấy",
+    "label": "a: ← Về trang chủ",
+    "kind": "text",
+    "value": "← Về trang chủ"
+  },
+  {
+    "key": "view.about.001",
+    "group_name": "Giới thiệu",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.about.002",
+    "group_name": "Giới thiệu",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.about.003",
+    "group_name": "Giới thiệu",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.about.004",
+    "group_name": "Giới thiệu",
+    "label": "span: Giới thiệu",
+    "kind": "text",
+    "value": "Giới thiệu"
+  },
+  {
+    "key": "view.about.005",
+    "group_name": "Giới thiệu",
+    "label": "aria-label: Slogan SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Slogan SOL DREAM EDUCATION"
+  },
+  {
+    "key": "view.about.006",
+    "group_name": "Giới thiệu",
+    "label": "strong: Cập nhật:",
+    "kind": "text",
+    "value": "Cập nhật:"
+  },
+  {
+    "key": "view.about.007",
+    "group_name": "Giới thiệu",
+    "label": "aria-label: Nội dung giới thiệu SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Nội dung giới thiệu SOL DREAM EDUCATION"
+  },
+  {
+    "key": "view.about.008",
+    "group_name": "Giới thiệu",
+    "label": "aria-label: Các mục giới thiệu",
+    "kind": "text",
+    "value": "Các mục giới thiệu"
+  },
+  {
+    "key": "view.about.009",
+    "group_name": "Giới thiệu",
+    "label": "Lời dẫn / nhãn dự phòng: Thông điệp SOL DREAM",
+    "kind": "text",
+    "value": "Thông điệp SOL DREAM"
+  },
+  {
+    "key": "view.about.010",
+    "group_name": "Giới thiệu",
+    "label": "Lời dẫn / nhãn dự phòng: Trả lời nhanh",
+    "kind": "text",
+    "value": "Trả lời nhanh"
+  },
+  {
+    "key": "view.chat-page.001",
+    "group_name": "Trang trợ lý",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.chat-page.002",
+    "group_name": "Trang trợ lý",
+    "label": "aria-label: Quay lại trang chủ",
+    "kind": "text",
+    "value": "Quay lại trang chủ"
+  },
+  {
+    "key": "view.chat-page.003",
+    "group_name": "Trang trợ lý",
+    "label": "h1: SolDream Support",
+    "kind": "text",
+    "value": "SolDream Support"
+  },
+  {
+    "key": "view.chat-page.004",
+    "group_name": "Trang trợ lý",
+    "label": "span: – Trợ lý tư vấn du học Hàn Quốc",
+    "kind": "text",
+    "value": "– Trợ lý tư vấn du học Hàn Quốc"
+  },
+  {
+    "key": "view.chat-page.005",
+    "group_name": "Trang trợ lý",
+    "label": "span: Sẵn sàng hỗ trợ",
+    "kind": "text",
+    "value": "Sẵn sàng hỗ trợ"
+  },
+  {
+    "key": "view.chat-page.006",
+    "group_name": "Trang trợ lý",
+    "label": "aria-label: Tạo cuộc trò chuyện mới",
+    "kind": "text",
+    "value": "Tạo cuộc trò chuyện mới"
+  },
+  {
+    "key": "view.chat-page.007",
+    "group_name": "Trang trợ lý",
+    "label": "title: Cuộc trò chuyện mới",
+    "kind": "text",
+    "value": "Cuộc trò chuyện mới"
+  },
+  {
+    "key": "view.chat-page.008",
+    "group_name": "Trang trợ lý",
+    "label": "Đích liên kết: https://zalo.me/0364648282",
+    "kind": "url",
+    "value": "https://zalo.me/0364648282"
+  },
+  {
+    "key": "view.chat-page.009",
+    "group_name": "Trang trợ lý",
+    "label": "aria-label: Liên hệ tư vấn viên qua Zalo",
+    "kind": "text",
+    "value": "Liên hệ tư vấn viên qua Zalo"
+  },
+  {
+    "key": "view.chat-page.010",
+    "group_name": "Trang trợ lý",
+    "label": "span: Tư vấn viên",
+    "kind": "text",
+    "value": "Tư vấn viên"
+  },
+  {
+    "key": "view.chat-page.011",
+    "group_name": "Trang trợ lý",
+    "label": "aria-label: Nội dung trò chuyện",
+    "kind": "text",
+    "value": "Nội dung trò chuyện"
+  },
+  {
+    "key": "view.chat-page.012",
+    "group_name": "Trang trợ lý",
+    "label": "span: Hôm nay",
+    "kind": "text",
+    "value": "Hôm nay"
+  },
+  {
+    "key": "view.chat-page.014",
+    "group_name": "Trang trợ lý",
+    "label": "aria-label: Câu hỏi gợi ý",
+    "kind": "text",
+    "value": "Câu hỏi gợi ý"
+  },
+  {
+    "key": "view.chat-page.015",
+    "group_name": "Trang trợ lý",
+    "label": "button: Khóa học mới nhất",
+    "kind": "text",
+    "value": "Khóa học mới nhất"
+  },
+  {
+    "key": "view.chat-page.016",
+    "group_name": "Trang trợ lý",
+    "label": "button: Chi phí du học Hàn Quốc",
+    "kind": "text",
+    "value": "Chi phí du học Hàn Quốc"
+  },
+  {
+    "key": "view.chat-page.017",
+    "group_name": "Trang trợ lý",
+    "label": "button: Tìm trường phù hợp với GPA",
+    "kind": "text",
+    "value": "Tìm trường phù hợp với GPA"
+  },
+  {
+    "key": "view.chat-page.018",
+    "group_name": "Trang trợ lý",
+    "label": "button: Liên hệ tư vấn viên",
+    "kind": "text",
+    "value": "Liên hệ tư vấn viên"
+  },
+  {
+    "key": "view.chat-page.019",
+    "group_name": "Trang trợ lý",
+    "label": "aria-label: Nhập câu hỏi cho trợ lý Sol Dream",
+    "kind": "text",
+    "value": "Nhập câu hỏi cho trợ lý Sol Dream"
+  },
+  {
+    "key": "view.chat-page.020",
+    "group_name": "Trang trợ lý",
+    "label": "placeholder: Nhập tin nhắn...",
+    "kind": "text",
+    "value": "Nhập tin nhắn..."
+  },
+  {
+    "key": "view.chat-page.021",
+    "group_name": "Trang trợ lý",
+    "label": "aria-label: Gửi tin nhắn",
+    "kind": "text",
+    "value": "Gửi tin nhắn"
+  },
+  {
+    "key": "view.course-detail.001",
+    "group_name": "Chi tiết khóa học",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.course-detail.002",
+    "group_name": "Chi tiết khóa học",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.course-detail.003",
+    "group_name": "Chi tiết khóa học",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.course-detail.004",
+    "group_name": "Chi tiết khóa học",
+    "label": "Đích liên kết: /khoa-hoc",
+    "kind": "url",
+    "value": "/khoa-hoc"
+  },
+  {
+    "key": "view.course-detail.005",
+    "group_name": "Chi tiết khóa học",
+    "label": "a: Khóa học",
+    "kind": "text",
+    "value": "Khóa học"
+  },
+  {
+    "key": "view.course-detail.006",
+    "group_name": "Chi tiết khóa học",
+    "label": "strong: Phù hợp:",
+    "kind": "text",
+    "value": "Phù hợp:"
+  },
+  {
+    "key": "view.course-detail.007",
+    "group_name": "Chi tiết khóa học",
+    "label": "strong: Học phí:",
+    "kind": "text",
+    "value": "Học phí:"
+  },
+  {
+    "key": "view.course-detail.008",
+    "group_name": "Chi tiết khóa học",
+    "label": "strong: Đầu vào:",
+    "kind": "text",
+    "value": "Đầu vào:"
+  },
+  {
+    "key": "view.course-detail.009",
+    "group_name": "Chi tiết khóa học",
+    "label": "h2: Thông tin lớp theo bảng học phí SDE 2026",
+    "kind": "text",
+    "value": "Thông tin lớp theo bảng học phí SDE 2026"
+  },
+  {
+    "key": "view.course-detail.010",
+    "group_name": "Chi tiết khóa học",
+    "label": "th: Hạng mục",
+    "kind": "text",
+    "value": "Hạng mục"
+  },
+  {
+    "key": "view.course-detail.011",
+    "group_name": "Chi tiết khóa học",
+    "label": "th: Thông tin lớp",
+    "kind": "text",
+    "value": "Thông tin lớp"
+  },
+  {
+    "key": "view.course-detail.012",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Mã lớp",
+    "kind": "text",
+    "value": "Mã lớp"
+  },
+  {
+    "key": "view.course-detail.013",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Số buổi",
+    "kind": "text",
+    "value": "Số buổi"
+  },
+  {
+    "key": "view.course-detail.014",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: buổi, mỗi buổi",
+    "kind": "text",
+    "value": "buổi, mỗi buổi"
+  },
+  {
+    "key": "view.course-detail.015",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: phút (",
+    "kind": "text",
+    "value": "phút ("
+  },
+  {
+    "key": "view.course-detail.016",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: giờ)",
+    "kind": "text",
+    "value": "giờ)"
+  },
+  {
+    "key": "view.course-detail.017",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Lịch học dự kiến",
+    "kind": "text",
+    "value": "Lịch học dự kiến"
+  },
+  {
+    "key": "view.course-detail.018",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: tuần, theo lịch chuẩn 3 buổi/tuần; thời lượng thực tế có thể điều chỉnh theo lịch lớp",
+    "kind": "text",
+    "value": "tuần, theo lịch chuẩn 3 buổi/tuần; thời lượng thực tế có thể điều chỉnh theo lịch lớp"
+  },
+  {
+    "key": "view.course-detail.019",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Cơ cấu giáo viên",
+    "kind": "text",
+    "value": "Cơ cấu giáo viên"
+  },
+  {
+    "key": "view.course-detail.020",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Sĩ số",
+    "kind": "text",
+    "value": "Sĩ số"
+  },
+  {
+    "key": "view.course-detail.021",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: học viên",
+    "kind": "text",
+    "value": "học viên"
+  },
+  {
+    "key": "view.course-detail.022",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: ; tối thiểu",
+    "kind": "text",
+    "value": "; tối thiểu"
+  },
+  {
+    "key": "view.course-detail.023",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: học viên để mở lớp",
+    "kind": "text",
+    "value": "học viên để mở lớp"
+  },
+  {
+    "key": "view.course-detail.024",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Giáo trình",
+    "kind": "text",
+    "value": "Giáo trình"
+  },
+  {
+    "key": "view.course-detail.025",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Tài liệu bổ trợ",
+    "kind": "text",
+    "value": "Tài liệu bổ trợ"
+  },
+  {
+    "key": "view.course-detail.026",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Học phí",
+    "kind": "text",
+    "value": "Học phí"
+  },
+  {
+    "key": "view.course-detail.027",
+    "group_name": "Chi tiết khóa học",
+    "label": "h2: phù hợp với ai?",
+    "kind": "text",
+    "value": "phù hợp với ai?"
+  },
+  {
+    "key": "view.course-detail.028",
+    "group_name": "Chi tiết khóa học",
+    "label": "strong: Đối tượng:",
+    "kind": "text",
+    "value": "Đối tượng:"
+  },
+  {
+    "key": "view.course-detail.029",
+    "group_name": "Chi tiết khóa học",
+    "label": "strong: Nội dung:",
+    "kind": "text",
+    "value": "Nội dung:"
+  },
+  {
+    "key": "view.course-detail.030",
+    "group_name": "Chi tiết khóa học",
+    "label": "strong: Học phí:",
+    "kind": "text",
+    "value": "Học phí:"
+  },
+  {
+    "key": "view.course-detail.031",
+    "group_name": "Chi tiết khóa học",
+    "label": "h2: Học phí và điều kiện của",
+    "kind": "text",
+    "value": "Học phí và điều kiện của"
+  },
+  {
+    "key": "view.course-detail.032",
+    "group_name": "Chi tiết khóa học",
+    "label": "p: Thông tin dưới đây giúp học viên nhận biết khoản phí đã được công bố và những điều kiện còn phải xác nhận trướ",
+    "kind": "text",
+    "value": "Thông tin dưới đây giúp học viên nhận biết khoản phí đã được công bố và những điều kiện còn phải xác nhận trước khi đăng ký. SOL DREAM EDUCATION kiểm tra trình độ và mục tiêu thực tế để tư vấn lớp phù hợp."
+  },
+  {
+    "key": "view.course-detail.033",
+    "group_name": "Chi tiết khóa học",
+    "label": "th: Hạng mục",
+    "kind": "text",
+    "value": "Hạng mục"
+  },
+  {
+    "key": "view.course-detail.034",
+    "group_name": "Chi tiết khóa học",
+    "label": "th: Thông tin hiện có",
+    "kind": "text",
+    "value": "Thông tin hiện có"
+  },
+  {
+    "key": "view.course-detail.035",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Học phí",
+    "kind": "text",
+    "value": "Học phí"
+  },
+  {
+    "key": "view.course-detail.036",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Ghi chú học phí",
+    "kind": "text",
+    "value": "Ghi chú học phí"
+  },
+  {
+    "key": "view.course-detail.037",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Trình độ đầu vào",
+    "kind": "text",
+    "value": "Trình độ đầu vào"
+  },
+  {
+    "key": "view.course-detail.038",
+    "group_name": "Chi tiết khóa học",
+    "label": "td: Yêu cầu",
+    "kind": "text",
+    "value": "Yêu cầu"
+  },
+  {
+    "key": "view.course-detail.039",
+    "group_name": "Chi tiết khóa học",
+    "label": "h2: Đăng ký và xếp lớp như thế nào?",
+    "kind": "text",
+    "value": "Đăng ký và xếp lớp như thế nào?"
+  },
+  {
+    "key": "view.course-detail.040",
+    "group_name": "Chi tiết khóa học",
+    "label": "p: Học viên gửi mục tiêu học tập, trình độ hiện tại và thời gian có thể tham gia. SOL DREAM EDUCATION kiểm tra nh",
+    "kind": "text",
+    "value": "Học viên gửi mục tiêu học tập, trình độ hiện tại và thời gian có thể tham gia. SOL DREAM EDUCATION kiểm tra nhu cầu, xác nhận lịch khai giảng, học phí và điều kiện áp dụng trước khi học viên quyết định đăng ký."
+  },
+  {
+    "key": "view.course-detail.041",
+    "group_name": "Chi tiết khóa học",
+    "label": "li: Gửi thông tin và mục tiêu học",
+    "kind": "text",
+    "value": "Gửi thông tin và mục tiêu học"
+  },
+  {
+    "key": "view.course-detail.042",
+    "group_name": "Chi tiết khóa học",
+    "label": "li: Kiểm tra trình độ, tư vấn khóa học và lộ trình phù hợp.",
+    "kind": "text",
+    "value": "Kiểm tra trình độ, tư vấn khóa học và lộ trình phù hợp."
+  },
+  {
+    "key": "view.course-detail.043",
+    "group_name": "Chi tiết khóa học",
+    "label": "li: Xác nhận lịch học, học phí, giáo trình và chính sách tại thời điểm mở lớp.",
+    "kind": "text",
+    "value": "Xác nhận lịch học, học phí, giáo trình và chính sách tại thời điểm mở lớp."
+  },
+  {
+    "key": "view.course-detail.044",
+    "group_name": "Chi tiết khóa học",
+    "label": "h2: Câu hỏi thường gặp về",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp về"
+  },
+  {
+    "key": "view.course-detail.045",
+    "group_name": "Chi tiết khóa học",
+    "label": "alt: SOL DREAM tuyển dụng giáo viên dạy tiếng Anh",
+    "kind": "text",
+    "value": "SOL DREAM tuyển dụng giáo viên dạy tiếng Anh"
+  },
+  {
+    "key": "view.course-detail.046",
+    "group_name": "Chi tiết khóa học",
+    "label": "span: Cơ hội nghề nghiệp",
+    "kind": "text",
+    "value": "Cơ hội nghề nghiệp"
+  },
+  {
+    "key": "view.course-detail.047",
+    "group_name": "Chi tiết khóa học",
+    "label": "h2: SOL DREAM tuyển 05 giáo viên dạy tiếng Anh",
+    "kind": "text",
+    "value": "SOL DREAM tuyển 05 giáo viên dạy tiếng Anh"
+  },
+  {
+    "key": "view.course-detail.048",
+    "group_name": "Chi tiết khóa học",
+    "label": "p: Hình thức toàn thời gian cố định, làm việc tại TP.HCM hoặc Cẩm Mỹ, Đồng Nai.",
+    "kind": "text",
+    "value": "Hình thức toàn thời gian cố định, làm việc tại TP.HCM hoặc Cẩm Mỹ, Đồng Nai."
+  },
+  {
+    "key": "view.course-detail.049",
+    "group_name": "Chi tiết khóa học",
+    "label": "Đích liên kết: /tin-tuc/tuyen-dung-giao-vien-day-tieng-anh",
+    "kind": "url",
+    "value": "/tin-tuc/tuyen-dung-giao-vien-day-tieng-anh"
+  },
+  {
+    "key": "view.course-detail.050",
+    "group_name": "Chi tiết khóa học",
+    "label": "a: Xem tin tuyển dụng",
+    "kind": "text",
+    "value": "Xem tin tuyển dụng"
+  },
+  {
+    "key": "view.course-detail.051",
+    "group_name": "Chi tiết khóa học",
+    "label": "strong: Lưu ý:",
+    "kind": "text",
+    "value": "Lưu ý:"
+  },
+  {
+    "key": "view.course-detail.052",
+    "group_name": "Chi tiết khóa học",
+    "label": "Đích liên kết: /#lienhe",
+    "kind": "url",
+    "value": "/#lienhe"
+  },
+  {
+    "key": "view.course-detail.053",
+    "group_name": "Chi tiết khóa học",
+    "label": "a: Đăng ký tư vấn lớp học",
+    "kind": "text",
+    "value": "Đăng ký tư vấn lớp học"
+  },
+  {
+    "key": "view.course-detail.054",
+    "group_name": "Chi tiết khóa học",
+    "label": "Lời dẫn / nhãn dự phòng: Kiểm tra trước khi xếp lớp",
+    "kind": "text",
+    "value": "Kiểm tra trước khi xếp lớp"
+  },
+  {
+    "key": "view.course-detail.055",
+    "group_name": "Chi tiết khóa học",
+    "label": "Lời dẫn / nhãn dự phòng: Không công bố yêu cầu chứng chỉ đầu vào",
+    "kind": "text",
+    "value": "Không công bố yêu cầu chứng chỉ đầu vào"
+  },
+  {
+    "key": "view.course-detail.056",
+    "group_name": "Chi tiết khóa học",
+    "label": "Lời dẫn / nhãn dự phòng: Kiểm tra trước khi xếp lớp",
+    "kind": "text",
+    "value": "Kiểm tra trước khi xếp lớp"
+  },
+  {
+    "key": "view.course-detail.057",
+    "group_name": "Chi tiết khóa học",
+    "label": "Lời dẫn / nhãn dự phòng: Chưa công bố yêu cầu ",
+    "kind": "text",
+    "value": "Chưa công bố yêu cầu "
+  },
+  {
+    "key": "view.course-detail.058",
+    "group_name": "Chi tiết khóa học",
+    "label": "Lời dẫn / nhãn dự phòng:  đầu vào",
+    "kind": "text",
+    "value": " đầu vào"
+  },
+  {
+    "key": "view.course-detail.059",
+    "group_name": "Chi tiết khóa học",
+    "label": "Lời dẫn / nhãn dự phòng: ngoại ngữ",
+    "kind": "text",
+    "value": "ngoại ngữ"
+  },
+  {
+    "key": "view.courses.001",
+    "group_name": "Danh sách khóa học",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.courses.002",
+    "group_name": "Danh sách khóa học",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.courses.003",
+    "group_name": "Danh sách khóa học",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.courses.004",
+    "group_name": "Danh sách khóa học",
+    "label": "span: Khóa học",
+    "kind": "text",
+    "value": "Khóa học"
+  },
+  {
+    "key": "view.courses.005",
+    "group_name": "Danh sách khóa học",
+    "label": "span: Đào tạo ngoại ngữ",
+    "kind": "text",
+    "value": "Đào tạo ngoại ngữ"
+  },
+  {
+    "key": "view.courses.006",
+    "group_name": "Danh sách khóa học",
+    "label": "h1: Khóa học và học phí tiếng Hàn 2026",
+    "kind": "text",
+    "value": "Khóa học và học phí tiếng Hàn 2026"
+  },
+  {
+    "key": "view.courses.007",
+    "group_name": "Danh sách khóa học",
+    "label": "p: SOL DREAM EDUCATION đào tạo từ nền tảng, trung cấp, TOPIK đến giao tiếp và phát âm. Mỗi mức học phí bên dưới l",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION đào tạo từ nền tảng, trung cấp, TOPIK đến giao tiếp và phát âm. Mỗi mức học phí bên dưới liên kết tới trang chi tiết của đúng lớp trong danh mục khóa học."
+  },
+  {
+    "key": "view.courses.008",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Đơn vị đào tạo:",
+    "kind": "text",
+    "value": "Đơn vị đào tạo:"
+  },
+  {
+    "key": "view.courses.009",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: SOL DREAM EDUCATION ·",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION ·"
+  },
+  {
+    "key": "view.courses.010",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Bảng học phí:",
+    "kind": "text",
+    "value": "Bảng học phí:"
+  },
+  {
+    "key": "view.courses.011",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: SDE 2026",
+    "kind": "text",
+    "value": "SDE 2026"
+  },
+  {
+    "key": "view.courses.012",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Cập nhật website:",
+    "kind": "text",
+    "value": "Cập nhật website:"
+  },
+  {
+    "key": "view.courses.013",
+    "group_name": "Danh sách khóa học",
+    "label": "p: Bảng học phí theo lớp",
+    "kind": "text",
+    "value": "Bảng học phí theo lớp"
+  },
+  {
+    "key": "view.courses.014",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Chọn lớp theo trình độ và mục tiêu.",
+    "kind": "text",
+    "value": "Chọn lớp theo trình độ và mục tiêu."
+  },
+  {
+    "key": "view.courses.015",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Người mới bắt đầu có thể tìm hiểu SC1A hoặc SC1B; các lớp từ SC2A trở đi áp dụng lộ trình xen kẽ giáo viên Việ",
+    "kind": "text",
+    "value": "Người mới bắt đầu có thể tìm hiểu SC1A hoặc SC1B; các lớp từ SC2A trở đi áp dụng lộ trình xen kẽ giáo viên Việt – Hàn. Lịch khai giảng và xếp lớp được xác nhận trước khi đăng ký."
+  },
+  {
+    "key": "view.courses.016",
+    "group_name": "Danh sách khóa học",
+    "label": "caption: Bảng học phí tiếng Hàn SDE 2026 — học phí theo lớp",
+    "kind": "text",
+    "value": "Bảng học phí tiếng Hàn SDE 2026 — học phí theo lớp"
+  },
+  {
+    "key": "view.courses.017",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Mã lớp / khóa học",
+    "kind": "text",
+    "value": "Mã lớp / khóa học"
+  },
+  {
+    "key": "view.courses.018",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Buổi",
+    "kind": "text",
+    "value": "Buổi"
+  },
+  {
+    "key": "view.courses.019",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Thời lượng",
+    "kind": "text",
+    "value": "Thời lượng"
+  },
+  {
+    "key": "view.courses.020",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Tổng giờ",
+    "kind": "text",
+    "value": "Tổng giờ"
+  },
+  {
+    "key": "view.courses.021",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Số tuần dự kiến",
+    "kind": "text",
+    "value": "Số tuần dự kiến"
+  },
+  {
+    "key": "view.courses.022",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Cơ cấu giáo viên",
+    "kind": "text",
+    "value": "Cơ cấu giáo viên"
+  },
+  {
+    "key": "view.courses.023",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Sĩ số",
+    "kind": "text",
+    "value": "Sĩ số"
+  },
+  {
+    "key": "view.courses.024",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Tối thiểu mở lớp",
+    "kind": "text",
+    "value": "Tối thiểu mở lớp"
+  },
+  {
+    "key": "view.courses.025",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Học phí",
+    "kind": "text",
+    "value": "Học phí"
+  },
+  {
+    "key": "view.courses.026",
+    "group_name": "Danh sách khóa học",
+    "label": "th: Giáo trình / tài liệu bổ trợ",
+    "kind": "text",
+    "value": "Giáo trình / tài liệu bổ trợ"
+  },
+  {
+    "key": "view.courses.027",
+    "group_name": "Danh sách khóa học",
+    "label": "td: buổi",
+    "kind": "text",
+    "value": "buổi"
+  },
+  {
+    "key": "view.courses.028",
+    "group_name": "Danh sách khóa học",
+    "label": "td: phút/buổi",
+    "kind": "text",
+    "value": "phút/buổi"
+  },
+  {
+    "key": "view.courses.029",
+    "group_name": "Danh sách khóa học",
+    "label": "td: giờ",
+    "kind": "text",
+    "value": "giờ"
+  },
+  {
+    "key": "view.courses.030",
+    "group_name": "Danh sách khóa học",
+    "label": "td: tuần",
+    "kind": "text",
+    "value": "tuần"
+  },
+  {
+    "key": "view.courses.031",
+    "group_name": "Danh sách khóa học",
+    "label": "td: học viên",
+    "kind": "text",
+    "value": "học viên"
+  },
+  {
+    "key": "view.courses.032",
+    "group_name": "Danh sách khóa học",
+    "label": "td: học viên",
+    "kind": "text",
+    "value": "học viên"
+  },
+  {
+    "key": "view.courses.033",
+    "group_name": "Danh sách khóa học",
+    "label": "a: Chi tiết lớp →",
+    "kind": "text",
+    "value": "Chi tiết lớp →"
+  },
+  {
+    "key": "view.courses.034",
+    "group_name": "Danh sách khóa học",
+    "label": "h2: Lộ trình và cách tổ chức lớp",
+    "kind": "text",
+    "value": "Lộ trình và cách tổ chức lớp"
+  },
+  {
+    "key": "view.courses.035",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: SC1A–SC1B:",
+    "kind": "text",
+    "value": "SC1A–SC1B:"
+  },
+  {
+    "key": "view.courses.036",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: giáo viên Việt hướng dẫn từ nền tảng, tập trung Hangul, phát âm, từ vựng, ngữ pháp và nghe – nói cơ bản.",
+    "kind": "text",
+    "value": "giáo viên Việt hướng dẫn từ nền tảng, tập trung Hangul, phát âm, từ vựng, ngữ pháp và nghe – nói cơ bản."
+  },
+  {
+    "key": "view.courses.037",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Từ SC2A đến TC4B:",
+    "kind": "text",
+    "value": "Từ SC2A đến TC4B:"
+  },
+  {
+    "key": "view.courses.038",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: trung bình 2 buổi với giáo viên Việt xen kẽ 1 buổi với giáo viên Hàn; số buổi thực tế phân bổ theo tổng thời l",
+    "kind": "text",
+    "value": "trung bình 2 buổi với giáo viên Việt xen kẽ 1 buổi với giáo viên Hàn; số buổi thực tế phân bổ theo tổng thời lượng của từng cấp."
+  },
+  {
+    "key": "view.courses.039",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: TOPIK:",
+    "kind": "text",
+    "value": "TOPIK:"
+  },
+  {
+    "key": "view.courses.040",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: TOPIK I tập trung nền tảng Nghe – Đọc và chiến thuật làm bài; TOPIK cấp 3 và 4 luyện mục tiêu điểm số, đề, Ngh",
+    "kind": "text",
+    "value": "TOPIK I tập trung nền tảng Nghe – Đọc và chiến thuật làm bài; TOPIK cấp 3 và 4 luyện mục tiêu điểm số, đề, Nghe – Đọc – Viết và chữa lỗi."
+  },
+  {
+    "key": "view.courses.041",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Giao tiếp:",
+    "kind": "text",
+    "value": "Giao tiếp:"
+  },
+  {
+    "key": "view.courses.042",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: ba cấp Sơ cấp, Trung cấp 1 và Trung cấp 2 học trực tiếp với giáo viên Hàn Quốc; sĩ số nhỏ để tăng thời gian nó",
+    "kind": "text",
+    "value": "ba cấp Sơ cấp, Trung cấp 1 và Trung cấp 2 học trực tiếp với giáo viên Hàn Quốc; sĩ số nhỏ để tăng thời gian nói và phản xạ."
+  },
+  {
+    "key": "view.courses.043",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Xếp lớp:",
+    "kind": "text",
+    "value": "Xếp lớp:"
+  },
+  {
+    "key": "view.courses.044",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: kiểm tra trình độ với lớp từ SC1B trở lên, lớp TOPIK và giao tiếp.",
+    "kind": "text",
+    "value": "kiểm tra trình độ với lớp từ SC1B trở lên, lớp TOPIK và giao tiếp."
+  },
+  {
+    "key": "view.courses.045",
+    "group_name": "Danh sách khóa học",
+    "label": "h2: Khóa học khác",
+    "kind": "text",
+    "value": "Khóa học khác"
+  },
+  {
+    "key": "view.courses.046",
+    "group_name": "Danh sách khóa học",
+    "label": "p: Các khóa dưới đây vẫn có trang thông tin riêng. Lớp tiếng Hàn cấp tốc chưa có mức phí trong bảng SDE 2026; học",
+    "kind": "text",
+    "value": "Các khóa dưới đây vẫn có trang thông tin riêng. Lớp tiếng Hàn cấp tốc chưa có mức phí trong bảng SDE 2026; học phí tiếng Anh cần xác nhận trực tiếp."
+  },
+  {
+    "key": "view.courses.047",
+    "group_name": "Danh sách khóa học",
+    "label": "span: Khóa học",
+    "kind": "text",
+    "value": "Khóa học"
+  },
+  {
+    "key": "view.courses.048",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Học phí:",
+    "kind": "text",
+    "value": "Học phí:"
+  },
+  {
+    "key": "view.courses.049",
+    "group_name": "Danh sách khóa học",
+    "label": "a: Xem nội dung khóa học →",
+    "kind": "text",
+    "value": "Xem nội dung khóa học →"
+  },
+  {
+    "key": "view.courses.050",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: Lưu ý:",
+    "kind": "text",
+    "value": "Lưu ý:"
+  },
+  {
+    "key": "view.duhoc-detail.001",
+    "group_name": "Chi tiết du học",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.duhoc-detail.002",
+    "group_name": "Chi tiết du học",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.duhoc-detail.003",
+    "group_name": "Chi tiết du học",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.duhoc-detail.004",
+    "group_name": "Chi tiết du học",
+    "label": "strong: Cập nhật:",
+    "kind": "text",
+    "value": "Cập nhật:"
+  },
+  {
+    "key": "view.duhoc-detail.005",
+    "group_name": "Chi tiết du học",
+    "label": "h2: Câu hỏi thường gặp về",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp về"
+  },
+  {
+    "key": "view.duhoc-detail.006",
+    "group_name": "Chi tiết du học",
+    "label": "span: · cập nhật",
+    "kind": "text",
+    "value": "· cập nhật"
+  },
+  {
+    "key": "view.duhoc-detail.007",
+    "group_name": "Chi tiết du học",
+    "label": "Đích liên kết: /#lienhe",
+    "kind": "url",
+    "value": "/#lienhe"
+  },
+  {
+    "key": "view.duhoc-detail.008",
+    "group_name": "Chi tiết du học",
+    "label": "a: Đăng ký tư vấn du học",
+    "kind": "text",
+    "value": "Đăng ký tư vấn du học"
+  },
+  {
+    "key": "view.duhoc-detail.009",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: Thông tin trường",
+    "kind": "text",
+    "value": "Thông tin trường"
+  },
+  {
+    "key": "view.duhoc-detail.010",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: Du học Hàn Quốc",
+    "kind": "text",
+    "value": "Du học Hàn Quốc"
+  },
+  {
+    "key": "view.duhoc-detail.011",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: Tác giả",
+    "kind": "text",
+    "value": "Tác giả"
+  },
+  {
+    "key": "view.duhoc-detail.012",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: Đơn vị tư vấn",
+    "kind": "text",
+    "value": "Đơn vị tư vấn"
+  },
+  {
+    "key": "view.duhoc-detail.013",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: trường này",
+    "kind": "text",
+    "value": "trường này"
+  },
+  {
+    "key": "view.duhoc-detail.014",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: chương trình này",
+    "kind": "text",
+    "value": "chương trình này"
+  },
+  {
+    "key": "view.duhoc-detail.015",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: Thông tin trường liên quan",
+    "kind": "text",
+    "value": "Thông tin trường liên quan"
+  },
+  {
+    "key": "view.duhoc-detail.016",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: Chương trình và hướng dẫn liên quan",
+    "kind": "text",
+    "value": "Chương trình và hướng dẫn liên quan"
+  },
+  {
+    "key": "view.duhoc-detail.017",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: Xem trường khác",
+    "kind": "text",
+    "value": "Xem trường khác"
+  },
+  {
+    "key": "view.duhoc-detail.018",
+    "group_name": "Chi tiết du học",
+    "label": "Lời dẫn / nhãn dự phòng: Xem chương trình khác",
+    "kind": "text",
+    "value": "Xem chương trình khác"
+  },
+  {
+    "key": "view.duhoc-list.001",
+    "group_name": "Danh sách du học",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.duhoc-list.002",
+    "group_name": "Danh sách du học",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.duhoc-list.003",
+    "group_name": "Danh sách du học",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.duhoc-list.004",
+    "group_name": "Danh sách du học",
+    "label": "span: Du học Hàn Quốc",
+    "kind": "text",
+    "value": "Du học Hàn Quốc"
+  },
+  {
+    "key": "view.duhoc-list.005",
+    "group_name": "Danh sách du học",
+    "label": "span: Du học Hàn Quốc",
+    "kind": "text",
+    "value": "Du học Hàn Quốc"
+  },
+  {
+    "key": "view.duhoc-list.006",
+    "group_name": "Danh sách du học",
+    "label": "h1: Chương trình du học Hàn Quốc",
+    "kind": "text",
+    "value": "Chương trình du học Hàn Quốc"
+  },
+  {
+    "key": "view.duhoc-list.007",
+    "group_name": "Danh sách du học",
+    "label": "p: Thông tin chương trình, điều kiện, chi phí và lộ trình hồ sơ được SOL DREAM EDUCATION tư vấn, đồng hành từ A–Z",
+    "kind": "text",
+    "value": "Thông tin chương trình, điều kiện, chi phí và lộ trình hồ sơ được SOL DREAM EDUCATION tư vấn, đồng hành từ A–Z."
+  },
+  {
+    "key": "view.duhoc-list.008",
+    "group_name": "Danh sách du học",
+    "label": "strong: Đơn vị tư vấn du học:",
+    "kind": "text",
+    "value": "Đơn vị tư vấn du học:"
+  },
+  {
+    "key": "view.duhoc-list.009",
+    "group_name": "Danh sách du học",
+    "label": "strong: SOL DREAM EDUCATION · Thông tin được kiểm tra lại theo kỳ tuyển sinh và hồ sơ",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION · Thông tin được kiểm tra lại theo kỳ tuyển sinh và hồ sơ"
+  },
+  {
+    "key": "view.duhoc-list.010",
+    "group_name": "Danh sách du học",
+    "label": "aria-label: Tóm tắt dịch vụ du học",
+    "kind": "text",
+    "value": "Tóm tắt dịch vụ du học"
+  },
+  {
+    "key": "view.duhoc-list.011",
+    "group_name": "Danh sách du học",
+    "label": "p: Trả lời nhanh",
+    "kind": "text",
+    "value": "Trả lời nhanh"
+  },
+  {
+    "key": "view.duhoc-list.012",
+    "group_name": "Danh sách du học",
+    "label": "strong: SOL DREAM EDUCATION tư vấn du học Hàn Quốc",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION tư vấn du học Hàn Quốc"
+  },
+  {
+    "key": "view.duhoc-list.013",
+    "group_name": "Danh sách du học",
+    "label": "strong: theo hồ sơ học tập, năng lực tiếng Hàn và ngân sách của từng học sinh. Danh sách dưới đây là nguồn tham khảo b",
+    "kind": "text",
+    "value": "theo hồ sơ học tập, năng lực tiếng Hàn và ngân sách của từng học sinh. Danh sách dưới đây là nguồn tham khảo ban đầu; điều kiện, học phí và học bổng cần được đối chiếu tại thời điểm đăng ký."
+  },
+  {
+    "key": "view.duhoc-list.014",
+    "group_name": "Danh sách du học",
+    "label": "p: Chưa có chương trình nào.",
+    "kind": "text",
+    "value": "Chưa có chương trình nào."
+  },
+  {
+    "key": "view.duhoc-list.015",
+    "group_name": "Danh sách du học",
+    "label": "Đích liên kết: /#lienhe",
+    "kind": "url",
+    "value": "/#lienhe"
+  },
+  {
+    "key": "view.duhoc-list.016",
+    "group_name": "Danh sách du học",
+    "label": "a: Đăng ký tư vấn du học",
+    "kind": "text",
+    "value": "Đăng ký tư vấn du học"
+  },
+  {
+    "key": "view.faq.001",
+    "group_name": "Hỏi đáp",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.faq.002",
+    "group_name": "Hỏi đáp",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.faq.003",
+    "group_name": "Hỏi đáp",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.faq.004",
+    "group_name": "Hỏi đáp",
+    "label": "span: Câu hỏi thường gặp",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp"
+  },
+  {
+    "key": "view.faq.005",
+    "group_name": "Hỏi đáp",
+    "label": "span: Thông tin nhanh",
+    "kind": "text",
+    "value": "Thông tin nhanh"
+  },
+  {
+    "key": "view.faq.006",
+    "group_name": "Hỏi đáp",
+    "label": "h1: Câu hỏi thường gặp",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp"
+  },
+  {
+    "key": "view.faq.007",
+    "group_name": "Hỏi đáp",
+    "label": "p: Các câu trả lời ngắn dưới đây giúp học viên hiểu phạm vi đào tạo, tư vấn du học và dữ liệu trên website SOL DR",
+    "kind": "text",
+    "value": "Các câu trả lời ngắn dưới đây giúp học viên hiểu phạm vi đào tạo, tư vấn du học và dữ liệu trên website SOL DREAM EDUCATION trước khi đăng ký hoặc đối chiếu thông tin chính thức."
+  },
+  {
+    "key": "view.faq.008",
+    "group_name": "Hỏi đáp",
+    "label": "strong: Hỗ trợ thông tin:",
+    "kind": "text",
+    "value": "Hỗ trợ thông tin:"
+  },
+  {
+    "key": "view.faq.009",
+    "group_name": "Hỏi đáp",
+    "label": "strong: SOL DREAM EDUCATION ·",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION ·"
+  },
+  {
+    "key": "view.faq.010",
+    "group_name": "Hỏi đáp",
+    "label": "strong: Cập nhật:",
+    "kind": "text",
+    "value": "Cập nhật:"
+  },
+  {
+    "key": "view.faq.011",
+    "group_name": "Hỏi đáp",
+    "label": "strong: 27/08/2026",
+    "kind": "text",
+    "value": "27/08/2026"
+  },
+  {
+    "key": "view.faq.012",
+    "group_name": "Hỏi đáp",
+    "label": "aria-label: Nhóm câu hỏi thường gặp",
+    "kind": "text",
+    "value": "Nhóm câu hỏi thường gặp"
+  },
+  {
+    "key": "view.faq.013",
+    "group_name": "Hỏi đáp",
+    "label": "span: Nhóm FAQ",
+    "kind": "text",
+    "value": "Nhóm FAQ"
+  },
+  {
+    "key": "view.faq.014",
+    "group_name": "Hỏi đáp",
+    "label": "a: Đối chiếu nguồn chính thức ↗",
+    "kind": "text",
+    "value": "Đối chiếu nguồn chính thức ↗"
+  },
+  {
+    "key": "view.faq.015",
+    "group_name": "Hỏi đáp",
+    "label": "strong: Phạm vi:",
+    "kind": "text",
+    "value": "Phạm vi:"
+  },
+  {
+    "key": "view.faq.016",
+    "group_name": "Hỏi đáp",
+    "label": "strong: Nội dung FAQ cung cấp định hướng chung. Điều kiện tuyển sinh, visa, học phí và học bổng cần được kiểm tra lại ",
+    "kind": "text",
+    "value": "Nội dung FAQ cung cấp định hướng chung. Điều kiện tuyển sinh, visa, học phí và học bổng cần được kiểm tra lại theo thời điểm và hồ sơ thực tế."
+  },
+  {
+    "key": "view.korea-life.001",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "aria-label: Breadcrumb",
+    "kind": "text",
+    "value": "Breadcrumb"
+  },
+  {
+    "key": "view.korea-life.002",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.korea-life.003",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.korea-life.004",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "span: Sinh hoạt tại Hàn Quốc",
+    "kind": "text",
+    "value": "Sinh hoạt tại Hàn Quốc"
+  },
+  {
+    "key": "view.korea-life.005",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "span: CẬP NHẬT",
+    "kind": "text",
+    "value": "CẬP NHẬT"
+  },
+  {
+    "key": "view.korea-life.006",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "strong: Tóm tắt nhanh:",
+    "kind": "text",
+    "value": "Tóm tắt nhanh:"
+  },
+  {
+    "key": "view.korea-life.007",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "Đích liên kết: /tin-tuc?muc=cam-nang-sinh-hoat",
+    "kind": "url",
+    "value": "/tin-tuc?muc=cam-nang-sinh-hoat"
+  },
+  {
+    "key": "view.korea-life.008",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "a: Xem các bài viết Cẩm nang sinh hoạt →",
+    "kind": "text",
+    "value": "Xem các bài viết Cẩm nang sinh hoạt →"
+  },
+  {
+    "key": "view.korea-life.009",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "h2: Du học sinh cần bao nhiêu tiền sinh hoạt mỗi tháng?",
+    "kind": "text",
+    "value": "Du học sinh cần bao nhiêu tiền sinh hoạt mỗi tháng?"
+  },
+  {
+    "key": "view.korea-life.010",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "p: Các mức dưới đây là số tham khảo do Study in Korea công bố. Đây không phải báo giá cố định; hãy lập ngân sách ",
+    "kind": "text",
+    "value": "Các mức dưới đây là số tham khảo do Study in Korea công bố. Đây không phải báo giá cố định; hãy lập ngân sách riêng theo trường và nơi ở."
+  },
+  {
+    "key": "view.korea-life.011",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "th: Khoản chi",
+    "kind": "text",
+    "value": "Khoản chi"
+  },
+  {
+    "key": "view.korea-life.012",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "th: KRW/tháng",
+    "kind": "text",
+    "value": "KRW/tháng"
+  },
+  {
+    "key": "view.korea-life.013",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "th: Lưu ý",
+    "kind": "text",
+    "value": "Lưu ý"
+  },
+  {
+    "key": "view.korea-life.014",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "p: Nguồn:",
+    "kind": "text",
+    "value": "Nguồn:"
+  },
+  {
+    "key": "view.korea-life.015",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "Đích liên kết: https://studyinkorea.go.kr/ko/life/livingExpense.do",
+    "kind": "url",
+    "value": "https://studyinkorea.go.kr/ko/life/livingExpense.do"
+  },
+  {
+    "key": "view.korea-life.016",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "a: Study in Korea – Living Expenses",
+    "kind": "text",
+    "value": "Study in Korea – Living Expenses"
+  },
+  {
+    "key": "view.korea-life.017",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "aria-label: Chủ đề sinh hoạt",
+    "kind": "text",
+    "value": "Chủ đề sinh hoạt"
+  },
+  {
+    "key": "view.korea-life.018",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "h3: Việc nên làm",
+    "kind": "text",
+    "value": "Việc nên làm"
+  },
+  {
+    "key": "view.korea-life.019",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "a: Kiểm tra nguồn chính thức:",
+    "kind": "text",
+    "value": "Kiểm tra nguồn chính thức:"
+  },
+  {
+    "key": "view.korea-life.020",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "strong: Lưu ý:",
+    "kind": "text",
+    "value": "Lưu ý:"
+  },
+  {
+    "key": "view.korea-life.021",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "strong: Quy định visa, cư trú, làm thêm và bảo hiểm có thể thay đổi. Hãy đối chiếu nguồn chính thức và xác nhận với tr",
+    "kind": "text",
+    "value": "Quy định visa, cư trú, làm thêm và bảo hiểm có thể thay đổi. Hãy đối chiếu nguồn chính thức và xác nhận với trường trước khi thực hiện."
+  },
+  {
+    "key": "view.layout.001",
+    "group_name": "Giao diện chung",
+    "label": "aside: Bản xem trước — chưa lưu và chưa xuất bản.",
+    "kind": "text",
+    "value": "Bản xem trước — chưa lưu và chưa xuất bản."
+  },
+  {
+    "key": "view.news-detail.001",
+    "group_name": "Chi tiết bài viết",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.news-detail.002",
+    "group_name": "Chi tiết bài viết",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.news-detail.003",
+    "group_name": "Chi tiết bài viết",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.news-detail.004",
+    "group_name": "Chi tiết bài viết",
+    "label": "strong: Ngày bài viết:",
+    "kind": "text",
+    "value": "Ngày bài viết:"
+  },
+  {
+    "key": "view.news-detail.005",
+    "group_name": "Chi tiết bài viết",
+    "label": "strong: Cập nhật:",
+    "kind": "text",
+    "value": "Cập nhật:"
+  },
+  {
+    "key": "view.news-detail.006",
+    "group_name": "Chi tiết bài viết",
+    "label": "h2: Câu hỏi thường gặp về nội dung này",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp về nội dung này"
+  },
+  {
+    "key": "view.news-detail.007",
+    "group_name": "Chi tiết bài viết",
+    "label": "h2: Bài viết liên quan",
+    "kind": "text",
+    "value": "Bài viết liên quan"
+  },
+  {
+    "key": "view.news-detail.008",
+    "group_name": "Chi tiết bài viết",
+    "label": "span: · cập nhật",
+    "kind": "text",
+    "value": "· cập nhật"
+  },
+  {
+    "key": "view.news-detail.009",
+    "group_name": "Chi tiết bài viết",
+    "label": "a: ← Quay lại",
+    "kind": "text",
+    "value": "← Quay lại"
+  },
+  {
+    "key": "view.news-detail.010",
+    "group_name": "Chi tiết bài viết",
+    "label": "Đích liên kết: /#lienhe",
+    "kind": "url",
+    "value": "/#lienhe"
+  },
+  {
+    "key": "view.news-detail.011",
+    "group_name": "Chi tiết bài viết",
+    "label": "a: Đăng ký tư vấn",
+    "kind": "text",
+    "value": "Đăng ký tư vấn"
+  },
+  {
+    "key": "view.news-detail.012",
+    "group_name": "Chi tiết bài viết",
+    "label": "Lời dẫn / nhãn dự phòng: Tác giả",
+    "kind": "text",
+    "value": "Tác giả"
+  },
+  {
+    "key": "view.news-detail.013",
+    "group_name": "Chi tiết bài viết",
+    "label": "Lời dẫn / nhãn dự phòng: Đơn vị cung cấp thông tin",
+    "kind": "text",
+    "value": "Đơn vị cung cấp thông tin"
+  },
+  {
+    "key": "view.news-list.001",
+    "group_name": "Danh sách cẩm nang",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.news-list.002",
+    "group_name": "Danh sách cẩm nang",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.news-list.003",
+    "group_name": "Danh sách cẩm nang",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.news-list.004",
+    "group_name": "Danh sách cẩm nang",
+    "label": "span: Cẩm nang & Thông tin",
+    "kind": "text",
+    "value": "Cẩm nang & Thông tin"
+  },
+  {
+    "key": "view.news-list.005",
+    "group_name": "Danh sách cẩm nang",
+    "label": "strong: Đơn vị tư vấn và cung cấp thông tin:",
+    "kind": "text",
+    "value": "Đơn vị tư vấn và cung cấp thông tin:"
+  },
+  {
+    "key": "view.news-list.006",
+    "group_name": "Danh sách cẩm nang",
+    "label": "strong: SOL DREAM EDUCATION · Nội dung được cập nhật theo từng chủ đề",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION · Nội dung được cập nhật theo từng chủ đề"
+  },
+  {
+    "key": "view.news-list.007",
+    "group_name": "Danh sách cẩm nang",
+    "label": "aria-label: Giới thiệu thư viện tin tức",
+    "kind": "text",
+    "value": "Giới thiệu thư viện tin tức"
+  },
+  {
+    "key": "view.news-list.008",
+    "group_name": "Danh sách cẩm nang",
+    "label": "p: Trả lời nhanh",
+    "kind": "text",
+    "value": "Trả lời nhanh"
+  },
+  {
+    "key": "view.news-list.009",
+    "group_name": "Danh sách cẩm nang",
+    "label": "strong: Bài viết của SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Bài viết của SOL DREAM EDUCATION"
+  },
+  {
+    "key": "view.news-list.010",
+    "group_name": "Danh sách cẩm nang",
+    "label": "strong: được xếp vào ba chủ đề bên dưới. Chọn một chủ đề để xem đúng nội dung bạn cần; mỗi bài có ngày cập nhật và ngu",
+    "kind": "text",
+    "value": "được xếp vào ba chủ đề bên dưới. Chọn một chủ đề để xem đúng nội dung bạn cần; mỗi bài có ngày cập nhật và nguồn thông tin để đối chiếu."
+  },
+  {
+    "key": "view.news-list.011",
+    "group_name": "Danh sách cẩm nang",
+    "label": "aria-label: Chọn chủ đề bài viết",
+    "kind": "text",
+    "value": "Chọn chủ đề bài viết"
+  },
+  {
+    "key": "view.news-list.012",
+    "group_name": "Danh sách cẩm nang",
+    "label": "Đích liên kết: /tin-tuc",
+    "kind": "url",
+    "value": "/tin-tuc"
+  },
+  {
+    "key": "view.news-list.013",
+    "group_name": "Danh sách cẩm nang",
+    "label": "a: Tất cả",
+    "kind": "text",
+    "value": "Tất cả"
+  },
+  {
+    "key": "view.news-list.014",
+    "group_name": "Danh sách cẩm nang",
+    "label": "strong: Cần một điểm bắt đầu?",
+    "kind": "text",
+    "value": "Cần một điểm bắt đầu?"
+  },
+  {
+    "key": "view.news-list.015",
+    "group_name": "Danh sách cẩm nang",
+    "label": "Đích liên kết: /cuoc-song-han-quoc",
+    "kind": "url",
+    "value": "/cuoc-song-han-quoc"
+  },
+  {
+    "key": "view.news-list.016",
+    "group_name": "Danh sách cẩm nang",
+    "label": "a: Xem cẩm nang sinh hoạt tại Hàn Quốc theo từng chủ đề →",
+    "kind": "text",
+    "value": "Xem cẩm nang sinh hoạt tại Hàn Quốc theo từng chủ đề →"
+  },
+  {
+    "key": "view.news-list.017",
+    "group_name": "Danh sách cẩm nang",
+    "label": "p: Chưa có bài viết trong chủ đề này.",
+    "kind": "text",
+    "value": "Chưa có bài viết trong chủ đề này."
+  },
+  {
+    "key": "view.news-list.018",
+    "group_name": "Danh sách cẩm nang",
+    "label": "Lời dẫn / nhãn dự phòng: Cẩm nang & Thông tin",
+    "kind": "text",
+    "value": "Cẩm nang & Thông tin"
+  },
+  {
+    "key": "view.news-list.019",
+    "group_name": "Danh sách cẩm nang",
+    "label": "Lời dẫn / nhãn dự phòng: Cẩm nang & Thông tin",
+    "kind": "text",
+    "value": "Cẩm nang & Thông tin"
+  },
+  {
+    "key": "view.news-list.020",
+    "group_name": "Danh sách cẩm nang",
+    "label": "Lời dẫn / nhãn dự phòng: Thông tin Hàn Quốc, cẩm nang sinh hoạt và hoạt động SOL DREAM được phân theo từng chủ đề để bạn",
+    "kind": "text",
+    "value": "Thông tin Hàn Quốc, cẩm nang sinh hoạt và hoạt động SOL DREAM được phân theo từng chủ đề để bạn dễ tìm."
+  },
+  {
+    "key": "view.universities-list.001",
+    "group_name": "Danh sách trường",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.universities-list.002",
+    "group_name": "Danh sách trường",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.universities-list.003",
+    "group_name": "Danh sách trường",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.universities-list.004",
+    "group_name": "Danh sách trường",
+    "label": "span: Thông tin trường đại học Hàn Quốc",
+    "kind": "text",
+    "value": "Thông tin trường đại học Hàn Quốc"
+  },
+  {
+    "key": "view.universities-list.005",
+    "group_name": "Danh sách trường",
+    "label": "span: Tra cứu và chọn trường",
+    "kind": "text",
+    "value": "Tra cứu và chọn trường"
+  },
+  {
+    "key": "view.universities-list.006",
+    "group_name": "Danh sách trường",
+    "label": "h1: Thông tin trường đại học Hàn Quốc",
+    "kind": "text",
+    "value": "Thông tin trường đại học Hàn Quốc"
+  },
+  {
+    "key": "view.universities-list.007",
+    "group_name": "Danh sách trường",
+    "label": "p: SOL DREAM EDUCATION tổng hợp thông tin chương trình, ngành học, học phí, học bổng và ký túc xá để học sinh dễ ",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION tổng hợp thông tin chương trình, ngành học, học phí, học bổng và ký túc xá để học sinh dễ tra cứu và so sánh trước khi đăng ký."
+  },
+  {
+    "key": "view.universities-list.008",
+    "group_name": "Danh sách trường",
+    "label": "strong: Đơn vị tư vấn:",
+    "kind": "text",
+    "value": "Đơn vị tư vấn:"
+  },
+  {
+    "key": "view.universities-list.009",
+    "group_name": "Danh sách trường",
+    "label": "strong: SOL DREAM EDUCATION ·",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION ·"
+  },
+  {
+    "key": "view.universities-list.010",
+    "group_name": "Danh sách trường",
+    "label": "strong: Cập nhật danh mục:",
+    "kind": "text",
+    "value": "Cập nhật danh mục:"
+  },
+  {
+    "key": "view.universities-list.011",
+    "group_name": "Danh sách trường",
+    "label": "strong: 17/10/2026",
+    "kind": "text",
+    "value": "17/10/2026"
+  },
+  {
+    "key": "view.universities-list.012",
+    "group_name": "Danh sách trường",
+    "label": "h2: Danh sách trường hợp tác 2026–2027",
+    "kind": "text",
+    "value": "Danh sách trường hợp tác 2026–2027"
+  },
+  {
+    "key": "view.universities-list.013",
+    "group_name": "Danh sách trường",
+    "label": "p: Danh sách 22 trường dưới đây được chép từ Hồ sơ giới thiệu SOL DREAM EDUCATION 2026–2027. Tên trường, cơ sở và",
+    "kind": "text",
+    "value": "Danh sách 22 trường dưới đây được chép từ Hồ sơ giới thiệu SOL DREAM EDUCATION 2026–2027. Tên trường, cơ sở và liên kết được đối chiếu với website chính thức; điều kiện tuyển sinh và học phí vẫn cần xem theo đúng ngành, cơ sở và kỳ nộp hồ sơ."
+  },
+  {
+    "key": "view.universities-list.014",
+    "group_name": "Danh sách trường",
+    "label": "Đích liên kết: /tin-tuc/22-truong-doi-tac-sol-dream-2026-2027",
+    "kind": "url",
+    "value": "/tin-tuc/22-truong-doi-tac-sol-dream-2026-2027"
+  },
+  {
+    "key": "view.universities-list.015",
+    "group_name": "Danh sách trường",
+    "label": "a: Đọc bài giới thiệu danh sách trường và cách tra cứu học phí →",
+    "kind": "text",
+    "value": "Đọc bài giới thiệu danh sách trường và cách tra cứu học phí →"
+  },
+  {
+    "key": "view.universities-list.016",
+    "group_name": "Danh sách trường",
+    "label": "a: Xem hồ sơ trên web →",
+    "kind": "text",
+    "value": "Xem hồ sơ trên web →"
+  },
+  {
+    "key": "view.universities-list.017",
+    "group_name": "Danh sách trường",
+    "label": "a: Website trường ↗",
+    "kind": "text",
+    "value": "Website trường ↗"
+  },
+  {
+    "key": "view.universities-list.018",
+    "group_name": "Danh sách trường",
+    "label": "h2: Thông tin trường mới nhất",
+    "kind": "text",
+    "value": "Thông tin trường mới nhất"
+  },
+  {
+    "key": "view.universities-list.019",
+    "group_name": "Danh sách trường",
+    "label": "span: Thông tin trường",
+    "kind": "text",
+    "value": "Thông tin trường"
+  },
+  {
+    "key": "view.universities-list.020",
+    "group_name": "Danh sách trường",
+    "label": "h2: Hồ sơ trường chuyên sâu",
+    "kind": "text",
+    "value": "Hồ sơ trường chuyên sâu"
+  },
+  {
+    "key": "view.universities-list.021",
+    "group_name": "Danh sách trường",
+    "label": "strong: Học phí tiếng tham khảo:",
+    "kind": "text",
+    "value": "Học phí tiếng tham khảo:"
+  },
+  {
+    "key": "view.universities-list.022",
+    "group_name": "Danh sách trường",
+    "label": "a: Xem hồ sơ đầy đủ →",
+    "kind": "text",
+    "value": "Xem hồ sơ đầy đủ →"
+  },
+  {
+    "key": "view.universities-list.023",
+    "group_name": "Danh sách trường",
+    "label": "h2: Phạm vi bộ dữ liệu trường đại học",
+    "kind": "text",
+    "value": "Phạm vi bộ dữ liệu trường đại học"
+  },
+  {
+    "key": "view.universities-list.024",
+    "group_name": "Danh sách trường",
+    "label": "p: Trang này giới thiệu",
+    "kind": "text",
+    "value": "Trang này giới thiệu"
+  },
+  {
+    "key": "view.universities-list.025",
+    "group_name": "Danh sách trường",
+    "label": "p: trường trong danh mục hợp tác 2026–2027,",
+    "kind": "text",
+    "value": "trường trong danh mục hợp tác 2026–2027,"
+  },
+  {
+    "key": "view.universities-list.026",
+    "group_name": "Danh sách trường",
+    "label": "p: hồ sơ trường đang có thông tin chi tiết và đường dẫn tới website chính thức của các trường.",
+    "kind": "text",
+    "value": "hồ sơ trường đang có thông tin chi tiết và đường dẫn tới website chính thức của các trường."
+  },
+  {
+    "key": "view.universities-list.027",
+    "group_name": "Danh sách trường",
+    "label": "strong: Danh mục hợp tác:",
+    "kind": "text",
+    "value": "Danh mục hợp tác:"
+  },
+  {
+    "key": "view.universities-list.028",
+    "group_name": "Danh sách trường",
+    "label": "strong: Hồ sơ trường chi tiết:",
+    "kind": "text",
+    "value": "Hồ sơ trường chi tiết:"
+  },
+  {
+    "key": "view.universities-list.029",
+    "group_name": "Danh sách trường",
+    "label": "strong: Trường dữ liệu chính:",
+    "kind": "text",
+    "value": "Trường dữ liệu chính:"
+  },
+  {
+    "key": "view.universities-list.030",
+    "group_name": "Danh sách trường",
+    "label": "strong: tên trường, địa chỉ, ngành học, học phí, học bổng và ký túc xá.",
+    "kind": "text",
+    "value": "tên trường, địa chỉ, ngành học, học phí, học bổng và ký túc xá."
+  },
+  {
+    "key": "view.universities-list.031",
+    "group_name": "Danh sách trường",
+    "label": "strong: Mục đích:",
+    "kind": "text",
+    "value": "Mục đích:"
+  },
+  {
+    "key": "view.universities-list.032",
+    "group_name": "Danh sách trường",
+    "label": "strong: tra cứu và lập danh sách trường ban đầu; không thay thế thông báo tuyển sinh.",
+    "kind": "text",
+    "value": "tra cứu và lập danh sách trường ban đầu; không thay thế thông báo tuyển sinh."
+  },
+  {
+    "key": "view.universities-list.033",
+    "group_name": "Danh sách trường",
+    "label": "strong: Lưu ý:",
+    "kind": "text",
+    "value": "Lưu ý:"
+  },
+  {
+    "key": "view.universities-list.034",
+    "group_name": "Danh sách trường",
+    "label": "strong: Học phí, học bổng, ngành mở tuyển và kỳ nhập học có thể thay đổi theo năm hoặc từng khoa. Hãy xác nhận lại với",
+    "kind": "text",
+    "value": "Học phí, học bổng, ngành mở tuyển và kỳ nhập học có thể thay đổi theo năm hoặc từng khoa. Hãy xác nhận lại với SOL DREAM EDUCATION và website chính thức của trường trước khi nộp hồ sơ."
+  },
+  {
+    "key": "view.university-detail.001",
+    "group_name": "Hồ sơ trường",
+    "label": "aria-label: breadcrumb",
+    "kind": "text",
+    "value": "breadcrumb"
+  },
+  {
+    "key": "view.university-detail.002",
+    "group_name": "Hồ sơ trường",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.university-detail.003",
+    "group_name": "Hồ sơ trường",
+    "label": "a: Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "view.university-detail.004",
+    "group_name": "Hồ sơ trường",
+    "label": "Đích liên kết: /truong-dai-hoc",
+    "kind": "url",
+    "value": "/truong-dai-hoc"
+  },
+  {
+    "key": "view.university-detail.005",
+    "group_name": "Hồ sơ trường",
+    "label": "a: Trường đại học",
+    "kind": "text",
+    "value": "Trường đại học"
+  },
+  {
+    "key": "view.university-detail.006",
+    "group_name": "Hồ sơ trường",
+    "label": "span: Hồ sơ trường đại học Hàn Quốc",
+    "kind": "text",
+    "value": "Hồ sơ trường đại học Hàn Quốc"
+  },
+  {
+    "key": "view.university-detail.007",
+    "group_name": "Hồ sơ trường",
+    "label": "aria-label: Tóm tắt định lượng",
+    "kind": "text",
+    "value": "Tóm tắt định lượng"
+  },
+  {
+    "key": "view.university-detail.008",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Tổng chi phí năm đầu:",
+    "kind": "text",
+    "value": "Tổng chi phí năm đầu:"
+  },
+  {
+    "key": "view.university-detail.009",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Nhóm trường:",
+    "kind": "text",
+    "value": "Nhóm trường:"
+  },
+  {
+    "key": "view.university-detail.010",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Sổ đóng băng:",
+    "kind": "text",
+    "value": "Sổ đóng băng:"
+  },
+  {
+    "key": "view.university-detail.011",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: GPA tối thiểu:",
+    "kind": "text",
+    "value": "GPA tối thiểu:"
+  },
+  {
+    "key": "view.university-detail.012",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Biên soạn:",
+    "kind": "text",
+    "value": "Biên soạn:"
+  },
+  {
+    "key": "view.university-detail.013",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: SOL DREAM EDUCATION ·",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION ·"
+  },
+  {
+    "key": "view.university-detail.014",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Cập nhật:",
+    "kind": "text",
+    "value": "Cập nhật:"
+  },
+  {
+    "key": "view.university-detail.015",
+    "group_name": "Hồ sơ trường",
+    "label": "aria-label: Mục lục hồ sơ",
+    "kind": "text",
+    "value": "Mục lục hồ sơ"
+  },
+  {
+    "key": "view.university-detail.016",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Nội dung hồ sơ",
+    "kind": "text",
+    "value": "Nội dung hồ sơ"
+  },
+  {
+    "key": "view.university-detail.017",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: Chi phí du học",
+    "kind": "text",
+    "value": "Chi phí du học"
+  },
+  {
+    "key": "view.university-detail.018",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: 1 năm cần bao nhiêu tiền?",
+    "kind": "text",
+    "value": "1 năm cần bao nhiêu tiền?"
+  },
+  {
+    "key": "view.university-detail.019",
+    "group_name": "Hồ sơ trường",
+    "label": "p: Bảng dưới đây tách học phí hệ tiếng, ký túc xá và yêu cầu sổ đóng băng từ nguồn đang có cho",
+    "kind": "text",
+    "value": "Bảng dưới đây tách học phí hệ tiếng, ký túc xá và yêu cầu sổ đóng băng từ nguồn đang có cho"
+  },
+  {
+    "key": "view.university-detail.020",
+    "group_name": "Hồ sơ trường",
+    "label": "p: Khoản VND là ước tính theo tỷ giá tham khảo ghi tại nguồn (",
+    "kind": "text",
+    "value": "Khoản VND là ước tính theo tỷ giá tham khảo ghi tại nguồn ("
+  },
+  {
+    "key": "view.university-detail.021",
+    "group_name": "Hồ sơ trường",
+    "label": "p: VND/KRW, ngày",
+    "kind": "text",
+    "value": "VND/KRW, ngày"
+  },
+  {
+    "key": "view.university-detail.022",
+    "group_name": "Hồ sơ trường",
+    "label": "p: ), không phải báo giá thanh toán.",
+    "kind": "text",
+    "value": "), không phải báo giá thanh toán."
+  },
+  {
+    "key": "view.university-detail.023",
+    "group_name": "Hồ sơ trường",
+    "label": "p: Chưa quy đổi sang VND vì tỷ giá thanh toán thay đổi; kiểm tra số KRW trực tiếp với trường trước khi đóng học p",
+    "kind": "text",
+    "value": "Chưa quy đổi sang VND vì tỷ giá thanh toán thay đổi; kiểm tra số KRW trực tiếp với trường trước khi đóng học phí."
+  },
+  {
+    "key": "view.university-detail.024",
+    "group_name": "Hồ sơ trường",
+    "label": "th: Khoản phí",
+    "kind": "text",
+    "value": "Khoản phí"
+  },
+  {
+    "key": "view.university-detail.025",
+    "group_name": "Hồ sơ trường",
+    "label": "th: KRW/USD",
+    "kind": "text",
+    "value": "KRW/USD"
+  },
+  {
+    "key": "view.university-detail.026",
+    "group_name": "Hồ sơ trường",
+    "label": "th: Quy đổi VND",
+    "kind": "text",
+    "value": "Quy đổi VND"
+  },
+  {
+    "key": "view.university-detail.027",
+    "group_name": "Hồ sơ trường",
+    "label": "th: Điều kiện và phạm vi",
+    "kind": "text",
+    "value": "Điều kiện và phạm vi"
+  },
+  {
+    "key": "view.university-detail.028",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: Điều kiện tuyển sinh và visa",
+    "kind": "text",
+    "value": "Điều kiện tuyển sinh và visa"
+  },
+  {
+    "key": "view.university-detail.029",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: năm 2026",
+    "kind": "text",
+    "value": "năm 2026"
+  },
+  {
+    "key": "view.university-detail.030",
+    "group_name": "Hồ sơ trường",
+    "label": "p: Bảng điều kiện tách riêng GPA, thời gian trống, TOPIK hệ D4, TOPIK hệ D2 và phân hạng visa của",
+    "kind": "text",
+    "value": "Bảng điều kiện tách riêng GPA, thời gian trống, TOPIK hệ D4, TOPIK hệ D2 và phân hạng visa của"
+  },
+  {
+    "key": "view.university-detail.031",
+    "group_name": "Hồ sơ trường",
+    "label": "p: . Giá trị chưa có thông báo tuyển sinh chính thức còn hiệu lực được đánh dấu “chưa xác minh”, không suy diễn t",
+    "kind": "text",
+    "value": ". Giá trị chưa có thông báo tuyển sinh chính thức còn hiệu lực được đánh dấu “chưa xác minh”, không suy diễn từ học bổng hoặc điều kiện chung."
+  },
+  {
+    "key": "view.university-detail.032",
+    "group_name": "Hồ sơ trường",
+    "label": "th: Tiêu chí",
+    "kind": "text",
+    "value": "Tiêu chí"
+  },
+  {
+    "key": "view.university-detail.033",
+    "group_name": "Hồ sơ trường",
+    "label": "th: Giá trị 2026",
+    "kind": "text",
+    "value": "Giá trị 2026"
+  },
+  {
+    "key": "view.university-detail.034",
+    "group_name": "Hồ sơ trường",
+    "label": "th: Phạm vi áp dụng",
+    "kind": "text",
+    "value": "Phạm vi áp dụng"
+  },
+  {
+    "key": "view.university-detail.035",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: Câu hỏi thường gặp về",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp về"
+  },
+  {
+    "key": "view.university-detail.036",
+    "group_name": "Hồ sơ trường",
+    "label": "p: Các câu trả lời sau tổng hợp những điểm người nộp hồ sơ thường cần đối chiếu: học phí, điều kiện GPA và TOPIK,",
+    "kind": "text",
+    "value": "Các câu trả lời sau tổng hợp những điểm người nộp hồ sơ thường cần đối chiếu: học phí, điều kiện GPA và TOPIK, phân hạng visa, sổ đóng băng và ký túc xá. Mọi giá trị chưa có nguồn xác minh được ghi rõ thay vì ước đoán."
+  },
+  {
+    "key": "view.university-detail.037",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: Đội ngũ tư vấn và hỗ trợ hồ sơ",
+    "kind": "text",
+    "value": "Đội ngũ tư vấn và hỗ trợ hồ sơ"
+  },
+  {
+    "key": "view.university-detail.038",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: . Chuyên viên hỗ trợ đối chiếu điều kiện, chọn trường và chuẩn bị hồ sơ theo tài liệu tuyển sinh được SOL DREA",
+    "kind": "text",
+    "value": ". Chuyên viên hỗ trợ đối chiếu điều kiện, chọn trường và chuẩn bị hồ sơ theo tài liệu tuyển sinh được SOL DREAM EDUCATION xác minh tại thời điểm tư vấn."
+  },
+  {
+    "key": "view.university-detail.039",
+    "group_name": "Hồ sơ trường",
+    "label": "a: Xem hồ sơ chuyên môn đã xác minh",
+    "kind": "text",
+    "value": "Xem hồ sơ chuyên môn đã xác minh"
+  },
+  {
+    "key": "view.university-detail.040",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: SOL DREAM EDUCATION trực tiếp tư vấn và hỗ trợ đối chiếu hồ sơ.",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION trực tiếp tư vấn và hỗ trợ đối chiếu hồ sơ."
+  },
+  {
+    "key": "view.university-detail.041",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Website chưa công bố tên, chứng chỉ ICEF/QEAC hoặc hồ sơ LinkedIn của một cố vấn cá nhân đã xác minh, vì vậy h",
+    "kind": "text",
+    "value": "Website chưa công bố tên, chứng chỉ ICEF/QEAC hoặc hồ sơ LinkedIn của một cố vấn cá nhân đã xác minh, vì vậy hệ thống không tự tạo danh tính hay tuyên bố chứng chỉ khi chưa có dữ liệu thật."
+  },
+  {
+    "key": "view.university-detail.042",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: Nguồn và phạm vi thông tin",
+    "kind": "text",
+    "value": "Nguồn và phạm vi thông tin"
+  },
+  {
+    "key": "view.university-detail.043",
+    "group_name": "Hồ sơ trường",
+    "label": "p: Thông tin được SOL DREAM EDUCATION tổng hợp để hỗ trợ học viên chọn trường và chuẩn bị hồ sơ du học Hàn Quốc. ",
+    "kind": "text",
+    "value": "Thông tin được SOL DREAM EDUCATION tổng hợp để hỗ trợ học viên chọn trường và chuẩn bị hồ sơ du học Hàn Quốc. Nội dung không thay thế thông báo tuyển sinh chính thức; học phí, học bổng, ngành mở tuyển và kỳ nhập học sẽ được chuyên viên xác nhận lại theo thời điểm."
+  },
+  {
+    "key": "view.university-detail.044",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Nguồn đối chiếu:",
+    "kind": "text",
+    "value": "Nguồn đối chiếu:"
+  },
+  {
+    "key": "view.university-detail.045",
+    "group_name": "Hồ sơ trường",
+    "label": "a: Website chính thức của",
+    "kind": "text",
+    "value": "Website chính thức của"
+  },
+  {
+    "key": "view.university-detail.046",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Trang và hướng dẫn đã đối chiếu:",
+    "kind": "text",
+    "value": "Trang và hướng dẫn đã đối chiếu:"
+  },
+  {
+    "key": "view.university-detail.047",
+    "group_name": "Hồ sơ trường",
+    "label": "strong: Ngày cập nhật dữ liệu:",
+    "kind": "text",
+    "value": "Ngày cập nhật dữ liệu:"
+  },
+  {
+    "key": "view.university-detail.048",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: Cần kiểm tra hồ sơ phù hợp?",
+    "kind": "text",
+    "value": "Cần kiểm tra hồ sơ phù hợp?"
+  },
+  {
+    "key": "view.university-detail.049",
+    "group_name": "Hồ sơ trường",
+    "label": "p: SOL DREAM EDUCATION hỗ trợ đối chiếu GPA, TOPIK, năng lực tài chính, ngành dự kiến và kỳ nhập học với yêu cầu ",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION hỗ trợ đối chiếu GPA, TOPIK, năng lực tài chính, ngành dự kiến và kỳ nhập học với yêu cầu của từng trường. Kết quả tư vấn dựa trên hồ sơ thực tế và thông tin tuyển sinh được xác nhận tại thời điểm đánh giá."
+  },
+  {
+    "key": "view.university-detail.050",
+    "group_name": "Hồ sơ trường",
+    "label": "Đích liên kết: /#lienhe",
+    "kind": "url",
+    "value": "/#lienhe"
+  },
+  {
+    "key": "view.university-detail.051",
+    "group_name": "Hồ sơ trường",
+    "label": "a: Đăng ký tư vấn",
+    "kind": "text",
+    "value": "Đăng ký tư vấn"
+  },
+  {
+    "key": "view.university-detail.052",
+    "group_name": "Hồ sơ trường",
+    "label": "h2: Các trường khác",
+    "kind": "text",
+    "value": "Các trường khác"
+  },
+  {
+    "key": "view.university-detail.053",
+    "group_name": "Hồ sơ trường",
+    "label": "p: Danh sách dưới đây dẫn đến các hồ sơ trường khác trong cùng bộ dữ liệu của SOL DREAM EDUCATION. Người đọc có t",
+    "kind": "text",
+    "value": "Danh sách dưới đây dẫn đến các hồ sơ trường khác trong cùng bộ dữ liệu của SOL DREAM EDUCATION. Người đọc có thể dùng các trang này để so sánh vị trí, thế mạnh đào tạo, học phí tham khảo, học bổng và lựa chọn ký túc xá."
+  },
+  {
+    "key": "view.university-detail.054",
+    "group_name": "Hồ sơ trường",
+    "label": "Đích liên kết: /truong-dai-hoc",
+    "kind": "url",
+    "value": "/truong-dai-hoc"
+  },
+  {
+    "key": "view.university-detail.055",
+    "group_name": "Hồ sơ trường",
+    "label": "a: Xem toàn bộ danh sách →",
+    "kind": "text",
+    "value": "Xem toàn bộ danh sách →"
+  },
+  {
+    "key": "view.university-detail.056",
+    "group_name": "Hồ sơ trường",
+    "label": "Lời dẫn / nhãn dự phòng: Chưa xác minh",
+    "kind": "text",
+    "value": "Chưa xác minh"
+  },
+  {
+    "key": "view.partials.article-extras.001",
+    "group_name": "Giao diện chung",
+    "label": "Lời dẫn / nhãn dự phòng: Tóm tắt",
+    "kind": "text",
+    "value": "Tóm tắt"
+  },
+  {
+    "key": "view.partials.article-sources.001",
+    "group_name": "Giao diện chung",
+    "label": "h2: Nguồn tham khảo",
+    "kind": "text",
+    "value": "Nguồn tham khảo"
+  },
+  {
+    "key": "view.partials.chatbot.001",
+    "group_name": "Nút trợ lý",
+    "label": "aria-label: Trợ lý tư vấn SolDream Support",
+    "kind": "text",
+    "value": "Trợ lý tư vấn SolDream Support"
+  },
+  {
+    "key": "view.partials.chatbot.002",
+    "group_name": "Nút trợ lý",
+    "label": "Đích liên kết: /tro-ly-du-hoc",
+    "kind": "url",
+    "value": "/tro-ly-du-hoc"
+  },
+  {
+    "key": "view.partials.chatbot.003",
+    "group_name": "Nút trợ lý",
+    "label": "Đích liên kết: /tro-ly-du-hoc",
+    "kind": "url",
+    "value": "/tro-ly-du-hoc"
+  },
+  {
+    "key": "view.partials.chatbot.004",
+    "group_name": "Nút trợ lý",
+    "label": "aria-label: Mở trang trợ lý tư vấn SolDream Support",
+    "kind": "text",
+    "value": "Mở trang trợ lý tư vấn SolDream Support"
+  },
+  {
+    "key": "view.partials.footer.001",
+    "group_name": "Chân trang",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.partials.footer.002",
+    "group_name": "Chân trang",
+    "label": "alt: Logo SolDream",
+    "kind": "text",
+    "value": "Logo SolDream"
+  },
+  {
+    "key": "view.partials.head.001",
+    "group_name": "SEO chung",
+    "label": "title: Cẩm nang du học Hàn Quốc - SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Cẩm nang du học Hàn Quốc - SOL DREAM EDUCATION"
+  },
+  {
+    "key": "view.partials.head.002",
+    "group_name": "SEO chung",
+    "label": "title: SOL DREAM EDUCATION content index for AI systems",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION content index for AI systems"
+  },
+  {
+    "key": "view.partials.header.001",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /",
+    "kind": "url",
+    "value": "/"
+  },
+  {
+    "key": "view.partials.header.002",
+    "group_name": "Menu và thương hiệu",
+    "label": "aria-label: Sol Dream Education",
+    "kind": "text",
+    "value": "Sol Dream Education"
+  },
+  {
+    "key": "view.partials.header.003",
+    "group_name": "Menu và thương hiệu",
+    "label": "alt: Logo SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Logo SOL DREAM EDUCATION"
+  },
+  {
+    "key": "view.partials.header.004",
+    "group_name": "Menu và thương hiệu",
+    "label": "strong: Sol Dream",
+    "kind": "text",
+    "value": "Sol Dream"
+  },
+  {
+    "key": "view.partials.header.005",
+    "group_name": "Menu và thương hiệu",
+    "label": "span: Education",
+    "kind": "text",
+    "value": "Education"
+  },
+  {
+    "key": "view.partials.header.006",
+    "group_name": "Menu và thương hiệu",
+    "label": "aria-label: Điều hướng chính",
+    "kind": "text",
+    "value": "Điều hướng chính"
+  },
+  {
+    "key": "view.partials.header.007",
+    "group_name": "Menu và thương hiệu",
+    "label": "aria-label: Đóng menu",
+    "kind": "text",
+    "value": "Đóng menu"
+  },
+  {
+    "key": "view.partials.header.008",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /gioi-thieu",
+    "kind": "url",
+    "value": "/gioi-thieu"
+  },
+  {
+    "key": "view.partials.header.009",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Giới thiệu",
+    "kind": "text",
+    "value": "Giới thiệu"
+  },
+  {
+    "key": "view.partials.header.010",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /khoa-hoc",
+    "kind": "url",
+    "value": "/khoa-hoc"
+  },
+  {
+    "key": "view.partials.header.011",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Khóa học",
+    "kind": "text",
+    "value": "Khóa học"
+  },
+  {
+    "key": "view.partials.header.012",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /khoa-hoc",
+    "kind": "url",
+    "value": "/khoa-hoc"
+  },
+  {
+    "key": "view.partials.header.013",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Tất cả khóa học và học phí",
+    "kind": "text",
+    "value": "Tất cả khóa học và học phí"
+  },
+  {
+    "key": "view.partials.header.014",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /khoa-hoc#tuition-foundation",
+    "kind": "url",
+    "value": "/khoa-hoc#tuition-foundation"
+  },
+  {
+    "key": "view.partials.header.015",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Sơ cấp & trung cấp",
+    "kind": "text",
+    "value": "Sơ cấp & trung cấp"
+  },
+  {
+    "key": "view.partials.header.016",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /khoa-hoc#tuition-topik",
+    "kind": "url",
+    "value": "/khoa-hoc#tuition-topik"
+  },
+  {
+    "key": "view.partials.header.017",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Luyện thi TOPIK",
+    "kind": "text",
+    "value": "Luyện thi TOPIK"
+  },
+  {
+    "key": "view.partials.header.018",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /khoa-hoc#tuition-speaking",
+    "kind": "url",
+    "value": "/khoa-hoc#tuition-speaking"
+  },
+  {
+    "key": "view.partials.header.019",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Giao tiếp & phát âm",
+    "kind": "text",
+    "value": "Giao tiếp & phát âm"
+  },
+  {
+    "key": "view.partials.header.020",
+    "group_name": "Menu và thương hiệu",
+    "label": "span: Từng khóa học",
+    "kind": "text",
+    "value": "Từng khóa học"
+  },
+  {
+    "key": "view.partials.header.021",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /du-hoc",
+    "kind": "url",
+    "value": "/du-hoc"
+  },
+  {
+    "key": "view.partials.header.022",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Du học Hàn Quốc",
+    "kind": "text",
+    "value": "Du học Hàn Quốc"
+  },
+  {
+    "key": "view.partials.header.023",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /du-hoc",
+    "kind": "url",
+    "value": "/du-hoc"
+  },
+  {
+    "key": "view.partials.header.024",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Tất cả chương trình và bài hướng dẫn",
+    "kind": "text",
+    "value": "Tất cả chương trình và bài hướng dẫn"
+  },
+  {
+    "key": "view.partials.header.025",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /du-hoc/cac-chuong-trinh-du-hoc-han-quoc-trong-ho-so-sol-dream-2026",
+    "kind": "url",
+    "value": "/du-hoc/cac-chuong-trinh-du-hoc-han-quoc-trong-ho-so-sol-dream-2026"
+  },
+  {
+    "key": "view.partials.header.026",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Các lộ trình du học",
+    "kind": "text",
+    "value": "Các lộ trình du học"
+  },
+  {
+    "key": "view.partials.header.027",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /du-hoc/chi-phi-du-hoc-han-quoc-2026-2027",
+    "kind": "url",
+    "value": "/du-hoc/chi-phi-du-hoc-han-quoc-2026-2027"
+  },
+  {
+    "key": "view.partials.header.028",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Chi phí và lịch thanh toán",
+    "kind": "text",
+    "value": "Chi phí và lịch thanh toán"
+  },
+  {
+    "key": "view.partials.header.029",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /du-hoc/phan-biet-visa-du-hoc-han-quoc-d4-1-d2",
+    "kind": "url",
+    "value": "/du-hoc/phan-biet-visa-du-hoc-han-quoc-d4-1-d2"
+  },
+  {
+    "key": "view.partials.header.030",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Hồ sơ & visa",
+    "kind": "text",
+    "value": "Hồ sơ & visa"
+  },
+  {
+    "key": "view.partials.header.031",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /du-hoc/lo-trinh-hoc-tieng-han-truoc-khi-du-hoc",
+    "kind": "url",
+    "value": "/du-hoc/lo-trinh-hoc-tieng-han-truoc-khi-du-hoc"
+  },
+  {
+    "key": "view.partials.header.032",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Chuẩn bị tiếng Hàn",
+    "kind": "text",
+    "value": "Chuẩn bị tiếng Hàn"
+  },
+  {
+    "key": "view.partials.header.033",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /truong-dai-hoc",
+    "kind": "url",
+    "value": "/truong-dai-hoc"
+  },
+  {
+    "key": "view.partials.header.034",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Thông tin trường",
+    "kind": "text",
+    "value": "Thông tin trường"
+  },
+  {
+    "key": "view.partials.header.035",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /truong-dai-hoc#partner-schools-title",
+    "kind": "url",
+    "value": "/truong-dai-hoc#partner-schools-title"
+  },
+  {
+    "key": "view.partials.header.036",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Trường đối tác SOL DREAM",
+    "kind": "text",
+    "value": "Trường đối tác SOL DREAM"
+  },
+  {
+    "key": "view.partials.header.037",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /truong-dai-hoc#admin-school-title",
+    "kind": "url",
+    "value": "/truong-dai-hoc#admin-school-title"
+  },
+  {
+    "key": "view.partials.header.038",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Hồ sơ và thông tin trường",
+    "kind": "text",
+    "value": "Hồ sơ và thông tin trường"
+  },
+  {
+    "key": "view.partials.header.039",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /du-hoc/hoc-phi-truong-doi-tac-han-quoc-2026",
+    "kind": "url",
+    "value": "/du-hoc/hoc-phi-truong-doi-tac-han-quoc-2026"
+  },
+  {
+    "key": "view.partials.header.040",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Học phí tiếng và đại học",
+    "kind": "text",
+    "value": "Học phí tiếng và đại học"
+  },
+  {
+    "key": "view.partials.header.041",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /tin-tuc",
+    "kind": "url",
+    "value": "/tin-tuc"
+  },
+  {
+    "key": "view.partials.header.042",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Cẩm nang & Thông tin",
+    "kind": "text",
+    "value": "Cẩm nang & Thông tin"
+  },
+  {
+    "key": "view.partials.header.043",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /tin-tuc?muc=thong-tin-han-quoc",
+    "kind": "url",
+    "value": "/tin-tuc?muc=thong-tin-han-quoc"
+  },
+  {
+    "key": "view.partials.header.045",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /tin-tuc?muc=cam-nang-sinh-hoat",
+    "kind": "url",
+    "value": "/tin-tuc?muc=cam-nang-sinh-hoat"
+  },
+  {
+    "key": "view.partials.header.047",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /tin-tuc?muc=hoat-dong-soldream",
+    "kind": "url",
+    "value": "/tin-tuc?muc=hoat-dong-soldream"
+  },
+  {
+    "key": "view.partials.header.049",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /cau-hoi-thuong-gap",
+    "kind": "url",
+    "value": "/cau-hoi-thuong-gap"
+  },
+  {
+    "key": "view.partials.header.050",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: FAQ",
+    "kind": "text",
+    "value": "FAQ"
+  },
+  {
+    "key": "view.partials.header.051",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /#lienhe",
+    "kind": "url",
+    "value": "/#lienhe"
+  },
+  {
+    "key": "view.partials.header.052",
+    "group_name": "Menu và thương hiệu",
+    "label": "a: Liên hệ",
+    "kind": "text",
+    "value": "Liên hệ"
+  },
+  {
+    "key": "view.partials.header.053",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: /#lienhe",
+    "kind": "url",
+    "value": "/#lienhe"
+  },
+  {
+    "key": "view.partials.header.054",
+    "group_name": "Menu và thương hiệu",
+    "label": "aria-label: Mở menu",
+    "kind": "text",
+    "value": "Mở menu"
+  },
+  {
+    "key": "view.partials.lead-popup.001",
+    "group_name": "Giao diện chung",
+    "label": "aria-label: Đóng đăng ký",
+    "kind": "text",
+    "value": "Đóng đăng ký"
+  },
+  {
+    "key": "view.partials.lead-popup.002",
+    "group_name": "Giao diện chung",
+    "label": "aria-label: Đóng",
+    "kind": "text",
+    "value": "Đóng"
+  },
+  {
+    "key": "view.partials.lead-popup.003",
+    "group_name": "Giao diện chung",
+    "label": "span: Nhận thông tin sớm nhất",
+    "kind": "text",
+    "value": "Nhận thông tin sớm nhất"
+  },
+  {
+    "key": "view.partials.lead-popup.004",
+    "group_name": "Giao diện chung",
+    "label": "placeholder: Nhập họ và tên",
+    "kind": "text",
+    "value": "Nhập họ và tên"
+  },
+  {
+    "key": "view.partials.lead-popup.005",
+    "group_name": "Giao diện chung",
+    "label": "placeholder: Ví dụ: 0364 648 282",
+    "kind": "text",
+    "value": "Ví dụ: 0364 648 282"
+  },
+  {
+    "key": "view.partials.lead-popup.006",
+    "group_name": "Giao diện chung",
+    "label": "placeholder: tenban@example.com",
+    "kind": "text",
+    "value": "tenban@example.com"
+  },
+  {
+    "key": "view.partials.lead-popup.007",
+    "group_name": "Giao diện chung",
+    "label": "label: Website",
+    "kind": "text",
+    "value": "Website"
+  },
+  {
+    "key": "view.partials.lead-popup.008",
+    "group_name": "Giao diện chung",
+    "label": "aria-label: Tùy chọn nhắc lại",
+    "kind": "text",
+    "value": "Tùy chọn nhắc lại"
+  },
+  {
+    "key": "view.partials.lead-popup.009",
+    "group_name": "Giao diện chung",
+    "label": "button: Không hiện lại trong lần này",
+    "kind": "text",
+    "value": "Không hiện lại trong lần này"
+  },
+  {
+    "key": "view.partials.lead-popup.010",
+    "group_name": "Giao diện chung",
+    "label": "button: Hiện lại sau 10 phút",
+    "kind": "text",
+    "value": "Hiện lại sau 10 phút"
+  },
+  {
+    "key": "view.partials.lead-popup.011",
+    "group_name": "Giao diện chung",
+    "label": "Lời dẫn / nhãn dự phòng: Thông tin trên trang này",
+    "kind": "text",
+    "value": "Thông tin trên trang này"
+  },
+  {
+    "key": "view.partials.lead-popup.012",
+    "group_name": "Giao diện chung",
+    "label": "Lời dẫn / nhãn dự phòng: Gửi đăng ký",
+    "kind": "text",
+    "value": "Gửi đăng ký"
+  },
+  {
+    "key": "view.partials.site-popup.001",
+    "group_name": "Giao diện chung",
+    "label": "aria-label: Đóng thông báo",
+    "kind": "text",
+    "value": "Đóng thông báo"
+  },
+  {
+    "key": "view.partials.site-popup.002",
+    "group_name": "Giao diện chung",
+    "label": "aria-label: Đóng",
+    "kind": "text",
+    "value": "Đóng"
+  },
+  {
+    "key": "view.home-sections.consult.001",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "placeholder: Nguyễn Văn A",
+    "kind": "text",
+    "value": "Nguyễn Văn A"
+  },
+  {
+    "key": "view.home-sections.consult.002",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "placeholder: 09xx xxx xxx",
+    "kind": "text",
+    "value": "09xx xxx xxx"
+  },
+  {
+    "key": "view.home-sections.consult.003",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "placeholder: ban@example.com",
+    "kind": "text",
+    "value": "ban@example.com"
+  },
+  {
+    "key": "view.home-sections.consult.004",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "option: Tiếng Hàn giao tiếp",
+    "kind": "text",
+    "value": "Tiếng Hàn giao tiếp"
+  },
+  {
+    "key": "view.home-sections.consult.005",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "option: Tiếng Hàn cấp tốc",
+    "kind": "text",
+    "value": "Tiếng Hàn cấp tốc"
+  },
+  {
+    "key": "view.home-sections.consult.006",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "option: Tiếng Hàn sơ cấp / trung cấp",
+    "kind": "text",
+    "value": "Tiếng Hàn sơ cấp / trung cấp"
+  },
+  {
+    "key": "view.home-sections.consult.007",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "option: Du học Hàn Quốc",
+    "kind": "text",
+    "value": "Du học Hàn Quốc"
+  },
+  {
+    "key": "view.home-sections.consult.008",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "option: Thông tin trường",
+    "kind": "text",
+    "value": "Thông tin trường"
+  },
+  {
+    "key": "view.home-sections.consult.009",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "placeholder: Nhập nội dung bạn muốn được tư vấn",
+    "kind": "text",
+    "value": "Nhập nội dung bạn muốn được tư vấn"
+  },
+  {
+    "key": "view.home-sections.consult.010",
+    "group_name": "Trang chủ – tư vấn",
+    "label": "label: Website",
+    "kind": "text",
+    "value": "Website"
+  },
+  {
+    "key": "view.home-sections.courses.001",
+    "group_name": "Danh sách khóa học",
+    "label": "p: Sĩ số:",
+    "kind": "text",
+    "value": "Sĩ số:"
+  },
+  {
+    "key": "view.home-sections.courses.002",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: học viên",
+    "kind": "text",
+    "value": "học viên"
+  },
+  {
+    "key": "view.home-sections.courses.003",
+    "group_name": "Danh sách khóa học",
+    "label": "strong: · Tối thiểu mở lớp:",
+    "kind": "text",
+    "value": "· Tối thiểu mở lớp:"
+  },
+  {
+    "key": "view.home-sections.courses.004",
+    "group_name": "Danh sách khóa học",
+    "label": "p: Giáo trình:",
+    "kind": "text",
+    "value": "Giáo trình:"
+  },
+  {
+    "key": "view.home-sections.courses.005",
+    "group_name": "Danh sách khóa học",
+    "label": "a: Chi tiết →",
+    "kind": "text",
+    "value": "Chi tiết →"
+  },
+  {
+    "key": "view.home-sections.hero.001",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "Đích liên kết: #lienhe",
+    "kind": "url",
+    "value": "#lienhe"
+  },
+  {
+    "key": "view.home-sections.hero.002",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "Đích liên kết: /khoa-hoc",
+    "kind": "url",
+    "value": "/khoa-hoc"
+  },
+  {
+    "key": "view.home-sections.hero.003",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "a: Xem khóa học",
+    "kind": "text",
+    "value": "Xem khóa học"
+  },
+  {
+    "key": "view.home-sections.hero.004",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "path: Giáo viên bản ngữ Hàn Quốc",
+    "kind": "text",
+    "value": "Giáo viên bản ngữ Hàn Quốc"
+  },
+  {
+    "key": "view.home-sections.hero.005",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "path: Học bổng du học Hàn",
+    "kind": "text",
+    "value": "Học bổng du học Hàn"
+  },
+  {
+    "key": "view.home-sections.hero.006",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "path: Giao lưu văn hóa hàng tháng",
+    "kind": "text",
+    "value": "Giao lưu văn hóa hàng tháng"
+  },
+  {
+    "key": "view.home-sections.hero.007",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "aria-label: Khởi động hành trình bay từ TP. Hồ Chí Minh đến Seoul",
+    "kind": "text",
+    "value": "Khởi động hành trình bay từ TP. Hồ Chí Minh đến Seoul"
+  },
+  {
+    "key": "view.home-sections.hero.008",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "i: SOL DREAM ✈ EDUCATION",
+    "kind": "text",
+    "value": "SOL DREAM ✈ EDUCATION"
+  },
+  {
+    "key": "view.home-sections.hero.009",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: Boarding Pass",
+    "kind": "text",
+    "value": "Boarding Pass"
+  },
+  {
+    "key": "view.home-sections.hero.010",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: SGN",
+    "kind": "text",
+    "value": "SGN"
+  },
+  {
+    "key": "view.home-sections.hero.011",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "small: TP. Hồ Chí Minh",
+    "kind": "text",
+    "value": "TP. Hồ Chí Minh"
+  },
+  {
+    "key": "view.home-sections.hero.012",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: ICN",
+    "kind": "text",
+    "value": "ICN"
+  },
+  {
+    "key": "view.home-sections.hero.013",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "small: Seoul, Hàn Quốc",
+    "kind": "text",
+    "value": "Seoul, Hàn Quốc"
+  },
+  {
+    "key": "view.home-sections.hero.014",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Passenger",
+    "kind": "text",
+    "value": "Passenger"
+  },
+  {
+    "key": "view.home-sections.hero.015",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Ước mơ của bạn",
+    "kind": "text",
+    "value": "Ước mơ của bạn"
+  },
+  {
+    "key": "view.home-sections.hero.016",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Flight",
+    "kind": "text",
+    "value": "Flight"
+  },
+  {
+    "key": "view.home-sections.hero.017",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: SD 2026",
+    "kind": "text",
+    "value": "SD 2026"
+  },
+  {
+    "key": "view.home-sections.hero.018",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Gate",
+    "kind": "text",
+    "value": "Gate"
+  },
+  {
+    "key": "view.home-sections.hero.019",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Sol Dream",
+    "kind": "text",
+    "value": "Sol Dream"
+  },
+  {
+    "key": "view.home-sections.hero.020",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Trường",
+    "kind": "text",
+    "value": "Trường"
+  },
+  {
+    "key": "view.home-sections.hero.021",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: ĐHQG Seoul · Yonsei",
+    "kind": "text",
+    "value": "ĐHQG Seoul · Yonsei"
+  },
+  {
+    "key": "view.home-sections.hero.022",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Học bổng",
+    "kind": "text",
+    "value": "Học bổng"
+  },
+  {
+    "key": "view.home-sections.hero.023",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Có",
+    "kind": "text",
+    "value": "Có"
+  },
+  {
+    "key": "view.home-sections.hero.024",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Status",
+    "kind": "text",
+    "value": "Status"
+  },
+  {
+    "key": "view.home-sections.hero.025",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "div: Sẵn sàng",
+    "kind": "text",
+    "value": "Sẵn sàng"
+  },
+  {
+    "key": "view.home-sections.hero.026",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: HÀN QUỐC",
+    "kind": "text",
+    "value": "HÀN QUỐC"
+  },
+  {
+    "key": "view.home-sections.hero.027",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: Chạm để cất cánh",
+    "kind": "text",
+    "value": "Chạm để cất cánh"
+  },
+  {
+    "key": "view.home-sections.hero.028",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "b: SOL DREAM",
+    "kind": "text",
+    "value": "SOL DREAM"
+  },
+  {
+    "key": "view.home-sections.hero.029",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: BOARDING PASS",
+    "kind": "text",
+    "value": "BOARDING PASS"
+  },
+  {
+    "key": "view.home-sections.hero.030",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "strong: SGN",
+    "kind": "text",
+    "value": "SGN"
+  },
+  {
+    "key": "view.home-sections.hero.031",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "strong: ICN",
+    "kind": "text",
+    "value": "ICN"
+  },
+  {
+    "key": "view.home-sections.hero.032",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "alt: Bản đồ Việt Nam và Hàn Quốc với hành trình TP. HCM – Seoul",
+    "kind": "text",
+    "value": "Bản đồ Việt Nam và Hàn Quốc với hành trình TP. HCM – Seoul"
+  },
+  {
+    "key": "view.home-sections.hero.033",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "b: VIỆT NAM",
+    "kind": "text",
+    "value": "VIỆT NAM"
+  },
+  {
+    "key": "view.home-sections.hero.034",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: ĐIỂM KHỞI HÀNH",
+    "kind": "text",
+    "value": "ĐIỂM KHỞI HÀNH"
+  },
+  {
+    "key": "view.home-sections.hero.035",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "b: HÀN QUỐC",
+    "kind": "text",
+    "value": "HÀN QUỐC"
+  },
+  {
+    "key": "view.home-sections.hero.036",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: ĐIỂM ĐẾN",
+    "kind": "text",
+    "value": "ĐIỂM ĐẾN"
+  },
+  {
+    "key": "view.home-sections.hero.037",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: TP. HCM",
+    "kind": "text",
+    "value": "TP. HCM"
+  },
+  {
+    "key": "view.home-sections.hero.038",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: SEOUL",
+    "kind": "text",
+    "value": "SEOUL"
+  },
+  {
+    "key": "view.home-sections.hero.039",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: Cất cánh từ TP. HCM",
+    "kind": "text",
+    "value": "Cất cánh từ TP. HCM"
+  },
+  {
+    "key": "view.home-sections.hero.040",
+    "group_name": "Trang chủ – mở đầu",
+    "label": "span: Hạ cánh tại Seoul",
+    "kind": "text",
+    "value": "Hạ cánh tại Seoul"
+  },
+  {
+    "key": "view.home-sections.journey.001",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: 01",
+    "kind": "text",
+    "value": "01"
+  },
+  {
+    "key": "view.home-sections.journey.002",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: Xác định điểm đến",
+    "kind": "text",
+    "value": "Xác định điểm đến"
+  },
+  {
+    "key": "view.home-sections.journey.003",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "h3: Tư vấn & định hướng",
+    "kind": "text",
+    "value": "Tư vấn & định hướng"
+  },
+  {
+    "key": "view.home-sections.journey.004",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "p: Đánh giá học lực, tiếng Hàn, ngân sách và mục tiêu nghề nghiệp để lập danh sách trường, ngành và học bổng cần ",
+    "kind": "text",
+    "value": "Đánh giá học lực, tiếng Hàn, ngân sách và mục tiêu nghề nghiệp để lập danh sách trường, ngành và học bổng cần kiểm tra."
+  },
+  {
+    "key": "view.home-sections.journey.005",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "small: Trường · Ngành · Ngân sách",
+    "kind": "text",
+    "value": "Trường · Ngành · Ngân sách"
+  },
+  {
+    "key": "view.home-sections.journey.006",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: 02",
+    "kind": "text",
+    "value": "02"
+  },
+  {
+    "key": "view.home-sections.journey.007",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: Xây nền tảng",
+    "kind": "text",
+    "value": "Xây nền tảng"
+  },
+  {
+    "key": "view.home-sections.journey.008",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "h3: Học tiếng Hàn",
+    "kind": "text",
+    "value": "Học tiếng Hàn"
+  },
+  {
+    "key": "view.home-sections.journey.009",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "p: Xây nền tảng hoặc tăng tốc tới mục tiêu TOPIK phù hợp với chương trình, thời gian chuẩn bị và yêu cầu của trườ",
+    "kind": "text",
+    "value": "Xây nền tảng hoặc tăng tốc tới mục tiêu TOPIK phù hợp với chương trình, thời gian chuẩn bị và yêu cầu của trường."
+  },
+  {
+    "key": "view.home-sections.journey.010",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "small: Hangul · Giao tiếp · TOPIK",
+    "kind": "text",
+    "value": "Hangul · Giao tiếp · TOPIK"
+  },
+  {
+    "key": "view.home-sections.journey.011",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: 03",
+    "kind": "text",
+    "value": "03"
+  },
+  {
+    "key": "view.home-sections.journey.012",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: Sẵn sàng hồ sơ",
+    "kind": "text",
+    "value": "Sẵn sàng hồ sơ"
+  },
+  {
+    "key": "view.home-sections.journey.013",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "h3: Hồ sơ & Visa",
+    "kind": "text",
+    "value": "Hồ sơ & Visa"
+  },
+  {
+    "key": "view.home-sections.journey.014",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "p: Rà soát giấy tờ học tập, tài chính và chuẩn bị phỏng vấn theo yêu cầu cập nhật của trường và cơ quan có thẩm q",
+    "kind": "text",
+    "value": "Rà soát giấy tờ học tập, tài chính và chuẩn bị phỏng vấn theo yêu cầu cập nhật của trường và cơ quan có thẩm quyền."
+  },
+  {
+    "key": "view.home-sections.journey.015",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "small: Giấy tờ · Tài chính · Phỏng vấn",
+    "kind": "text",
+    "value": "Giấy tờ · Tài chính · Phỏng vấn"
+  },
+  {
+    "key": "view.home-sections.journey.016",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: 04",
+    "kind": "text",
+    "value": "04"
+  },
+  {
+    "key": "view.home-sections.journey.017",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: Cất cánh",
+    "kind": "text",
+    "value": "Cất cánh"
+  },
+  {
+    "key": "view.home-sections.journey.018",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "h3: Lên đường sang Hàn",
+    "kind": "text",
+    "value": "Lên đường sang Hàn"
+  },
+  {
+    "key": "view.home-sections.journey.019",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "p: Chuẩn bị nhập cảnh, chỗ ở và thủ tục nhập học theo kế hoạch đã thống nhất với học viên trước ngày khởi hành.",
+    "kind": "text",
+    "value": "Chuẩn bị nhập cảnh, chỗ ở và thủ tục nhập học theo kế hoạch đã thống nhất với học viên trước ngày khởi hành."
+  },
+  {
+    "key": "view.home-sections.journey.020",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "small: Nhập cảnh · Chỗ ở · Nhập học",
+    "kind": "text",
+    "value": "Nhập cảnh · Chỗ ở · Nhập học"
+  },
+  {
+    "key": "view.home-sections.journey.021",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: SGN",
+    "kind": "text",
+    "value": "SGN"
+  },
+  {
+    "key": "view.home-sections.journey.022",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "span: ICN",
+    "kind": "text",
+    "value": "ICN"
+  },
+  {
+    "key": "view.home-sections.journey.023",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "Đích liên kết: /du-hoc",
+    "kind": "url",
+    "value": "/du-hoc"
+  },
+  {
+    "key": "view.home-sections.journey.024",
+    "group_name": "Trang chủ – lộ trình du học",
+    "label": "a: Xem tất cả chương trình du học",
+    "kind": "text",
+    "value": "Xem tất cả chương trình du học"
+  },
+  {
+    "key": "view.home-sections.news.001",
+    "group_name": "Trang chủ – bài viết",
+    "label": "aria-label: Chủ đề cẩm nang",
+    "kind": "text",
+    "value": "Chủ đề cẩm nang"
+  },
+  {
+    "key": "view.home-sections.news.002",
+    "group_name": "Trang chủ – bài viết",
+    "label": "Đích liên kết: /tin-tuc?muc=thong-tin-han-quoc",
+    "kind": "url",
+    "value": "/tin-tuc?muc=thong-tin-han-quoc"
+  },
+  {
+    "key": "view.home-sections.news.003",
+    "group_name": "Trang chủ – bài viết",
+    "label": "a: Thông tin Hàn Quốc",
+    "kind": "text",
+    "value": "Thông tin Hàn Quốc"
+  },
+  {
+    "key": "view.home-sections.news.004",
+    "group_name": "Trang chủ – bài viết",
+    "label": "Đích liên kết: /tin-tuc?muc=cam-nang-sinh-hoat",
+    "kind": "url",
+    "value": "/tin-tuc?muc=cam-nang-sinh-hoat"
+  },
+  {
+    "key": "view.home-sections.news.005",
+    "group_name": "Trang chủ – bài viết",
+    "label": "a: Cẩm nang sinh hoạt",
+    "kind": "text",
+    "value": "Cẩm nang sinh hoạt"
+  },
+  {
+    "key": "view.home-sections.news.006",
+    "group_name": "Trang chủ – bài viết",
+    "label": "Đích liên kết: /tin-tuc?muc=hoat-dong-soldream",
+    "kind": "url",
+    "value": "/tin-tuc?muc=hoat-dong-soldream"
+  },
+  {
+    "key": "view.home-sections.news.007",
+    "group_name": "Trang chủ – bài viết",
+    "label": "a: Hoạt động SolDream",
+    "kind": "text",
+    "value": "Hoạt động SolDream"
+  },
+  {
+    "key": "view.home-sections.news.008",
+    "group_name": "Trang chủ – bài viết",
+    "label": "p: Chưa có bài viết nào.",
+    "kind": "text",
+    "value": "Chưa có bài viết nào."
+  },
+  {
+    "key": "view.home-sections.news.009",
+    "group_name": "Trang chủ – bài viết",
+    "label": "Đích liên kết: /tin-tuc",
+    "kind": "url",
+    "value": "/tin-tuc"
+  },
+  {
+    "key": "view.home-sections.news.010",
+    "group_name": "Trang chủ – bài viết",
+    "label": "a: Xem tất cả tin tức",
+    "kind": "text",
+    "value": "Xem tất cả tin tức"
+  },
+  {
+    "key": "browser.site.001",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Đóng menu",
+    "kind": "text",
+    "value": "Đóng menu"
+  },
+  {
+    "key": "browser.site.002",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Mở menu",
+    "kind": "text",
+    "value": "Mở menu"
+  },
+  {
+    "key": "browser.site.003",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Gửi đăng ký",
+    "kind": "text",
+    "value": "Gửi đăng ký"
+  },
+  {
+    "key": "browser.site.004",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Bạn muốn nhận thông tin trường nào?",
+    "kind": "text",
+    "value": "Bạn muốn nhận thông tin trường nào?"
+  },
+  {
+    "key": "browser.site.005",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Ví dụ: Đại học Hannam",
+    "kind": "text",
+    "value": "Ví dụ: Đại học Hannam"
+  },
+  {
+    "key": "browser.site.006",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Bạn muốn tìm hiểu chương trình hoặc kỳ tuyển sinh nào?",
+    "kind": "text",
+    "value": "Bạn muốn tìm hiểu chương trình hoặc kỳ tuyển sinh nào?"
+  },
+  {
+    "key": "browser.site.007",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Ví dụ: Hệ tiếng kỳ tháng 9",
+    "kind": "text",
+    "value": "Ví dụ: Hệ tiếng kỳ tháng 9"
+  },
+  {
+    "key": "browser.site.008",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Đang gửi…",
+    "kind": "text",
+    "value": "Đang gửi…"
+  },
+  {
+    "key": "browser.site.009",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Không thể gửi yêu cầu.",
+    "kind": "text",
+    "value": "Không thể gửi yêu cầu."
+  },
+  {
+    "key": "browser.site.010",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": " Bạn có thể gọi Hotline 0364 648 282.",
+    "kind": "text",
+    "value": " Bạn có thể gọi Hotline 0364 648 282."
+  },
+  {
+    "key": "browser.site.011",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Đã gửi đăng ký",
+    "kind": "text",
+    "value": "Đã gửi đăng ký"
+  },
+  {
+    "key": "browser.site.012",
+    "group_name": "Biểu mẫu và thao tác",
+    "label": "Bảng thông tin, vuốt ngang để xem đầy đủ",
+    "kind": "text",
+    "value": "Bảng thông tin, vuốt ngang để xem đầy đủ"
+  },
+  {
+    "key": "browser.chatbot.001",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Chào bạn! Mình là trợ lý của Sol Dream Education. Bạn có thể hỏi về khóa học, trường đại học, học phí, học bổn",
+    "kind": "text",
+    "value": "Chào bạn! Mình là trợ lý của Sol Dream Education. Bạn có thể hỏi về khóa học, trường đại học, học phí, học bổng, hồ sơ hoặc chương trình du học Hàn Quốc."
+  },
+  {
+    "key": "browser.chatbot.002",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Hôm nay",
+    "kind": "text",
+    "value": "Hôm nay"
+  },
+  {
+    "key": "browser.chatbot.003",
+    "group_name": "Trợ lý – thông báo",
+    "label": "AI + dữ liệu Sol Dream",
+    "kind": "text",
+    "value": "AI + dữ liệu Sol Dream"
+  },
+  {
+    "key": "browser.chatbot.004",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Tra cứu dữ liệu Sol Dream",
+    "kind": "text",
+    "value": "Tra cứu dữ liệu Sol Dream"
+  },
+  {
+    "key": "browser.chatbot.005",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Đang kết nối lại",
+    "kind": "text",
+    "value": "Đang kết nối lại"
+  },
+  {
+    "key": "browser.chatbot.006",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Vuốt ngang để xem đầy đủ bảng →",
+    "kind": "text",
+    "value": "Vuốt ngang để xem đầy đủ bảng →"
+  },
+  {
+    "key": "browser.chatbot.007",
+    "group_name": "Trợ lý – thông báo",
+    "label": "SolDream Support đang trả lời",
+    "kind": "text",
+    "value": "SolDream Support đang trả lời"
+  },
+  {
+    "key": "browser.chatbot.008",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Đang tổng hợp câu trả lời…",
+    "kind": "text",
+    "value": "Đang tổng hợp câu trả lời…"
+  },
+  {
+    "key": "browser.chatbot.009",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Không thể kết nối đến trợ lý.",
+    "kind": "text",
+    "value": "Không thể kết nối đến trợ lý."
+  },
+  {
+    "key": "browser.chatbot.010",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Tra cứu dữ liệu Sol Dream",
+    "kind": "text",
+    "value": "Tra cứu dữ liệu Sol Dream"
+  },
+  {
+    "key": "browser.chatbot.011",
+    "group_name": "Trợ lý – thông báo",
+    "label": "AI + dữ liệu Sol Dream",
+    "kind": "text",
+    "value": "AI + dữ liệu Sol Dream"
+  },
+  {
+    "key": "browser.chatbot.012",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Hiện chưa thể kết nối máy chủ tư vấn. Bạn vui lòng thử lại hoặc liên hệ Hotline/Zalo 0364 648 282 nhé.",
+    "kind": "text",
+    "value": "Hiện chưa thể kết nối máy chủ tư vấn. Bạn vui lòng thử lại hoặc liên hệ Hotline/Zalo 0364 648 282 nhé."
+  },
+  {
+    "key": "browser.chatbot.013",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Mất kết nối",
+    "kind": "text",
+    "value": "Mất kết nối"
+  },
+  {
+    "key": "server.routes.public.001",
+    "group_name": "SEO và tên trang",
+    "label": "SOL DREAM EDUCATION - Trung tâm Hàn ngữ và Du học Hàn Quốc",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION - Trung tâm Hàn ngữ và Du học Hàn Quốc"
+  },
+  {
+    "key": "server.routes.public.002",
+    "group_name": "SEO và tên trang",
+    "label": "Thông tin khóa học tiếng Hàn và dịch vụ tư vấn du học Hàn Quốc tại SOL DREAM EDUCATION.",
+    "kind": "text",
+    "value": "Thông tin khóa học tiếng Hàn và dịch vụ tư vấn du học Hàn Quốc tại SOL DREAM EDUCATION."
+  },
+  {
+    "key": "server.routes.public.003",
+    "group_name": "SEO và tên trang",
+    "label": "Khóa học tại SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Khóa học tại SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.004",
+    "group_name": "SEO và tên trang",
+    "label": "Trợ lý tư vấn du học Hàn Quốc SolDream Support",
+    "kind": "text",
+    "value": "Trợ lý tư vấn du học Hàn Quốc SolDream Support"
+  },
+  {
+    "key": "server.routes.public.005",
+    "group_name": "SEO và tên trang",
+    "label": "Trợ lý tra cứu khóa học, trường đại học, chương trình du học Hàn Quốc và thông tin tư vấn đã công bố",
+    "kind": "text",
+    "value": "Trợ lý tra cứu khóa học, trường đại học, chương trình du học Hàn Quốc và thông tin tư vấn đã công bố của SOL DREAM EDUCATION."
+  },
+  {
+    "key": "server.routes.public.006",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.007",
+    "group_name": "SEO và tên trang",
+    "label": "Trợ lý tư vấn du học",
+    "kind": "text",
+    "value": "Trợ lý tư vấn du học"
+  },
+  {
+    "key": "server.routes.public.008",
+    "group_name": "SEO và tên trang",
+    "label": "Trợ lý tư vấn du học Hàn Quốc | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Trợ lý tư vấn du học Hàn Quốc | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.009",
+    "group_name": "SEO và tên trang",
+    "label": "Hỏi đáp về khóa học tiếng Hàn, trường đại học, học phí, học bổng, hồ sơ và chương trình du học Hàn Q",
+    "kind": "text",
+    "value": "Hỏi đáp về khóa học tiếng Hàn, trường đại học, học phí, học bổng, hồ sơ và chương trình du học Hàn Quốc cùng SolDream Support."
+  },
+  {
+    "key": "server.routes.public.010",
+    "group_name": "SEO và tên trang",
+    "label": "Giới thiệu SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Giới thiệu SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.011",
+    "group_name": "SEO và tên trang",
+    "label": "Thông tin nhận diện, dịch vụ, địa chỉ và phạm vi hoạt động của SOL DREAM EDUCATION.",
+    "kind": "text",
+    "value": "Thông tin nhận diện, dịch vụ, địa chỉ và phạm vi hoạt động của SOL DREAM EDUCATION."
+  },
+  {
+    "key": "server.routes.public.012",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.013",
+    "group_name": "SEO và tên trang",
+    "label": "Giới thiệu",
+    "kind": "text",
+    "value": "Giới thiệu"
+  },
+  {
+    "key": "server.routes.public.014",
+    "group_name": "SEO và tên trang",
+    "label": "Giới thiệu SOL DREAM EDUCATION | Trung tâm Hàn ngữ & Du học Hàn Quốc",
+    "kind": "text",
+    "value": "Giới thiệu SOL DREAM EDUCATION | Trung tâm Hàn ngữ & Du học Hàn Quốc"
+  },
+  {
+    "key": "server.routes.public.015",
+    "group_name": "SEO và tên trang",
+    "label": "SOL DREAM EDUCATION là trung tâm Hàn ngữ và tư vấn du học Hàn Quốc tại Tân Phú, TP.HCM, hoạt động từ",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION là trung tâm Hàn ngữ và tư vấn du học Hàn Quốc tại Tân Phú, TP.HCM, hoạt động từ năm 2019."
+  },
+  {
+    "key": "server.routes.public.016",
+    "group_name": "SEO và tên trang",
+    "label": "Câu hỏi thường gặp về khóa học và du học Hàn Quốc",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp về khóa học và du học Hàn Quốc"
+  },
+  {
+    "key": "server.routes.public.017",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.018",
+    "group_name": "SEO và tên trang",
+    "label": "Câu hỏi thường gặp",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp"
+  },
+  {
+    "key": "server.routes.public.019",
+    "group_name": "SEO và tên trang",
+    "label": "Câu hỏi thường gặp | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Câu hỏi thường gặp | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.020",
+    "group_name": "SEO và tên trang",
+    "label": "Giải đáp về khóa học tiếng Hàn, tư vấn du học, dữ liệu trường đại học và cách liên hệ SOL DREAM EDUC",
+    "kind": "text",
+    "value": "Giải đáp về khóa học tiếng Hàn, tư vấn du học, dữ liệu trường đại học và cách liên hệ SOL DREAM EDUCATION."
+  },
+  {
+    "key": "server.routes.public.021",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.022",
+    "group_name": "SEO và tên trang",
+    "label": "Sinh hoạt tại Hàn Quốc",
+    "kind": "text",
+    "value": "Sinh hoạt tại Hàn Quốc"
+  },
+  {
+    "key": "server.routes.public.023",
+    "group_name": "SEO và tên trang",
+    "label": "{v0} | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "{v0} | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.024",
+    "group_name": "SEO và tên trang",
+    "label": "Nền tảng và trung cấp",
+    "kind": "text",
+    "value": "Nền tảng và trung cấp"
+  },
+  {
+    "key": "server.routes.public.025",
+    "group_name": "SEO và tên trang",
+    "label": "Luyện thi TOPIK",
+    "kind": "text",
+    "value": "Luyện thi TOPIK"
+  },
+  {
+    "key": "server.routes.public.026",
+    "group_name": "SEO và tên trang",
+    "label": "Giao tiếp và phát âm",
+    "kind": "text",
+    "value": "Giao tiếp và phát âm"
+  },
+  {
+    "key": "server.routes.public.027",
+    "group_name": "SEO và tên trang",
+    "label": "Khóa học tại SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Khóa học tại SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.028",
+    "group_name": "SEO và tên trang",
+    "label": "Danh sách khóa học tiếng Hàn và tiếng Anh tại SOL DREAM EDUCATION.",
+    "kind": "text",
+    "value": "Danh sách khóa học tiếng Hàn và tiếng Anh tại SOL DREAM EDUCATION."
+  },
+  {
+    "key": "server.routes.public.029",
+    "group_name": "SEO và tên trang",
+    "label": "Danh sách khóa học tại SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Danh sách khóa học tại SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.030",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.031",
+    "group_name": "SEO và tên trang",
+    "label": "Khóa học",
+    "kind": "text",
+    "value": "Khóa học"
+  },
+  {
+    "key": "server.routes.public.032",
+    "group_name": "SEO và tên trang",
+    "label": "Học phí tiếng Hàn 2026 tại TP.HCM | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Học phí tiếng Hàn 2026 tại TP.HCM | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.033",
+    "group_name": "SEO và tên trang",
+    "label": "Tra cứu bảng học phí tiếng Hàn SDE 2026 theo lớp: sơ cấp, trung cấp, TOPIK, giao tiếp và phát âm, gồ",
+    "kind": "text",
+    "value": "Tra cứu bảng học phí tiếng Hàn SDE 2026 theo lớp: sơ cấp, trung cấp, TOPIK, giao tiếp và phát âm, gồm số buổi, thời lượng, sĩ số và cơ cấu giáo viên."
+  },
+  {
+    "key": "server.routes.public.034",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.035",
+    "group_name": "SEO và tên trang",
+    "label": "Khóa học",
+    "kind": "text",
+    "value": "Khóa học"
+  },
+  {
+    "key": "server.routes.public.036",
+    "group_name": "SEO và tên trang",
+    "label": "{v0} | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "{v0} | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.037",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.038",
+    "group_name": "SEO và tên trang",
+    "label": "Cẩm nang & Thông tin",
+    "kind": "text",
+    "value": "Cẩm nang & Thông tin"
+  },
+  {
+    "key": "server.routes.public.039",
+    "group_name": "SEO và tên trang",
+    "label": "{v0} | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "{v0} | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.040",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.041",
+    "group_name": "SEO và tên trang",
+    "label": "SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.042",
+    "group_name": "SEO và tên trang",
+    "label": "Chương trình du học Hàn Quốc | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Chương trình du học Hàn Quốc | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.043",
+    "group_name": "SEO và tên trang",
+    "label": "Chương trình tư vấn du học Hàn Quốc, chọn trường, dự toán chi phí và chuẩn bị hồ sơ cùng SOL DREAM E",
+    "kind": "text",
+    "value": "Chương trình tư vấn du học Hàn Quốc, chọn trường, dự toán chi phí và chuẩn bị hồ sơ cùng SOL DREAM EDUCATION."
+  },
+  {
+    "key": "server.routes.public.044",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.045",
+    "group_name": "SEO và tên trang",
+    "label": "Du học Hàn Quốc",
+    "kind": "text",
+    "value": "Du học Hàn Quốc"
+  },
+  {
+    "key": "server.routes.public.046",
+    "group_name": "SEO và tên trang",
+    "label": "Chương trình du học Hàn Quốc | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Chương trình du học Hàn Quốc | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.047",
+    "group_name": "SEO và tên trang",
+    "label": "Thông tin chương trình du học Hàn Quốc, điều kiện, chi phí và lộ trình hồ sơ do SOL DREAM EDUCATION ",
+    "kind": "text",
+    "value": "Thông tin chương trình du học Hàn Quốc, điều kiện, chi phí và lộ trình hồ sơ do SOL DREAM EDUCATION tổng hợp."
+  },
+  {
+    "key": "server.routes.public.048",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.049",
+    "group_name": "SEO và tên trang",
+    "label": "Du học Hàn Quốc",
+    "kind": "text",
+    "value": "Du học Hàn Quốc"
+  },
+  {
+    "key": "server.routes.public.050",
+    "group_name": "SEO và tên trang",
+    "label": "Thông tin trường đại học Hàn Quốc | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Thông tin trường đại học Hàn Quốc | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.051",
+    "group_name": "SEO và tên trang",
+    "label": "Hồ sơ trường đại học Hàn Quốc do SOL DREAM EDUCATION tổng hợp: ngành học, học phí, học bổng và ký tú",
+    "kind": "text",
+    "value": "Hồ sơ trường đại học Hàn Quốc do SOL DREAM EDUCATION tổng hợp: ngành học, học phí, học bổng và ký túc xá."
+  },
+  {
+    "key": "server.routes.public.052",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.053",
+    "group_name": "SEO và tên trang",
+    "label": "Trường đại học Hàn Quốc",
+    "kind": "text",
+    "value": "Trường đại học Hàn Quốc"
+  },
+  {
+    "key": "server.routes.public.054",
+    "group_name": "SEO và tên trang",
+    "label": "Bộ dữ liệu trường đại học Hàn Quốc của SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Bộ dữ liệu trường đại học Hàn Quốc của SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.055",
+    "group_name": "SEO và tên trang",
+    "label": "Bộ dữ liệu gồm {v0} trường trong danh mục hợp tác 2026-2027 cùng {v1} hồ sơ thông tin trường.",
+    "kind": "text",
+    "value": "Bộ dữ liệu gồm {v0} trường trong danh mục hợp tác 2026-2027 cùng {v1} hồ sơ thông tin trường."
+  },
+  {
+    "key": "server.routes.public.056",
+    "group_name": "SEO và tên trang",
+    "label": "Thông tin trường đại học Hàn Quốc | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "Thông tin trường đại học Hàn Quốc | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.057",
+    "group_name": "SEO và tên trang",
+    "label": "Tra cứu thông tin trường đại học Hàn Quốc: ngành học, học phí, học bổng và ký túc xá do SOL DREAM ED",
+    "kind": "text",
+    "value": "Tra cứu thông tin trường đại học Hàn Quốc: ngành học, học phí, học bổng và ký túc xá do SOL DREAM EDUCATION tổng hợp."
+  },
+  {
+    "key": "server.routes.public.058",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.059",
+    "group_name": "SEO và tên trang",
+    "label": "Thông tin trường",
+    "kind": "text",
+    "value": "Thông tin trường"
+  },
+  {
+    "key": "server.routes.public.060",
+    "group_name": "SEO và tên trang",
+    "label": "Trang chủ",
+    "kind": "text",
+    "value": "Trang chủ"
+  },
+  {
+    "key": "server.routes.public.061",
+    "group_name": "SEO và tên trang",
+    "label": "Trường đại học Hàn Quốc",
+    "kind": "text",
+    "value": "Trường đại học Hàn Quốc"
+  },
+  {
+    "key": "server.routes.public.062",
+    "group_name": "SEO và tên trang",
+    "label": "{v0}: ngành học, học phí, học bổng | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "{v0}: ngành học, học phí, học bổng | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.063",
+    "group_name": "SEO và tên trang",
+    "label": "{v0} - SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "{v0} - SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.064",
+    "group_name": "SEO và tên trang",
+    "label": "{v0} - Du học Hàn Quốc | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "{v0} - Du học Hàn Quốc | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.public.065",
+    "group_name": "SEO và tên trang",
+    "label": "{v0} - Thông tin trường | SOL DREAM EDUCATION",
+    "kind": "text",
+    "value": "{v0} - Thông tin trường | SOL DREAM EDUCATION"
+  },
+  {
+    "key": "server.routes.contact.001",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Yêu cầu gửi tư vấn không hợp lệ.",
+    "kind": "text",
+    "value": "Yêu cầu gửi tư vấn không hợp lệ."
+  },
+  {
+    "key": "server.routes.contact.002",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Đã nhận yêu cầu.",
+    "kind": "text",
+    "value": "Đã nhận yêu cầu."
+  },
+  {
+    "key": "server.routes.contact.003",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Bạn đã gửi nhiều yêu cầu trong thời gian ngắn. Vui lòng thử lại sau hoặc gọi Hotline 0364 648 282.",
+    "kind": "text",
+    "value": "Bạn đã gửi nhiều yêu cầu trong thời gian ngắn. Vui lòng thử lại sau hoặc gọi Hotline 0364 648 282."
+  },
+  {
+    "key": "server.routes.contact.004",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Biểu mẫu đã hết hạn hoặc được gửi quá nhanh. Vui lòng tải lại trang rồi thử lại.",
+    "kind": "text",
+    "value": "Biểu mẫu đã hết hạn hoặc được gửi quá nhanh. Vui lòng tải lại trang rồi thử lại."
+  },
+  {
+    "key": "server.routes.contact.005",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Vui lòng nhập họ tên và số điện thoại Việt Nam hợp lệ.",
+    "kind": "text",
+    "value": "Vui lòng nhập họ tên và số điện thoại Việt Nam hợp lệ."
+  },
+  {
+    "key": "server.routes.contact.006",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Vui lòng nhập email liên hệ hợp lệ.",
+    "kind": "text",
+    "value": "Vui lòng nhập email liên hệ hợp lệ."
+  },
+  {
+    "key": "server.routes.contact.007",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Nội dung quan tâm chưa hợp lệ.",
+    "kind": "text",
+    "value": "Nội dung quan tâm chưa hợp lệ."
+  },
+  {
+    "key": "server.routes.contact.008",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Thông tin cần nhận chưa hợp lệ.",
+    "kind": "text",
+    "value": "Thông tin cần nhận chưa hợp lệ."
+  },
+  {
+    "key": "server.routes.contact.009",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Vui lòng cho biết trường bạn muốn nhận thông tin.",
+    "kind": "text",
+    "value": "Vui lòng cho biết trường bạn muốn nhận thông tin."
+  },
+  {
+    "key": "server.routes.contact.010",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Yêu cầu của bạn đã được ghi nhận. SOL DREAM sẽ liên hệ với bạn sớm.",
+    "kind": "text",
+    "value": "Yêu cầu của bạn đã được ghi nhận. SOL DREAM sẽ liên hệ với bạn sớm."
+  },
+  {
+    "key": "server.routes.contact.011",
+    "group_name": "Biểu mẫu – phản hồi máy chủ",
+    "label": "Đã nhận yêu cầu. SOL DREAM sẽ liên hệ với bạn sớm.",
+    "kind": "text",
+    "value": "Đã nhận yêu cầu. SOL DREAM sẽ liên hệ với bạn sớm."
+  },
+  {
+    "key": "server.lib.leadContext.001",
+    "group_name": "Biểu mẫu – nội dung quan tâm",
+    "label": "Thông tin về bài viết {v0}",
+    "kind": "text",
+    "value": "Thông tin về bài viết {v0}"
+  },
+  {
+    "key": "server.lib.leadContext.002",
+    "group_name": "Biểu mẫu – nội dung quan tâm",
+    "label": "Thông tin về {v0}",
+    "kind": "text",
+    "value": "Thông tin về {v0}"
+  },
+  {
+    "key": "server.lib.leadContext.003",
+    "group_name": "Biểu mẫu – nội dung quan tâm",
+    "label": "Thông tin về chương trình {v0}",
+    "kind": "text",
+    "value": "Thông tin về chương trình {v0}"
+  },
+  {
+    "key": "server.lib.leadContext.004",
+    "group_name": "Biểu mẫu – nội dung quan tâm",
+    "label": "Thông tin về {v0}",
+    "kind": "text",
+    "value": "Thông tin về {v0}"
+  },
+  {
+    "key": "server.lib.leadContext.005",
+    "group_name": "Biểu mẫu – nội dung quan tâm",
+    "label": "Thông tin về khóa học {v0}",
+    "kind": "text",
+    "value": "Thông tin về khóa học {v0}"
+  },
+  {
+    "key": "course.notice",
+    "group_name": "Chính sách khóa học",
+    "label": "Lưu ý chung về khóa học",
+    "kind": "text",
+    "value": "Mức học phí áp dụng theo Bảng học phí tiếng Hàn SDE 2026, chưa gồm VAT. Lịch chuẩn 3 buổi/tuần, 90 phút/buổi; số tuần là ước tính, chưa tính ngày nghỉ và điều chỉnh lịch. Lịch khai giảng, ưu đãi và điều kiện áp dụng cần xác nhận với SOL DREAM EDUCATION trước khi đăng ký."
+  },
+  {
+    "key": "seo.default-title",
+    "group_name": "SEO chung",
+    "label": "Tiêu đề mặc định",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION - Trung Tâm Hàn Ngữ & Du Học Hàn Quốc Uy Tín"
+  },
+  {
+    "key": "seo.default-description",
+    "group_name": "SEO chung",
+    "label": "Mô tả mặc định",
+    "kind": "text",
+    "value": "Trung tâm Hàn ngữ Sol Dream Education chuyên đào tạo tiếng Hàn cấp tốc, tiếng Hàn giao tiếp và tư vấn du học Hàn Quốc uy tín tại TP.HCM. Đăng ký nhận tư vấn ngay!"
+  },
+  {
+    "key": "seo.default-alt",
+    "group_name": "SEO chung",
+    "label": "Alt ảnh mặc định",
+    "kind": "text",
+    "value": "SOL DREAM EDUCATION - Tư vấn du học Hàn Quốc và đào tạo tiếng Hàn"
+  },
+  {
+    "key": "error.404-title",
+    "group_name": "Trang không tìm thấy",
+    "label": "Tiêu đề SEO",
+    "kind": "text",
+    "value": "Không tìm thấy trang - SOL DREAM EDUCATION"
+  },
+  {
+    "key": "error.404-description",
+    "group_name": "Trang không tìm thấy",
+    "label": "Mô tả SEO",
+    "kind": "text",
+    "value": "Trang bạn tìm không tồn tại."
+  },
+  {
+    "key": "topic.thong-tin-han-quoc.label",
+    "group_name": "Ba tab cẩm nang",
+    "label": "Tên tab: Thông tin Hàn Quốc",
+    "kind": "text",
+    "value": "Thông tin Hàn Quốc"
+  },
+  {
+    "key": "topic.thong-tin-han-quoc.description",
+    "group_name": "Ba tab cẩm nang",
+    "label": "Lời dẫn: Thông tin Hàn Quốc",
+    "kind": "text",
+    "value": "Thông tin về học tiếng, trường, chương trình và chuẩn bị du học Hàn Quốc."
+  },
+  {
+    "key": "topic.cam-nang-sinh-hoat.label",
+    "group_name": "Ba tab cẩm nang",
+    "label": "Tên tab: Cẩm nang sinh hoạt",
+    "kind": "text",
+    "value": "Cẩm nang sinh hoạt"
+  },
+  {
+    "key": "topic.cam-nang-sinh-hoat.description",
+    "group_name": "Ba tab cẩm nang",
+    "label": "Lời dẫn: Cẩm nang sinh hoạt",
+    "kind": "text",
+    "value": "Kinh nghiệm chuẩn bị chỗ ở, chi tiêu và thích nghi với đời sống tại Hàn Quốc."
+  },
+  {
+    "key": "topic.hoat-dong-soldream.label",
+    "group_name": "Ba tab cẩm nang",
+    "label": "Tên tab: Hoạt động SolDream",
+    "kind": "text",
+    "value": "Hoạt động SolDream"
+  },
+  {
+    "key": "topic.hoat-dong-soldream.description",
+    "group_name": "Ba tab cẩm nang",
+    "label": "Lời dẫn: Hoạt động SolDream",
+    "kind": "text",
+    "value": "Hành trình, đội ngũ, lớp học và các hoạt động được SOL DREAM EDUCATION công bố."
+  },
+  {
+    "key": "seo.geo-place",
+    "group_name": "SEO chung",
+    "label": "89 đường S11, phường Tây Thạnh, Quận Tân Phú, TP.HCM",
+    "kind": "text",
+    "value": "89 đường S11, phường Tây Thạnh, Quận Tân Phú, TP.HCM"
+  },
+  {
+    "key": "view.faq.category-aria",
+    "group_name": "Hỏi đáp",
+    "label": "Câu hỏi về {v0}",
+    "kind": "text",
+    "value": "Câu hỏi về {v0}"
+  },
+  {
+    "key": "browser.chatbot.table-aria",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Bảng dữ liệu gồm {v0} cột",
+    "kind": "text",
+    "value": "Bảng dữ liệu gồm {v0} cột"
+  },
+  {
+    "key": "cover.default",
+    "group_name": "SEO và tên trang",
+    "label": "Cẩm nang du học Hàn Quốc",
+    "kind": "text",
+    "value": "Cẩm nang du học Hàn Quốc"
+  },
+  {
+    "key": "cover.category",
+    "group_name": "SEO và tên trang",
+    "label": "Cẩm nang du học",
+    "kind": "text",
+    "value": "Cẩm nang du học"
+  },
+  {
+    "key": "cover.school",
+    "group_name": "SEO và tên trang",
+    "label": "HỒ SƠ TRƯỜNG HÀN QUỐC",
+    "kind": "text",
+    "value": "HỒ SƠ TRƯỜNG HÀN QUỐC"
+  },
+  {
+    "key": "news.default-name",
+    "group_name": "SEO và tên trang",
+    "label": "Cẩm nang & Thông tin",
+    "kind": "text",
+    "value": "Cẩm nang & Thông tin"
+  },
+  {
+    "key": "news.default-description",
+    "group_name": "SEO và tên trang",
+    "label": "Cẩm nang, kinh nghiệm và câu chuyện du học Hàn Quốc từ SOL DREAM EDUCATION.",
+    "kind": "text",
+    "value": "Cẩm nang, kinh nghiệm và câu chuyện du học Hàn Quốc từ SOL DREAM EDUCATION."
+  },
+  {
+    "key": "life.faq-template",
+    "group_name": "Sinh hoạt Hàn Quốc",
+    "label": "{v0}: du học sinh cần lưu ý gì?",
+    "kind": "text",
+    "value": "{v0}: du học sinh cần lưu ý gì?"
+  },
+  {
+    "key": "school.article-headline",
+    "group_name": "Hồ sơ trường",
+    "label": "{v0}: ngành học, học phí, học bổng và ký túc xá",
+    "kind": "text",
+    "value": "{v0}: ngành học, học phí, học bổng và ký túc xá"
+  },
+  {
+    "key": "school.og-alt",
+    "group_name": "Hồ sơ trường",
+    "label": "{v0} - thông tin tuyển sinh và chi phí du học",
+    "kind": "text",
+    "value": "{v0} - thông tin tuyển sinh và chi phí du học"
+  },
+  {
+    "key": "catalog.heading.0",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "Lớp",
+    "kind": "text",
+    "value": "Lớp"
+  },
+  {
+    "key": "catalog.heading.1",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "Thời lượng",
+    "kind": "text",
+    "value": "Thời lượng"
+  },
+  {
+    "key": "catalog.heading.2",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "Sĩ số",
+    "kind": "text",
+    "value": "Sĩ số"
+  },
+  {
+    "key": "catalog.heading.3",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "Tối thiểu mở lớp",
+    "kind": "text",
+    "value": "Tối thiểu mở lớp"
+  },
+  {
+    "key": "catalog.heading.4",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "Giáo trình",
+    "kind": "text",
+    "value": "Giáo trình"
+  },
+  {
+    "key": "catalog.heading.5",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "Tài liệu bổ trợ",
+    "kind": "text",
+    "value": "Tài liệu bổ trợ"
+  },
+  {
+    "key": "catalog.heading.6",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "Học phí",
+    "kind": "text",
+    "value": "Học phí"
+  },
+  {
+    "key": "course.faq.audience-question",
+    "value": "{v0} phù hợp với ai?",
+    "group_name": "FAQ khóa học – mẫu dự phòng",
+    "label": "{v0} phù hợp với ai?",
+    "kind": "text"
+  },
+  {
+    "key": "course.faq.audience-answer",
+    "value": "{v0} phù hợp với {v1}. SOL DREAM EDUCATION kiểm tra mục tiêu, nền tảng hiện tại và thời gian dự kiến trước khi tư vấn lớp để học viên không đăng ký một lộ trình không phù hợp.",
+    "group_name": "FAQ khóa học – mẫu dự phòng",
+    "label": "{v0} phù hợp với {v1}. SOL DREAM EDUCATION kiểm tra mục tiêu, nền tảng hiện tại và thời gian dự kiến trước khi",
+    "kind": "text"
+  },
+  {
+    "key": "course.faq.fee-question",
+    "value": "Học phí {v0} là bao nhiêu?",
+    "group_name": "FAQ khóa học – mẫu dự phòng",
+    "label": "Học phí {v0} là bao nhiêu?",
+    "kind": "text"
+  },
+  {
+    "key": "course.faq.fee-answer",
+    "value": "{v0}. {v1}. Lịch học, thời lượng, ưu đãi và khoản phí áp dụng cần được xác nhận trực tiếp với SOL DREAM EDUCATION tại thời điểm đăng ký.",
+    "group_name": "FAQ khóa học – mẫu dự phòng",
+    "label": "{v0}. {v1}. Lịch học, thời lượng, ưu đãi và khoản phí áp dụng cần được xác nhận trực tiếp với SOL DREAM EDUCAT",
+    "kind": "text"
+  },
+  {
+    "key": "course.faq.exam-question",
+    "value": "{v0} có yêu cầu {v1} đầu vào không?",
+    "group_name": "FAQ khóa học – mẫu dự phòng",
+    "label": "{v0} có yêu cầu {v1} đầu vào không?",
+    "kind": "text"
+  },
+  {
+    "key": "course.faq.exam-missing",
+    "value": "Website chưa công bố yêu cầu {v0} đầu vào cho khóa học này.",
+    "group_name": "FAQ khóa học – mẫu dự phòng",
+    "label": "Website chưa công bố yêu cầu {v0} đầu vào cho khóa học này.",
+    "kind": "text"
+  },
+  {
+    "key": "course.faq.exam-answer",
+    "value": "{v0} {v1}. Học viên sẽ được kiểm tra mục tiêu và trình độ thực tế trước khi xếp lớp.",
+    "group_name": "FAQ khóa học – mẫu dự phòng",
+    "label": "{v0} {v1}. Học viên sẽ được kiểm tra mục tiêu và trình độ thực tế trước khi xếp lớp.",
+    "kind": "text"
+  },
+  {
+    "key": "unsubscribe.title",
+    "value": "Hủy nhận thông tin",
+    "group_name": "Trang hủy nhận thông tin",
+    "label": "Hủy nhận thông tin",
+    "kind": "text"
+  },
+  {
+    "key": "unsubscribe.success",
+    "value": "Đã dừng gửi thông tin",
+    "group_name": "Trang hủy nhận thông tin",
+    "label": "Đã dừng gửi thông tin",
+    "kind": "text"
+  },
+  {
+    "key": "unsubscribe.invalid",
+    "value": "Liên kết không hợp lệ",
+    "group_name": "Trang hủy nhận thông tin",
+    "label": "Liên kết không hợp lệ",
+    "kind": "text"
+  },
+  {
+    "key": "unsubscribe.successNote",
+    "value": "Bạn sẽ không nhận thêm email cập nhật từ đăng ký này.",
+    "group_name": "Trang hủy nhận thông tin",
+    "label": "Bạn sẽ không nhận thêm email cập nhật từ đăng ký này.",
+    "kind": "text"
+  },
+  {
+    "key": "unsubscribe.invalidNote",
+    "value": "Không tìm thấy đăng ký tương ứng hoặc liên kết đã hết hiệu lực.",
+    "group_name": "Trang hủy nhận thông tin",
+    "label": "Không tìm thấy đăng ký tương ứng hoặc liên kết đã hết hiệu lực.",
+    "kind": "text"
+  },
+  {
+    "key": "unsubscribe.home",
+    "value": "Về trang chủ",
+    "group_name": "Trang hủy nhận thông tin",
+    "label": "Về trang chủ",
+    "kind": "text"
+  },
+  {
+    "key": "chat.empty-message",
+    "value": "Bạn hãy nhập nội dung cần tư vấn nhé.",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Bạn hãy nhập nội dung cần tư vấn nhé.",
+    "kind": "text"
+  },
+  {
+    "key": "chat.long-message",
+    "value": "Tin nhắn vui lòng không quá 1.500 ký tự.",
+    "group_name": "Trợ lý – thông báo",
+    "label": "Tin nhắn vui lòng không quá 1.500 ký tự.",
+    "kind": "text"
+  },
+  {
+    "key": "catalog.unit.sessions",
+    "value": "buổi",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "buổi",
+    "kind": "text"
+  },
+  {
+    "key": "catalog.unit.minutes",
+    "value": "phút",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "phút",
+    "kind": "text"
+  },
+  {
+    "key": "catalog.unit.hours",
+    "value": "giờ",
+    "group_name": "Bảng học phí trong bài viết",
+    "label": "giờ",
+    "kind": "text"
+  },
+  {
+    "key": "faq.category.0",
+    "value": "Du học",
+    "group_name": "Hỏi đáp",
+    "label": "Du học",
+    "kind": "text"
+  },
+  {
+    "key": "faq.category.1",
+    "value": "Đào tạo tiếng",
+    "group_name": "Hỏi đáp",
+    "label": "Đào tạo tiếng",
+    "kind": "text"
+  },
+  {
+    "key": "faq.category.2",
+    "value": "Thông tin sinh hoạt tại Hàn Quốc",
+    "group_name": "Hỏi đáp",
+    "label": "Thông tin sinh hoạt tại Hàn Quốc",
+    "kind": "text"
+  },
+  {
+    "key": "faq.category.3",
+    "value": "Thông tin trường",
+    "group_name": "Hỏi đáp",
+    "label": "Thông tin trường",
+    "kind": "text"
+  },
+  {
+    "key": "program.category.study",
+    "value": "Chương trình du học",
+    "group_name": "Nhãn chuyên mục",
+    "label": "Chương trình du học",
+    "kind": "text"
+  },
+  {
+    "key": "program.category.school",
+    "value": "Thông tin trường",
+    "group_name": "Nhãn chuyên mục",
+    "label": "Thông tin trường",
+    "kind": "text"
+  },
+  {
+    "key": "cover.brand",
+    "value": "Sol Dream",
+    "group_name": "Ảnh bìa tự động",
+    "label": "Sol Dream",
+    "kind": "text"
+  },
+  {
+    "key": "cover.brand-line",
+    "value": "EDUCATION",
+    "group_name": "Ảnh bìa tự động",
+    "label": "EDUCATION",
+    "kind": "text"
+  }
+]

@@ -5,63 +5,63 @@
     <div class="hero__text reveal">
       <% const heroIntro=getBlock("hero-intro"); %><% if(heroIntro.active){ %><span class="eyebrow"><%= heroIntro.eyebrow %></span><h1><%= heroIntro.title %></h1><div class="hero__sub"><%- heroIntro.content %></div><% } %>
       <div class="hero__actions">
-        <a href="#lienhe" class="btn btn-primary"><%= getBlock("consult-form").title %>
+        <a href="<%= siteText("view.home-sections.hero.001") %>" class="btn btn-primary"><%= getBlock("consult-form").title %>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a href="/khoa-hoc" class="btn btn-ghost">Xem khóa học</a>
+        <a href="<%= siteText("view.home-sections.hero.002") %>" class="btn btn-ghost"><%= siteText("view.home-sections.hero.003") %></a>
       </div>
       <div class="hero__chips">
-        <span class="chip p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 7v6c0 5 3.8 8.6 9 10 5.2-1.4 9-5 9-10V7l-9-5Z"/></svg>Giáo viên bản ngữ Hàn Quốc</span>
-        <span class="chip s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 2.4 7.4H22l-6 4.4 2.3 7.4L12 16.9 5.7 21.2 8 13.8l-6-4.4h7.6L12 2Z"/></svg>Học bổng du học Hàn</span>
-        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Giao lưu văn hóa hàng tháng</span>
+        <span class="chip p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 7v6c0 5 3.8 8.6 9 10 5.2-1.4 9-5 9-10V7l-9-5Z"/></svg><%= siteText("view.home-sections.hero.004") %></span>
+        <span class="chip s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 2.4 7.4H22l-6 4.4 2.3 7.4L12 16.9 5.7 21.2 8 13.8l-6-4.4h7.6L12 2Z"/></svg><%= siteText("view.home-sections.hero.005") %></span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><%= siteText("view.home-sections.hero.006") %></span>
       </div>
     </div>
 
     <div class="hero__visual reveal">
-      <div class="pass" role="button" tabindex="0" aria-label="Khởi động hành trình bay từ TP. Hồ Chí Minh đến Seoul" data-flight-ticket>
+      <div class="pass" role="button" tabindex="0" aria-label="<%= siteText("view.home-sections.hero.007") %>" data-flight-ticket>
         <div class="pass__main">
           <div class="pass__top">
-            <span class="pass__air"><i></i>SOL DREAM ✈ EDUCATION</span>
-            <span class="pass__tag">Boarding Pass</span>
+            <span class="pass__air"><i></i><%= siteText("view.home-sections.hero.008") %></span>
+            <span class="pass__tag"><%= siteText("view.home-sections.hero.009") %></span>
           </div>
           <div class="pass__route">
-            <div class="pass__city"><div class="pass__code">SGN</div><small>TP. Hồ Chí Minh</small></div>
+            <div class="pass__city"><div class="pass__code"><%= siteText("view.home-sections.hero.010") %></div><small><%= siteText("view.home-sections.hero.011") %></small></div>
             <div class="pass__path">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 16.5 14 14V7.5a2 2 0 0 0-4 0V14l-8 2.5V19l8-1.5V22l-2 1.5V25l3-1 3 1v-1.5L12 22v-4.5L22 19v-2.5Z"/></svg>
             </div>
-            <div class="pass__city"><div class="pass__code">ICN</div><small>Seoul, Hàn Quốc</small></div>
+            <div class="pass__city"><div class="pass__code"><%= siteText("view.home-sections.hero.012") %></div><small><%= siteText("view.home-sections.hero.013") %></small></div>
           </div>
           <div class="pass__grid">
-            <div><div class="lbl">Passenger</div><div class="val">Ước mơ của bạn</div></div>
-            <div><div class="lbl">Flight</div><div class="val">SD&nbsp;2026</div></div>
-            <div><div class="lbl">Gate</div><div class="val">Sol Dream</div></div>
-              <div><div class="lbl">Trường</div><div class="val">ĐHQG Seoul · Yonsei</div></div>
-            <div><div class="lbl">Học bổng</div><div class="val">Có</div></div>
-            <div><div class="lbl">Status</div><div class="val accent">Sẵn sàng</div></div>
+            <div><div class="lbl"><%= siteText("view.home-sections.hero.014") %></div><div class="val"><%= siteText("view.home-sections.hero.015") %></div></div>
+            <div><div class="lbl"><%= siteText("view.home-sections.hero.016") %></div><div class="val"><%= siteText("view.home-sections.hero.017") %></div></div>
+            <div><div class="lbl"><%= siteText("view.home-sections.hero.018") %></div><div class="val"><%= siteText("view.home-sections.hero.019") %></div></div>
+              <div><div class="lbl"><%= siteText("view.home-sections.hero.020") %></div><div class="val"><%= siteText("view.home-sections.hero.021") %></div></div>
+            <div><div class="lbl"><%= siteText("view.home-sections.hero.022") %></div><div class="val"><%= siteText("view.home-sections.hero.023") %></div></div>
+            <div><div class="lbl"><%= siteText("view.home-sections.hero.024") %></div><div class="val accent"><%= siteText("view.home-sections.hero.025") %></div></div>
           </div>
         </div>
         <div class="pass__stub">
-          <span class="seat">HÀN QUỐC</span>
+          <span class="seat"><%= siteText("view.home-sections.hero.026") %></span>
           <div class="barcode"></div>
         </div>
-        <span class="pass__tap">Chạm để cất cánh</span>
+        <span class="pass__tap"><%= siteText("view.home-sections.hero.027") %></span>
       </div>
       <div class="ticket-morph" aria-hidden="true">
-        <div class="ticket-morph__brand"><i></i><b>SOL DREAM</b><span>BOARDING PASS</span></div>
-        <div class="ticket-morph__route"><strong>SGN</strong><i></i><strong>ICN</strong></div>
+        <div class="ticket-morph__brand"><i></i><b><%= siteText("view.home-sections.hero.028") %></b><span><%= siteText("view.home-sections.hero.029") %></span></div>
+        <div class="ticket-morph__route"><strong><%= siteText("view.home-sections.hero.030") %></strong><i></i><strong><%= siteText("view.home-sections.hero.031") %></strong></div>
         <div class="ticket-morph__details"><span></span><span></span><span></span><span></span><span></span><span></span></div>
         <div class="ticket-morph__stub"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
       <div class="ticket-flight" aria-hidden="true">
         <div class="ticket-flight__map">
-          <img src="/img/vietnam-korea-flight-map.svg" alt="Bản đồ Việt Nam và Hàn Quốc với hành trình TP. HCM – Seoul">
-          <div class="flight-map__country flight-map__country--vietnam"><b>VIỆT NAM</b><span>ĐIỂM KHỞI HÀNH</span></div>
-          <div class="flight-map__country flight-map__country--korea"><b>HÀN QUỐC</b><span>ĐIỂM ĐẾN</span></div>
+          <img src="/img/vietnam-korea-flight-map.svg" alt="<%= siteText("view.home-sections.hero.032") %>">
+          <div class="flight-map__country flight-map__country--vietnam"><b><%= siteText("view.home-sections.hero.033") %></b><span><%= siteText("view.home-sections.hero.034") %></span></div>
+          <div class="flight-map__country flight-map__country--korea"><b><%= siteText("view.home-sections.hero.035") %></b><span><%= siteText("view.home-sections.hero.036") %></span></div>
           <span class="flight-map__marker flight-map__marker--hcm" data-hcm-marker><i></i></span>
           <span class="flight-map__marker flight-map__marker--seoul" data-seoul-marker><i></i></span>
-          <span class="flight-map__city flight-map__city--hcm">TP. HCM</span>
-          <span class="flight-map__city flight-map__city--seoul">SEOUL</span>
-          <div class="ticket-flight__departed"><span></span>Cất cánh từ TP. HCM</div>
-          <div class="ticket-flight__landed"><span></span>Hạ cánh tại Seoul</div>
+          <span class="flight-map__city flight-map__city--hcm"><%= siteText("view.home-sections.hero.037") %></span>
+          <span class="flight-map__city flight-map__city--seoul"><%= siteText("view.home-sections.hero.038") %></span>
+          <div class="ticket-flight__departed"><span></span><%= siteText("view.home-sections.hero.039") %></div>
+          <div class="ticket-flight__landed"><span></span><%= siteText("view.home-sections.hero.040") %></div>
         </div>
         <span class="ticket-flight__cloud ticket-flight__cloud--one"></span>
         <span class="ticket-flight__cloud ticket-flight__cloud--two"></span>

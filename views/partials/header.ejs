@@ -1,60 +1,60 @@
 <header class="site-header">
   <div class="wrap nav">
-    <a href="/" class="brand" aria-label="Sol Dream Education">
-      <img class="brand__logo" src="/img/logo-mark.png" alt="Logo SOL DREAM EDUCATION" width="48" height="48">
+    <a href="<%= siteText("view.partials.header.001") %>" class="brand" aria-label="<%= siteText("view.partials.header.002") %>">
+      <img class="brand__logo" src="/img/logo-mark.png" alt="<%= siteText("view.partials.header.003") %>" width="48" height="48">
       <span class="brand__wordmark" aria-hidden="true">
-        <strong>Sol Dream</strong>
-        <small><i></i><span>Education</span><i></i></small>
+        <strong><%= siteText("view.partials.header.004") %></strong>
+        <small><i></i><span><%= siteText("view.partials.header.005") %></span><i></i></small>
       </span>
     </a>
-    <nav aria-label="Điều hướng chính">
-      <button class="menu-close" id="menu-close" type="button" aria-label="Đóng menu">
+    <nav aria-label="<%= siteText("view.partials.header.006") %>">
+      <button class="menu-close" id="menu-close" type="button" aria-label="<%= siteText("view.partials.header.007") %>">
         <span aria-hidden="true">×</span>
       </button>
       <ul class="menu" id="menu">
-        <li><a href="/gioi-thieu">Giới thiệu</a></li>
-        <li><a href="/khoa-hoc">Khóa học <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
+        <li><a href="<%= siteText("view.partials.header.008") %>"><%= siteText("view.partials.header.009") %></a></li>
+        <li><a href="<%= siteText("view.partials.header.010") %>"><%= siteText("view.partials.header.011") %> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
           <div class="dropdown">
-            <a href="/khoa-hoc">Tất cả khóa học và học phí</a>
-            <a href="/khoa-hoc#tuition-foundation">Sơ cấp &amp; trung cấp</a>
-            <a href="/khoa-hoc#tuition-topik">Luyện thi TOPIK</a>
-            <a href="/khoa-hoc#tuition-speaking">Giao tiếp &amp; phát âm</a>
-            <span class="dropdown__label">Từng khóa học</span>
+            <a href="<%= siteText("view.partials.header.012") %>"><%= siteText("view.partials.header.013") %></a>
+            <a href="<%= siteText("view.partials.header.014") %>"><%= siteText("view.partials.header.015") %></a>
+            <a href="<%= siteText("view.partials.header.016") %>"><%= siteText("view.partials.header.017") %></a>
+            <a href="<%= siteText("view.partials.header.018") %>"><%= siteText("view.partials.header.019") %></a>
+            <span class="dropdown__label"><%= siteText("view.partials.header.020") %></span>
             <% (typeof navigationCourses !== 'undefined' ? navigationCourses : []).forEach(function(course){ %>
               <a href="<%= course.url %>"><%= course.name %></a>
             <% }) %>
           </div>
         </li>
-        <li><a href="/du-hoc">Du học Hàn Quốc <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
+        <li><a href="<%= siteText("view.partials.header.021") %>"><%= siteText("view.partials.header.022") %> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
           <div class="dropdown">
-            <a href="/du-hoc">Tất cả chương trình và bài hướng dẫn</a>
-            <a href="/du-hoc/cac-chuong-trinh-du-hoc-han-quoc-trong-ho-so-sol-dream-2026">Các lộ trình du học</a>
-            <a href="/du-hoc/chi-phi-du-hoc-han-quoc-2026-2027">Chi phí và lịch thanh toán</a>
-            <a href="/du-hoc/phan-biet-visa-du-hoc-han-quoc-d4-1-d2">Hồ sơ &amp; visa</a>
-            <a href="/du-hoc/lo-trinh-hoc-tieng-han-truoc-khi-du-hoc">Chuẩn bị tiếng Hàn</a>
+            <a href="<%= siteText("view.partials.header.023") %>"><%= siteText("view.partials.header.024") %></a>
+            <a href="<%= siteText("view.partials.header.025") %>"><%= siteText("view.partials.header.026") %></a>
+            <a href="<%= siteText("view.partials.header.027") %>"><%= siteText("view.partials.header.028") %></a>
+            <a href="<%= siteText("view.partials.header.029") %>"><%= siteText("view.partials.header.030") %></a>
+            <a href="<%= siteText("view.partials.header.031") %>"><%= siteText("view.partials.header.032") %></a>
           </div>
         </li>
-        <li><a href="/truong-dai-hoc">Thông tin trường <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
+        <li><a href="<%= siteText("view.partials.header.033") %>"><%= siteText("view.partials.header.034") %> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
           <div class="dropdown">
-            <a href="/truong-dai-hoc#partner-schools-title">Trường đối tác SOL DREAM</a>
-            <a href="/truong-dai-hoc#admin-school-title">Hồ sơ và thông tin trường</a>
-            <a href="/du-hoc/hoc-phi-truong-doi-tac-han-quoc-2026">Học phí tiếng và đại học</a>
+            <a href="<%= siteText("view.partials.header.035") %>"><%= siteText("view.partials.header.036") %></a>
+            <a href="<%= siteText("view.partials.header.037") %>"><%= siteText("view.partials.header.038") %></a>
+            <a href="<%= siteText("view.partials.header.039") %>"><%= siteText("view.partials.header.040") %></a>
           </div>
         </li>
-        <li><a href="/tin-tuc">Cẩm nang &amp; Thông tin <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
+        <li><a href="<%= siteText("view.partials.header.041") %>"><%= siteText("view.partials.header.042") %> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg></a>
           <div class="dropdown">
-            <a href="/tin-tuc?muc=thong-tin-han-quoc">Thông tin Hàn Quốc</a>
-            <a href="/tin-tuc?muc=cam-nang-sinh-hoat">Cẩm nang sinh hoạt</a>
-            <a href="/tin-tuc?muc=hoat-dong-soldream">Hoạt động SolDream</a>
+            <a href="<%= siteText("view.partials.header.043") %>"><%= siteText('topic.thong-tin-han-quoc.label') %></a>
+            <a href="<%= siteText("view.partials.header.045") %>"><%= siteText('topic.cam-nang-sinh-hoat.label') %></a>
+            <a href="<%= siteText("view.partials.header.047") %>"><%= siteText('topic.hoat-dong-soldream.label') %></a>
           </div>
         </li>
-        <li><a href="/cau-hoi-thuong-gap">FAQ</a></li>
-        <li><a href="/#lienhe">Liên hệ</a></li>
+        <li><a href="<%= siteText("view.partials.header.049") %>"><%= siteText("view.partials.header.050") %></a></li>
+        <li><a href="<%= siteText("view.partials.header.051") %>"><%= siteText("view.partials.header.052") %></a></li>
       </ul>
     </nav>
     <div class="nav__cta">
-      <a href="/#lienhe" class="btn btn-primary"><%= getBlock("consult-button").title %></a>
-      <button class="burger" id="burger" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+      <a href="<%= siteText("view.partials.header.053") %>" class="btn btn-primary"><%= getBlock("consult-button").title %></a>
+      <button class="burger" id="burger" type="button" aria-label="<%= siteText("view.partials.header.054") %>" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="backdrop" id="backdrop"></div>

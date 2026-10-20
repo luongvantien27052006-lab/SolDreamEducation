@@ -21,7 +21,7 @@ const { getAboutSections, normaliseAboutSection } = require('../lib/aboutContent
 const { saveArticleOptions } = require('../lib/articleEditing');
 const { courseFinancials, syncCourseNarratives } = require('../lib/courseEditing');
 const { UPLOADS_DIR } = require('../lib/storagePaths');
-const { TOPICS, normalizeTopic, topicLabel } = require('../lib/contentTopics');
+const { TOPICS, getTopics, normalizeTopic, topicLabel } = require('../lib/contentTopics');
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || (process.env.NODE_ENV === 'production' ? '' : 'soldream@2026');
 const layout = 'admin/layout';
@@ -30,7 +30,7 @@ const loginAttempts = new Map();
 if (!ADMIN_PASSWORD) throw new Error('ADMIN_PASSWORD bắt buộc phải được cấu hình trong môi trường production.');
 
 router.use((req, res, next) => {
-  res.locals.contentTopics = TOPICS;
+  res.locals.contentTopics = getTopics();
   res.locals.articleFaqs = [];
   const editMatch = req.path.match(/^\/(tin-tuc|du-hoc)\/(\d+)\/sua$/);
   if(editMatch) res.locals.articleFaqs = db.prepare('SELECT question,answer FROM faqs WHERE origin_type=? AND origin_id=? ORDER BY sort_order,id').all(editMatch[1]==='tin-tuc'?'post':'program',editMatch[2]);
@@ -308,18 +308,18 @@ router.get('/', requireAdmin, (req, res) => {
 router.get('/tin-tuc', requireAdmin, (req, res) => {
   const result = listContent('posts', req, 'datetime(updated_at) DESC, id DESC');
   const topicCounts = Object.fromEntries(db.prepare('SELECT topic,COUNT(*) count FROM posts GROUP BY topic').all().map((row) => [row.topic, row.count]));
-  res.render('admin/news-list', { layout, title: 'Quản lý tin tức', active: 'news', posts: result.rows, topics: TOPICS, topicCounts, categories: result.categories, filters: result.filters, pagination: result.pagination, flash: req.query.flash || null });
+  res.render('admin/news-list', { layout, title: 'Quản lý tin tức', active: 'news', posts: result.rows, topics: getTopics(), topicCounts, categories: result.categories, filters: result.filters, pagination: result.pagination, flash: req.query.flash || null });
 });
 
 router.get('/tin-tuc/moi', requireAdmin, (req, res) => {
   const topic = normalizeTopic(req.query.muc) || TOPICS[0].id;
-  res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { category: topicLabel(topic), topic, cover: 'p1', published: 1, publication_date: req.query.date || '' }, topics: TOPICS, error: null });
+  res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { category: topicLabel(topic), topic, cover: 'p1', published: 1, publication_date: req.query.date || '' }, topics: getTopics(), error: null });
 });
 
 router.post('/tin-tuc/moi', requireAdmin, uploadCover, (req, res) => {
   const b = req.body;
   const topic = normalizeTopic(b.topic) || TOPICS[0].id;
-  const back = (error) => res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { ...b, topic }, topics: TOPICS, error });
+  const back = (error) => res.render('admin/news-form', { layout, title: 'Thêm bài viết', active: 'news', mode: 'create', post: { ...b, topic }, topics: getTopics(), error });
   if (req.uploadError) { return back(req.uploadError); }
   if (!b.title || !b.title.trim()) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Vui lòng nhập tiêu đề.'); }
   const publicationDate = dateInputToLocalDateTime(b.publication_date);
@@ -344,7 +344,7 @@ router.get('/tin-tuc/:id/sua', requireAdmin, (req, res, next) => {
     : req.query.ai === '0'
       ? 'Bản nháp được tạo từ dữ kiện nguồn đã làm sạch vì AI hiện không khả dụng. Ghi chú xử lý được lưu riêng trong mục Nghiên cứu; hãy rà soát trước khi duyệt.'
       : null;
-  res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post, topics: TOPICS, error: null, notice });
+  res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post, topics: getTopics(), error: null, notice });
 });
 
 router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
@@ -352,7 +352,7 @@ router.post('/tin-tuc/:id/sua', requireAdmin, uploadCover, (req, res, next) => {
   if (!existing) { if (req.file) removeUpload('/uploads/' + req.file.filename); return next(); }
   const b = req.body;
   const topic = normalizeTopic(b.topic) || normalizeTopic(existing.topic) || TOPICS[0].id;
-  const back = (error) => res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post: { ...existing, ...b, topic }, topics: TOPICS, error });
+  const back = (error) => res.render('admin/news-form', { layout, title: 'Sửa bài viết', active: 'news', mode: 'edit', post: { ...existing, ...b, topic }, topics: getTopics(), error });
   if (req.uploadError) { return back(req.uploadError); }
   if (!b.title || !b.title.trim()) { if (req.file) removeUpload('/uploads/' + req.file.filename); return back('Vui lòng nhập tiêu đề.'); }
   const publicationDate = dateInputToLocalDateTime(b.publication_date);
@@ -787,7 +787,7 @@ router.get('/nghien-cuu', requireAdmin, (req, res) => {
     indexedPrograms: db.prepare("SELECT COUNT(*) c FROM chat_knowledge_documents WHERE id GLOB 'program:*:summary'").get().c,
   };
   const schoolScanHours = Math.max(168, (Number(process.env.RESEARCH_BOT_INTERVAL_MS) || 7 * 24 * 3600000) / 3600000);
-  res.render('admin/research', { layout, title: 'Dữ liệu & AI', active: 'research', sources, sourceHealth, items, topics: TOPICS, topicCounts, selectedTopic, suggestedKeywords, chatIndex, schoolScanHours, flash: req.query.flash || null });
+  res.render('admin/research', { layout, title: 'Dữ liệu & AI', active: 'research', sources, sourceHealth, items, topics: getTopics(), topicCounts, selectedTopic, suggestedKeywords, chatIndex, schoolScanHours, flash: req.query.flash || null });
 });
 router.post('/nghien-cuu/:id/chon-chu-de', requireAdmin, (req, res, next) => {
   const topic = normalizeTopic(req.body.topic);

@@ -12,7 +12,7 @@
   const quickQuestions = root.querySelector('.chatbot__quick-questions');
   const newChatButton = root.querySelector('.chatbot__new');
   const storageKey = 'sol-dream-chat-history-v2';
-  const welcomeMessage = 'Chào bạn! Mình là trợ lý của Sol Dream Education. Bạn có thể hỏi về khóa học, trường đại học, học phí, học bổng, hồ sơ hoặc chương trình du học Hàn Quốc.';
+  const welcomeMessage = window.solDreamText("browser.chatbot.001");
   const history = [];
   let isSending = false;
 
@@ -69,7 +69,7 @@
     const day = document.createElement('div');
     day.className = 'chatbot__day';
     const dayText = document.createElement('span');
-    dayText.textContent = 'Hôm nay';
+    dayText.textContent = window.solDreamText("browser.chatbot.002");
     day.append(dayText);
     messages.append(day);
     addMessage(welcomeMessage, 'bot');
@@ -83,9 +83,9 @@
       const response = await fetch('/api/chat/status', { cache: 'no-store' });
       if (!response.ok) throw new Error('STATUS_UNAVAILABLE');
       const data = await response.json();
-      setStatus(data.aiConfigured ? 'AI + dữ liệu Sol Dream' : 'Tra cứu dữ liệu Sol Dream', data.aiConfigured ? 'ready' : 'local');
+      setStatus(data.aiConfigured ? window.solDreamText("browser.chatbot.003") : window.solDreamText("browser.chatbot.004"), data.aiConfigured ? 'ready' : 'local');
     } catch (_) {
-      setStatus('Đang kết nối lại', 'offline');
+      setStatus(window.solDreamText("browser.chatbot.005"), 'offline');
     }
   }
   async function refreshQuestions(context = '') {
@@ -184,7 +184,7 @@
     wrapper.className = 'chatbot__table-wrap';
     wrapper.tabIndex = 0;
     wrapper.setAttribute('role', 'region');
-    wrapper.setAttribute('aria-label', `Bảng dữ liệu gồm ${headerCells.length} cột`);
+    wrapper.setAttribute('aria-label', window.solDreamText('browser.chatbot.table-aria',{v0:headerCells.length}));
     const table = document.createElement('table');
     table.className = 'chatbot__table';
     const head = document.createElement('thead');
@@ -211,7 +211,7 @@
     wrapper.append(table);
     const hint = document.createElement('div');
     hint.className = 'chatbot__table-hint';
-    hint.textContent = 'Vuốt ngang để xem đầy đủ bảng →';
+    hint.textContent = window.solDreamText("browser.chatbot.006");
     wrapper.append(hint);
     container.classList.add('chatbot__message--table');
     container.append(wrapper);
@@ -288,7 +288,7 @@
     if (show && !existing) {
       const indicator = document.createElement('div');
       indicator.className = 'chatbot__typing';
-      indicator.setAttribute('aria-label', 'SolDream Support đang trả lời');
+      indicator.setAttribute('aria-label', window.solDreamText("browser.chatbot.007"));
       indicator.innerHTML = '<span></span><span></span><span></span>';
       messages.appendChild(indicator);
     }
@@ -300,7 +300,7 @@
     if (!message || isSending) return;
     const requestHistory = history.slice(-12);
     setSending(true);
-    setStatus('Đang tổng hợp câu trả lời…', 'ready');
+    setStatus(window.solDreamText("browser.chatbot.008"), 'ready');
     input.value = '';
     resizeComposer();
     addMessage(message, 'user');
@@ -318,21 +318,21 @@
         signal: controller.signal
       });
       const data = await response.json().catch(() => ({}));
-      if (!response.ok || !data.reply) throw new Error(data.error || 'Không thể kết nối đến trợ lý.');
+      if (!response.ok || !data.reply) throw new Error(data.error || window.solDreamText("browser.chatbot.009"));
       history.push({ role: 'assistant', content: data.reply });
       if (history.length > 12) history.splice(0, history.length - 12);
       saveHistory();
       addMessage(data.reply, 'bot');
       refreshQuestions(message);
-      setStatus(data.mode === 'local' ? 'Tra cứu dữ liệu Sol Dream' : 'AI + dữ liệu Sol Dream', data.mode === 'local' ? 'local' : 'ready');
+      setStatus(data.mode === 'local' ? window.solDreamText("browser.chatbot.010") : window.solDreamText("browser.chatbot.011"), data.mode === 'local' ? 'local' : 'ready');
     } catch (error) {
-      const fallback = 'Hiện chưa thể kết nối máy chủ tư vấn. Bạn vui lòng thử lại hoặc liên hệ Hotline/Zalo 0364 648 282 nhé.';
+      const fallback = window.solDreamText("browser.chatbot.012");
       const errorReply = error.name === 'AbortError' || error instanceof TypeError ? fallback : (error.message || fallback);
       history.push({ role: 'assistant', content: errorReply });
       if (history.length > 12) history.splice(0, history.length - 12);
       saveHistory();
       addMessage(errorReply, 'bot');
-      setStatus('Mất kết nối', 'offline');
+      setStatus(window.solDreamText("browser.chatbot.013"), 'offline');
     } finally {
       window.clearTimeout(timeout);
       showTyping(false);

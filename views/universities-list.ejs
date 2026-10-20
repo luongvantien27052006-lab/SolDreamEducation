@@ -1,20 +1,20 @@
 <main>
 <section class="section knowledge-hub">
   <div class="wrap">
-    <nav class="crumbs" aria-label="breadcrumb">
-      <a href="/">Trang chủ</a> <span>›</span> <span>Thông tin trường đại học Hàn Quốc</span>
+    <nav class="crumbs" aria-label="<%= siteText("view.universities-list.001") %>">
+      <a href="<%= siteText("view.universities-list.002") %>"><%= siteText("view.universities-list.003") %></a> <span>›</span> <span><%= siteText("view.universities-list.004") %></span>
     </nav>
     <header class="knowledge-hero">
-      <span class="eyebrow">Tra cứu và chọn trường</span>
-      <h1>Thông tin trường đại học Hàn Quốc</h1>
-      <p>SOL DREAM EDUCATION tổng hợp thông tin chương trình, ngành học, học phí, học bổng và ký túc xá để học sinh dễ tra cứu và so sánh trước khi đăng ký.</p>
-      <div class="source-meta"><strong>Đơn vị tư vấn:</strong> SOL DREAM EDUCATION · <strong>Cập nhật danh mục:</strong> 17/10/2026</div>
+      <span class="eyebrow"><%= siteText("view.universities-list.005") %></span>
+      <h1><%= siteText("view.universities-list.006") %></h1>
+      <p><%= siteText("view.universities-list.007") %></p>
+      <div class="source-meta"><strong><%= siteText("view.universities-list.008") %></strong> <%= siteText("view.universities-list.009") %> <strong><%= siteText("view.universities-list.010") %></strong> <%= siteText("view.universities-list.011") %></div>
     </header>
 
     <section aria-labelledby="partner-schools-title">
-      <h2 id="partner-schools-title" style="margin:36px 0 10px">Danh sách trường hợp tác 2026–2027</h2>
-      <p class="section-lead">Danh sách 22 trường dưới đây được chép từ Hồ sơ giới thiệu SOL DREAM EDUCATION 2026–2027. Tên trường, cơ sở và liên kết được đối chiếu với website chính thức; điều kiện tuyển sinh và học phí vẫn cần xem theo đúng ngành, cơ sở và kỳ nộp hồ sơ.</p>
-      <p><a class="knowledge-card__link" href="/tin-tuc/22-truong-doi-tac-sol-dream-2026-2027">Đọc bài giới thiệu danh sách trường và cách tra cứu học phí →</a></p>
+      <h2 id="partner-schools-title" style="margin:36px 0 10px"><%= siteText("view.universities-list.012") %></h2>
+      <p class="section-lead"><%= siteText("view.universities-list.013") %></p>
+      <p><a class="knowledge-card__link" href="<%= siteText("view.universities-list.014") %>"><%= siteText("view.universities-list.015") %></a></p>
       <div class="knowledge-grid">
         <% partnerSchools.forEach(function(school){ %>
         <article class="knowledge-card">
@@ -22,8 +22,8 @@
           <h3><%= school.name %></h3>
           <p class="knowledge-card__en"><%= school.englishName %></p>
           <div style="display:flex;flex-wrap:wrap;gap:0 16px">
-            <% if (school.profilePath) { %><a class="knowledge-card__link" style="margin-top:12px" href="<%= school.profilePath %>">Xem hồ sơ trên web →</a><% } %>
-            <a class="knowledge-card__link" style="margin-top:12px" href="<%= school.website %>" target="_blank" rel="noopener noreferrer">Website trường ↗</a>
+            <% if (school.profilePath) { %><a class="knowledge-card__link" style="margin-top:12px" href="<%= school.profilePath %>"><%= siteText("view.universities-list.016") %></a><% } %>
+            <a class="knowledge-card__link" style="margin-top:12px" href="<%= school.website %>" target="_blank" rel="noopener noreferrer"><%= siteText("view.universities-list.017") %></a>
           </div>
         </article>
         <% }); %>
@@ -32,19 +32,19 @@
 
     <% if (schoolPrograms && schoolPrograms.length) { %>
     <section aria-labelledby="admin-school-title">
-      <h2 id="admin-school-title" style="margin:36px 0 20px">Thông tin trường mới nhất</h2>
+      <h2 id="admin-school-title" style="margin:36px 0 20px"><%= siteText("view.universities-list.018") %></h2>
       <div class="news-grid">
         <% schoolPrograms.forEach(function(program){ %>
         <a class="post" href="/truong-dai-hoc/<%= program.slug %>">
           <div class="post__img <%= program.cover_image ? '' : program.cover %>"><img class="post__cover<%= (!program.cover_image || program.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= program.cover_image || '/img/research-cover.svg' %>" alt="<%= program.title %>" loading="lazy"></div>
-          <div class="post__body"><span class="post__cat">Thông tin trường</span><h3><%= program.title %></h3><p class="section-lead"><%= program.geoBluf %></p><% if(program.subtitle){ %><div class="prog__kr"><%= program.subtitle %></div><% } %></div>
+          <div class="post__body"><span class="post__cat"><%= siteText("view.universities-list.019") %></span><h3><%= program.title %></h3><p class="section-lead"><%= program.geoBluf %></p><% if(program.subtitle){ %><div class="prog__kr"><%= program.subtitle %></div><% } %></div>
         </a>
         <% }); %>
       </div>
     </section>
     <% } %>
 
-    <% if (universities.length) { %><h2 style="margin:42px 0 20px">Hồ sơ trường chuyên sâu</h2><% } %>
+    <% if (universities.length) { %><h2 style="margin:42px 0 20px"><%= siteText("view.universities-list.020") %></h2><% } %>
     <div class="knowledge-grid">
       <% universities.forEach(function(university){ %>
       <article class="knowledge-card">
@@ -53,25 +53,25 @@
         <p class="section-lead"><%= university.bluf %></p>
         <p class="knowledge-card__en"><%= university.english_name %></p>
         <p><%= university.highlight %></p>
-        <% if (university.tuitionSummary) { %><p class="knowledge-card__fact"><strong>Học phí tiếng tham khảo:</strong> <%= university.tuitionSummary %></p><% } %>
-        <a class="knowledge-card__link" href="<%= university.url %>">Xem hồ sơ đầy đủ →</a>
+        <% if (university.tuitionSummary) { %><p class="knowledge-card__fact"><strong><%= siteText("view.universities-list.021") %></strong> <%= university.tuitionSummary %></p><% } %>
+        <a class="knowledge-card__link" href="<%= university.url %>"><%= siteText("view.universities-list.022") %></a>
       </article>
       <% }); %>
     </div>
 
     <section class="source-box dataset-scope" aria-labelledby="dataset-title">
-      <h2 id="dataset-title">Phạm vi bộ dữ liệu trường đại học</h2>
-      <p class="section-lead">Trang này giới thiệu <%= partnerSchools.length %> trường trong danh mục hợp tác 2026–2027, <%= universities.length + schoolPrograms.length %> hồ sơ trường đang có thông tin chi tiết và đường dẫn tới website chính thức của các trường.</p>
+      <h2 id="dataset-title"><%= siteText("view.universities-list.023") %></h2>
+      <p class="section-lead"><%= siteText("view.universities-list.024") %> <%= partnerSchools.length %> <%= siteText("view.universities-list.025") %> <%= universities.length + schoolPrograms.length %> <%= siteText("view.universities-list.026") %></p>
       <ul>
-        <li><strong>Danh mục hợp tác:</strong> <%= partnerSchools.map(function(item){ return item.name; }).join('; ') %>.</li>
-        <li><strong>Hồ sơ trường chi tiết:</strong> <%= schoolPrograms.map(function(item){ return item.title; }).concat(universities.map(function(item){ return item.name; })).join('; ') %>.</li>
-        <li><strong>Trường dữ liệu chính:</strong> tên trường, địa chỉ, ngành học, học phí, học bổng và ký túc xá.</li>
-        <li><strong>Mục đích:</strong> tra cứu và lập danh sách trường ban đầu; không thay thế thông báo tuyển sinh.</li>
+        <li><strong><%= siteText("view.universities-list.027") %></strong> <%= partnerSchools.map(function(item){ return item.name; }).join('; ') %>.</li>
+        <li><strong><%= siteText("view.universities-list.028") %></strong> <%= schoolPrograms.map(function(item){ return item.title; }).concat(universities.map(function(item){ return item.name; })).join('; ') %>.</li>
+        <li><strong><%= siteText("view.universities-list.029") %></strong> <%= siteText("view.universities-list.030") %></li>
+        <li><strong><%= siteText("view.universities-list.031") %></strong> <%= siteText("view.universities-list.032") %></li>
       </ul>
     </section>
 
     <aside class="source-note">
-      <strong>Lưu ý:</strong> Học phí, học bổng, ngành mở tuyển và kỳ nhập học có thể thay đổi theo năm hoặc từng khoa. Hãy xác nhận lại với SOL DREAM EDUCATION và website chính thức của trường trước khi nộp hồ sơ.
+      <strong><%= siteText("view.universities-list.033") %></strong> <%= siteText("view.universities-list.034") %>
     </aside>
   </div>
 </section>

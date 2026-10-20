@@ -1,4 +1,5 @@
 'use strict';
+const {siteText}=require('../lib/siteContent');
 
 const express = require('express');
 const { GoogleGenAI, ThinkingLevel } = require('@google/genai');
@@ -230,8 +231,8 @@ router.get('/chat/questions', (req, res) => {
 
 router.post('/chat', async (req, res) => {
   const message = typeof req.body?.message === 'string' ? req.body.message.trim() : '';
-  if (!message) return res.status(400).json({ error: 'Bạn hãy nhập nội dung cần tư vấn nhé.' });
-  if (message.length > 1500) return res.status(400).json({ error: 'Tin nhắn vui lòng không quá 1.500 ký tự.' });
+  if (!message) return res.status(400).json({ error: siteText('chat.empty-message') });
+  if (message.length > 1500) return res.status(400).json({ error: siteText('chat.long-message') });
   if (isAdminCredentialQuery(message)) {
     return res.json({
       reply: 'Mình không thể cung cấp hoặc hỗ trợ truy tìm tài khoản, mật khẩu, khóa API hay thông tin đăng nhập quản trị. Nếu bạn là quản trị viên, hãy dùng quy trình đặt lại thông tin đăng nhập an toàn trên máy chủ.',

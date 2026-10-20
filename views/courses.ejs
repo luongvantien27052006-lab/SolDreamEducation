@@ -1,17 +1,17 @@
 <main>
 <section class="section knowledge-hub">
   <div class="wrap">
-    <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <span>Khóa học</span></nav>
+    <nav class="crumbs" aria-label="<%= siteText("view.courses.001") %>"><a href="<%= siteText("view.courses.002") %>"><%= siteText("view.courses.003") %></a> <span>›</span> <span><%= siteText("view.courses.004") %></span></nav>
     <header class="knowledge-hero">
-      <span class="eyebrow">Đào tạo ngoại ngữ</span>
-      <h1>Khóa học và học phí tiếng Hàn 2026</h1>
-      <p>SOL DREAM EDUCATION đào tạo từ nền tảng, trung cấp, TOPIK đến giao tiếp và phát âm. Mỗi mức học phí bên dưới liên kết tới trang chi tiết của đúng lớp trong danh mục khóa học.</p>
-      <div class="source-meta"><strong>Đơn vị đào tạo:</strong> SOL DREAM EDUCATION · <strong>Bảng học phí:</strong> SDE 2026<% if (updatedDateLabel) { %> · <strong>Cập nhật website:</strong> <%= updatedDateLabel %><% } %></div>
+      <span class="eyebrow"><%= siteText("view.courses.005") %></span>
+      <h1><%= siteText("view.courses.006") %></h1>
+      <p><%= siteText("view.courses.007") %></p>
+      <div class="source-meta"><strong><%= siteText("view.courses.008") %></strong> <%= siteText("view.courses.009") %> <strong><%= siteText("view.courses.010") %></strong> <%= siteText("view.courses.011") %><% if (updatedDateLabel) { %> · <strong><%= siteText("view.courses.012") %></strong> <%= updatedDateLabel %><% } %></div>
     </header>
 
     <section class="direct-answer" aria-labelledby="course-answer-title">
-      <p class="direct-answer__label" id="course-answer-title">Bảng học phí theo lớp</p>
-      <p><strong>Chọn lớp theo trình độ và mục tiêu.</strong> Người mới bắt đầu có thể tìm hiểu SC1A hoặc SC1B; các lớp từ SC2A trở đi áp dụng lộ trình xen kẽ giáo viên Việt – Hàn. Lịch khai giảng và xếp lớp được xác nhận trước khi đăng ký.</p>
+      <p class="direct-answer__label" id="course-answer-title"><%= siteText("view.courses.013") %></p>
+      <p><strong><%= siteText("view.courses.014") %></strong> <%= siteText("view.courses.015") %></p>
       <% const feeLink = getBlock('course-fee-link'); if (feeLink.active) { %><p><a href="<%= feeLink.link_url %>"><%= feeLink.link_label %></a></p><% } %>
     </section>
 
@@ -20,23 +20,23 @@
       <h2 id="tuition-<%= group.courses[0].financials.tuition2026.track %>"><%= group.title %></h2>
       <div class="knowledge-table-wrap">
         <table class="knowledge-table course-tuition-table">
-          <caption>Bảng học phí tiếng Hàn SDE 2026 — học phí theo lớp</caption>
+          <caption><%= siteText("view.courses.016") %></caption>
           <thead><tr>
-            <th scope="col">Mã lớp / khóa học</th><th scope="col">Buổi</th><th scope="col">Thời lượng</th><th scope="col">Tổng giờ</th><th scope="col">Số tuần dự kiến</th>
-            <th scope="col">Cơ cấu giáo viên</th><th scope="col">Sĩ số</th><th scope="col">Tối thiểu mở lớp</th><th scope="col">Học phí</th><th scope="col">Giáo trình / tài liệu bổ trợ</th>
+            <th scope="col"><%= siteText("view.courses.017") %></th><th scope="col"><%= siteText("view.courses.018") %></th><th scope="col"><%= siteText("view.courses.019") %></th><th scope="col"><%= siteText("view.courses.020") %></th><th scope="col"><%= siteText("view.courses.021") %></th>
+            <th scope="col"><%= siteText("view.courses.022") %></th><th scope="col"><%= siteText("view.courses.023") %></th><th scope="col"><%= siteText("view.courses.024") %></th><th scope="col"><%= siteText("view.courses.025") %></th><th scope="col"><%= siteText("view.courses.026") %></th>
           </tr></thead>
           <tbody>
             <% group.courses.forEach(function(course) { const spec = course.financials.tuition2026 || course.financials.classDetails; %>
             <tr>
               <td><strong><%= spec.code %></strong><br><a href="<%= course.url %>"><%= course.name %></a></td>
-              <td><%= spec.sessions %> buổi</td>
-              <td><%= spec.minutesPerSession %> phút/buổi</td>
-              <td><%= spec.totalHours %> giờ</td>
-              <td><%= spec.estimatedWeeks %> tuần</td>
+              <td><%= spec.sessions %> <%= siteText("view.courses.027") %></td>
+              <td><%= spec.minutesPerSession %> <%= siteText("view.courses.028") %></td>
+              <td><%= spec.totalHours %> <%= siteText("view.courses.029") %></td>
+              <td><%= spec.estimatedWeeks %> <%= siteText("view.courses.030") %></td>
               <td><%= spec.instructors %></td>
-              <td><%= spec.classSize %> học viên</td>
-              <td><%= spec.minimumStudents %> học viên</td>
-              <td><strong><%= course.price %></strong><br><a href="<%= course.url %>">Chi tiết lớp →</a></td>
+              <td><%= spec.classSize %> <%= siteText("view.courses.031") %></td>
+              <td><%= spec.minimumStudents %> <%= siteText("view.courses.032") %></td>
+              <td><strong><%= course.price %></strong><br><a href="<%= course.url %>"><%= siteText("view.courses.033") %></a></td>
               <td><%= spec.textbook || '' %><br><%= spec.materials %></td>
             </tr>
             <% }); %>
@@ -47,35 +47,35 @@
     <% }); %>
 
     <section class="knowledge-section">
-      <h2>Lộ trình và cách tổ chức lớp</h2>
+      <h2><%= siteText("view.courses.034") %></h2>
       <ul>
-        <li><strong>SC1A–SC1B:</strong> giáo viên Việt hướng dẫn từ nền tảng, tập trung Hangul, phát âm, từ vựng, ngữ pháp và nghe – nói cơ bản.</li>
-        <li><strong>Từ SC2A đến TC4B:</strong> trung bình 2 buổi với giáo viên Việt xen kẽ 1 buổi với giáo viên Hàn; số buổi thực tế phân bổ theo tổng thời lượng của từng cấp.</li>
-        <li><strong>TOPIK:</strong> TOPIK I tập trung nền tảng Nghe – Đọc và chiến thuật làm bài; TOPIK cấp 3 và 4 luyện mục tiêu điểm số, đề, Nghe – Đọc – Viết và chữa lỗi.</li>
-        <li><strong>Giao tiếp:</strong> ba cấp Sơ cấp, Trung cấp 1 và Trung cấp 2 học trực tiếp với giáo viên Hàn Quốc; sĩ số nhỏ để tăng thời gian nói và phản xạ.</li>
-        <li><strong>Xếp lớp:</strong> kiểm tra trình độ với lớp từ SC1B trở lên, lớp TOPIK và giao tiếp.</li>
+        <li><strong><%= siteText("view.courses.035") %></strong> <%= siteText("view.courses.036") %></li>
+        <li><strong><%= siteText("view.courses.037") %></strong> <%= siteText("view.courses.038") %></li>
+        <li><strong><%= siteText("view.courses.039") %></strong> <%= siteText("view.courses.040") %></li>
+        <li><strong><%= siteText("view.courses.041") %></strong> <%= siteText("view.courses.042") %></li>
+        <li><strong><%= siteText("view.courses.043") %></strong> <%= siteText("view.courses.044") %></li>
       </ul>
     </section>
 
     <% if (otherCourses.length) { %>
     <section class="knowledge-section">
-      <h2>Khóa học khác</h2>
-      <p class="section-lead">Các khóa dưới đây vẫn có trang thông tin riêng. Lớp tiếng Hàn cấp tốc chưa có mức phí trong bảng SDE 2026; học phí tiếng Anh cần xác nhận trực tiếp.</p>
+      <h2><%= siteText("view.courses.045") %></h2>
+      <p class="section-lead"><%= siteText("view.courses.046") %></p>
       <div class="knowledge-grid course-knowledge-grid">
         <% otherCourses.forEach(function(course) { %>
         <article class="knowledge-card" id="<%= course.id %>">
-          <div class="knowledge-card__top"><span><%= course.language %></span><span>Khóa học</span></div>
+          <div class="knowledge-card__top"><span><%= course.language %></span><span><%= siteText("view.courses.047") %></span></div>
           <h3><a href="<%= course.url %>"><%= course.name %></a></h3>
           <p class="section-lead"><%= course.blufSummary || course.description %></p>
-          <p class="knowledge-card__fact"><strong>Học phí:</strong> <%= course.price %></p>
-          <a class="knowledge-card__link" href="<%= course.url %>">Xem nội dung khóa học →</a>
+          <p class="knowledge-card__fact"><strong><%= siteText("view.courses.048") %></strong> <%= course.price %></p>
+          <a class="knowledge-card__link" href="<%= course.url %>"><%= siteText("view.courses.049") %></a>
         </article>
         <% }); %>
       </div>
     </section>
     <% } %>
 
-    <aside class="source-note"><strong>Lưu ý:</strong> <%= courseNotice %></aside>
+    <aside class="source-note"><strong><%= siteText("view.courses.050") %></strong> <%= courseNotice %></aside>
   </div>
 </section>
 </main>

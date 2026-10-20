@@ -5,12 +5,13 @@
 </head>
 <body class="<%= typeof chatPageMode !== 'undefined' && chatPageMode ? 'chat-mode' : '' %>">
 <%- include('partials/header') %>
-<% if(typeof previewMode!=='undefined' && previewMode){ %><aside class="source-note" role="status">Bản xem trước — chưa lưu và chưa xuất bản.</aside><% } %>
+<% if(typeof previewMode!=='undefined' && previewMode){ %><aside class="source-note" role="status"><%= siteText("view.layout.001") %></aside><% } %>
 <%- body %>
 <% if (!(typeof hideFooter !== 'undefined' && hideFooter)) { %><%- include('partials/footer') %><% } %>
 <% if (!(typeof hideFloatingChat !== 'undefined' && hideFloatingChat)) { %><%- include('partials/chatbot') %><% } %>
 <%- include('partials/site-popup') %>
 <%- include('partials/lead-popup') %>
+<script>window.solDreamCopy=<%- browserCopyJson %>;window.solDreamText=function(key,values){return String(window.solDreamCopy[key]||'').replace(/\{(v\d+)\}/g,function(token,name){return values&&Object.prototype.hasOwnProperty.call(values,name)?String(values[name]):token;});};</script>
 <script src="/js/site.js?v=<%= assetVer %>" defer></script>
 <script src="/js/chatbot.js?v=<%= assetVer %>" defer></script>
 </body>

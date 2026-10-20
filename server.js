@@ -135,7 +135,7 @@ app.use((req, res, next) => {
 });
 
 // Inject SEO defaults into every render
-app.use((req, res, next) => { res.locals = Object.assign({}, seoDefaults(req), { assetVer: ASSET_VER }, res.locals); next(); });
+app.use((req, res, next) => { res.locals = Object.assign({}, seoDefaults(req), require('./lib/siteContent').siteContentLocals(), { assetVer: ASSET_VER }, res.locals); next(); });
 // The course dropdown is sourced from the live published catalogue so every
 // Admin add/edit/hide/delete operation is reflected on the next page request.
 app.use((req, res, next) => {
@@ -162,8 +162,8 @@ app.use('/', publicRoutes);
 app.use((req, res) => {
   res.set('Cache-Control', 'no-store').status(404).render('404', {
     layout: 'layout',
-    title: 'Không tìm thấy trang - SOL DREAM EDUCATION',
-    description: 'Trang bạn tìm không tồn tại.',
+    title: require('./lib/siteContent').siteText('error.404-title'),
+    description: require('./lib/siteContent').siteText('error.404-description'),
     robots: 'noindex, follow, max-snippet:-1, max-image-preview:large'
   });
 });

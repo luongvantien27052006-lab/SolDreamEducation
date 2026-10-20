@@ -1,71 +1,71 @@
 <main>
 <article class="section knowledge-hub">
   <div class="wrap" style="max-width:920px">
-    <nav class="crumbs" aria-label="breadcrumb"><a href="/">Trang chủ</a> <span>›</span> <a href="/khoa-hoc">Khóa học</a> <span>›</span> <span><%= course.name %></span></nav>
+    <nav class="crumbs" aria-label="<%= siteText("view.course-detail.001") %>"><a href="<%= siteText("view.course-detail.002") %>"><%= siteText("view.course-detail.003") %></a> <span>›</span> <a href="<%= siteText("view.course-detail.004") %>"><%= siteText("view.course-detail.005") %></a> <span>›</span> <span><%= course.name %></span></nav>
     <header class="knowledge-hero">
       <span class="eyebrow"><%= course.language %></span>
       <h1><%= course.name %></h1>
       <div class="geo-summary-box">
         <p class="geo-summary-box__bluf"><%= course.blufSummary %></p>
         <ul class="geo-summary-box__facts">
-          <li><strong>Phù hợp:</strong> <%= course.audience %></li>
-          <li><strong>Học phí:</strong> <%= course.price %></li>
-          <li><strong>Đầu vào:</strong> <%= course.requirements.entryLevel || 'Kiểm tra trước khi xếp lớp' %></li>
-          <li><strong><%= course.entryExamLabel %>:</strong> <%= course.entryExamRequirement || 'Không công bố yêu cầu chứng chỉ đầu vào' %></li>
+          <li><strong><%= siteText("view.course-detail.006") %></strong> <%= course.audience %></li>
+          <li><strong><%= siteText("view.course-detail.007") %></strong> <%= course.price %></li>
+          <li><strong><%= siteText("view.course-detail.008") %></strong> <%= course.requirements.entryLevel || siteText("view.course-detail.054") %></li>
+          <li><strong><%= course.entryExamLabel %>:</strong> <%= course.entryExamRequirement || siteText("view.course-detail.055") %></li>
         </ul>
       </div>
     </header>
     <% if (course.financials && (course.financials.tuition2026 || course.financials.classDetails)) { const spec = course.financials.tuition2026 || course.financials.classDetails; %>
     <section class="knowledge-section" aria-labelledby="class-specs-title">
-      <h2 id="class-specs-title">Thông tin lớp theo bảng học phí SDE 2026</h2>
-      <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th>Hạng mục</th><th>Thông tin lớp</th></tr></thead><tbody>
-        <% if(spec.code){ %><tr><td>Mã lớp</td><td><%= spec.code %></td></tr><% } %>
-        <% if(spec.sessions){ %><tr><td>Số buổi</td><td><%= spec.sessions %> buổi, mỗi buổi <%= spec.minutesPerSession %> phút (<%= spec.totalHours %> giờ)</td></tr><% } %>
-        <% if(spec.estimatedWeeks){ %><tr><td>Lịch học dự kiến</td><td><%= spec.estimatedWeeks %> tuần, theo lịch chuẩn 3 buổi/tuần; thời lượng thực tế có thể điều chỉnh theo lịch lớp</td></tr><% } %>
-        <% if(spec.instructors){ %><tr><td>Cơ cấu giáo viên</td><td><%= spec.instructors %></td></tr><% } %>
-        <tr><td>Sĩ số</td><td><%= spec.classSize %> học viên<% if(spec.minimumStudents!=null){ %>; tối thiểu <%= spec.minimumStudents %> học viên để mở lớp<% } %></td></tr>
-        <tr><td>Giáo trình</td><td><%= spec.textbook || '' %></td></tr><tr><td>Tài liệu bổ trợ</td><td><%= spec.textbook || '' %><br><%= spec.materials %></td></tr>
-        <tr><td>Học phí</td><td><strong><%= course.price %></strong></td></tr>
+      <h2 id="class-specs-title"><%= siteText("view.course-detail.009") %></h2>
+      <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th><%= siteText("view.course-detail.010") %></th><th><%= siteText("view.course-detail.011") %></th></tr></thead><tbody>
+        <% if(spec.code){ %><tr><td><%= siteText("view.course-detail.012") %></td><td><%= spec.code %></td></tr><% } %>
+        <% if(spec.sessions){ %><tr><td><%= siteText("view.course-detail.013") %></td><td><%= spec.sessions %> <%= siteText("view.course-detail.014") %> <%= spec.minutesPerSession %> <%= siteText("view.course-detail.015") %><%= spec.totalHours %> <%= siteText("view.course-detail.016") %></td></tr><% } %>
+        <% if(spec.estimatedWeeks){ %><tr><td><%= siteText("view.course-detail.017") %></td><td><%= spec.estimatedWeeks %> <%= siteText("view.course-detail.018") %></td></tr><% } %>
+        <% if(spec.instructors){ %><tr><td><%= siteText("view.course-detail.019") %></td><td><%= spec.instructors %></td></tr><% } %>
+        <tr><td><%= siteText("view.course-detail.020") %></td><td><%= spec.classSize %> <%= siteText("view.course-detail.021") %><% if(spec.minimumStudents!=null){ %><%= siteText("view.course-detail.022") %> <%= spec.minimumStudents %> <%= siteText("view.course-detail.023") %><% } %></td></tr>
+        <tr><td><%= siteText("view.course-detail.024") %></td><td><%= spec.textbook || '' %></td></tr><tr><td><%= siteText("view.course-detail.025") %></td><td><%= spec.textbook || '' %><br><%= spec.materials %></td></tr>
+        <tr><td><%= siteText("view.course-detail.026") %></td><td><strong><%= course.price %></strong></td></tr>
       </tbody></table></div>
     </section>
     <% } %>
     <section class="knowledge-section">
-      <h2><%= course.name %> phù hợp với ai?</h2>
+      <h2><%= course.name %> <%= siteText("view.course-detail.027") %></h2>
       <p class="section-lead"><%= course.blufSummary %></p>
-      <ul><li><strong>Đối tượng:</strong> <%= course.audience %></li><li><strong>Nội dung:</strong> <%= course.description %></li><li><strong>Học phí:</strong> <%= course.financials.priceNote %></li></ul>
+      <ul><li><strong><%= siteText("view.course-detail.028") %></strong> <%= course.audience %></li><li><strong><%= siteText("view.course-detail.029") %></strong> <%= course.description %></li><li><strong><%= siteText("view.course-detail.030") %></strong> <%= course.financials.priceNote %></li></ul>
     </section>
     <section class="knowledge-section">
-      <h2>Học phí và điều kiện của <%= course.name %></h2>
-      <p class="section-lead">Thông tin dưới đây giúp học viên nhận biết khoản phí đã được công bố và những điều kiện còn phải xác nhận trước khi đăng ký. SOL DREAM EDUCATION kiểm tra trình độ và mục tiêu thực tế để tư vấn lớp phù hợp.</p>
-      <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th>Hạng mục</th><th>Thông tin hiện có</th></tr></thead><tbody>
-        <tr><td>Học phí</td><td><%= course.price %></td></tr>
-        <tr><td>Ghi chú học phí</td><td><%= course.financials.priceNote %></td></tr>
-        <tr><td>Trình độ đầu vào</td><td><%= course.requirements.entryLevel || 'Kiểm tra trước khi xếp lớp' %></td></tr>
-        <tr><td>Yêu cầu <%= course.entryExamLabel %></td><td><%= course.entryExamRequirement || ('Chưa công bố yêu cầu ' + course.entryExamLabel + ' đầu vào') %></td></tr>
+      <h2><%= siteText("view.course-detail.031") %> <%= course.name %></h2>
+      <p class="section-lead"><%= siteText("view.course-detail.032") %></p>
+      <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th><%= siteText("view.course-detail.033") %></th><th><%= siteText("view.course-detail.034") %></th></tr></thead><tbody>
+        <tr><td><%= siteText("view.course-detail.035") %></td><td><%= course.price %></td></tr>
+        <tr><td><%= siteText("view.course-detail.036") %></td><td><%= course.financials.priceNote %></td></tr>
+        <tr><td><%= siteText("view.course-detail.037") %></td><td><%= course.requirements.entryLevel || siteText("view.course-detail.056") %></td></tr>
+        <tr><td><%= siteText("view.course-detail.038") %> <%= course.entryExamLabel %></td><td><%= course.entryExamRequirement || (siteText("view.course-detail.057") + course.entryExamLabel + siteText("view.course-detail.058")) %></td></tr>
       </tbody></table></div>
     </section>
     <section class="knowledge-section">
-      <h2>Đăng ký và xếp lớp như thế nào?</h2>
-      <p class="section-lead">Học viên gửi mục tiêu học tập, trình độ hiện tại và thời gian có thể tham gia. SOL DREAM EDUCATION kiểm tra nhu cầu, xác nhận lịch khai giảng, học phí và điều kiện áp dụng trước khi học viên quyết định đăng ký.</p>
-      <ol><li>Gửi thông tin và mục tiêu học <%= String(course.language || 'ngoại ngữ').toLocaleLowerCase('vi') %>.</li><li>Kiểm tra trình độ, tư vấn khóa học và lộ trình phù hợp.</li><li>Xác nhận lịch học, học phí, giáo trình và chính sách tại thời điểm mở lớp.</li></ol>
+      <h2><%= siteText("view.course-detail.039") %></h2>
+      <p class="section-lead"><%= siteText("view.course-detail.040") %></p>
+      <ol><li><%= siteText("view.course-detail.041") %> <%= String(course.language || siteText("view.course-detail.059")).toLocaleLowerCase('vi') %>.</li><li><%= siteText("view.course-detail.042") %></li><li><%= siteText("view.course-detail.043") %></li></ol>
     </section>
     <section class="faq-section" aria-labelledby="course-faq-title">
-      <h2 id="course-faq-title">Câu hỏi thường gặp về <%= course.name %></h2>
+      <h2 id="course-faq-title"><%= siteText("view.course-detail.044") %> <%= course.name %></h2>
       <% courseFaqs.forEach(function(faq, index){ %><details class="faq-item" <%= index === 0 ? 'open' : '' %>><summary><%= faq.question %></summary><p class="section-lead"><%= faq.answer %></p></details><% }); %>
     </section>
     <% if (/tiếng anh|english/i.test(`${course.language || ''} ${course.name || ''}`)) { %>
       <aside class="recruitment-callout" aria-labelledby="recruitment-callout-title">
-        <img class="recruitment-callout__image" src="/img/tuyen-dung-giao-vien-tieng-anh-v2.png" alt="SOL DREAM tuyển dụng giáo viên dạy tiếng Anh">
+        <img class="recruitment-callout__image" src="/img/tuyen-dung-giao-vien-tieng-anh-v2.png" alt="<%= siteText("view.course-detail.045") %>">
         <div class="recruitment-callout__body">
-          <span class="eyebrow">Cơ hội nghề nghiệp</span>
-          <h2 id="recruitment-callout-title">SOL DREAM tuyển 05 giáo viên dạy tiếng Anh</h2>
-          <p>Hình thức toàn thời gian cố định, làm việc tại TP.HCM hoặc Cẩm Mỹ, Đồng Nai.</p>
-          <a class="btn btn-primary" href="/tin-tuc/tuyen-dung-giao-vien-day-tieng-anh">Xem tin tuyển dụng</a>
+          <span class="eyebrow"><%= siteText("view.course-detail.046") %></span>
+          <h2 id="recruitment-callout-title"><%= siteText("view.course-detail.047") %></h2>
+          <p><%= siteText("view.course-detail.048") %></p>
+          <a class="btn btn-primary" href="<%= siteText("view.course-detail.049") %>"><%= siteText("view.course-detail.050") %></a>
         </div>
       </aside>
     <% } %>
-    <aside class="source-note"><strong>Lưu ý:</strong> <%= courseNotice %></aside>
-    <p style="margin-top:28px"><a href="/#lienhe" class="btn btn-primary">Đăng ký tư vấn lớp học</a></p>
+    <aside class="source-note"><strong><%= siteText("view.course-detail.051") %></strong> <%= courseNotice %></aside>
+    <p style="margin-top:28px"><a href="<%= siteText("view.course-detail.052") %>" class="btn btn-primary"><%= siteText("view.course-detail.053") %></a></p>
   </div>
 </article>
 </main>

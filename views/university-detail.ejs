@@ -2,39 +2,39 @@
 <article class="section knowledge-detail">
   <div class="wrap knowledge-layout">
     <div class="knowledge-main">
-      <nav class="crumbs" aria-label="breadcrumb">
-        <a href="/">Trang chủ</a> <span>›</span>
-        <a href="/truong-dai-hoc">Trường đại học</a> <span>›</span>
+      <nav class="crumbs" aria-label="<%= siteText("view.university-detail.001") %>">
+        <a href="<%= siteText("view.university-detail.002") %>"><%= siteText("view.university-detail.003") %></a> <span>›</span>
+        <a href="<%= siteText("view.university-detail.004") %>"><%= siteText("view.university-detail.005") %></a> <span>›</span>
         <span><%= university.name %></span>
       </nav>
 
       <header class="knowledge-title">
-        <span class="post__cat">Hồ sơ trường đại học Hàn Quốc</span>
+        <span class="post__cat"><%= siteText("view.university-detail.006") %></span>
         <h1><%= university.name %></h1>
         <span class="freshness-badge"><%= university.freshnessLabel %></span>
-        <div class="geo-summary-box" aria-label="Tóm tắt định lượng">
+        <div class="geo-summary-box" aria-label="<%= siteText("view.university-detail.007") %>">
           <p class="geo-summary-box__bluf"><%= university.blufSummary %></p>
           <ul class="geo-summary-box__facts">
-            <li><strong>Tổng chi phí năm đầu:</strong> <%= university.coreFacts.firstYearTotal %></li>
-            <li><strong>Nhóm trường:</strong> <%= university.coreFacts.visa %></li>
-            <li><strong>Sổ đóng băng:</strong> <%= university.financials.kStudyDeposit.amountUsd ? university.financials.kStudyDeposit.amountUsd.toLocaleString('en-US') + ' USD' : 'Chưa xác minh' %></li>
-            <li><strong>GPA tối thiểu:</strong> <%= university.coreFacts.gpa %></li>
+            <li><strong><%= siteText("view.university-detail.008") %></strong> <%= university.coreFacts.firstYearTotal %></li>
+            <li><strong><%= siteText("view.university-detail.009") %></strong> <%= university.coreFacts.visa %></li>
+            <li><strong><%= siteText("view.university-detail.010") %></strong> <%= university.financials.kStudyDeposit.amountUsd ? university.financials.kStudyDeposit.amountUsd.toLocaleString('en-US') + ' USD' : siteText("view.university-detail.056") %></li>
+            <li><strong><%= siteText("view.university-detail.011") %></strong> <%= university.coreFacts.gpa %></li>
           </ul>
         </div>
         <p class="knowledge-title__names"><%= university.english_name %></p>
-        <div class="source-meta"><strong>Biên soạn:</strong> SOL DREAM EDUCATION · <strong>Cập nhật:</strong> <time datetime="<%= university.updatedDate %>"><%= university.updatedDateDisplay %></time></div>
+        <div class="source-meta"><strong><%= siteText("view.university-detail.012") %></strong> <%= siteText("view.university-detail.013") %> <strong><%= siteText("view.university-detail.014") %></strong> <time datetime="<%= university.updatedDate %>"><%= university.updatedDateDisplay %></time></div>
       </header>
 
-      <nav class="knowledge-toc" aria-label="Mục lục hồ sơ">
-        <strong>Nội dung hồ sơ</strong>
+      <nav class="knowledge-toc" aria-label="<%= siteText("view.university-detail.015") %>">
+        <strong><%= siteText("view.university-detail.016") %></strong>
         <% university.sections.forEach(function(section){ %><a href="#<%= section.id %>"><%= section.title %></a><% }); %>
       </nav>
 
       <section class="knowledge-section" id="chi-phi-dinh-luong">
-        <h2>Chi phí du học <%= university.name %> 1 năm cần bao nhiêu tiền?</h2>
-        <p class="section-lead">Bảng dưới đây tách học phí hệ tiếng, ký túc xá và yêu cầu sổ đóng băng từ nguồn đang có cho <%= university.name %>. <% if (university.financials.conversion && university.financials.conversion.rateVndPerKrw) { %>Khoản VND là ước tính theo tỷ giá tham khảo ghi tại nguồn (<%= university.financials.conversion.rateVndPerKrw %> VND/KRW, ngày <%= university.financials.conversion.asOf %>), không phải báo giá thanh toán.<% } else { %>Chưa quy đổi sang VND vì tỷ giá thanh toán thay đổi; kiểm tra số KRW trực tiếp với trường trước khi đóng học phí.<% } %></p>
+        <h2><%= siteText("view.university-detail.017") %> <%= university.name %> <%= siteText("view.university-detail.018") %></h2>
+        <p class="section-lead"><%= siteText("view.university-detail.019") %> <%= university.name %>. <% if (university.financials.conversion && university.financials.conversion.rateVndPerKrw) { %><%= siteText("view.university-detail.020") %><%= university.financials.conversion.rateVndPerKrw %> <%= siteText("view.university-detail.021") %> <%= university.financials.conversion.asOf %><%= siteText("view.university-detail.022") %><% } else { %><%= siteText("view.university-detail.023") %><% } %></p>
         <div class="knowledge-table-wrap"><table class="geo-data-table">
-          <thead><tr><th scope="col">Khoản phí</th><th scope="col">KRW/USD</th><th scope="col">Quy đổi VND</th><th scope="col">Điều kiện và phạm vi</th></tr></thead>
+          <thead><tr><th scope="col"><%= siteText("view.university-detail.024") %></th><th scope="col"><%= siteText("view.university-detail.025") %></th><th scope="col"><%= siteText("view.university-detail.026") %></th><th scope="col"><%= siteText("view.university-detail.027") %></th></tr></thead>
           <tbody>
             <% university.costComparison.forEach(function(row){ %>
             <tr><th scope="row"><%= row.item %></th><td><%= row.foreignAmount %></td><td><%= row.vndAmount %></td><td><%= row.note %></td></tr>
@@ -44,10 +44,10 @@
       </section>
 
       <section class="knowledge-section" id="dieu-kien-tuyen-sinh-visa">
-        <h2>Điều kiện tuyển sinh và visa <%= university.name %> năm 2026</h2>
-        <p class="section-lead">Bảng điều kiện tách riêng GPA, thời gian trống, TOPIK hệ D4, TOPIK hệ D2 và phân hạng visa của <%= university.name %>. Giá trị chưa có thông báo tuyển sinh chính thức còn hiệu lực được đánh dấu “chưa xác minh”, không suy diễn từ học bổng hoặc điều kiện chung.</p>
+        <h2><%= siteText("view.university-detail.028") %> <%= university.name %> <%= siteText("view.university-detail.029") %></h2>
+        <p class="section-lead"><%= siteText("view.university-detail.030") %> <%= university.name %><%= siteText("view.university-detail.031") %></p>
         <div class="knowledge-table-wrap"><table class="geo-data-table">
-          <thead><tr><th scope="col">Tiêu chí</th><th scope="col">Giá trị 2026</th><th scope="col">Phạm vi áp dụng</th></tr></thead>
+          <thead><tr><th scope="col"><%= siteText("view.university-detail.032") %></th><th scope="col"><%= siteText("view.university-detail.033") %></th><th scope="col"><%= siteText("view.university-detail.034") %></th></tr></thead>
           <tbody><% university.admissionRows.forEach(function(row){ %><tr><th scope="row"><%= row.criterion %></th><td><%= row.value %></td><td><%= row.note %></td></tr><% }); %></tbody>
         </table></div>
       </section>
@@ -75,8 +75,8 @@
       <% }); %>
 
       <section class="knowledge-section university-faq" id="cau-hoi-thuong-gap">
-        <h2>Câu hỏi thường gặp về <%= university.name %></h2>
-        <p class="section-lead">Các câu trả lời sau tổng hợp những điểm người nộp hồ sơ thường cần đối chiếu: học phí, điều kiện GPA và TOPIK, phân hạng visa, sổ đóng băng và ký túc xá. Mọi giá trị chưa có nguồn xác minh được ghi rõ thay vì ước đoán.</p>
+        <h2><%= siteText("view.university-detail.035") %> <%= university.name %></h2>
+        <p class="section-lead"><%= siteText("view.university-detail.036") %></p>
         <% universityFaqs.forEach(function(faq, index){ %>
         <details class="faq-item" id="faq-<%= index + 1 %>" <%= index === 0 ? 'open' : '' %>>
           <summary><%= faq.question %></summary>
@@ -86,36 +86,36 @@
       </section>
 
       <section class="author-box" aria-labelledby="advisor-title">
-        <h2 id="advisor-title">Đội ngũ tư vấn và hỗ trợ hồ sơ</h2>
+        <h2 id="advisor-title"><%= siteText("view.university-detail.037") %></h2>
         <% if (advisor) { %>
-          <p class="section-lead"><strong><%= advisor.name %></strong> — <%= advisor.jobTitle %>. Chuyên viên hỗ trợ đối chiếu điều kiện, chọn trường và chuẩn bị hồ sơ theo tài liệu tuyển sinh được SOL DREAM EDUCATION xác minh tại thời điểm tư vấn.</p>
+          <p class="section-lead"><strong><%= advisor.name %></strong> — <%= advisor.jobTitle %><%= siteText("view.university-detail.038") %></p>
           <% if (advisor.hasCredential && advisor.hasCredential.length) { %><ul><% advisor.hasCredential.forEach(function(credential){ %><li><%= credential.name %></li><% }); %></ul><% } %>
-          <% if (advisor.sameAs && advisor.sameAs.length) { %><p><a href="<%= advisor.sameAs[0] %>" rel="me noopener" target="_blank">Xem hồ sơ chuyên môn đã xác minh</a></p><% } %>
+          <% if (advisor.sameAs && advisor.sameAs.length) { %><p><a href="<%= advisor.sameAs[0] %>" rel="me noopener" target="_blank"><%= siteText("view.university-detail.039") %></a></p><% } %>
         <% } else { %>
-          <p class="section-lead"><strong>SOL DREAM EDUCATION trực tiếp tư vấn và hỗ trợ đối chiếu hồ sơ.</strong> Website chưa công bố tên, chứng chỉ ICEF/QEAC hoặc hồ sơ LinkedIn của một cố vấn cá nhân đã xác minh, vì vậy hệ thống không tự tạo danh tính hay tuyên bố chứng chỉ khi chưa có dữ liệu thật.</p>
+          <p class="section-lead"><strong><%= siteText("view.university-detail.040") %></strong> <%= siteText("view.university-detail.041") %></p>
         <% } %>
       </section>
 
       <section class="source-box" aria-labelledby="source-title">
-        <h2 id="source-title">Nguồn và phạm vi thông tin</h2>
-        <p class="section-lead">Thông tin được SOL DREAM EDUCATION tổng hợp để hỗ trợ học viên chọn trường và chuẩn bị hồ sơ du học Hàn Quốc. Nội dung không thay thế thông báo tuyển sinh chính thức; học phí, học bổng, ngành mở tuyển và kỳ nhập học sẽ được chuyên viên xác nhận lại theo thời điểm.</p>
-        <% if (university.officialWebsite) { %><p><strong>Nguồn đối chiếu:</strong> <a href="<%= university.officialWebsite %>" target="_blank" rel="noopener noreferrer">Website chính thức của <%= university.english_name %></a>.</p><% } %>
-        <% if (university.sourceUrls && university.sourceUrls.length) { %><p><strong>Trang và hướng dẫn đã đối chiếu:</strong></p><ul><% university.sourceUrls.forEach(function(source){ %><li><a href="<%= source %>" target="_blank" rel="noopener noreferrer"><%= source %></a></li><% }); %></ul><% } %>
-        <p><strong>Ngày cập nhật dữ liệu:</strong> <%= university.updatedDateDisplay %>. <%= university.sourceNotice %></p>
+        <h2 id="source-title"><%= siteText("view.university-detail.042") %></h2>
+        <p class="section-lead"><%= siteText("view.university-detail.043") %></p>
+        <% if (university.officialWebsite) { %><p><strong><%= siteText("view.university-detail.044") %></strong> <a href="<%= university.officialWebsite %>" target="_blank" rel="noopener noreferrer"><%= siteText("view.university-detail.045") %> <%= university.english_name %></a>.</p><% } %>
+        <% if (university.sourceUrls && university.sourceUrls.length) { %><p><strong><%= siteText("view.university-detail.046") %></strong></p><ul><% university.sourceUrls.forEach(function(source){ %><li><a href="<%= source %>" target="_blank" rel="noopener noreferrer"><%= source %></a></li><% }); %></ul><% } %>
+        <p><strong><%= siteText("view.university-detail.047") %></strong> <%= university.updatedDateDisplay %>. <%= university.sourceNotice %></p>
       </section>
     </div>
 
     <aside class="knowledge-sidebar">
       <div class="knowledge-sidebar__card">
-        <h2>Cần kiểm tra hồ sơ phù hợp?</h2>
-        <p class="section-lead">SOL DREAM EDUCATION hỗ trợ đối chiếu GPA, TOPIK, năng lực tài chính, ngành dự kiến và kỳ nhập học với yêu cầu của từng trường. Kết quả tư vấn dựa trên hồ sơ thực tế và thông tin tuyển sinh được xác nhận tại thời điểm đánh giá.</p>
-        <a href="/#lienhe" class="btn btn-primary">Đăng ký tư vấn</a>
+        <h2><%= siteText("view.university-detail.048") %></h2>
+        <p class="section-lead"><%= siteText("view.university-detail.049") %></p>
+        <a href="<%= siteText("view.university-detail.050") %>" class="btn btn-primary"><%= siteText("view.university-detail.051") %></a>
       </div>
       <div class="knowledge-sidebar__card">
-        <h2>Các trường khác</h2>
-        <p class="section-lead">Danh sách dưới đây dẫn đến các hồ sơ trường khác trong cùng bộ dữ liệu của SOL DREAM EDUCATION. Người đọc có thể dùng các trang này để so sánh vị trí, thế mạnh đào tạo, học phí tham khảo, học bổng và lựa chọn ký túc xá.</p>
+        <h2><%= siteText("view.university-detail.052") %></h2>
+        <p class="section-lead"><%= siteText("view.university-detail.053") %></p>
         <ul><% relatedUniversities.forEach(function(item){ %><li><a href="<%= item.url %>"><%= item.name %></a></li><% }); %></ul>
-        <a href="/truong-dai-hoc" class="knowledge-card__link">Xem toàn bộ danh sách →</a>
+        <a href="<%= siteText("view.university-detail.054") %>" class="knowledge-card__link"><%= siteText("view.university-detail.055") %></a>
       </div>
     </aside>
   </div>

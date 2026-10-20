@@ -1,18 +1,18 @@
 <main>
 <section class="section" style="padding-top:56px">
   <div class="wrap">
-    <nav class="crumbs" aria-label="breadcrumb" style="font-size:14px;color:var(--muted);margin-bottom:14px">
-      <a href="/" style="color:var(--muted)">Trang chủ</a> <span>›</span> <span>Du học Hàn Quốc</span>
+    <nav class="crumbs" aria-label="<%= siteText("view.duhoc-list.001") %>" style="font-size:14px;color:var(--muted);margin-bottom:14px">
+      <a href="<%= siteText("view.duhoc-list.002") %>" style="color:var(--muted)"><%= siteText("view.duhoc-list.003") %></a> <span>›</span> <span><%= siteText("view.duhoc-list.004") %></span>
     </nav>
     <div class="sec-head">
-      <span class="eyebrow">Du học Hàn Quốc</span>
-      <h1>Chương trình du học Hàn Quốc</h1>
-      <p>Thông tin chương trình, điều kiện, chi phí và lộ trình hồ sơ được SOL DREAM EDUCATION tư vấn, đồng hành từ A–Z.</p>
-      <div class="source-meta"><strong>Đơn vị tư vấn du học:</strong> SOL DREAM EDUCATION · Thông tin được kiểm tra lại theo kỳ tuyển sinh và hồ sơ</div>
+      <span class="eyebrow"><%= siteText("view.duhoc-list.005") %></span>
+      <h1><%= siteText("view.duhoc-list.006") %></h1>
+      <p><%= siteText("view.duhoc-list.007") %></p>
+      <div class="source-meta"><strong><%= siteText("view.duhoc-list.008") %></strong> <%= siteText("view.duhoc-list.009") %></div>
     </div>
-    <section class="direct-answer list-direct-answer" aria-label="Tóm tắt dịch vụ du học">
-      <p class="direct-answer__label">Trả lời nhanh</p>
-      <p><strong>SOL DREAM EDUCATION tư vấn du học Hàn Quốc</strong> theo hồ sơ học tập, năng lực tiếng Hàn và ngân sách của từng học sinh. Danh sách dưới đây là nguồn tham khảo ban đầu; điều kiện, học phí và học bổng cần được đối chiếu tại thời điểm đăng ký.</p>
+    <section class="direct-answer list-direct-answer" aria-label="<%= siteText("view.duhoc-list.010") %>">
+      <p class="direct-answer__label"><%= siteText("view.duhoc-list.011") %></p>
+      <p><strong><%= siteText("view.duhoc-list.012") %></strong> <%= siteText("view.duhoc-list.013") %></p>
     </section>
     <div class="news-grid">
       <% programs.forEach(function(p){ %>
@@ -20,17 +20,17 @@
         <div class="post__img <%= p.cover_image ? '' : p.cover %>">
           <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= p.cover_image || '/img/research-cover.svg' %>" alt="<%= p.title %>" loading="lazy">
         </div>
-        <div class="post__body"><span class="post__cat"><%= p.category %></span>
+        <div class="post__body"><span class="post__cat"><%= p.categoryLabel %></span>
           <h3><%= p.title %></h3>
           <p class="section-lead"><%= p.geoBluf %></p>
           <% if (p.subtitle) { %><div class="prog__kr"><%= p.subtitle %></div><% } %>
         </div>
       </a>
       <% }); %>
-      <% if (programs.length === 0) { %><p>Chưa có chương trình nào.</p><% } %>
+      <% if (programs.length === 0) { %><p><%= siteText("view.duhoc-list.014") %></p><% } %>
     </div>
     <div style="text-align:center;margin-top:44px">
-      <a href="/#lienhe" class="btn btn-primary">Đăng ký tư vấn du học</a>
+      <a href="<%= siteText("view.duhoc-list.015") %>" class="btn btn-primary"><%= siteText("view.duhoc-list.016") %></a>
     </div>
   </div>
 </section>

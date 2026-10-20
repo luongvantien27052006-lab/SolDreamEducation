@@ -2,10 +2,10 @@
 <section class="section news" id="tintuc">
   <div class="wrap">
     <div class="sec-head reveal"><%- include("../partials/shared-block", { blockKey: "news-intro" }) %></div>
-    <nav class="topic-tabs" aria-label="Chủ đề cẩm nang">
-      <a href="/tin-tuc?muc=thong-tin-han-quoc">Thông tin Hàn Quốc</a>
-      <a href="/tin-tuc?muc=cam-nang-sinh-hoat">Cẩm nang sinh hoạt</a>
-      <a href="/tin-tuc?muc=hoat-dong-soldream">Hoạt động SolDream</a>
+    <nav class="topic-tabs" aria-label="<%= siteText("view.home-sections.news.001") %>">
+      <a href="<%= siteText("view.home-sections.news.002") %>"><%= siteText("view.home-sections.news.003") %></a>
+      <a href="<%= siteText("view.home-sections.news.004") %>"><%= siteText("view.home-sections.news.005") %></a>
+      <a href="<%= siteText("view.home-sections.news.006") %>"><%= siteText("view.home-sections.news.007") %></a>
     </nav>
     <div class="news-grid">
       <% posts.forEach(function(p){ %>
@@ -20,10 +20,10 @@
         </div>
       </a>
       <% }); %>
-      <% if (posts.length === 0) { %><p>Chưa có bài viết nào.</p><% } %>
+      <% if (posts.length === 0) { %><p><%= siteText("view.home-sections.news.008") %></p><% } %>
     </div>
     <div style="text-align:center;margin-top:40px">
-      <a href="/tin-tuc" class="btn btn-ghost">Xem tất cả tin tức
+      <a href="<%= siteText("view.home-sections.news.009") %>" class="btn btn-ghost"><%= siteText("view.home-sections.news.010") %>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
