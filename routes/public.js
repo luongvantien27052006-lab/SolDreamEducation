@@ -19,17 +19,13 @@ const { getHomepageStats, getHomepageStatsSource } = require('../lib/homepageSta
 const { getAboutSections } = require('../lib/aboutContent');
 const { TOPICS, normalizeTopic } = require('../lib/contentTopics');
 const { articleDates, coverMetadata } = require('../lib/articleMetadata');
+const { storedDescription, automaticDescription } = require('../lib/seoDescription');
+const { aboutPageMetadata } = require('../lib/aboutPageMetadata');
 const koreaLife = require('../data/korea-life.json');
 const partnerSchools = require('../data/partner-schools.json').schools;
 
 function jsonLdScript(payload) {
   return `<script type="application/ld+json">${JSON.stringify(payload).replace(/</g, '\\u003c')}</script>`;
-}
-
-function isoDateTime(value) {
-  const text = String(value || '').trim().replace(' ', 'T');
-  if (!text) return '';
-  return /(?:Z|[+-]\d{2}:?\d{2})$/i.test(text) ? text : `${text}+07:00`;
 }
 
 function detailRobots(item) {
@@ -166,6 +162,8 @@ router.get('/tro-ly-du-hoc', (req, res) => {
 router.get('/gioi-thieu', (req, res) => {
   const url = abs('/gioi-thieu');
   const aboutSections = getAboutSections('page');
+  const aboutPageDates = aboutPageMetadata();
+  const aboutStories = db.prepare('SELECT id,title,slug FROM posts WHERE id IN (269,270,271) AND published=1 ORDER BY id').all();
   const jsonLd = jsonLdScript([
     {
       '@context': 'https://schema.org', '@type': 'AboutPage', '@id': `${url}#page`, url,
@@ -173,11 +171,13 @@ router.get('/gioi-thieu', (req, res) => {
       description: 'Thông tin nhận diện, dịch vụ, địa chỉ và phạm vi hoạt động của SOL DREAM EDUCATION.',
       inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` },
       mainEntity: { '@id': `${SITE_URL}/#organization` },
+      ...(aboutPageDates.publishedTime ? {datePublished:aboutPageDates.publishedTime} : {}),
+      ...(aboutPageDates.modifiedTime ? {dateModified:aboutPageDates.modifiedTime} : {}),
     },
     generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Giới thiệu', url: '/gioi-thieu' }]),
   ]);
   res.render('about', {
-    aboutSections,
+    aboutSections, aboutStories, aboutPageDates,
     title: 'Giới thiệu SOL DREAM EDUCATION | Trung tâm Hàn ngữ & Du học Hàn Quốc',
     description: 'SOL DREAM EDUCATION là trung tâm Hàn ngữ và tư vấn du học Hàn Quốc tại Tân Phú, TP.HCM, hoạt động từ năm 2019.',
     canonical: url,
@@ -300,7 +300,7 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
   ]);
   res.render('course-detail', {
     course, courseFaqs, courseNotice: getCourseNotice(),
-    title: course.seoTitle || `${course.name} | SOL DREAM EDUCATION`, description: course.metaDescription || course.blufSummary,
+    title: course.seoTitle || `${course.name} | SOL DREAM EDUCATION`, description: course.metaDescription || automaticDescription(course.blufSummary, course.description),
     canonical: url, jsonLd,
   });
 });
@@ -371,7 +371,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
       ] },
       {
         '@type': 'Article', '@id': `${url}#article`, headline: post.title,
-        description: post.excerpt, image: [{ '@type': 'ImageObject', url: ogImg, description: coverMeta.alt, ...(coverMeta.caption ? { caption: coverMeta.caption } : {}), ...(coverMeta.width ? { width: coverMeta.width, height: coverMeta.height } : {}) }], articleSection: post.topicLabel,
+        description: storedDescription(post), image: [{ '@type': 'ImageObject', url: ogImg, description: coverMeta.alt, ...(coverMeta.caption ? { caption: coverMeta.caption } : {}), ...(coverMeta.width ? { width: coverMeta.width, height: coverMeta.height } : {}) }], articleSection: post.topicLabel,
         wordCount: post.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true,
         ...(publishedTime ? { datePublished: publishedTime } : {}),
         ...(modifiedTime ? { dateModified: modifiedTime } : {}),
@@ -387,7 +387,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
   res.render('news-detail', {
     post, relatedPosts, relatedFaqs, coverMeta, displayTime, contentModifiedTime: modifiedTime,
     title: post.seo_title || `${post.title} - SOL DREAM EDUCATION`,
-    description: post.meta_description || post.excerpt,
+    description: storedDescription(post),
     canonical: url,
     ogType: 'article',
     ogImage: ogImg,
@@ -430,11 +430,11 @@ router.get('/du-hoc/:slug', (req, res, next) => {
   if (program.noindex) res.set('X-Robots-Tag', 'noindex, follow');
   const url = abs('/du-hoc/' + program.slug);
   const ogImg = program.cover_image ? abs(program.cover_image) : (process.env.OG_IMAGE || (SITE_URL + '/img/logo.png'));
-  const publishedTime = isoDateTime(program.created_at);
-  const modifiedTime = isoDateTime(program.updated_at || program.created_at);
+  const { publishedTime, modifiedTime, modifiedDate } = articleDates(program);
+  if (modifiedDate) program.updatedDateFull = modifiedDate;
   const relatedPrograms = db.prepare('SELECT * FROM programs WHERE published = 1 AND category = ? AND id != ? ORDER BY sort_order ASC, datetime(updated_at) DESC LIMIT 3').all(program.category, program.id).map(decorate);
   const relatedFaqs = getRelatedFaqs('program', program.id);
-  setFreshnessHeaders(res, program.updated_at || program.created_at);
+  setFreshnessHeaders(res, modifiedTime);
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org',
     '@graph': [
@@ -445,7 +445,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
       ] },
       {
         '@type': 'Article', '@id': `${url}#article`, headline: program.title,
-        description: program.excerpt, image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
+        description: storedDescription(program), image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
         wordCount: program.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true,
         datePublished: publishedTime,
         dateModified: modifiedTime,
@@ -460,7 +460,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
   res.render('duhoc-detail', {
     program, relatedPrograms, relatedFaqs, isSchoolPage: false,
     title: program.seo_title || `${program.title} - Du học Hàn Quốc | SOL DREAM EDUCATION`,
-    description: program.meta_description || program.excerpt,
+    description: storedDescription(program),
     canonical: url,
     ogType: 'article',
     ogImage: ogImg,
@@ -520,21 +520,21 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
     if (program.noindex) res.set('X-Robots-Tag', 'noindex, follow');
     const url = abs(programPublicPath(program));
     const ogImg = program.cover_image ? abs(program.cover_image) : (process.env.OG_IMAGE || (SITE_URL + '/img/logo.png'));
-    const publishedTime = isoDateTime(program.created_at);
-    const modifiedTime = isoDateTime(program.updated_at || program.created_at);
+    const { publishedTime, modifiedTime, modifiedDate } = articleDates(program);
+  if (modifiedDate) program.updatedDateFull = modifiedDate;
     const relatedPrograms = db.prepare("SELECT * FROM programs WHERE published=1 AND category='Thông tin trường' AND id!=? ORDER BY sort_order ASC,datetime(updated_at) DESC LIMIT 3").all(program.id).map(decorate);
     const relatedFaqs = getRelatedFaqs('program', program.id);
-    setFreshnessHeaders(res, program.updated_at || program.created_at);
+    setFreshnessHeaders(res, modifiedTime);
     const jsonLd = jsonLdScript({ '@context': 'https://schema.org', '@graph': [
       generateBreadcrumbSchema([{ name: 'Trang chủ', url: '/' }, { name: 'Thông tin trường', url: '/truong-dai-hoc' }, { name: program.title, url: programPublicPath(program) }]),
-      { '@type': 'Article', '@id': `${url}#article`, headline: program.title, description: program.excerpt, image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
+      { '@type': 'Article', '@id': `${url}#article`, headline: program.title, description: storedDescription(program), image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
         wordCount: program.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true, datePublished: publishedTime, dateModified: modifiedTime,
         author: authorEntity(program), publisher: { '@id': `${SITE_URL}/#organization` }, mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         ...(program.sourceLinks.length ? { citation: program.sourceLinks } : {}), ...(program.focus_keyword ? { keywords: program.focus_keyword } : {}) },
       ...(relatedFaqs.length ? [{ ...generateFAQSchema(relatedFaqs), '@id': `${url}#faq`, url, inLanguage: 'vi-VN' }] : []),
     ] });
     return res.render('duhoc-detail', { program, relatedPrograms, relatedFaqs, isSchoolPage: true,
-      title: program.seo_title || `${program.title} - Thông tin trường | SOL DREAM EDUCATION`, description: program.meta_description || program.excerpt,
+      title: program.seo_title || `${program.title} - Thông tin trường | SOL DREAM EDUCATION`, description: storedDescription(program),
       canonical: url, ogType: 'article', ogImage: ogImg, ogImageAlt: program.cover_alt || program.title, publishedTime, modifiedTime, robots: detailRobots(program), jsonLd });
   }
   const university = getUniversityById(req.params.id);
@@ -591,13 +591,13 @@ router.get('/robots.txt', (req, res) => {
 // sitemap.xml (dynamic)
 router.get('/sitemap.xml', (req, res) => {
   const posts = db.prepare('SELECT title, slug, cover_image, updated_at, created_at, content_modified_at FROM posts WHERE published = 1 AND noindex = 0 ORDER BY datetime(created_at) DESC').all();
-  const programs = db.prepare('SELECT title, slug, category, cover_image, updated_at, created_at FROM programs WHERE published = 1 AND noindex = 0 ORDER BY sort_order ASC').all();
+  const programs = db.prepare('SELECT title, slug, category, cover_image, updated_at, created_at, content_modified_at FROM programs WHERE published = 1 AND noindex = 0 ORDER BY sort_order ASC').all();
   res.set('Cache-Control', 'public, max-age=60, must-revalidate').type('application/xml').send(generateSitemapXml({ posts, programs }));
 });
 
 router.get('/feed.xml', (req, res) => {
-  const posts = db.prepare('SELECT title, slug, excerpt, content, category, topic, updated_at, created_at, first_published_at FROM posts WHERE published = 1 AND noindex = 0').all();
-  const programs = db.prepare('SELECT title, slug, excerpt, content, category, updated_at, created_at FROM programs WHERE published = 1 AND noindex = 0').all();
+  const posts = db.prepare('SELECT title, slug, excerpt, content, category, topic, updated_at, created_at, first_published_at, meta_description FROM posts WHERE published = 1 AND noindex = 0').all();
+  const programs = db.prepare('SELECT title, slug, excerpt, content, category, updated_at, created_at, first_published_at, meta_description FROM programs WHERE published = 1 AND noindex = 0').all();
   res.set('Cache-Control', 'public, max-age=60, must-revalidate').type('application/rss+xml').send(generateRssXml({ posts, programs }));
 });
 

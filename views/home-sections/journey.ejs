@@ -24,8 +24,10 @@
       </ol>
       <div class="journey-timeline__destination" aria-hidden="true"><span>SGN</span><i></i><span>ICN</span></div>
     </div>
-    <h2 class="reveal" style="text-align:center;font-size:clamp(24px,3.4vw,36px);margin:8px 0 34px">Trường đại học &amp; chương trình du học nổi bật</h2>
-    <p class="section-lead reveal" style="text-align:center;max-width:760px;margin:-18px auto 34px">Danh sách nổi bật giới thiệu các trường và chủ đề du học đang có trên website SOL DREAM EDUCATION. Mỗi thẻ dẫn đến trang chi tiết; điều kiện đầu vào, học phí, ngành tuyển và học bổng cần được đối chiếu theo kỳ tuyển sinh.</p>
+    <% const schoolsIntro = getBlock('school-featured-intro'); if (schoolsIntro.active) { %>
+    <h2 class="reveal" style="text-align:center;font-size:clamp(24px,3.4vw,36px);margin:8px 0 34px"><%= schoolsIntro.title %></h2>
+    <div class="section-lead reveal" style="text-align:center;max-width:760px;margin:-18px auto 34px"><%- schoolsIntro.content %></div>
+    <% } %>
     <div class="news-grid">
       <% programs.forEach(function(pr){ %>
       <a class="post reveal" href="<%= pr.category==='Thông tin trường'?'/truong-dai-hoc/':'/du-hoc/' %><%= pr.slug %>">

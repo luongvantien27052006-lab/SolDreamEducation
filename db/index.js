@@ -1420,4 +1420,5 @@ db.exec(`
 }
 require('../lib/contentEditingMigration').applyContentEditing(db);
 { const result=require('../lib/guidanceScopeMigration').applyGuidanceScope(db);if(result)console.log('[research] living support guidance scope',JSON.stringify(result)); }
+{ const result=require('../lib/sevenContentFixesMigration').applySevenContentFixes(db);if(result)console.log('[content] seven content fixes',JSON.stringify(result)); }
 module.exports = db;

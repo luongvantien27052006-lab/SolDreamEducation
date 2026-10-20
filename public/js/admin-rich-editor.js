@@ -5,10 +5,23 @@
   var DROP = new Set(['SCRIPT','STYLE','IFRAME','OBJECT','EMBED','FORM','INPUT','BUTTON','TEXTAREA','SELECT','OPTION','META','LINK','BASE','SVG','MATH']);
   var SAFE_STYLES = new Set(['text-align','vertical-align','font-weight','font-style','text-decoration','color','background-color','width','height','min-width','max-width','font-size','font-family','line-height','letter-spacing','white-space','text-indent','list-style-type','border','border-top','border-right','border-bottom','border-left','border-collapse','padding','padding-top','padding-right','padding-bottom','padding-left','margin','margin-top','margin-right','margin-bottom','margin-left']);
 
+  function decodeUrlEntities(value) {
+    var text=String(value||'');
+    for(var i=0;i<8;i++){
+      var next=text.replace(/&(?:amp|quot|apos|lt|gt);|&#(?:x[0-9a-f]+|[0-9]+);/gi,function(entity){
+        var names={'&amp;':'&','&quot;':'"','&apos;':"'",'&lt;':'<','&gt;':'>'};
+        if(names[entity.toLowerCase()])return names[entity.toLowerCase()];
+        var hex=/^&#x/i.test(entity),code=parseInt(entity.slice(hex?3:2,-1),hex?16:10);
+        return Number.isFinite(code)&&code>0&&code<=0x10ffff&&!(code>=0xd800&&code<=0xdfff)?String.fromCodePoint(code):'';
+      });
+      if(next===text)break;text=next;
+    }
+    return text;
+  }
   function cleanUrl(value, image) {
-    var url = String(value || '').trim();
-    if (!url || /^(javascript|vbscript|file|data):/i.test(url)) return '';
-    return (image ? /^(https?:\/\/|\/uploads\/)/i : /^(https?:\/\/|mailto:|tel:|\/|#)/i).test(url) ? url : '';
+    var url = decodeUrlEntities(value).trim();
+    if (!url || /[\u0000-\u0020\u007f\\]/.test(url) || url.startsWith('//') || /^(javascript|vbscript|file|data):/i.test(url)) return '';
+    return (image ? /^(https?:\/\/|\/(?:uploads|img)\/)/i : /^(https?:\/\/|mailto:|tel:|\/|#)/i).test(url) ? url : '';
   }
 
   function cleanHtml(html) {

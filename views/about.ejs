@@ -13,11 +13,17 @@
       </aside>
     <% } %>
     <header class="knowledge-hero">
-      <span class="eyebrow">Về chúng tôi</span>
-      <h1>SOL DREAM EDUCATION là ai?</h1>
-      <p>SOL DREAM EDUCATION là trung tâm Hàn ngữ và tư vấn du học Hàn Quốc tại Tân Phú, TP.HCM, hoạt động từ năm 2019 với định hướng đào tạo ngoại ngữ và đồng hành hồ sơ du học.</p>
-      <div class="source-meta"><strong>Thông tin do:</strong> SOL DREAM EDUCATION công bố · <strong>Cập nhật:</strong> 17/10/2026</div>
-      <p><a class="knowledge-card__link" href="/documents/sol-dream-profile-2026-2027.pdf" target="_blank" rel="noopener">Tải hồ sơ giới thiệu SOL DREAM 2026–2027 (PDF) →</a><br><small>Thông tin trong hồ sơ áp dụng đến khi có thông báo mới.</small></p>
+      <% const header = getBlock('about-page-header'); const download = getBlock('about-profile-download'); %>
+      <% if (header.active) { %>
+        <span class="eyebrow"><%= header.eyebrow %></span>
+        <h1><%= header.title %></h1>
+        <%- header.content %>
+      <% } %>
+      <% if (aboutPageDates.modifiedLabel) { %><div class="source-meta"><strong>Cập nhật:</strong> <time datetime="<%= aboutPageDates.modifiedTime %>"><%= aboutPageDates.modifiedLabel %></time></div><% } %>
+      <% if (download.active) { %>
+        <p><a class="knowledge-card__link" href="<%= download.link_url %>" target="_blank" rel="noopener"><%= download.link_label %></a></p>
+        <div class="source-meta"><%- download.content %></div>
+      <% } %>
     </header>
 
     <% const tabSections = (aboutSections || []).filter(function(section){ return section.section_style === 'tab'; }); %>
@@ -57,14 +63,14 @@
         </section>
       <% } %>
     <% }) %>
+    <% const storiesHeading = getBlock('about-stories-heading'); if (storiesHeading.active && aboutStories.length) { %>
     <section class="knowledge-section" aria-labelledby="profile-articles-title">
-      <h2 id="profile-articles-title">Bài viết từ hồ sơ 2026–2027</h2>
+      <h2 id="profile-articles-title"><%= storiesHeading.title %></h2>
       <ul>
-        <li><a href="/tin-tuc/hanh-trinh-doi-ngu-va-phap-ly-sol-dream-education-2026">Hành trình, đội ngũ và pháp lý SOL DREAM EDUCATION</a></li>
-        <li><a href="/tin-tuc/gia-tri-dao-tao-va-trai-nghiem-hoc-tap-sol-dream">Giá trị đào tạo và trải nghiệm học tập</a></li>
-        <li><a href="/tin-tuc/van-phong-va-dau-moi-ho-tro-sol-dream-viet-nam-han-quoc">Văn phòng và đầu mối hỗ trợ tại Việt Nam, Hàn Quốc</a></li>
+        <% aboutStories.forEach(function(story){ %><li><a href="/tin-tuc/<%= story.slug %>"><%= story.title %></a></li><% }); %>
       </ul>
     </section>
+    <% } %>
   </div>
 </article>
 </main>
