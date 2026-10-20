@@ -333,12 +333,28 @@ const _researchSourceCols = db.prepare("PRAGMA table_info(research_sources)").al
 if (!_researchSourceCols.includes('crawl_delay_ms')) db.exec('ALTER TABLE research_sources ADD COLUMN crawl_delay_ms INTEGER NOT NULL DEFAULT 0');
 if (!_researchSourceCols.includes('auto_publish_non_school')) db.exec('ALTER TABLE research_sources ADD COLUMN auto_publish_non_school INTEGER NOT NULL DEFAULT 1');
 if (!_researchSourceCols.includes('next_crawl_at_ms')) db.exec('ALTER TABLE research_sources ADD COLUMN next_crawl_at_ms INTEGER NOT NULL DEFAULT 0');
+if (!_researchSourceCols.includes('notice_urls')) db.exec("ALTER TABLE research_sources ADD COLUMN notice_urls TEXT NOT NULL DEFAULT '[]'");
+db.exec(`CREATE TABLE IF NOT EXISTS research_school_seen (
+  source_id INTEGER NOT NULL REFERENCES research_sources(id) ON DELETE CASCADE,
+  url TEXT NOT NULL, first_seen_at_ms INTEGER NOT NULL, PRIMARY KEY(source_id,url)
+);
+CREATE TABLE IF NOT EXISTS research_school_lists (
+  source_id INTEGER NOT NULL REFERENCES research_sources(id) ON DELETE CASCADE,
+  url TEXT NOT NULL, baseline_at_ms INTEGER NOT NULL DEFAULT 0,
+  etag TEXT NOT NULL DEFAULT '',last_modified TEXT NOT NULL DEFAULT '',last_checked_at_ms INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY(source_id,url)
+);
+CREATE TABLE IF NOT EXISTS research_school_images (
+  school_key TEXT PRIMARY KEY, image_url TEXT NOT NULL DEFAULT '',source_url TEXT NOT NULL DEFAULT '',
+  last_attempt_at_ms INTEGER NOT NULL
+);`);
 const _faqCols = db.prepare("PRAGMA table_info(faqs)").all().map(c => c.name);
 if (!_faqCols.includes('origin_type')) db.exec("ALTER TABLE faqs ADD COLUMN origin_type TEXT NOT NULL DEFAULT ''");
 if (!_faqCols.includes('origin_id')) db.exec("ALTER TABLE faqs ADD COLUMN origin_id TEXT NOT NULL DEFAULT ''");
 db.exec('CREATE INDEX IF NOT EXISTS idx_faqs_origin ON faqs(origin_type, origin_id, generated)');
 const _researchItemCols = db.prepare("PRAGMA table_info(research_items)").all().map(c => c.name);
 if (!_researchItemCols.includes('topic')) db.exec("ALTER TABLE research_items ADD COLUMN topic TEXT NOT NULL DEFAULT 'thong-tin-han-quoc'");
+if (!_researchItemCols.includes('content_kind')) db.exec("ALTER TABLE research_items ADD COLUMN content_kind TEXT NOT NULL DEFAULT ''");
 db.exec('CREATE INDEX IF NOT EXISTS idx_research_topic_status ON research_items(topic,status,created_at)');
 if (!_researchItemCols.includes('quality_score')) db.exec('ALTER TABLE research_items ADD COLUMN quality_score INTEGER NOT NULL DEFAULT 0');
 if (!_researchItemCols.includes('optimization_note')) db.exec("ALTER TABLE research_items ADD COLUMN optimization_note TEXT NOT NULL DEFAULT ''");
@@ -1397,5 +1413,9 @@ db.exec(`
 {
   const result = require('../lib/researchPolicyMigration').applyResearchPolicy(db);
   if (result) console.log('[research] partner/monthly policy', JSON.stringify(result));
+}
+{
+  const result = require('../lib/schoolNoticeMigration').applySchoolNoticePolicy(db);
+  if (result) console.log('[research] weekly school notices', JSON.stringify(result));
 }
 module.exports = db;

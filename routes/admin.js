@@ -12,7 +12,7 @@ const { sanitizeRichHtml } = require('../lib/contentSanitizer');
 const { queueIndexNow } = require('../lib/indexNow');
 const { assessContent } = require('../lib/contentQuality');
 const { syncWebsiteKnowledge, getIndexStats } = require('../lib/websiteKnowledge');
-const { runResearchBot, buildEditorialSource, coverImageForPage, searchExternalContentCover, attachmentMarkup, editorialSourceUrls } = require('../lib/researchBot');
+const { runResearchBot, buildEditorialSource, coverImageForPage, coverImageForSchoolUpdate, searchExternalContentCover, attachmentMarkup, editorialSourceUrls } = require('../lib/researchBot');
 const { sourcePolicy, nextCrawlLabel } = require('../lib/researchPolicy');
 const { MINIMUM_EDITORIAL_CHARACTERS, UNIVERSITY_MINIMUM_CHARACTERS, generateEditorialDraft, generateUniversityProfileDraft, suggestResearchKeywords, isVietnameseDraft, cleanResearchAnnotations, visibleCharacterCount, universityDraftCoverageReport } = require('../lib/editorialAi');
 const { finalizePublishedContent, removePublishedContent } = require('../lib/publicationPipeline');
@@ -746,7 +746,10 @@ router.post('/gioi-thieu/:id/xoa', requireAdmin, (req, res) => {
 router.get('/nghien-cuu', requireAdmin, (req, res) => {
   const selectedTopic = normalizeTopic(req.query.muc);
   const sources = db.prepare('SELECT * FROM research_sources ORDER BY id').all()
-    .map(source => ({ ...source, crawlPolicy: sourcePolicy(source), nextCrawlLabel: nextCrawlLabel(source) }));
+    .map(source => {
+      let noticeUrls = []; try { noticeUrls = JSON.parse(source.notice_urls || '[]'); } catch (_) { /* Show unconfigured sources without links. */ }
+      return { ...source, noticeUrls, crawlPolicy: sourcePolicy(source), nextCrawlLabel: nextCrawlLabel(source) };
+    });
   const activeSources = sources.filter((source) => source.active);
   const sourceHealth = {
     total: activeSources.length,
@@ -755,7 +758,7 @@ router.get('/nghien-cuu', requireAdmin, (req, res) => {
     failed: activeSources.filter((source) => source.last_error && !/robots\.txt|không cho phép thu thập/i.test(source.last_error)).length,
   };
   const topicCounts = Object.fromEntries(db.prepare('SELECT topic,COUNT(*) count FROM research_items GROUP BY topic').all().map((row) => [row.topic, row.count]));
-  const items = db.prepare(`SELECT i.id,i.source_id,i.title,i.url,i.excerpt,i.published_at,i.suggested_section,i.topic,
+  const items = db.prepare(`SELECT i.id,i.source_id,i.title,i.url,i.excerpt,i.published_at,i.suggested_section,i.topic,i.content_kind,
     i.quality_score,i.optimization_note,i.official_url,i.published_post_id,i.published_program_id,i.status,
     i.source_captured_at,length(i.source_text) source_text_chars,i.created_at,i.updated_at,
     s.name source_name,s.source_type
@@ -772,7 +775,7 @@ router.get('/nghien-cuu', requireAdmin, (req, res) => {
     publishedPrograms: db.prepare('SELECT COUNT(*) c FROM programs WHERE published=1').get().c,
     indexedPrograms: db.prepare("SELECT COUNT(*) c FROM chat_knowledge_documents WHERE id GLOB 'program:*:summary'").get().c,
   };
-  const schoolScanHours = Math.max(1, (Number(process.env.RESEARCH_BOT_INTERVAL_MS) || 7 * 24 * 3600000) / 3600000);
+  const schoolScanHours = Math.max(168, (Number(process.env.RESEARCH_BOT_INTERVAL_MS) || 7 * 24 * 3600000) / 3600000);
   res.render('admin/research', { layout, title: 'Dữ liệu & AI', active: 'research', sources, sourceHealth, items, topics: TOPICS, topicCounts, selectedTopic, suggestedKeywords, chatIndex, schoolScanHours, flash: req.query.flash || null });
 });
 router.post('/nghien-cuu/:id/chon-chu-de', requireAdmin, (req, res, next) => {
@@ -835,13 +838,15 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
   const item = db.prepare(`SELECT i.*,s.name source_name,s.url source_url,s.source_type,s.keywords source_keywords,s.crawl_delay_ms FROM research_items i JOIN research_sources s ON s.id=i.source_id WHERE i.id=?`).get(req.params.id); if (!item) return next();
   try {
     const page = await buildEditorialSource(item, item);
-    const isUniversityProfile = item.suggested_section === SCHOOL_CATEGORY
-      || item.source_type === 'university-directory';
+    const isSchoolNotice = sourcePolicy(item).group === 'schools';
+    const isUniversityProfile = !isSchoolNotice && (item.suggested_section === SCHOOL_CATEGORY
+      || item.source_type === 'university-directory');
     const discoverySummary = page.discovery
       ? `Đã đọc ${page.discovery.pagesRead} trang chính thức, tìm ${page.discovery.attachments} tệp; nhóm dữ liệu: ${Object.entries(page.discovery.coverage || {}).map(([key, value]) => `${key} ${value}`).join(', ')}.${page.discovery.governmentDirectoryFallback ? ' Website trường hiện không phản hồi; dữ liệu tạm thời lấy từ hồ sơ chính phủ Study in Korea và bắt buộc đối chiếu lại trước khi xuất bản.' : ''}`
       : '';
     if (isUniversityProfile && discoverySummary) db.prepare("UPDATE research_items SET optimization_note=?,updated_at=datetime('now','localtime') WHERE id=?").run(discoverySummary, item.id);
     const draftInput = {
+      disableExternalResearch: isSchoolNotice,
       title: item.title, sourceUrl: page.url, sourceUrls: page.sourceUrls || [page.url], sourceText: page.text,
       sourceClassification: page.classification,
       sourceName: item.source_name,
@@ -863,9 +868,9 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
       const profileQuality = universityDraftCoverageReport({ ...draft, content: cleanDraftContent });
       if (!profileQuality.complete) throw new Error(`Hồ sơ trường chưa đạt chuẩn chuyên sâu: ${profileQuality.wordCount} từ, ${profileQuality.headingCount} đề mục, ${profileQuality.coveredGroups} nhóm nội dung.`);
     }
-    let fetchedCover = await coverImageForPage(page);
+    let fetchedCover = isSchoolNotice ? await coverImageForSchoolUpdate(page, item) : await coverImageForPage(page);
     let externalCover = null;
-    if (!fetchedCover) {
+    if (!fetchedCover && !isSchoolNotice) {
       externalCover = await searchExternalContentCover({
         title: draft.title,
         subtitle: draft.subtitle,
@@ -874,7 +879,7 @@ router.post('/nghien-cuu/:id/tao-ban-nhap', requireAdmin, async (req, res, next)
       }, { school: isUniversityProfile });
       fetchedCover = externalCover?.cachedImageUrl || '';
     }
-    const isStudyProgram = item.suggested_section === STUDY_CATEGORY || draft.category === STUDY_CATEGORY;
+    const isStudyProgram = !isSchoolNotice && (item.suggested_section === STUDY_CATEGORY || draft.category === STUDY_CATEGORY);
     const target = isUniversityProfile || isStudyProgram || req.body.target === 'program' ? 'programs' : 'posts';
     const sourceUrls = normalizeSourceUrls(editorialSourceUrls(draft.researchSourceUrls || page.sourceUrls || [], page.url, 3).join('\n'));
     const preparedRelatedGuides = [];
