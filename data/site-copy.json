@@ -2802,7 +2802,7 @@
   {
     "key": "navigation.soldream-life.url",
     "group_name": "Menu và thương hiệu",
-    "label": "Đích liên kết: Cuộc sống SolDream (Hoạt động SolDream)",
+    "label": "Đích liên kết: Cuộc sống SolDream",
     "kind": "url",
     "value": "/tin-tuc?muc=hoat-dong-soldream"
   },
@@ -3509,9 +3509,9 @@
   {
     "key": "view.home-sections.news.007",
     "group_name": "Trang chủ – bài viết",
-    "label": "a: Hoạt động SolDream",
+    "label": "a: Cuộc sống SolDream",
     "kind": "text",
-    "value": "Hoạt động SolDream"
+    "value": "Cuộc sống SolDream"
   },
   {
     "key": "view.home-sections.news.008",
@@ -4349,14 +4349,14 @@
   {
     "key": "topic.hoat-dong-soldream.label",
     "group_name": "Ba tab cẩm nang",
-    "label": "Tên tab: Hoạt động SolDream",
+    "label": "Tên tab: Cuộc sống SolDream",
     "kind": "text",
-    "value": "Hoạt động SolDream"
+    "value": "Cuộc sống SolDream"
   },
   {
     "key": "topic.hoat-dong-soldream.description",
     "group_name": "Ba tab cẩm nang",
-    "label": "Lời dẫn: Hoạt động SolDream",
+    "label": "Lời dẫn: Cuộc sống SolDream",
     "kind": "text",
     "value": "Hành trình, đội ngũ, lớp học và các hoạt động được SOL DREAM EDUCATION công bố."
   },

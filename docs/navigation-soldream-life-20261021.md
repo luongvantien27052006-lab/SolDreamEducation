@@ -15,3 +15,11 @@
 ## Kiểm tra cú pháp
 
 Đọc JSON, biên dịch cú pháp EJS và `git diff --check`. Không thêm hoặc chạy bộ kiểm thử.
+
+## Đồng bộ tên tab theo yêu cầu tiếp theo
+
+- Đổi nhãn Hoạt động SolDream thành Cuộc sống SolDream trong dữ liệu mặc định và CMS hiện có, gồm liên kết khối bài viết trang chủ.
+- Trang cẩm nang, menu, breadcrumb, thẻ bài, tab quản trị bài viết, biểu mẫu chỉnh bài và màn dữ liệu quét đều dùng chung nhãn CMS qua `getTopics()` / `displayTopicLabel()`.
+- Migration có dấu mốc chạy một lần, giữ nguyên lời dẫn đã biên tập và không ghi đè các lần sửa tên qua CMS sau này.
+- Giữ ID chủ đề `hoat-dong-soldream`, URL, toàn bộ bài viết và phân loại hiện có. Bộ nhận diện chủ đề chấp nhận cả tên cũ và tên mới.
+- File bổ sung: `lib/contentTopics.js`, `lib/siteContentMigration.js`.
