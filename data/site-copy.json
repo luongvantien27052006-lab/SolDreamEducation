@@ -2793,6 +2793,20 @@
     "value": "/#lienhe"
   },
   {
+    "key": "navigation.soldream-life.label",
+    "group_name": "Menu và thương hiệu",
+    "label": "Menu nổi bật: Cuộc sống SolDream",
+    "kind": "text",
+    "value": "Cuộc sống SolDream"
+  },
+  {
+    "key": "navigation.soldream-life.url",
+    "group_name": "Menu và thương hiệu",
+    "label": "Đích liên kết: Cuộc sống SolDream (Hoạt động SolDream)",
+    "kind": "url",
+    "value": "/tin-tuc?muc=hoat-dong-soldream"
+  },
+  {
     "key": "view.partials.header.054",
     "group_name": "Menu và thương hiệu",
     "label": "aria-label: Mở menu",
