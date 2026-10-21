@@ -103,9 +103,9 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .menu>li>a{display:flex;align-items:center;gap:5px;padding:10px 13px;border-radius:10px;font-weight:600;font-size:15px;transition:background .15s,color .15s}
 .menu>li>a:hover{background:var(--paper-2);color:var(--persimmon)}
 .menu>li>a svg{width:11px;height:11px;opacity:.6}
-.menu>li>a.menu__life{gap:8px;background:linear-gradient(135deg,#7c2e9e,#a51a60);color:#fff;border:1px solid rgba(255,255,255,.25);font-weight:800;box-shadow:0 6px 16px -8px rgba(124,46,158,.65)}
-.menu>li>a.menu__life:hover{background:linear-gradient(135deg,#652280,#8e1550);color:#fff;box-shadow:0 8px 20px -8px rgba(124,46,158,.75)}
-.menu>li>a.menu__life svg{width:17px;height:17px;flex-shrink:0;opacity:1}
+.menu>li>a.menu__life{gap:8px;background:#f7edf5;color:#77316f;border:1px solid #ead7e5;font-weight:700;box-shadow:none}
+.menu>li>a.menu__life:hover{background:#f0e1ee;color:#68265e;box-shadow:none}
+.menu>li>a.menu__life svg{width:15px;height:15px;flex-shrink:0;opacity:1}
 .dropdown{position:absolute;top:100%;left:0;min-width:250px;max-height:min(70vh,480px);overflow-y:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:8px;opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s}
 .menu>li:hover .dropdown,.menu>li:focus-within .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
 .dropdown a{display:block;padding:9px 12px;border-radius:9px;font-size:14px;font-weight:500;color:var(--ink-2)}
@@ -453,7 +453,7 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
   /* mobile menu panel */
   .menu.open{display:flex;position:fixed!important;inset:0 0 0 auto!important;width:min(86vw,340px);height:100dvh;min-height:0;max-height:100dvh;margin:0;transform:none;box-sizing:border-box;background:#fff;flex-direction:column;align-items:stretch;gap:2px;padding:calc(env(safe-area-inset-top) + 72px) 20px calc(env(safe-area-inset-bottom) + 30px);z-index:70;box-shadow:-20px 0 50px -20px rgba(0,0,0,.3);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
   .menu.open>li>a{padding:14px 12px;font-size:16px;border-bottom:1px solid var(--line);border-radius:0}
-  .menu.open>li>a.menu__life{margin:8px 0;border:1px solid rgba(124,46,158,.2);border-radius:12px}
+  .menu.open>li>a.menu__life{margin:8px 0;border:1px solid #ead7e5;border-radius:12px}
   .menu.open .dropdown{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;padding:0 0 8px 12px;min-width:0;max-height:none;overflow:visible}
   .menu.open>li:hover .dropdown{transform:none}
   .nav-open .burger span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
