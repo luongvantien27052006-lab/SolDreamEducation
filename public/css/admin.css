@@ -24,17 +24,18 @@ a{color:inherit;text-decoration:none}
 
 /* ---- Shell ---- */
 .adm{display:grid;width:100%;max-width:100%;grid-template-columns:250px minmax(0,1fr);min-height:100vh;overflow-x:hidden}
-.adm__side{background:var(--ink);color:#cfd6e6;padding:24px 18px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
-.adm__brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;color:#fff;margin-bottom:28px}
+/* Keep the sidebar attached to the viewport, independent of page scrolling. */
+.adm__side{background:var(--ink);color:#cfd6e6;padding:24px 18px;display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0;width:250px;height:100vh;height:100dvh;overflow:hidden;z-index:10}
+.adm__brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;color:#fff;margin-bottom:28px;flex-shrink:0}
 .adm__brand small{color:#8f9ab5;font-weight:600;letter-spacing:.18em;text-transform:uppercase;font-size:10px}
-.adm__nav{display:flex;flex-direction:column;gap:4px}
+.adm__nav{display:flex;flex-direction:column;gap:4px;flex:1;min-height:0;overscroll-behavior:contain;scrollbar-gutter:stable}
 .adm__nav a{padding:11px 14px;border-radius:11px;font-weight:600;font-size:14.5px;color:#cfd6e6;transition:.15s}
 .adm__nav a:hover{background:rgba(255,255,255,.07);color:#fff}
 .adm__nav a.on{background:var(--persimmon);color:#fff}
-.adm__logout{margin-top:auto}
+.adm__logout{margin-top:auto;flex-shrink:0;padding-top:12px}
 .adm__logout button{width:100%;padding:11px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#cfd6e6;border-radius:11px;font:inherit;font-weight:600;cursor:pointer;transition:.15s}
 .adm__logout button:hover{background:rgba(255,255,255,.08);color:#fff}
-.adm__main{width:100%;min-width:0;max-width:1100px;padding:32px 34px}
+.adm__main{grid-column:2;width:100%;min-width:0;max-width:1100px;padding:32px 34px}
 .adm__head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:26px;flex-wrap:wrap}
 .adm__head h1{font-size:26px}
 .adm__head p{color:var(--muted);font-size:14.5px;margin-top:4px}
@@ -154,12 +155,12 @@ a{color:inherit;text-decoration:none}
   .bar{flex:0 0 34px}
   .cover-preview img{max-height:180px}
   .adm__main,.panel,.form,.rich-editor{width:100%;min-width:0;max-width:100%}
-  .adm__main{padding:20px 16px;overflow-x:hidden}
+  .adm__main{grid-column:1;padding:20px 16px;overflow-x:hidden}
   .adm{grid-template-columns:1fr}
-  .adm__side{position:static;width:100%;max-width:100%;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;overflow:hidden}
+  .adm__side{position:static;inset:auto;width:100%;max-width:100%;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;overflow:hidden;z-index:auto}
   .adm__brand{margin-bottom:0}
-  .adm__nav{flex-direction:row;flex-wrap:wrap}
-  .adm__logout{margin-left:auto}
+  .adm__nav{flex:0 1 auto;flex-direction:row;flex-wrap:wrap;overflow-y:visible;overscroll-behavior:auto;scrollbar-gutter:auto}
+  .adm__logout{margin-left:auto;padding-top:0}
   .cards{grid-template-columns:1fr 1fr}
   .grid2{grid-template-columns:1fr}
   .row2{grid-template-columns:1fr}
