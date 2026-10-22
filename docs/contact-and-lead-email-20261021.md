@@ -36,3 +36,18 @@ Hai worker chia sẻ giới hạn nhịp gọi Resend. Luồng bản tin đượ
 ## File
 
 `db/index.js`, `lib/leadEmailNotifier.js`, `lib/subscriberNotifier.js`, `lib/resendRateLimit.js`, `routes/contact.js`, `routes/admin.js`, `server.js`, `views/admin/leads.ejs`, `views/partials/footer.ejs`, `public/css/style.css`, `public/img/icons/contact-phone.svg`, `public/img/icons/contact-email.svg`, `.env.example`.
+
+## Tự cập nhật trạng thái trên admin (22/10/2026)
+
+- Luồng `/api/contact` đã lưu đăng ký và công việc gửi email trong cùng giao dịch, sau đó gọi worker ngay. Worker vẫn tiếp tục mỗi 30 giây và khi khởi động, không phụ thuộc việc mở trang admin hoặc bấm nút gửi.
+- Bổ sung cờ đánh thức worker: đăng ký đến trong khi worker đang gửi được xử lý ở lượt tiếp theo ngay sau khi lượt hiện tại kết thúc.
+- Trang Yêu cầu liên hệ tự đọc trạng thái mỗi 5 giây qua endpoint `/admin/lien-he/trang-thai-email` có bảo vệ phiên quản trị và `Cache-Control: no-store, private`.
+- Cập nhật ngay trong từng ô thông báo: đang chờ, đang gửi, đã gửi, thời điểm gửi, lỗi và nút thử lại. Không tải lại cả trang và không thay đổi vị trí cuộn hoặc dữ liệu người dùng đang chọn.
+- Khi mất kết nối, trang tự thử lại với thời gian chờ tăng dần; dừng khi phiên quản trị hết hạn, tạm dừng ở tab ẩn và tiếp tục khi quay lại.
+- Nhãn và ngày gửi được tạo chung từ `lib/leadEmailStatus.js` cho lần mở trang đầu và các lần cập nhật tiếp theo. Chỉ báo Đã gửi sau khi Resend chấp nhận và trả mã email.
+- Cột Mới / Đã liên hệ / Đã đóng đổi tên thành Xử lý khách hàng. Việc gửi email không tự đánh dấu nhân viên đã liên hệ khách.
+- Nút gửi thủ công chỉ còn dành cho đăng ký cũ chưa có công việc gửi hoặc các lần gửi đã thất bại. Bản ghi đã gửi không bị xếp lại; cơ chế chống trùng và nơi nhận `thangdd@ueh.edu.vn` được giữ nguyên.
+- Không thay đổi luồng bản tin cho email người đăng ký, học phí, thời lượng hoặc chính sách.
+- File bổ sung: `lib/leadEmailStatus.js`, `public/js/admin-leads.js`; cập nhật `lib/leadEmailNotifier.js`, `routes/admin.js`, `views/admin/leads.ejs`, danh sách phiên bản tài nguyên trong `server.js`.
+- Kiểm tra cú pháp JavaScript, EJS và `git diff --check`. Không thêm hoặc chạy bộ kiểm thử, không tạo đăng ký giả và không gửi email thử trên production.
+- Theo yêu cầu hiện tại, chỉ đẩy lên GitHub; chưa triển khai do Railway đang tạm chặn deploy và phiên CLI đã hết hạn.

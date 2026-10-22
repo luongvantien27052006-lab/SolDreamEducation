@@ -56,7 +56,7 @@ try {
 // Asset version (busts browser cache automatically whenever CSS/JS change on disk)
 let ASSET_VER;
 try {
-  const files = ['css/style.css', 'css/admin.css', 'css/chatbot.css', 'js/site.js', 'js/admin-rich-editor.js', 'js/admin-content.js', 'js/admin-preview.js', 'js/chatbot.js'];
+  const files = ['css/style.css', 'css/admin.css', 'css/chatbot.css', 'js/site.js', 'js/admin-rich-editor.js', 'js/admin-content.js', 'js/admin-preview.js', 'js/admin-leads.js', 'js/chatbot.js'];
   ASSET_VER = String(Math.floor(Math.max(...files.map((file) => fs.statSync(path.join(__dirname, 'public', file)).mtimeMs))));
 } catch (e) { ASSET_VER = String(Date.now()); }
 

@@ -1005,8 +1005,17 @@ router.post('/popup/:id/xoa', requireAdmin, (req, res, next) => {
 });
 
 // ---------- Hotline contact requests ----------
+function contactRequestRows(){
+  const {leadEmailStatus}=require('../lib/leadEmailStatus');
+  return db.prepare(`SELECT l.*,n.status email_status,n.recipient email_recipient,n.sent_at email_sent_at,n.last_error email_error,n.attempts email_attempts FROM leads l LEFT JOIN lead_email_notifications n ON n.lead_id=l.id ORDER BY CASE l.status WHEN 'new' THEN 0 ELSE 1 END,datetime(l.created_at) DESC LIMIT 300`).all().map(lead=>({...lead,emailNotification:leadEmailStatus(lead)}));
+}
+router.get('/lien-he/trang-thai-email',requireAdmin,(req,res)=>{
+  res.set({'Cache-Control':'no-store, private','Vary':'Cookie'});
+  res.json({notifications:contactRequestRows().map(lead=>({id:lead.id,...lead.emailNotification}))});
+});
 router.get('/lien-he', requireAdmin, (req, res) => {
-  const leads = db.prepare(`SELECT l.*,n.status email_status,n.recipient email_recipient,n.sent_at email_sent_at,n.last_error email_error,n.attempts email_attempts FROM leads l LEFT JOIN lead_email_notifications n ON n.lead_id=l.id ORDER BY CASE l.status WHEN 'new' THEN 0 ELSE 1 END,datetime(l.created_at) DESC LIMIT 300`).all();
+  res.set('Cache-Control','no-store, private');
+  const leads = contactRequestRows();
   const leadGroups = [
     { key: 'study_abroad', title: 'Tư vấn chương trình du học', rows: leads.filter((lead) => lead.lead_type === 'study_abroad') },
     { key: 'course', title: 'Tư vấn khóa học', rows: leads.filter((lead) => !lead.lead_type || lead.lead_type === 'course') },
