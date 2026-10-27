@@ -1448,3 +1448,4 @@ module.exports = db;
 { const result=require('../lib/studyHubMigration').applyStudyHubCopy(db);if(result)console.log('[seo] nationwide study hub',JSON.stringify(result)); }
 { const result=require('../lib/editorialGuidesMigration').applyEditorialGuides(db);if(result)console.log('[content] completed study guides',JSON.stringify(result)); }
 { const result=require('../lib/partnerEditorialMigration').applyPartnerEditorial(db);if(result)console.log('[content] profile partner schools',JSON.stringify(result)); }
+{ const result=require('../lib/partnerEditorialMigration').applyPartnerCovers(db);if(result)console.log('[content] saved partner school images',JSON.stringify(result)); }
