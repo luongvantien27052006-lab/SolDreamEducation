@@ -6,7 +6,7 @@ const PINNED_NEWS_POST_SLUG = 'tuyen-dung-giao-vien-day-tieng-anh';
 const db = require('../db');
 const { decorate, programPublicPath, slugify } = require('../lib/util');
 const {
-  abs, SITE_URL, LOGO_URL, authorEntity, buildRobotsTxt, generateUniversitySchema,
+  abs, SITE_URL, LOGO_URL, authorEntity, buildRobotsTxt, generateUniversitySchema, defaultOgImage,
   generateFAQSchema, generateBreadcrumbSchema, getVerifiedAdvisor,
 } = require('../lib/seo');
 const { getAllUniversities, getUniversityById } = require('../lib/universityPages');
@@ -22,6 +22,7 @@ const { TOPICS, getTopics, normalizeTopic } = require('../lib/contentTopics');
 const { articleDates, coverMetadata } = require('../lib/articleMetadata');
 const { storedDescription, automaticDescription } = require('../lib/seoDescription');
 const { aboutPageMetadata } = require('../lib/aboutPageMetadata');
+const { socialImage } = require('../lib/responsiveImages');
 
 
 
@@ -360,7 +361,8 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
   const post = decorate(row);
   if (post.noindex) res.set('X-Robots-Tag', 'noindex, follow');
   const url = abs('/tin-tuc/' + post.slug);
-  const ogImg = post.cover_image ? abs(post.cover_image) : (process.env.OG_IMAGE || (SITE_URL + '/img/logo.png'));
+  const shareImage=socialImage(post.cover_image);
+  const ogImg = post.cover_image ? abs(shareImage.src) : defaultOgImage();
   const { publishedTime, modifiedTime, displayTime, modifiedDate } = articleDates(post);
   const coverMeta = coverMetadata(post);
   if (modifiedDate) post.updatedDateFull = modifiedDate;
@@ -377,7 +379,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
       ] },
       {
         '@type': 'Article', '@id': `${url}#article`, headline: post.title,
-        description: storedDescription(post), image: [{ '@type': 'ImageObject', url: ogImg, description: coverMeta.alt, ...(coverMeta.caption ? { caption: coverMeta.caption } : {}), ...(coverMeta.width ? { width: coverMeta.width, height: coverMeta.height } : {}) }], articleSection: post.topicLabel,
+        description: storedDescription(post), image: [{ '@type': 'ImageObject', url: ogImg, description: coverMeta.alt, ...(coverMeta.caption ? { caption: coverMeta.caption } : {}), ...((shareImage.width || coverMeta.width) ? { width: shareImage.width || coverMeta.width, height: shareImage.height || coverMeta.height } : {}) }], articleSection: post.topicLabel,
         wordCount: post.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true,
         ...(publishedTime ? { datePublished: publishedTime } : {}),
         ...(modifiedTime ? { dateModified: modifiedTime } : {}),
@@ -431,11 +433,11 @@ router.get('/du-hoc', (req, res) => {
 router.get('/du-hoc/:slug', (req, res, next) => {
   const row = db.prepare('SELECT * FROM programs WHERE slug = ? AND published = 1').get(req.params.slug);
   if (!row) return next();
-  if (row.category === 'Thông tin trường') return res.redirect(301, `/truong-dai-hoc/${row.slug}`);
+  if (row.category === 'Thông tin trường') return res.redirect(301, programPublicPath(row));
   const program = decorate(row);
   if (program.noindex) res.set('X-Robots-Tag', 'noindex, follow');
   const url = abs('/du-hoc/' + program.slug);
-  const ogImg = program.cover_image ? abs(program.cover_image) : (process.env.OG_IMAGE || (SITE_URL + '/img/logo.png'));
+  const ogImg = program.cover_image ? abs(socialImage(program.cover_image).src) : defaultOgImage();
   const { publishedTime, modifiedTime, modifiedDate } = articleDates(program);
   if (modifiedDate) program.updatedDateFull = modifiedDate;
   const relatedPrograms = db.prepare('SELECT * FROM programs WHERE published = 1 AND category = ? AND id != ? ORDER BY sort_order ASC, datetime(updated_at) DESC LIMIT 3').all(program.category, program.id).map(decorate);
@@ -481,7 +483,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
 // Crawlable knowledge hub: detailed university profiles used by people and search AI.
 router.get('/truong-dai-hoc', (req, res) => {
   const partnerSchools=require('../lib/siteContent').getDataset('partners').schools;
-  const schoolPrograms = db.prepare("SELECT * FROM programs WHERE published=1 AND category='Thông tin trường' ORDER BY sort_order ASC,datetime(updated_at) DESC,id ASC").all().map(decorate);
+  const schoolPrograms = db.prepare("SELECT * FROM programs WHERE published=1 AND category='Thông tin trường' ORDER BY sort_order ASC,datetime(updated_at) DESC,id ASC").all().filter(item=>item.slug!=='dai-hoc-woosong').map(decorate);
   const dynamicKeys = new Set(schoolPrograms.map((item) => slugify(item.title).replace(/^(?:truong-)?dai-hoc-/, '')));
   const universities = getAllUniversities().filter((item) => !dynamicKeys.has(slugify(item.name).replace(/^(?:truong-)?dai-hoc-/, '')));
   const url = abs('/truong-dai-hoc');
@@ -501,7 +503,7 @@ router.get('/truong-dai-hoc', (req, res) => {
         name: siteText("server.routes.public.054"),
         description: siteText("server.routes.public.055",{v0:(partnerSchools.length),v1:(universities.length + schoolPrograms.length)}),
         creator: { '@id': `${SITE_URL}/#organization` },
-        dateModified: '2026-10-17', inLanguage: 'vi-VN',
+        dateModified: require('../lib/pageFreshness').getPageFreshness().get('/truong-dai-hoc') || undefined, inLanguage: 'vi-VN',
         variableMeasured: ['Tên trường', 'Địa chỉ', 'Ngành học', 'Học phí', 'Học bổng', 'Ký túc xá'],
         hasPart: [
           ...partnerSchools.map((school) => ({ '@type': 'EducationalOrganization', name: school.englishName, sameAs: school.website })),
@@ -521,12 +523,16 @@ router.get('/truong-dai-hoc', (req, res) => {
 });
 
 router.get('/truong-dai-hoc/:id', (req, res, next) => {
+  if(req.params.id==='dai-hoc-woosong'&&getUniversityById('woosong')&&db.prepare("SELECT 1 FROM programs WHERE slug=? AND published=1 AND category='Thông tin trường'").get(req.params.id)){
+    const queryIndex=req.originalUrl.indexOf('?');
+    return res.redirect(301,'/truong-dai-hoc/woosong'+(queryIndex>=0?req.originalUrl.slice(queryIndex):''));
+  }
   const storedRow = db.prepare("SELECT * FROM programs WHERE slug=? AND published=1 AND category='Thông tin trường'").get(req.params.id);
   if (storedRow) {
     const program = decorate(storedRow);
     if (program.noindex) res.set('X-Robots-Tag', 'noindex, follow');
     const url = abs(programPublicPath(program));
-    const ogImg = program.cover_image ? abs(program.cover_image) : (process.env.OG_IMAGE || (SITE_URL + '/img/logo.png'));
+    const ogImg = program.cover_image ? abs(socialImage(program.cover_image).src) : defaultOgImage();
     const { publishedTime, modifiedTime, modifiedDate } = articleDates(program);
   if (modifiedDate) program.updatedDateFull = modifiedDate;
     const relatedPrograms = db.prepare("SELECT * FROM programs WHERE published=1 AND category='Thông tin trường' AND id!=? ORDER BY sort_order ASC,datetime(updated_at) DESC LIMIT 3").all(program.id).map(decorate);
@@ -546,9 +552,14 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
   }
   const university = getUniversityById(req.params.id);
   if (!university) return next();
+  if(university.id==='woosong'){
+    const supplement=db.prepare("SELECT * FROM programs WHERE slug='dai-hoc-woosong' AND published=1 AND category='Thông tin trường'").get();
+    if(supplement){university.supplementaryProgram=decorate(supplement);university.sourceUrls=[...new Set([...university.sourceUrls,...university.supplementaryProgram.sourceLinks])];}
+  }
   setFreshnessHeaders(res);
   const url = abs(university.url);
   const universityFaqs = getUniversityFaqs(university);
+  if(university.supplementaryProgram){for(const faq of getRelatedFaqs('program',university.supplementaryProgram.id)){if(!universityFaqs.some(item=>item.question===faq.question&&item.answer===faq.answer))universityFaqs.push(faq);}}
   const advisor = getVerifiedAdvisor();
   const jsonLd = jsonLdScript([
     generateUniversitySchema(university, advisor),
@@ -567,6 +578,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
         description: university.description,
         datePublished: university.firstPublishedAt || university.updatedDate,
         dateModified: university.updatedDate,
+        image:[{ '@type':'ImageObject',url:abs('/img/og-'+university.id+'.jpg'),width:1200,height:630,description:university.name+' — thông tin trường tại SolDream' }],
         inLanguage: 'vi-VN',
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         author: advisor ? { '@id': advisor['@id'] } : { '@id': `${SITE_URL}/#organization` },
@@ -584,8 +596,9 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
     description: university.description,
     canonical: url,
     ogType: 'article',
+    ogImage:abs('/img/og-'+university.id+'.jpg'),
     ogImageAlt: siteText('school.og-alt',{v0:university.name}),
-    publishedTime: `${university.updatedDate}T00:00:00+07:00`,
+    publishedTime: `${university.firstPublishedAt || university.updatedDate}T00:00:00+07:00`,
     modifiedTime: `${university.updatedDate}T00:00:00+07:00`,
     jsonLd,
   });

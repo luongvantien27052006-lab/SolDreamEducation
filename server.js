@@ -62,6 +62,7 @@ try {
 
 // If deployed behind a proxy (Railway, Nginx) so secure cookies / IPs work
 app.set('trust proxy', 1);
+app.use(require('./lib/preferredHost').createPreferredHostRedirect());
 
 // Views
 app.set('view engine', 'ejs');
@@ -136,7 +137,7 @@ app.use((req, res, next) => {
 });
 
 // Inject SEO defaults into every render
-app.use((req, res, next) => { res.locals = Object.assign({}, seoDefaults(req), require('./lib/siteContent').siteContentLocals(), { assetVer: ASSET_VER }, res.locals); next(); });
+app.use((req, res, next) => { res.locals = Object.assign({}, seoDefaults(req), require('./lib/siteContent').siteContentLocals(), require('./lib/responsiveImages'), { assetVer: ASSET_VER }, res.locals); next(); });
 // The course dropdown is sourced from the live published catalogue so every
 // Admin add/edit/hide/delete operation is reflected on the next page request.
 app.use((req, res, next) => {

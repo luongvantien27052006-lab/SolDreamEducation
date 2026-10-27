@@ -1,0 +1,77 @@
+{
+  "/uploads/1790953866908-59242ba7d944.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 1242625,
+    "variants": [
+      {
+        "src": "/img/optimized/1790953866908-59242ba7d944-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 14750
+      },
+      {
+        "src": "/img/optimized/1790953866908-59242ba7d944-960.webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 29172
+      },
+      {
+        "src": "/img/optimized/1790953866908-59242ba7d944-1440.webp",
+        "width": 1440,
+        "height": 810,
+        "bytes": 42308
+      }
+    ]
+  },
+  "/uploads/1792414207365-94ab07107ec8.jpg": {
+    "width": 2568,
+    "height": 1926,
+    "originalBytes": 1904952,
+    "variants": [
+      {
+        "src": "/img/optimized/1792414207365-94ab07107ec8-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 70532
+      },
+      {
+        "src": "/img/optimized/1792414207365-94ab07107ec8-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 234406
+      },
+      {
+        "src": "/img/optimized/1792414207365-94ab07107ec8-1440.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 442474
+      }
+    ]
+  },
+  "/uploads/1792414213360-89a87c3d69be.jpg": {
+    "width": 4032,
+    "height": 3024,
+    "originalBytes": 2684694,
+    "variants": [
+      {
+        "src": "/img/optimized/1792414213360-89a87c3d69be-480.webp",
+        "width": 480,
+        "height": 360,
+        "bytes": 32050
+      },
+      {
+        "src": "/img/optimized/1792414213360-89a87c3d69be-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 83396
+      },
+      {
+        "src": "/img/optimized/1792414213360-89a87c3d69be-1440.webp",
+        "width": 1440,
+        "height": 1080,
+        "bytes": 143302
+      }
+    ]
+  }
+}

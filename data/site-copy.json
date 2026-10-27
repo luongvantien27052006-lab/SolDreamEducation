@@ -4667,5 +4667,40 @@
     "group_name": "Ảnh bìa tự động",
     "label": "EDUCATION",
     "kind": "text"
+  },
+  {
+    "key": "university.missing-data.note",
+    "group_name": "Hồ sơ trường",
+    "label": "Ghi chú dữ liệu chưa công bố",
+    "kind": "text",
+    "value": "Các khoản chi phí và điều kiện chưa có dữ liệu xác nhận được tư vấn theo chương trình, kỳ nhập học và hồ sơ thực tế."
+  },
+  {
+    "key": "university.costs.summary",
+    "group_name": "Hồ sơ trường",
+    "label": "Lời dẫn chi phí trường",
+    "kind": "text",
+    "value": "Các khoản dưới đây được trình bày theo dữ liệu và phạm vi áp dụng của từng chương trình."
+  },
+  {
+    "key": "university.admissions.summary",
+    "group_name": "Hồ sơ trường",
+    "label": "Lời dẫn điều kiện trường",
+    "kind": "text",
+    "value": "Các điều kiện dưới đây áp dụng theo chương trình và kỳ tuyển sinh được ghi trong dữ liệu hiện có."
+  },
+  {
+    "key": "university.supplementary.heading",
+    "group_name": "Hồ sơ trường",
+    "label": "Tiêu đề nội dung trường hợp nhất",
+    "kind": "text",
+    "value": "Ngành học, chương trình và học phí chuyên ngành"
+  },
+  {
+    "key": "seo.default-og-image",
+    "group_name": "SEO mặc định",
+    "label": "Ảnh chia sẻ mặc định",
+    "kind": "url",
+    "value": "/img/og-soldream.jpg"
   }
 ]

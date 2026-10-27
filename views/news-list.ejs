@@ -23,7 +23,7 @@
       <% posts.forEach(function(p){ %>
       <a class="post" href="/tin-tuc/<%= p.slug %>">
         <div class="post__img <%= p.cover_image ? '' : p.cover %>">
-          <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= p.cover_image || '/img/research-cover.svg' %>" alt="<%= p.title %>" loading="lazy">
+          <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" <%- imageAttributes(p.cover_image || '/img/research-cover.svg', '(max-width: 720px) 100vw, 420px') %> alt="<%= p.title %>" loading="lazy">
           <div class="post__date"><b><%= p.day %></b><span><%= p.monthYear %></span></div>
         </div>
         <div class="post__body"><span class="post__cat"><%= p.topicLabel %></span>

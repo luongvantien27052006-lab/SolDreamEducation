@@ -1,0 +1,687 @@
+{
+  "version": "seo-editorial-fixes-20261028-v1",
+  "auditDate": "2026-10-28",
+  "description": "Chỉ sửa metadata theo cặp giá trị cũ–mới chính xác; không thay title hiển thị, nội dung, URL hoặc ngày xuất bản.",
+  "applicationGuards": {
+    "expectedValuesAre": "rendered HTML from public crawl; compare DB value or its existing fallback before applying",
+    "checkContentTitle": "posts/programs.title or courses.name must still match expectedContentTitle",
+    "preserveFields": [
+      "title",
+      "name",
+      "content",
+      "excerpt",
+      "price",
+      "financials_json",
+      "requirements_json",
+      "created_at",
+      "publication_date",
+      "first_published_at",
+      "slug"
+    ],
+    "skipWhenEditorChanged": true,
+    "courseDescriptionNote": "Một số courses.meta_description có thể rỗng và đang dùng fallback từ bluf_summary; cần đối chiếu fallback trước khi điền metadata hoàn chỉnh."
+  },
+  "summary": {
+    "records": 41,
+    "seoTitles": 25,
+    "descriptions": 17,
+    "confirmedMidWordTitles": 3
+  },
+  "fixes": [
+    {
+      "table": "posts",
+      "slug": "thong-bao-danh-sach-cong-ty-du-lich-uu-tien-ap-dung-tu-21092026",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-bao-danh-sach-cong-ty-du-lich-uu-tien-ap-dung-tu-21092026",
+      "expectedContentTitle": "Thông báo danh sách công ty du lịch ưu tiên (áp dụng từ 21.09.2026)",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Thông báo danh sách công ty du lịch ưu tiên (áp dụng từ…",
+          "fullVisibleHeading": "Thông báo danh sách công ty du lịch ưu tiên (áp dụng từ 21.09.2026)",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Thông báo danh sách công ty du lịch ưu tiên (áp dụng từ…",
+      "newSeoTitle": "Thông báo danh sách công ty du lịch ưu tiên (áp dụng từ 21.09.2026)"
+    },
+    {
+      "table": "posts",
+      "slug": "thong-bao-ve-viec-uy-quyen-xin-visa-du-hoc-tu-ngay-20-thang-10-nam-2025",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-bao-ve-viec-uy-quyen-xin-visa-du-hoc-tu-ngay-20-thang-10-nam-2025",
+      "expectedContentTitle": "Thông báo về việc ủy quyền xin visa du học (Từ ngày 20 tháng 10 năm 2025)",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Thông báo về việc ủy quyền xin visa du học (Từ ngày 20 tháng 10…",
+          "fullVisibleHeading": "Thông báo về việc ủy quyền xin visa du học (Từ ngày 20 tháng 10 năm 2025)",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Thông báo về việc ủy quyền xin visa du học (Từ ngày 20 tháng 10…",
+      "newSeoTitle": "Thông báo về việc ủy quyền xin visa du học (Từ ngày 20 tháng 10 năm 2025)"
+    },
+    {
+      "table": "posts",
+      "slug": "thong-bao-tuyen-sinh-nam-2026-chuong-trinh-dao-tao-chuyen-mon-doi-voi-dieu-duong-vien-cham-soc-2",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-bao-tuyen-sinh-nam-2026-chuong-trinh-dao-tao-chuyen-mon-doi-voi-dieu-duong-vien-cham-soc-2",
+      "expectedContentTitle": "Thông báo tuyển sinh năm 2026 - Chương trình đào tạo chuyên môn đối với điều dưỡng viên chăm sóc",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Thông báo tuyển sinh năm 2026 - Chương trình đào tạo chuyên môn…",
+          "fullVisibleHeading": "Thông báo tuyển sinh năm 2026 - Chương trình đào tạo chuyên môn đối với điều dưỡng viên chăm sóc",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Thông báo tuyển sinh năm 2026 - Chương trình đào tạo chuyên môn…",
+      "newSeoTitle": "Thông báo tuyển sinh năm 2026 - Chương trình đào tạo chuyên môn đối với điều dưỡng viên chăm sóc"
+    },
+    {
+      "table": "posts",
+      "slug": "thong-bao-ve-viec-trien-khai-dich-vu-phong-cho-cao-cap-tai-trung-tam",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-bao-ve-viec-trien-khai-dich-vu-phong-cho-cao-cap-tai-trung-tam",
+      "expectedContentTitle": "Thông báo về việc triển khai dịch vụ phòng chờ cao cấp tại trung tâm",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Thông báo về việc triển khai dịch vụ phòng chờ cao cấp tại…",
+          "fullVisibleHeading": "Thông báo về việc triển khai dịch vụ phòng chờ cao cấp tại trung tâm",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Thông báo về việc triển khai dịch vụ phòng chờ cao cấp tại…",
+      "newSeoTitle": "Thông báo về việc triển khai dịch vụ phòng chờ cao cấp tại trung tâm"
+    },
+    {
+      "table": "posts",
+      "slug": "gioi-thieu-chung-va-hop-tac-quoc-te-tai-vien-trao-doi-quoc-te-dai-hoc-dongyang",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/gioi-thieu-chung-va-hop-tac-quoc-te-tai-vien-trao-doi-quoc-te-dai-hoc-dongyang",
+      "expectedContentTitle": "Giới thiệu chung và Hợp tác Quốc tế tại Viện Trao đổi Quốc tế Đại học Dongyang",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Giới thiệu chung và Hợp tác Quốc tế tại Viện Trao đổi Quốc tế…",
+          "fullVisibleHeading": "Giới thiệu chung và Hợp tác Quốc tế tại Viện Trao đổi Quốc tế Đại học Dongyang",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Giới thiệu chung và Hợp tác Quốc tế tại Viện Trao đổi Quốc tế…",
+      "newSeoTitle": "Giới thiệu chung và Hợp tác Quốc tế tại Viện Trao đổi Quốc tế Đại học Dongyang"
+    },
+    {
+      "table": "posts",
+      "slug": "trang-thong-bao-chinh-thuc-ve-visa-cua-dai-su-quan-han-quoc-tai-viet-nam",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/trang-thong-bao-chinh-thuc-ve-visa-cua-dai-su-quan-han-quoc-tai-viet-nam",
+      "expectedContentTitle": "Trang thông báo chính thức về visa của Đại sứ quán Hàn Quốc tại Việt Nam",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Trang thông báo chính thức về visa của Đại sứ quán Hàn Quốc tại…",
+          "fullVisibleHeading": "Trang thông báo chính thức về visa của Đại sứ quán Hàn Quốc tại Việt Nam",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Trang thông báo chính thức về visa của Đại sứ quán Hàn Quốc tại…",
+      "newSeoTitle": "Trang thông báo chính thức về visa của Đại sứ quán Hàn Quốc tại Việt Nam"
+    },
+    {
+      "table": "posts",
+      "slug": "bieu-phi-le-phi-dang-ky-xin-cap-visa-han-quoc-va-cac-dich-vu-lanh-su",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/bieu-phi-le-phi-dang-ky-xin-cap-visa-han-quoc-va-cac-dich-vu-lanh-su",
+      "expectedContentTitle": "Biểu phí lệ phí đăng ký xin cấp visa Hàn Quốc và các dịch vụ lãnh sự",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Biểu phí lệ phí đăng ký xin cấp visa Hàn Quốc và các dịch vụ…",
+          "fullVisibleHeading": "Biểu phí lệ phí đăng ký xin cấp visa Hàn Quốc và các dịch vụ lãnh sự",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Biểu phí lệ phí đăng ký xin cấp visa Hàn Quốc và các dịch vụ…",
+      "newSeoTitle": "Biểu phí lệ phí đăng ký xin cấp visa Hàn Quốc và các dịch vụ lãnh sự"
+    },
+    {
+      "table": "posts",
+      "slug": "huong-dan-quy-trinh-kham-suc-khoe-danh-cho-du-hoc-sinh-xin-visa-han-quoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/huong-dan-quy-trinh-kham-suc-khoe-danh-cho-du-hoc-sinh-xin-visa-han-quoc",
+      "expectedContentTitle": "Hướng dẫn quy trình khám sức khỏe dành cho du học sinh xin visa Hàn Quốc",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Hướng dẫn quy trình khám sức khỏe dành cho du học sinh xin visa…",
+          "fullVisibleHeading": "Hướng dẫn quy trình khám sức khỏe dành cho du học sinh xin visa Hàn Quốc",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Hướng dẫn quy trình khám sức khỏe dành cho du học sinh xin visa…",
+      "newSeoTitle": "Hướng dẫn quy trình khám sức khỏe dành cho du học sinh xin visa Hàn Quốc"
+    },
+    {
+      "table": "posts",
+      "slug": "dai-su-quan-viet-nam-tai-han-quoc-hoan-tat-cong-tac-bao-ho-cong-dan-dua-10-thuyen-vien-bi-mac-ket-ve-nuoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/dai-su-quan-viet-nam-tai-han-quoc-hoan-tat-cong-tac-bao-ho-cong-dan-dua-10-thuyen-vien-bi-mac-ket-ve-nuoc",
+      "expectedContentTitle": "Đại sứ quán Việt Nam tại Hàn Quốc hoàn tất công tác bảo hộ công dân đưa 10 thuyền viên bị mắc kẹt về nước",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Đại sứ quán Việt Nam tại Hàn Quốc hoàn tất công tác bảo hộ công…",
+          "fullVisibleHeading": "Đại sứ quán Việt Nam tại Hàn Quốc hoàn tất công tác bảo hộ công dân đưa 10 thuyền viên bị mắc kẹt về nước",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Đại sứ quán Việt Nam tại Hàn Quốc hoàn tất công tác bảo hộ công…",
+      "newSeoTitle": "Đại sứ quán Việt Nam tại Hàn Quốc hoàn tất công tác bảo hộ công dân đưa 10 thuyền viên bị mắc kẹt về nước"
+    },
+    {
+      "table": "posts",
+      "slug": "ap-dung-chung-nhan-apostille-thay-cho-hop-phap-hoa-lanh-su-ke-tu-ngay-1192026",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/ap-dung-chung-nhan-apostille-thay-cho-hop-phap-hoa-lanh-su-ke-tu-ngay-1192026",
+      "expectedContentTitle": "Apostille thay hợp pháp hóa lãnh sự từ 11/9/2026: hướng dẫn với giấy tờ Việt Nam–Hàn Quốc",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Apostille thay hợp pháp hóa lãnh sự từ 11/9/2026: hướng dẫn với g",
+          "fullVisibleHeading": "Apostille thay hợp pháp hóa lãnh sự từ 11/9/2026: hướng dẫn với giấy tờ Việt Nam–Hàn Quốc",
+          "confirmedMidWord": true
+        }
+      ],
+      "expectedSeoTitle": "Apostille thay hợp pháp hóa lãnh sự từ 11/9/2026: hướng dẫn với g",
+      "newSeoTitle": "Apostille thay hợp pháp hóa lãnh sự từ 11/9/2026: hướng dẫn với giấy tờ Việt Nam–Hàn Quốc"
+    },
+    {
+      "table": "posts",
+      "slug": "canh-bao-trang-web-gia-mao-e-arrival-card-khi-du-hoc-han-quoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/canh-bao-trang-web-gia-mao-e-arrival-card-khi-du-hoc-han-quoc",
+      "expectedContentTitle": "Cảnh báo website giả mạo e-Arrival Card: cách nhận biết trang chính thức",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Cảnh báo website giả mạo e-Arrival Card: cách nhận biết trang chí",
+          "fullVisibleHeading": "Cảnh báo website giả mạo e-Arrival Card: cách nhận biết trang chính thức",
+          "confirmedMidWord": true
+        }
+      ],
+      "expectedSeoTitle": "Cảnh báo website giả mạo e-Arrival Card: cách nhận biết trang chí",
+      "newSeoTitle": "Cảnh báo website giả mạo e-Arrival Card: cách nhận biết trang chính thức"
+    },
+    {
+      "table": "posts",
+      "slug": "seoul-global-student-center-2026-seoul-global-marketer-training-program-lich-trinh-va-thong-tin-can-biet",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/seoul-global-student-center-2026-seoul-global-marketer-training-program-lich-trinh-va-thong-tin-can-biet",
+      "expectedContentTitle": "Chương trình đào tạo nhà tiếp thị toàn cầu Seoul 2026 dành cho sinh viên quốc tế",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Chương trình đào tạo nhà tiếp thị toàn cầu Seoul 2026 dành cho…",
+          "fullVisibleHeading": "Chương trình đào tạo nhà tiếp thị toàn cầu Seoul 2026 dành cho sinh viên quốc tế",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Chương trình đào tạo nhà tiếp thị toàn cầu Seoul 2026 dành cho…",
+      "newSeoTitle": "Chương trình đào tạo nhà tiếp thị toàn cầu Seoul 2026 dành cho sinh viên quốc tế"
+    },
+    {
+      "table": "posts",
+      "slug": "seoul-foreign-resident-center-to-chuc-chuong-trinh-my-ai-storybook-video-workshop",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/seoul-foreign-resident-center-to-chuc-chuong-trinh-my-ai-storybook-video-workshop",
+      "expectedContentTitle": "Hội thảo làm video truyện bằng AI tại Trung tâm Cư dân Nước ngoài Seoul",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Hội thảo làm video truyện bằng AI tại Trung tâm Cư dân Nước…",
+          "fullVisibleHeading": "Hội thảo làm video truyện bằng AI tại Trung tâm Cư dân Nước ngoài Seoul",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Hội thảo làm video truyện bằng AI tại Trung tâm Cư dân Nước…",
+      "newSeoTitle": "Hội thảo làm video truyện bằng AI tại Trung tâm Cư dân Nước ngoài Seoul"
+    },
+    {
+      "table": "posts",
+      "slug": "thong-bao-tuyen-dung-thay-the-nghi-thai-san-va-nuoi-con-nho-tai-trung-tam-cu-tru-nguoi-nuoc-ngoai-geumcheon-nam-2026",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-bao-tuyen-dung-thay-the-nghi-thai-san-va-nuoi-con-nho-tai-trung-tam-cu-tru-nguoi-nuoc-ngoai-geumcheon-nam-2026",
+      "expectedContentTitle": "Tuyển nhân viên phúc lợi xã hội thay thế nghỉ thai sản tại Trung tâm Cư trú Người nước ngoài Geumcheon năm 2026",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Tuyển nhân viên phúc lợi xã hội thay thế nghỉ thai sản tại…",
+          "fullVisibleHeading": "Tuyển nhân viên phúc lợi xã hội thay thế nghỉ thai sản tại Trung tâm Cư trú Người nước ngoài Geumcheon năm 2026",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Tuyển nhân viên phúc lợi xã hội thay thế nghỉ thai sản tại…",
+      "newSeoTitle": "Tuyển nhân viên phúc lợi xã hội thay thế nghỉ thai sản tại Trung tâm Cư trú Người nước ngoài Geumcheon năm 2026"
+    },
+    {
+      "table": "posts",
+      "slug": "huong-dan-su-dung-dich-vu-y-te-va-kham-chua-benh-tai-seoul-cho-nguoi-nuoc-ngoai",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/huong-dan-su-dung-dich-vu-y-te-va-kham-chua-benh-tai-seoul-cho-nguoi-nuoc-ngoai",
+      "expectedContentTitle": "Hướng dẫn sử dụng dịch vụ y tế và khám chữa bệnh tại Seoul cho người nước ngoài",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Hướng dẫn sử dụng dịch vụ y tế và khám chữa bệnh tại Seoul",
+          "fullVisibleHeading": "Hướng dẫn sử dụng dịch vụ y tế và khám chữa bệnh tại Seoul cho người nước ngoài",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Hướng dẫn sử dụng dịch vụ y tế và khám chữa bệnh tại Seoul",
+      "newSeoTitle": "Hướng dẫn sử dụng dịch vụ y tế và khám chữa bệnh tại Seoul cho người nước ngoài"
+    },
+    {
+      "table": "posts",
+      "slug": "cap-nhat-thong-tin-ve-phi-va-le-phi-lanh-su-tai-dai-su-quan-viet-nam-o-han-quoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/cap-nhat-thong-tin-ve-phi-va-le-phi-lanh-su-tai-dai-su-quan-viet-nam-o-han-quoc",
+      "expectedContentTitle": "Cách tra cứu phí và lệ phí lãnh sự tại Đại sứ quán Việt Nam ở Hàn Quốc",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Cách tra cứu phí và lệ phí lãnh sự tại Đại sứ quán Việt Nam ở Hàn",
+          "fullVisibleHeading": "Cách tra cứu phí và lệ phí lãnh sự tại Đại sứ quán Việt Nam ở Hàn Quốc",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Cách tra cứu phí và lệ phí lãnh sự tại Đại sứ quán Việt Nam ở Hàn",
+      "newSeoTitle": "Cách tra cứu phí và lệ phí lãnh sự tại Đại sứ quán Việt Nam ở Hàn Quốc"
+    },
+    {
+      "table": "posts",
+      "slug": "canh-bao-tu-dai-su-quan-viet-nam-tai-han-quoc-cho-nguoi-lao-dong-va-du-hoc-sinh",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/canh-bao-tu-dai-su-quan-viet-nam-tai-han-quoc-cho-nguoi-lao-dong-va-du-hoc-sinh",
+      "expectedContentTitle": "Cách theo dõi cảnh báo chính thức cho người Việt Nam đang học tập và làm việc tại Hàn Quốc",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Cách theo dõi cảnh báo chính thức cho người Việt Nam đang học tập",
+          "fullVisibleHeading": "Cách theo dõi cảnh báo chính thức cho người Việt Nam đang học tập và làm việc tại Hàn Quốc",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Cách theo dõi cảnh báo chính thức cho người Việt Nam đang học tập",
+      "newSeoTitle": "Cách theo dõi cảnh báo chính thức cho người Việt Nam đang học tập và làm việc tại Hàn Quốc"
+    },
+    {
+      "table": "posts",
+      "slug": "bao-ho-cong-dan-viet-nam-tai-han-quoc-can-biet-nhung-gi",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/bao-ho-cong-dan-viet-nam-tai-han-quoc-can-biet-nhung-gi",
+      "expectedContentTitle": "Bảo hộ công dân Việt Nam tại Hàn Quốc: kênh liên hệ và cách chuẩn bị thông tin",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Bảo hộ công dân Việt Nam tại Hàn Quốc: kênh liên hệ và cách chuẩn",
+          "fullVisibleHeading": "Bảo hộ công dân Việt Nam tại Hàn Quốc: kênh liên hệ và cách chuẩn bị thông tin",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Bảo hộ công dân Việt Nam tại Hàn Quốc: kênh liên hệ và cách chuẩn",
+      "newSeoTitle": "Bảo hộ công dân Việt Nam tại Hàn Quốc: kênh liên hệ và cách chuẩn bị thông tin"
+    },
+    {
+      "table": "posts",
+      "slug": "thong-tin-chuong-trinh-2025-expo-cho-du-hoc-sinh-nuoc-ngoai",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-tin-chuong-trinh-2025-expo-cho-du-hoc-sinh-nuoc-ngoai",
+      "expectedContentTitle": "Triển lãm hợp tác công nghiệp – học thuật – nghiên cứu 2025 dành cho du học sinh",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Triển lãm hợp tác công nghiệp – học thuật – nghiên cứu 2025…",
+          "fullVisibleHeading": "Triển lãm hợp tác công nghiệp – học thuật – nghiên cứu 2025 dành cho du học sinh",
+          "confirmedMidWord": false
+        },
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Triển lãm hợp tác công nghiệp – học thuật – nghiên cứu năm 2025 diễn ra từ ngày 29 đến 31/10/2025 tại khu triển lãm phía Tây EXCO, Daegu. Chương trình có hoạt…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedSeoTitle": "Triển lãm hợp tác công nghiệp – học thuật – nghiên cứu 2025…",
+      "newSeoTitle": "Triển lãm hợp tác công nghiệp – học thuật – nghiên cứu 2025 dành cho du học sinh",
+      "expectedDescription": "Triển lãm hợp tác công nghiệp – học thuật – nghiên cứu năm 2025 diễn ra từ ngày 29 đến 31/10/2025 tại khu triển lãm phía Tây EXCO, Daegu. Chương trình có hoạt…",
+      "newDescription": "Triển lãm hợp tác công nghiệp – học thuật – nghiên cứu năm 2025 diễn ra từ 29 đến 31/10/2025 tại khu triển lãm phía Tây EXCO, Daegu, có tư vấn việc làm cho du học sinh."
+    },
+    {
+      "table": "posts",
+      "slug": "huong-dan-tra-cuu-cam-nang-phan-loai-visa-va-luu-tru-han-quoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/huong-dan-tra-cuu-cam-nang-phan-loai-visa-va-luu-tru-han-quoc",
+      "expectedContentTitle": "Hướng dẫn tra cứu cẩm nang visa và tư cách lưu trú Hàn Quốc trên HiKorea",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Hướng dẫn tra cứu cẩm nang visa và tư cách lưu trú Hàn Quốc trên",
+          "fullVisibleHeading": "Hướng dẫn tra cứu cẩm nang visa và tư cách lưu trú Hàn Quốc trên HiKorea",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Hướng dẫn tra cứu cẩm nang visa và tư cách lưu trú Hàn Quốc trên",
+      "newSeoTitle": "Hướng dẫn tra cứu cẩm nang visa và tư cách lưu trú Hàn Quốc trên HiKorea"
+    },
+    {
+      "table": "posts",
+      "slug": "thong-tin-ho-tro-cuoc-song-va-tieng-han-tai-han-quoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-tin-ho-tro-cuoc-song-va-tieng-han-tai-han-quoc",
+      "expectedContentTitle": "Cổng Danuri hỗ trợ cuộc sống, tiếng Hàn và tư vấn cho gia đình đa văn hóa",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Cổng Danuri hỗ trợ cuộc sống, tiếng Hàn và tư vấn cho gia đình đa",
+          "fullVisibleHeading": "Cổng Danuri hỗ trợ cuộc sống, tiếng Hàn và tư vấn cho gia đình đa văn hóa",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Cổng Danuri hỗ trợ cuộc sống, tiếng Hàn và tư vấn cho gia đình đa",
+      "newSeoTitle": "Cổng Danuri hỗ trợ cuộc sống, tiếng Hàn và tư vấn cho gia đình đa văn hóa"
+    },
+    {
+      "table": "posts",
+      "slug": "toi-da-tim-thay-chinh-minh-giua-xu-lanh-han-quoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/toi-da-tim-thay-chinh-minh-giua-xu-lanh-han-quoc",
+      "expectedContentTitle": "Tìm lại chính mình khi du học Hàn Quốc: hành trình thích nghi và trưởng thành",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Tìm lại chính mình khi du học Hàn Quốc: hành trình thích nghi và",
+          "fullVisibleHeading": "Tìm lại chính mình khi du học Hàn Quốc: hành trình thích nghi và trưởng thành",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Tìm lại chính mình khi du học Hàn Quốc: hành trình thích nghi và",
+      "newSeoTitle": "Tìm lại chính mình khi du học Hàn Quốc: hành trình thích nghi và trưởng thành"
+    },
+    {
+      "table": "posts",
+      "slug": "cuoc-song-du-hoc-han-quoc-lieu-co-mau-hong",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/cuoc-song-du-hoc-han-quoc-lieu-co-mau-hong",
+      "expectedContentTitle": "Cuộc sống du học Hàn Quốc có thật sự màu hồng? Góc nhìn thực tế trước khi đi",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Cuộc sống du học Hàn Quốc có thật sự màu hồng? Góc nhìn thực tế t",
+          "fullVisibleHeading": "Cuộc sống du học Hàn Quốc có thật sự màu hồng? Góc nhìn thực tế trước khi đi",
+          "confirmedMidWord": true
+        }
+      ],
+      "expectedSeoTitle": "Cuộc sống du học Hàn Quốc có thật sự màu hồng? Góc nhìn thực tế t",
+      "newSeoTitle": "Cuộc sống du học Hàn Quốc có thật sự màu hồng? Góc nhìn thực tế trước khi đi"
+    },
+    {
+      "table": "posts",
+      "slug": "10-dieu-can-biet-ve-van-hoa-uong-ruou-han-quoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/10-dieu-can-biet-ve-van-hoa-uong-ruou-han-quoc",
+      "expectedContentTitle": "Văn hóa uống rượu tại Hàn Quốc: 10 nguyên tắc ứng xử và quyền từ chối",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Văn hóa uống rượu tại Hàn Quốc: 10 nguyên tắc ứng xử và quyền từ",
+          "fullVisibleHeading": "Văn hóa uống rượu tại Hàn Quốc: 10 nguyên tắc ứng xử và quyền từ chối",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Văn hóa uống rượu tại Hàn Quốc: 10 nguyên tắc ứng xử và quyền từ",
+      "newSeoTitle": "Văn hóa uống rượu tại Hàn Quốc: 10 nguyên tắc ứng xử và quyền từ chối"
+    },
+    {
+      "table": "posts",
+      "slug": "du-hoc-han-quoc-nen-chon-nganh-nao",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/du-hoc-han-quoc-nen-chon-nganh-nao",
+      "expectedContentTitle": "Du học Hàn Quốc nên chọn ngành nào? Khung ra quyết định theo mục tiêu cá nhân",
+      "evidence": [
+        {
+          "kind": "title-prefix-truncation",
+          "currentTitle": "Du học Hàn Quốc nên chọn ngành nào? Khung ra quyết định theo mục",
+          "fullVisibleHeading": "Du học Hàn Quốc nên chọn ngành nào? Khung ra quyết định theo mục tiêu cá nhân",
+          "confirmedMidWord": false
+        }
+      ],
+      "expectedSeoTitle": "Du học Hàn Quốc nên chọn ngành nào? Khung ra quyết định theo mục",
+      "newSeoTitle": "Du học Hàn Quốc nên chọn ngành nào? Khung ra quyết định theo mục tiêu cá nhân"
+    },
+    {
+      "table": "courses",
+      "slug": "tieng-han-so-cap-1",
+      "sourceUrl": "https://soldream.edu.vn/khoa-hoc/tieng-han-so-cap-1",
+      "expectedContentTitle": "Tiếng Hàn Sơ cấp 1 – SC1A",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Lớp SC1A dành cho người mới bắt đầu, học 16 buổi (24 giờ) với giáo viên Việt Nam. Sĩ số 8–10, tối thiểu 3 học viên để khai giảng; học phí 1.890.000 VNĐ, tài…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Lớp SC1A dành cho người mới bắt đầu, học 16 buổi (24 giờ) với giáo viên Việt Nam. Sĩ số 8–10, tối thiểu 3 học viên để khai giảng; học phí 1.890.000 VNĐ, tài…",
+      "newDescription": "Lớp SC1A dành cho người mới bắt đầu, học 16 buổi (24 giờ) với giáo viên Việt Nam. Sĩ số 8–10, tối thiểu 3 học viên để khai giảng; học phí 1.890.000 VNĐ, tài liệu Vitamin."
+    },
+    {
+      "table": "courses",
+      "slug": "tieng-han-cap-toc",
+      "sourceUrl": "https://soldream.edu.vn/khoa-hoc/tieng-han-cap-toc",
+      "expectedContentTitle": "Lớp tiếng Hàn cấp tốc",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Lớp tiếng Hàn cấp tốc dành cho học viên cần tăng trình độ để chuẩn bị hồ sơ du học. Lộ trình, thời lượng và học phí được tư vấn theo mục tiêu và trình độ đầu…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Lớp tiếng Hàn cấp tốc dành cho học viên cần tăng trình độ để chuẩn bị hồ sơ du học. Lộ trình, thời lượng và học phí được tư vấn theo mục tiêu và trình độ đầu…",
+      "newDescription": "Lớp tiếng Hàn cấp tốc dành cho học viên cần tăng trình độ để chuẩn bị hồ sơ du học. Lộ trình, thời lượng và học phí được tư vấn theo mục tiêu và trình độ đầu vào."
+    },
+    {
+      "table": "courses",
+      "slug": "phat-am-tieng-han",
+      "sourceUrl": "https://soldream.edu.vn/khoa-hoc/phat-am-tieng-han",
+      "expectedContentTitle": "Luyện phát âm tiếng Hàn",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Lớp luyện phát âm chuyên sâu gồm 6 buổi (9 giờ), do giáo viên Hàn Quốc và trợ giảng Việt Nam hướng dẫn. Sĩ số 8–10, tối thiểu 4 học viên để mở lớp; học phí…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Lớp luyện phát âm chuyên sâu gồm 6 buổi (9 giờ), do giáo viên Hàn Quốc và trợ giảng Việt Nam hướng dẫn. Sĩ số 8–10, tối thiểu 4 học viên để mở lớp; học phí…",
+      "newDescription": "Lớp luyện phát âm chuyên sâu gồm 6 buổi (9 giờ), do giáo viên Hàn Quốc và trợ giảng Việt Nam hướng dẫn. Sĩ số 8–10, tối thiểu 4 học viên để mở lớp; học phí 1.490.000 VNĐ."
+    },
+    {
+      "table": "courses",
+      "slug": "tieng-anh-giao-tiep",
+      "sourceUrl": "https://soldream.edu.vn/khoa-hoc/tieng-anh-giao-tiep",
+      "expectedContentTitle": "Tiếng Anh giao tiếp",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Lớp tiếng Anh giao tiếp dành cho học viên muốn phát triển ngoại ngữ thứ hai. Chương trình tập trung kỹ năng giao tiếp thực tế; học phí, thời lượng và trình độ…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Lớp tiếng Anh giao tiếp dành cho học viên muốn phát triển ngoại ngữ thứ hai. Chương trình tập trung kỹ năng giao tiếp thực tế; học phí, thời lượng và trình độ…",
+      "newDescription": "Lớp tiếng Anh giao tiếp dành cho học viên muốn phát triển ngoại ngữ thứ hai. Chương trình tập trung kỹ năng giao tiếp thực tế; học phí, thời lượng và trình độ đầu vào được tư vấn theo lớp đăng ký."
+    },
+    {
+      "table": "courses",
+      "slug": "tieng-han-so-cap-1-sc1b",
+      "sourceUrl": "https://soldream.edu.vn/khoa-hoc/tieng-han-so-cap-1-sc1b",
+      "expectedContentTitle": "Tiếng Hàn Sơ cấp 1 – SC1B",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Lớp SC1B học 20 buổi (30 giờ), giáo viên Việt Nam hướng dẫn nền tảng tiếng Hàn. Sĩ số 8–10, tối thiểu 3 học viên để khai giảng; học phí 2.190.000 VNĐ, tài liệu…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Lớp SC1B học 20 buổi (30 giờ), giáo viên Việt Nam hướng dẫn nền tảng tiếng Hàn. Sĩ số 8–10, tối thiểu 3 học viên để khai giảng; học phí 2.190.000 VNĐ, tài liệu…",
+      "newDescription": "Lớp SC1B học 20 buổi (30 giờ), giáo viên Việt Nam hướng dẫn nền tảng tiếng Hàn. Sĩ số 8–10, tối thiểu 3 học viên để khai giảng; học phí 2.190.000 VNĐ, tài liệu Vitamin."
+    },
+    {
+      "table": "courses",
+      "slug": "tieng-han-so-cap-2-sc2a",
+      "sourceUrl": "https://soldream.edu.vn/khoa-hoc/tieng-han-so-cap-2-sc2a",
+      "expectedContentTitle": "Tiếng Hàn Sơ cấp 2 – SC2A",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Lớp SC2A học 22 buổi (33 giờ), trung bình 15 buổi với giáo viên Việt và 7 với giáo viên Hàn. Sĩ số 8–10, tối thiểu 4 học viên; học phí 2.590.000 VNĐ, tài liệu…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Lớp SC2A học 22 buổi (33 giờ), trung bình 15 buổi với giáo viên Việt và 7 với giáo viên Hàn. Sĩ số 8–10, tối thiểu 4 học viên; học phí 2.590.000 VNĐ, tài liệu…",
+      "newDescription": "Lớp SC2A học 22 buổi (33 giờ), trung bình 15 buổi với giáo viên Việt và 7 với giáo viên Hàn. Sĩ số 8–10, tối thiểu 4 học viên; học phí 2.590.000 VNĐ, tài liệu Vitamin."
+    },
+    {
+      "table": "programs",
+      "slug": "phan-biet-visa-du-hoc-han-quoc-d4-1-d2",
+      "sourceUrl": "https://soldream.edu.vn/du-hoc/phan-biet-visa-du-hoc-han-quoc-d4-1-d2",
+      "expectedContentTitle": "D4-1 và D2-1, D2-2, D2-3, D2-6 khác nhau thế nào?",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Các mã này gắn với mục tiêu học tiếng, cao đẳng, cử nhân, thạc sĩ hoặc trao đổi. Chọn mã theo chương trình được trường tiếp nhận và yêu cầu của cơ quan cấp…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Các mã này gắn với mục tiêu học tiếng, cao đẳng, cử nhân, thạc sĩ hoặc trao đổi. Chọn mã theo chương trình được trường tiếp nhận và yêu cầu của cơ quan cấp…",
+      "newDescription": "Các mã D4-1, D2-1, D2-2, D2-3 và D2-6 gắn với mục tiêu học tiếng, cao đẳng, cử nhân, thạc sĩ hoặc trao đổi. Chọn mã theo chương trình được trường tiếp nhận và yêu cầu của cơ quan cấp thị thực."
+    },
+    {
+      "table": "posts",
+      "slug": "chuong-trinh-trai-nghiem-templestay-tai-chua-doseonsa-do-trung-tam-cu-dan-nuoc-ngoai-seongbuk-to-chuc-nam-2026",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/chuong-trinh-trai-nghiem-templestay-tai-chua-doseonsa-do-trung-tam-cu-dan-nuoc-ngoai-seongbuk-to-chuc-nam-2026",
+      "expectedContentTitle": "Chương trình Trải nghiệm Templestay tại Chùa Doseonsa do Trung tâm Cư dân Nước ngoài Seongbuk tổ chức năm 2026",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Thông tin chi tiết về chương trình Trải nghiệm Templestay năm 2026 dành cho người nước ngoài tại Chùa Doseonsa núi Samgaksan do Trung tâm Cư dân Nước ngoài…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Thông tin chi tiết về chương trình Trải nghiệm Templestay năm 2026 dành cho người nước ngoài tại Chùa Doseonsa núi Samgaksan do Trung tâm Cư dân Nước ngoài…",
+      "newDescription": "Chương trình Templestay năm 2026 tại Chùa Doseonsa, núi Samgaksan, do Trung tâm Cư dân Nước ngoài Seongbuk tổ chức dành cho người nước ngoài."
+    },
+    {
+      "table": "posts",
+      "slug": "thong-bao-nghi-le-chu-han",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-bao-nghi-le-chu-han",
+      "expectedContentTitle": "THÔNG BÁO NGHỈ LỄ CHỮ HÀN",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Cập nhật lịch nghỉ lễ Ngày chữ tiếng Hàn (Hangeul Day) năm 2026 của Trung tâm Đăng ký Visa Hàn Quốc (KVAC). Xem chi tiết thời gian tạm ngưng tiếp nhận hồ sơ…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Cập nhật lịch nghỉ lễ Ngày chữ tiếng Hàn (Hangeul Day) năm 2026 của Trung tâm Đăng ký Visa Hàn Quốc (KVAC). Xem chi tiết thời gian tạm ngưng tiếp nhận hồ sơ…",
+      "newDescription": "Lịch nghỉ lễ Ngày chữ tiếng Hàn (Hangeul Day) năm 2026 của Trung tâm Đăng ký Visa Hàn Quốc (KVAC), gồm thời gian tạm ngưng tiếp nhận hồ sơ và lịch làm việc trở lại."
+    },
+    {
+      "table": "posts",
+      "slug": "chuong-trinh-dao-tao-ngon-ngu-va-trai-nghiem-van-hoa-quoc-te-tai-dai-hoc-dongyang",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/chuong-trinh-dao-tao-ngon-ngu-va-trai-nghiem-van-hoa-quoc-te-tai-dai-hoc-dongyang",
+      "expectedContentTitle": "Chương trình đào tạo ngôn ngữ và trải nghiệm văn hóa quốc tế tại Đại học Dongyang",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Thông tin chi tiết về các chương trình đào tạo tiếng Hàn, định hướng quốc tế, chương trình tăng cường năng lực chuyên môn và hệ thống học bổng tại Đại học…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Thông tin chi tiết về các chương trình đào tạo tiếng Hàn, định hướng quốc tế, chương trình tăng cường năng lực chuyên môn và hệ thống học bổng tại Đại học…",
+      "newDescription": "Tìm hiểu chương trình đào tạo tiếng Hàn, định hướng quốc tế, trải nghiệm chuyên môn và hệ thống học bổng tại Đại học Dongyang."
+    },
+    {
+      "table": "posts",
+      "slug": "khoa-tieng-han-dai-hoc-suwon-20262027-lich-hoc-va-chi-phi",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/khoa-tieng-han-dai-hoc-suwon-20262027-lich-hoc-va-chi-phi",
+      "expectedContentTitle": "Khóa tiếng Hàn Đại học Suwon 2026–2027: lịch học và chi phí",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Khóa tiếng Hàn Đại học Suwon 2026–2027: lịch học và chi phí: Lịch bốn kỳ, học phí, phí nhập học, giáo trình, bảo hiểm và lưu ý hoàn phí của chương trình tiếng…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Khóa tiếng Hàn Đại học Suwon 2026–2027: lịch học và chi phí: Lịch bốn kỳ, học phí, phí nhập học, giáo trình, bảo hiểm và lưu ý hoàn phí của chương trình tiếng…",
+      "newDescription": "Khóa tiếng Hàn Đại học Suwon 2026–2027: lịch bốn kỳ, học phí, phí nhập học, giáo trình, bảo hiểm và lưu ý hoàn phí của chương trình tiếng Hàn."
+    },
+    {
+      "table": "posts",
+      "slug": "seoul-foreign-resident-center-itq-certificate-preparation-class-overview",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/seoul-foreign-resident-center-itq-certificate-preparation-class-overview",
+      "expectedContentTitle": "Lớp luyện thi chứng chỉ ITQ tại Trung tâm Cư dân Nước ngoài Seoul",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Trung tâm Cư dân Nước ngoài Seoul mở lớp luyện thi chứng chỉ ITQ, nhận đăng ký từ ngày 17/09 đến 09/10/2026 và tổ chức học từ ngày 11 đến 29/10/2026. Người…",
+          "reason": "Chọn mô tả trung tính không có ngày vì metadata và bài viết đang ghi lịch học khác nhau; giữ nguyên nội dung/lịch trong bài để xác minh riêng."
+        }
+      ],
+      "expectedDescription": "Trung tâm Cư dân Nước ngoài Seoul mở lớp luyện thi chứng chỉ ITQ, nhận đăng ký từ ngày 17/09 đến 09/10/2026 và tổ chức học từ ngày 11 đến 29/10/2026. Người…",
+      "newDescription": "Thông tin lớp luyện thi chứng chỉ ITQ tại Trung tâm Cư dân Nước ngoài Seoul, gồm đối tượng tham gia, lịch đăng ký và lịch học do trung tâm công bố."
+    },
+    {
+      "table": "posts",
+      "slug": "huong-dan-chuan-bi-tim-viec-lam-tai-seoul-cho-nguoi-nuoc-ngoai",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/huong-dan-chuan-bi-tim-viec-lam-tai-seoul-cho-nguoi-nuoc-ngoai",
+      "expectedContentTitle": "Hướng dẫn chuẩn bị tìm việc làm tại Seoul cho người nước ngoài",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Học sinh du học Hàn Quốc và người nước ngoài tại Seoul cần nắm rõ quy định visa, nền tảng tìm việc uy tín như K-Work, và các chương trình hỗ trợ đào tạo nghề…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Học sinh du học Hàn Quốc và người nước ngoài tại Seoul cần nắm rõ quy định visa, nền tảng tìm việc uy tín như K-Work, và các chương trình hỗ trợ đào tạo nghề…",
+      "newDescription": "Hướng dẫn chuẩn bị tìm việc tại Seoul cho du học sinh và người nước ngoài: lưu ý về visa, nền tảng K-Work và các chương trình hỗ trợ đào tạo nghề."
+    },
+    {
+      "table": "posts",
+      "slug": "tim-hieu-cac-loai-hinh-nha-o-tai-seoul-cho-du-hoc-sinh",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/tim-hieu-cac-loai-hinh-nha-o-tai-seoul-cho-du-hoc-sinh",
+      "expectedContentTitle": "Tìm hiểu các loại hình nhà ở tại Seoul cho du học sinh",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Bài viết cung cấp thông tin tổng quan về các loại hình nhà ở phổ biến tại Seoul và hệ thống thuê nhà như thuê nhà bằng tiền đặt cọc lớn, thuê nhà trả tiền…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Bài viết cung cấp thông tin tổng quan về các loại hình nhà ở phổ biến tại Seoul và hệ thống thuê nhà như thuê nhà bằng tiền đặt cọc lớn, thuê nhà trả tiền…",
+      "newDescription": "Tìm hiểu các loại hình nhà ở phổ biến tại Seoul và hình thức thuê nhà: đặt cọc lớn, trả tiền hằng tháng hoặc kết hợp tiền đặt cọc với tiền thuê tháng."
+    },
+    {
+      "table": "posts",
+      "slug": "thong-tin-ve-kotra",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/thong-tin-ve-kotra",
+      "expectedContentTitle": "Hội chợ việc làm KOTRA dành cho du học sinh quốc tế",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Hội chợ việc làm do KOTRA tổ chức ngày 17/11/2026 tại Seoul, kết nối du học sinh quốc tế với các doanh nghiệp đang tuyển dụng. Người quan tâm cần kiểm tra lại…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Hội chợ việc làm do KOTRA tổ chức ngày 17/11/2026 tại Seoul, kết nối du học sinh quốc tế với các doanh nghiệp đang tuyển dụng. Người quan tâm cần kiểm tra lại…",
+      "newDescription": "Hội chợ việc làm KOTRA ngày 17/11/2026 tại Seoul kết nối du học sinh quốc tế với doanh nghiệp tuyển dụng. Kiểm tra thông tin đăng ký trên thông báo của ban tổ chức."
+    },
+    {
+      "table": "posts",
+      "slug": "huong-dan-tra-cuu-thong-tin-viec-lam-va-kha-nang-tuyen-dung-nguoi-nuoc-ngoai-tai-han-quoc",
+      "sourceUrl": "https://soldream.edu.vn/tin-tuc/huong-dan-tra-cuu-thong-tin-viec-lam-va-kha-nang-tuyen-dung-nguoi-nuoc-ngoai-tai-han-quoc",
+      "expectedContentTitle": "Hướng dẫn tra cứu thông tin việc làm và khả năng tuyển dụng người nước ngoài tại Hàn Quốc",
+      "evidence": [
+        {
+          "kind": "incomplete-description",
+          "currentDescription": "Công cụ kiểm tra việc làm và khả năng tuyển dụng người nước ngoài trên HiKorea hỗ trợ người lao động và chủ sử dụng lao động nắm bắt quy định pháp lý, phạm vi…",
+          "reason": "Hoàn chỉnh cụm/câu dựa trên nội dung đang hiển thị, không thay học phí, thời lượng hoặc chính sách trong bài."
+        }
+      ],
+      "expectedDescription": "Công cụ kiểm tra việc làm và khả năng tuyển dụng người nước ngoài trên HiKorea hỗ trợ người lao động và chủ sử dụng lao động nắm bắt quy định pháp lý, phạm vi…",
+      "newDescription": "Công cụ HiKorea hỗ trợ người lao động và đơn vị tuyển dụng tra cứu thông tin về diện cư trú, phạm vi công việc và thủ tục tuyển dụng người nước ngoài."
+    }
+  ],
+  "deferredFactualChecks": [
+    {
+      "table": "posts",
+      "slug": "seoul-foreign-resident-center-itq-certificate-preparation-class-overview",
+      "issue": "Metadata cũ ghi học 11–29/10/2026; đoạn nội dung và bảng ghi 11/10–29/11/2026.",
+      "resolution": "Chỉ dùng mô tả trung tính không có ngày; không thay lịch trong bài hoặc chọn một mốc khi chưa kiểm tra thông báo gốc."
+    }
+  ]
+}

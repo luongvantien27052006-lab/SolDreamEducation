@@ -1,3 +1,4 @@
+<% const presentation=university.presentation; %>
 <main>
 <article class="section knowledge-detail">
   <div class="wrap knowledge-layout">
@@ -14,48 +15,48 @@
         <span class="freshness-badge"><%= university.freshnessLabel %></span>
         <div class="geo-summary-box" aria-label="<%= siteText("view.university-detail.007") %>">
           <p class="geo-summary-box__bluf"><%= university.blufSummary %></p>
-          <ul class="geo-summary-box__facts">
-            <li><strong><%= siteText("view.university-detail.008") %></strong> <%= university.coreFacts.firstYearTotal %></li>
-            <li><strong><%= siteText("view.university-detail.009") %></strong> <%= university.coreFacts.visa %></li>
-            <li><strong><%= siteText("view.university-detail.010") %></strong> <%= university.financials.kStudyDeposit.amountUsd ? university.financials.kStudyDeposit.amountUsd.toLocaleString('en-US') + ' USD' : siteText("view.university-detail.056") %></li>
-            <li><strong><%= siteText("view.university-detail.011") %></strong> <%= university.coreFacts.gpa %></li>
-          </ul>
+          <% if(presentation.facts.length){ %><ul class="geo-summary-box__facts">
+            <% presentation.facts.forEach(function(fact){ %><li><strong><%= siteText(fact.labelKey) %></strong> <%= fact.value %></li><% }); %>
+          </ul><% } %>
         </div>
         <p class="knowledge-title__names"><%= university.english_name %></p>
         <div class="source-meta"><strong><%= siteText("view.university-detail.012") %></strong> <%= siteText("view.university-detail.013") %> <strong><%= siteText("view.university-detail.014") %></strong> <time datetime="<%= university.updatedDate %>"><%= university.updatedDateDisplay %></time></div>
+        <% if(presentation.hasMissingData){ %><p class="section-lead university-data-note"><%= siteText('university.missing-data.note') %></p><% } %>
       </header>
 
       <nav class="knowledge-toc" aria-label="<%= siteText("view.university-detail.015") %>">
         <strong><%= siteText("view.university-detail.016") %></strong>
-        <% university.sections.forEach(function(section){ %><a href="#<%= section.id %>"><%= section.title %></a><% }); %>
+        <% presentation.sections.forEach(function(section){ %><a href="#<%= section.id %>"><%= section.title %></a><% }); %>
+        <% if(university.supplementaryProgram){ %><a href="#chuong-trinh-chuyen-nganh"><%= siteText('university.supplementary.heading') %></a><% } %>
       </nav>
 
-      <section class="knowledge-section" id="chi-phi-dinh-luong">
-        <h2><%= siteText("view.university-detail.017") %> <%= university.name %> <%= siteText("view.university-detail.018") %></h2>
-        <p class="section-lead"><%= siteText("view.university-detail.019") %> <%= university.name %>. <% if (university.financials.conversion && university.financials.conversion.rateVndPerKrw) { %><%= siteText("view.university-detail.020") %><%= university.financials.conversion.rateVndPerKrw %> <%= siteText("view.university-detail.021") %> <%= university.financials.conversion.asOf %><%= siteText("view.university-detail.022") %><% } else { %><%= siteText("view.university-detail.023") %><% } %></p>
-        <div class="knowledge-table-wrap"><table class="geo-data-table">
-          <thead><tr><th scope="col"><%= siteText("view.university-detail.024") %></th><th scope="col"><%= siteText("view.university-detail.025") %></th><th scope="col"><%= siteText("view.university-detail.026") %></th><th scope="col"><%= siteText("view.university-detail.027") %></th></tr></thead>
+      <% if(presentation.costRows.length || presentation.costNotes.length){ %><section class="knowledge-section" id="chi-phi-dinh-luong">
+        <h2><%= siteText("view.university-detail.017") %> <%= university.name %></h2>
+        <p class="section-lead"><%= siteText('university.costs.summary') %> <% if (university.financials.conversion && university.financials.conversion.rateVndPerKrw) { %><%= siteText("view.university-detail.020") %><%= university.financials.conversion.rateVndPerKrw %> <%= siteText("view.university-detail.021") %> <%= university.financials.conversion.asOf %><%= siteText("view.university-detail.022") %><% } %></p>
+        <% if(presentation.costRows.length){ %><div class="knowledge-table-wrap"><table class="geo-data-table">
+          <thead><tr><th scope="col"><%= siteText("view.university-detail.024") %></th><% if(presentation.showForeignAmounts){ %><th scope="col"><%= siteText("view.university-detail.025") %></th><% } %><% if(presentation.showVndAmounts){ %><th scope="col"><%= siteText("view.university-detail.026") %></th><% } %><th scope="col"><%= siteText("view.university-detail.027") %></th></tr></thead>
           <tbody>
-            <% university.costComparison.forEach(function(row){ %>
-            <tr><th scope="row"><%= row.item %></th><td><%= row.foreignAmount %></td><td><%= row.vndAmount %></td><td><%= row.note %></td></tr>
+            <% presentation.costRows.forEach(function(row){ %>
+            <tr><th scope="row"><%= row.item %></th><% if(presentation.showForeignAmounts){ %><td><%= row.foreignAmount %></td><% } %><% if(presentation.showVndAmounts){ %><td><%= row.vndAmount %></td><% } %><td><%= row.note %></td></tr>
             <% }); %>
           </tbody>
-        </table></div>
-      </section>
+        </table></div><% } %>
+        <% if(presentation.costNotes.length){ %><ul><% presentation.costNotes.forEach(function(note){ %><li><%= note %></li><% }); %></ul><% } %>
+      </section><% } %>
 
-      <section class="knowledge-section" id="dieu-kien-tuyen-sinh-visa">
+      <% if(presentation.admissionRows.length){ %><section class="knowledge-section" id="dieu-kien-tuyen-sinh-visa">
         <h2><%= siteText("view.university-detail.028") %> <%= university.name %> <%= siteText("view.university-detail.029") %></h2>
-        <p class="section-lead"><%= siteText("view.university-detail.030") %> <%= university.name %><%= siteText("view.university-detail.031") %></p>
+        <p class="section-lead"><%= siteText('university.admissions.summary') %></p>
         <div class="knowledge-table-wrap"><table class="geo-data-table">
           <thead><tr><th scope="col"><%= siteText("view.university-detail.032") %></th><th scope="col"><%= siteText("view.university-detail.033") %></th><th scope="col"><%= siteText("view.university-detail.034") %></th></tr></thead>
-          <tbody><% university.admissionRows.forEach(function(row){ %><tr><th scope="row"><%= row.criterion %></th><td><%= row.value %></td><td><%= row.note %></td></tr><% }); %></tbody>
+          <tbody><% presentation.admissionRows.forEach(function(row){ %><tr><th scope="row"><%= row.criterion %></th><td><%= row.value %></td><td><%= row.note %></td></tr><% }); %></tbody>
         </table></div>
-      </section>
+      </section><% } %>
 
-      <% university.sections.forEach(function(section){ %>
+      <% presentation.sections.forEach(function(section){ %>
       <section class="knowledge-section" id="<%= section.id %>">
         <h2><%= section.title %></h2>
-        <p class="section-lead"><%= section.lead %></p>
+        <% if(section.lead){ %><p class="section-lead"><%= section.lead %></p><% } %>
         <% section.blocks.forEach(function(block){ %>
           <% if (block.type === 'heading') { %>
             <h3><%= block.text %></h3>
@@ -73,6 +74,12 @@
         <% }); %>
       </section>
       <% }); %>
+
+      <% if(university.supplementaryProgram){ %><section class="knowledge-section article-body" id="chuong-trinh-chuyen-nganh">
+        <h2><%= siteText('university.supplementary.heading') %></h2>
+        <% if(university.supplementaryProgram.cover_image){ %><figure><img <%- imageAttributes(university.supplementaryProgram.cover_image) %> alt="<%= university.supplementaryProgram.cover_alt || university.supplementaryProgram.title %>" loading="lazy"><% if(university.supplementaryProgram.cover_caption){ %><figcaption><%= university.supplementaryProgram.cover_caption %></figcaption><% } %></figure><% } %>
+        <%- responsiveContent(university.supplementaryProgram.content) %>
+      </section><% } %>
 
       <section class="knowledge-section university-faq" id="cau-hoi-thuong-gap">
         <h2><%= siteText("view.university-detail.035") %> <%= university.name %></h2>

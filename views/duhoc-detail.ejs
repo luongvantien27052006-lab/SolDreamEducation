@@ -10,12 +10,12 @@
     <% if (program.subtitle) { %><div class="prog__kr" style="font-size:18px;margin-bottom:20px"><%= program.subtitle %></div><% } else { %><div style="margin-bottom:20px"></div><% } %>
     <p class="source-meta" style="margin-bottom:24px"><strong><%= program.author_type==='person'?siteText("view.duhoc-detail.011"):siteText("view.duhoc-detail.012") %>:</strong> <% if (program.author_url) { %><a href="<%= program.author_url %>" target="_blank" rel="author noopener noreferrer"><%= program.author_name || 'SOL DREAM EDUCATION' %></a><% } else { %><%= program.author_name || 'SOL DREAM EDUCATION' %><% } %><% if (program.author_role) { %> — <%= program.author_role %><% } %> · <strong><%= siteText("view.duhoc-detail.004") %></strong> <time datetime="<%= modifiedTime %>"><%= program.updatedDateFull %></time></p>
     <div class="post__img <%= program.cover_image ? '' : program.cover %>" style="height:300px;border-radius:20px;margin-bottom:30px">
-      <img class="post__cover<%= (!program.cover_image || program.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= program.cover_image || '/img/research-cover.svg' %>" alt="<%= program.cover_alt || program.title %>" style="border-radius:20px">
+      <img class="post__cover<%= (!program.cover_image || program.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" <%- imageAttributes(program.cover_image || '/img/research-cover.svg') %> alt="<%= program.cover_alt || program.title %>" style="border-radius:20px">
     </div>
     <% if(program.cover_caption){ %><p class="cover-caption"><%= program.cover_caption %></p><% } %>
     <%- include('partials/article-extras',{item:program}) %>
     <div class="article-body" style="font-size:17px;line-height:1.8;color:var(--ink-2)">
-      <%- program.contentHtml %>
+      <%- responsiveContent(program.contentHtml) %>
     </div>
     <%- include('partials/article-sources',{item:program}) %>
     <% if (relatedFaqs && relatedFaqs.length) { %>

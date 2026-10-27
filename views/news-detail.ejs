@@ -9,12 +9,12 @@
     <h1 style="font-size:clamp(28px,4.4vw,44px);margin:12px 0 14px"><%= post.title %></h1>
     <p class="source-meta" style="margin-bottom:26px"><strong><%= post.author_type==='person'?siteText("view.news-detail.012"):siteText("view.news-detail.013") %>:</strong> <% if (post.author_url) { %><a href="<%= post.author_url %>" target="_blank" rel="author noopener noreferrer"><%= post.author_name || 'SOL DREAM EDUCATION' %></a><% } else { %><%= post.author_name || 'SOL DREAM EDUCATION' %><% } %><% if (post.author_role) { %> — <%= post.author_role %><% } %> · <strong><%= siteText("view.news-detail.004") %></strong> <time datetime="<%= displayTime %>"><%= post.dateFull %></time> · <strong><%= siteText("view.news-detail.005") %></strong> <time datetime="<%= contentModifiedTime %>"><%= post.updatedDateFull %></time></p>
     <div class="post__img <%= post.cover_image ? '' : post.cover %>" style="height:300px;border-radius:20px;margin-bottom:30px">
-      <img class="post__cover<%= (!post.cover_image || post.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= post.cover_image || '/img/research-cover.svg' %>" alt="<%= coverMeta.alt %>" <% if (coverMeta.width) { %>width="<%= coverMeta.width %>" height="<%= coverMeta.height %>"<% } %> style="border-radius:20px">
+      <img class="post__cover<%= (!post.cover_image || post.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" <%- imageAttributes(post.cover_image || '/img/research-cover.svg') %> alt="<%= coverMeta.alt %>" <% if (coverMeta.width && !responsiveImage(post.cover_image).srcset) { %>width="<%= coverMeta.width %>" height="<%= coverMeta.height %>"<% } %> style="border-radius:20px">
     </div>
     <% if(post.cover_caption){ %><p class="cover-caption"><%= post.cover_caption %></p><% } %>
     <%- include('partials/article-extras',{item:post}) %>
     <div class="article-body" style="font-size:17px;line-height:1.8;color:var(--ink-2)">
-      <%- post.contentHtml %>
+      <%- responsiveContent(post.contentHtml) %>
     </div>
     <%- include('partials/article-sources',{item:post}) %>
     <% if (relatedFaqs && relatedFaqs.length) { %>

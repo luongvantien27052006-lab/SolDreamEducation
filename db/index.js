@@ -1442,3 +1442,5 @@ require('../lib/contentEditingMigration').applyContentEditing(db);
 { const result=require('../lib/sevenContentFixesMigration').applySevenContentFixes(db);if(result)console.log('[content] seven content fixes',JSON.stringify(result)); }
 module.exports = db;
 { const result=require('../lib/siteContentMigration').applySiteContent(db);if(result.fields||result.datasets)console.log('[content] editable website content',JSON.stringify(result)); }
+{ const result=require('../lib/seoAuditMigration').applySeoAuditFixes(db);if(result)console.log('[seo] verified metadata fixes',JSON.stringify(result)); }
+{ const result=require('../lib/seoTopicReviewMigration').applySeoTopicReview(db);if(result)console.log('[seo] owner-approved topic review',JSON.stringify(result)); }
