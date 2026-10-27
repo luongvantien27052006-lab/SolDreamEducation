@@ -1447,3 +1447,4 @@ module.exports = db;
 { const result=require('../lib/confirmedStatsMigration').applyConfirmedStats(db);if(result)console.log('[content] owner-confirmed statistics',JSON.stringify(result)); }
 { const result=require('../lib/studyHubMigration').applyStudyHubCopy(db);if(result)console.log('[seo] nationwide study hub',JSON.stringify(result)); }
 { const result=require('../lib/editorialGuidesMigration').applyEditorialGuides(db);if(result)console.log('[content] completed study guides',JSON.stringify(result)); }
+{ const result=require('../lib/partnerEditorialMigration').applyPartnerEditorial(db);if(result)console.log('[content] profile partner schools',JSON.stringify(result)); }

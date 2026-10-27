@@ -72,6 +72,7 @@
             <p><%= block.text %></p>
           <% } %>
         <% }); %>
+        <% if(section.links && section.links.length){ %><ul class="study-hub-links"><% section.links.forEach(function(link){ %><li><a href="<%= link.href %>"><%= link.label %></a></li><% }); %></ul><% } %>
       </section>
       <% }); %>
 

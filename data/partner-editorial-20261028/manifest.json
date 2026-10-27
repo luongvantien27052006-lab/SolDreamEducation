@@ -1,0 +1,40 @@
+{
+  "datasets": [
+    {
+      "key": "university-hannam",
+      "expectedHash": "db322962402098e2952791c00e01e38f2b7fbff0206b27754d96362f30136dde"
+    },
+    {
+      "key": "university-woosong",
+      "expectedHash": "356b03254ece527e7d815efab3658ab5d335d07377a50d24d7fc73de37485712"
+    },
+    {
+      "key": "university-hanyang",
+      "expectedHash": "2e0215ebc348f5bd80d6b5699690440df4406be6b2a538cd876151c0f595e04a"
+    },
+    {
+      "key": "university-daeduk",
+      "expectedHash": "fd8d3408bdcf0e618a61b767a4688f81ab3fa0d87f6d8ad23f52a56cdb2895c8"
+    },
+    {
+      "key": "university-dongyang",
+      "expectedHash": "1340866c56602f64f73161014f7743f0728373851c45f30ae9377aa14af5d3d7"
+    },
+    {
+      "key": "university-gimhae",
+      "expectedHash": "a46d20b774939fa1262f7dcce9f10cda2749a21125c3fe1f67cc8c8344666722"
+    },
+    {
+      "key": "university-sogang",
+      "expectedHash": "561162cb9fa4632e195013b6a27514f6c9f79d7c9c8eea4e6c8211bce52dcc11"
+    }
+  ],
+  "yonsei": {
+    "id": 2,
+    "slug": "dai-hoc-yonsei",
+    "expectedHash": "be4d22b55699c22f870861df10b4725a21b3cb9ff20bcdce5317feeacb7d9614"
+  },
+  "partners": {
+    "expectedHash": "76f5e25b5eff03b485425adcbcf9b4ba1efdc0eee39a2bceb78c3ab8db0bd240"
+  }
+}

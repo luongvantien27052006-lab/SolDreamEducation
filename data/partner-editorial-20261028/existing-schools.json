@@ -1,0 +1,72 @@
+[
+  {
+    "key":"university-hannam",
+    "sources":["https://www.hannam.ac.kr/kor/educate/educate_01.html","https://cir.hannam.ac.kr/kor/main/"],
+    "section":{"id":"chon-lo-trinh-hannam","title":"Chọn chương trình và đầu mối tuyển sinh Hannam","blocks":[
+      {"type":"paragraph","text":"Khi tìm hiểu Hannam tại Daejeon, hãy tách khóa tiếng Hàn khỏi hồ sơ học chuyên ngành. Trường giới thiệu Korean Language Education Center và các đơn vị học thuật, trong đó có Linton Global School. Mỗi lựa chọn cần được đọc theo đúng nhánh ngôn ngữ và bậc học."},
+      {"type":"paragraph","text":"Nếu cân nhắc chương trình quốc tế, ghi rõ tên ngành và ngôn ngữ giảng dạy thay vì chỉ ghi Hannam. Với mục tiêu học tiếng trước, đối chiếu yêu cầu vào khóa tiếng rồi lập kế hoạch riêng cho ngành muốn theo học sau đó."},
+      {"type":"list","items":["Từ mục tuyển sinh của trường hoặc văn phòng hợp tác quốc tế, lấy đúng hướng dẫn cho nhập học mới, chuyển tiếp hay sau đại học.","Chuẩn bị kết quả học tập, khả năng ngoại ngữ và câu hỏi về cách đánh giá của chương trình trước khi luyện phỏng vấn.","Khi xem học phí và học bổng, giữ nguyên phạm vi kỳ hoặc năm được ghi trong thông báo; mức tham khảo từ chính sách cũ cần được xác nhận riêng cho kỳ đăng ký."]},
+      {"type":"paragraph","text":"Bộ hồ sơ tư vấn nên ghi cùng lúc trường, ngành, bậc học và kỳ dự kiến. Các hoạt động gặp gỡ trường tại SolDream giúp người học đặt câu hỏi cụ thể, còn việc tiếp nhận vẫn cần đối chiếu hướng dẫn tuyển sinh và phản hồi của đơn vị phụ trách."}
+    ],"links":[{"href":"/du-hoc/5-buoc-chuan-bi-ho-so-du-hoc-han-quoc","label":"Lập kế hoạch chuẩn bị hồ sơ"},{"href":"/du-hoc/hoc-phi-truong-doi-tac-han-quoc-2026","label":"Đọc bảng học phí theo đúng kỳ và chương trình"}]}
+  },
+  {
+    "key":"university-woosong",
+    "sources":["https://english.wsu.ac.kr/page/index.jsp?code=eng0201_back"],
+    "section":{"id":"chon-nganh-woosong","title":"Chọn ngôn ngữ và đơn vị đào tạo tại Woosong","blocks":[
+      {"type":"paragraph","text":"Woosong giới thiệu nhánh tiếng Anh, nhánh tiếng Hàn và Korean Language Institute thành các mục riêng. Trong nhóm chương trình tiếng Anh có những hướng như kinh doanh, AI và dữ liệu, khách sạn, ẩm thực và truyền thông. Cần tra đúng ngành và kỳ tuyển sinh thay vì suy rằng mọi chương trình đều dùng cùng ngôn ngữ."},
+      {"type":"list","items":["Hướng kinh doanh: đối chiếu đơn vị đào tạo, cấu trúc chương trình và yêu cầu ngoại ngữ của ngành.","Hướng AI, dữ liệu hoặc truyền thông: so sánh nội dung học phần và nền tảng chuyên môn cần chuẩn bị.","Hướng khách sạn, nhà hàng hoặc ẩm thực: hỏi rõ bậc đào tạo, phần thực hành và nơi học của chương trình đang xét."]},
+      {"type":"paragraph","text":"Woosong College và Woosong University là hai tên cơ sở cần nhận diện riêng trong hồ sơ. Cùng quan tâm ẩm thực hay khách sạn không có nghĩa là cùng loại bằng, bộ giấy tờ hoặc bảng phí. Giữ tên cơ sở cấp giấy tiếp nhận trong mọi trao đổi và thanh toán."},
+      {"type":"paragraph","text":"Trước khi chốt lựa chọn, đối chiếu giấy tờ học tập, chứng chỉ ngoại ngữ, thông báo thu theo kỳ hoặc năm và chỗ ở. Nếu đăng ký tiếng Hàn trước, phần kế hoạch học chuyên ngành cần được kiểm tra riêng với đơn vị tuyển sinh."}
+    ],"links":[{"href":"/truong-dai-hoc/woosong-college","label":"Phân biệt với Cao đẳng Woosong"},{"href":"/du-hoc/phan-biet-visa-du-hoc-han-quoc-d4-1-d2","label":"Đối chiếu bậc học và mã chương trình"}]}
+  },
+  {
+    "key":"university-hanyang",
+    "sources":["https://studyerica.hanyang.ac.kr/","https://ericaiie.hanyang.ac.kr/eng_enrollment"],
+    "section":{"id":"chon-co-so-hanyang","title":"Phân biệt Hanyang Seoul và Hanyang ERICA","blocks":[
+      {"type":"heading","text":"Hanyang Seoul","lead":"Ghi rõ cơ sở Seoul khi đối chiếu ngành và thông báo tuyển sinh."},
+      {"type":"paragraph","text":"Cơ sở Seoul có hướng dẫn quốc tế và thông báo học phí riêng. Khi xem một ngành hoặc bảng tiền, hãy đối chiếu tên cơ sở trong tài liệu, bậc đào tạo và kỳ áp dụng. Thông tin của một chương trình tại Seoul không tự động áp dụng cho ERICA."},
+      {"type":"heading","text":"Hanyang ERICA tại Ansan","lead":"Tách khóa tiếng của International Education Institute khỏi tuyển sinh chuyên ngành."},
+      {"type":"paragraph","text":"ERICA có cổng quốc tế Study ERICA và trang riêng của viện giáo dục quốc tế. Nếu quan tâm khóa tiếng, đọc hướng dẫn đăng ký của ERICA IIE; nếu muốn vào chuyên ngành, dùng thông báo của đơn vị tuyển sinh tương ứng. Hai nhánh có mục đích hồ sơ khác nhau."},
+      {"type":"list","items":["Ghi cơ sở và ngành ngay trên bảng so sánh trường, trước khi tra điều kiện ngoại ngữ.","Kiểm tra nơi nộp, nơi học và nơi ở; đừng dùng địa chỉ ký túc xá của cơ sở này cho cơ sở khác.","Đọc ghi chú bảo hiểm, phí đăng ký và đơn vị tính ngay cạnh mức học phí, giữ riêng thông báo cho từng chương trình.","Với trao đổi, kiểm tra thêm đơn vị cử đi và thỏa thuận của chương trình thay vì dùng hồ sơ tuyển sinh cấp bằng."]}
+    ],"links":[{"href":"https://studyerica.hanyang.ac.kr/","label":"Cổng tuyển sinh quốc tế ERICA"},{"href":"/du-hoc/hoc-phi-truong-doi-tac-han-quoc-2026","label":"So sánh đúng cơ sở trong bảng học phí trường"}]}
+  },
+  {
+    "key":"university-daeduk",
+    "sources":["https://www.ddu.ac.kr/sitemap.htm","https://www.ddu.ac.kr/content/MN000000000024","https://www.ddu.ac.kr/content/MN000000000261"],
+    "section":{"id":"chon-huong-daeduk","title":"Đối chiếu ngành thực hành và tuyển sinh quốc tế Daeduk","blocks":[
+      {"type":"paragraph","text":"Danh mục của Daeduk thể hiện các nhóm K-culture, xã hội, kỹ thuật và những hướng đào tạo khác. Trong đó có thiết kế, làm đẹp, webtoon, ẩm thực, ô tô, điện và máy tính. Đây là điểm khởi đầu để so sánh ngành, chưa thay cho danh sách tiếp nhận sinh viên quốc tế của kỳ dự kiến."},
+      {"type":"paragraph","text":"Trường có đơn vị hợp tác quốc tế, trung tâm tiếng Hàn và hỗ trợ sinh viên nước ngoài trong sơ đồ tổ chức. Khi liên hệ, cần nêu rõ đang hỏi khóa tiếng, ngành thực hành hay một chương trình đào tạo tiếp nối để nhận đúng danh mục giấy tờ."},
+      {"type":"list","items":["Với hướng thiết kế, làm đẹp hoặc webtoon, hỏi tên khoa, nội dung thực hành và cách đánh giá năng lực áp dụng cho hồ sơ quốc tế.","Với hướng ô tô, điện hoặc máy tính, so sánh học phần và nền tảng cần có trước khi chốt ngành.","Đối chiếu loại văn bằng và đơn vị tuyển sinh của chương trình; không dùng yêu cầu của một ngành hoặc một hệ cho toàn trường."]},
+      {"type":"paragraph","text":"Kế hoạch ngân sách cần đọc cùng bảng học phí, khoản thực hành được trường thông báo và chỗ ở. Những nội dung đã ghi trong hồ sơ SolDream cần được đối chiếu với văn bản cho kỳ đăng ký, đồng thời lưu riêng khoản trường thu và khoản dịch vụ tại Việt Nam."}
+    ],"links":[{"href":"/du-hoc/dieu-kien-du-hoc-han-quoc","label":"Đối chiếu hồ sơ theo bậc học"},{"href":"/du-hoc/chi-phi-du-hoc-han-quoc-2026-2027","label":"Tách chi phí trường và dịch vụ"}]}
+  },
+  {
+    "key":"university-dongyang",
+    "sources":["https://www.dyu.ac.kr/intro-2-2/map/","https://www.dyu.ac.kr/college/art-part/"],
+    "section":{"id":"chon-campus-dongyang","title":"Chọn đúng cơ sở Yeongju hoặc Dongducheon","blocks":[
+      {"type":"paragraph","text":"Dongyang có thông tin riêng cho Yeongju và Dongducheon. Người quan tâm trường cần ghi cơ sở của ngành trên bảng lựa chọn, vì nơi học, lịch di chuyển và nhu cầu chỗ ở phụ thuộc vào chương trình thực tế, không chỉ tên đại học."},
+      {"type":"paragraph","text":"Trang giới thiệu nghệ thuật tại Dongducheon trình bày các hướng liên quan thiết kế không gian, biểu diễn và nội dung hình ảnh. Nếu theo hướng sáng tạo, hãy đọc đúng đề cương của ngành, hỏi tài liệu chuyên môn cần chuẩn bị và ngôn ngữ đánh giá trong kỳ nộp."},
+      {"type":"list","items":["Tra bản đồ và đầu mối khoa của cơ sở được ghi trên chương trình dự kiến.","Khi khảo sát nhóm đường sắt, công nghệ hoặc nghệ thuật, kiểm tra tên ngành và đơn vị tiếp nhận quốc tế thay vì suy từ thế mạnh chung của trường.","Đối chiếu yêu cầu ngoại ngữ, hình thức đánh giá, thông báo thu và chỗ ở theo cùng một bộ hướng dẫn tuyển sinh."]},
+      {"type":"paragraph","text":"Nếu có kế hoạch học tiếng trước, cần hỏi rõ nơi tổ chức khóa tiếng và điều kiện học tiếp của ngành muốn chọn. Chuyển từ mục tiêu ngôn ngữ sang chuyên ngành là một bước cần kiểm tra lại hồ sơ và ngân sách, không chỉ đổi tên chương trình trong đơn."}
+    ],"links":[{"href":"/du-hoc/5-buoc-chuan-bi-ho-so-du-hoc-han-quoc","label":"Theo dõi từng bước chuẩn bị hồ sơ"},{"href":"/du-hoc/phan-biet-visa-du-hoc-han-quoc-d4-1-d2","label":"Phân biệt mục tiêu học tiếng và học chuyên ngành"}]}
+  },
+  {
+    "key":"university-gimhae",
+    "sources":["https://www.gimhae.ac.kr/www/main"],
+    "section":{"id":"chon-nganh-gimhae","title":"Khảo sát chương trình và điều kiện thực hành Gimhae","blocks":[
+      {"type":"paragraph","text":"Khi tìm hiểu Gimhae, nên bắt đầu từ danh mục khoa và hướng dẫn tuyển sinh được trường công bố. Các thông tin về điều dưỡng, sức khỏe và những hướng nghề thực hành cần được đọc theo ngành cụ thể; số liệu của toàn trường không thay cho điều kiện nhận hồ sơ quốc tế."},
+      {"type":"paragraph","text":"Nếu quan tâm khối sức khỏe, hỏi riêng điều kiện tiếp nhận, ngoại ngữ cho học tập và thực hành, cùng mục tiêu nghề nghiệp sau học. Việc một ngành xuất hiện trên website không tự xác nhận hồ sơ của bạn phù hợp hoặc đủ điều kiện hành nghề."},
+      {"type":"list","items":["Ghi đúng tên khoa, loại chương trình và kỳ dự kiến trong mọi trao đổi với trường.","Đối chiếu hồ sơ học tập và cách đánh giá theo hướng dẫn quốc tế, tách với lịch tuyển sinh đại trà được quảng bá trên trang chủ.","Khi chọn chỗ ở, xác nhận địa điểm học và sinh hoạt tại Gimhae; kế hoạch đi lại sang Busan cần được tính riêng theo nhu cầu thực tế."]},
+      {"type":"paragraph","text":"Khi lập ngân sách, kiểm tra thông báo của chương trình về học phí, các khoản thu riêng và ký túc xá. Với kế hoạch học tiếp hoặc công việc sau này, cần xác nhận điều kiện của từng bước với đơn vị phụ trách thay vì suy từ một giới thiệu chung về hỗ trợ sinh viên."}
+    ],"links":[{"href":"/du-hoc/dieu-kien-du-hoc-han-quoc","label":"Kiểm tra điều kiện theo chương trình"},{"href":"/du-hoc/chi-phi-du-hoc-han-quoc-2026-2027","label":"Lập kế hoạch chi phí theo từng đơn vị thu"}]}
+  },
+  {
+    "key":"university-sogang",
+    "sources":["https://klec.sogang.ac.kr/?lang=eng"],
+    "section":{"id":"chon-khoa-sogang","title":"Chọn khóa KLEC và chuẩn bị mục tiêu học tiếp","blocks":[
+      {"type":"paragraph","text":"Với Sogang, cần phân biệt khóa tiếng Hàn tại Korean Language Education Center với hồ sơ học chương trình cấp bằng của đại học. Khi so sánh KGP200 và KAP200, đọc đúng tên khóa, thời gian trong ngày và hướng dẫn đăng ký trong tài liệu của KLEC."},
+      {"type":"paragraph","text":"Hãy xác định mục tiêu học tiếng của mình: xây nền giao tiếp, chuẩn bị ngoại ngữ cho ngành dự kiến hay phục vụ một kế hoạch học tập cụ thể. Sau đó đối chiếu lịch học và khả năng theo học đều đặn, thay vì chọn chỉ theo sự khác nhau giữa các mức tiền."},
+      {"type":"list","items":["Lưu đúng hướng dẫn của khóa và kỳ, tách hạn đăng ký với lịch học hoặc kiểm tra xếp lớp.","Kiểm tra khoản học phí, đăng ký mới và ghi chú áp dụng ngay trong cùng thông báo.","Nếu muốn vào chuyên ngành, đối chiếu thêm yêu cầu ngoại ngữ, hồ sơ và kỳ tuyển sinh của ngành; hoàn thành một khóa tiếng không thay cho việc xét tiếp nhận chuyên ngành.","Khi xem chỗ ở tại Seoul, hỏi rõ lịch đến, địa điểm học và khoản đóng riêng để tránh thiếu ngân sách ngoài học phí."]}
+    ],"links":[{"href":"/du-hoc/hoc-phi-truong-doi-tac-han-quoc-2026","label":"Cách đọc học phí theo từng khóa"},{"href":"/du-hoc/lo-trinh-hoc-tieng-han-truoc-khi-du-hoc","label":"Chuẩn bị tiếng Hàn trước khi du học"}]}
+  }
+]
