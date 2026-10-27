@@ -12,13 +12,24 @@
     </div>
     <section class="direct-answer list-direct-answer" aria-label="<%= siteText("view.duhoc-list.010") %>">
       <p class="direct-answer__label"><%= siteText("view.duhoc-list.011") %></p>
-      <p><strong><%= siteText("view.duhoc-list.012") %></strong> <%= siteText("view.duhoc-list.013") %></p>
+      <p><%= hub.intro || (siteText('view.duhoc-list.012')+' '+siteText('view.duhoc-list.013')) %></p>
     </section>
-    <div class="news-grid">
+    <div class="study-hub-actions"><a class="btn btn-primary" href="#lienhe"><%= hub.consultationTitle %></a><a class="btn btn-ghost" href="#chuong-trinh"><%= hub.programsTitle %></a></div>
+    <nav class="knowledge-toc" aria-label="<%= siteText('study.hub.toc-label') %>"><% hub.sections.forEach(function(section){ %><a href="#<%= section.id %>"><%= section.title %></a><% }); %></nav>
+    <div class="study-hub-content">
+      <% hub.sections.forEach(function(section){ %><section class="knowledge-section" id="<%= section.id %>">
+        <h2><%= section.title %></h2>
+        <% section.paragraphs.forEach(function(paragraph){ %><p><%= paragraph %></p><% }); %>
+        <% if(section.links.length){ %><ul class="study-hub-links"><% section.links.forEach(function(link){ %><li><a href="<%= link.href %>"><%= link.label %></a></li><% }); %></ul><% } %>
+      </section><% }); %>
+    </div>
+    <section class="knowledge-section" id="lo-trinh-chuan-bi"><h2><%= hub.checklistTitle %></h2><ol class="study-hub-checklist"><% hub.checklist.forEach(function(step){ %><li><%= step %></li><% }); %></ol></section>
+    <% if(partners.length){ %><section class="knowledge-section" aria-labelledby="hub-schools-title"><h2 id="hub-schools-title"><%= hub.schoolsTitle %></h2><ul class="study-hub-partners"><% partners.forEach(function(school){ %><li><a href="<%= school.href %>"><strong><%= school.name %></strong><% if(school.campus){ %><span><%= school.campus %></span><% } %></a></li><% }); %></ul><a class="btn btn-ghost" href="/truong-dai-hoc#partner-schools-title"><%= siteText('study.hub.all-schools') %></a></section><% } %>
+    <section class="knowledge-section" id="chuong-trinh"><h2><%= hub.programsTitle %></h2><div class="news-grid">
       <% programs.forEach(function(p){ %>
       <a class="post" href="/du-hoc/<%= p.slug %>">
         <div class="post__img <%= p.cover_image ? '' : p.cover %>">
-          <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" src="<%= p.cover_image || '/img/research-cover.svg' %>" alt="<%= p.title %>" loading="lazy">
+          <img class="post__cover<%= (!p.cover_image || p.cover_image === '/img/research-cover.svg') ? ' post__cover--fallback' : '' %>" <%- imageAttributes(p.cover_image || '/img/research-cover.svg','(max-width: 720px) 100vw, 420px') %> alt="<%= p.title %>" loading="lazy">
         </div>
         <div class="post__body"><span class="post__cat"><%= p.categoryLabel %></span>
           <h3><%= p.title %></h3>
@@ -28,10 +39,10 @@
       </a>
       <% }); %>
       <% if (programs.length === 0) { %><p><%= siteText("view.duhoc-list.014") %></p><% } %>
-    </div>
-    <div style="text-align:center;margin-top:44px">
-      <a href="<%= siteText("view.duhoc-list.015") %>" class="btn btn-primary"><%= siteText("view.duhoc-list.016") %></a>
-    </div>
+    </div></section>
+    <% if(stories.length){ %><section class="knowledge-section" aria-labelledby="hub-stories-title"><h2 id="hub-stories-title"><%= hub.storiesTitle %></h2><ul class="study-hub-links"><% stories.forEach(function(story){ %><li><a href="/tin-tuc/<%= story.slug %>"><%= story.title %></a></li><% }); %></ul></section><% } %>
+    <section class="knowledge-section"><h2><%= hub.consultationTitle %></h2><p><%= hub.consultationText %></p><%- include('partials/content-responsibility',{item:{},kind:'hub'}) %></section>
   </div>
 </section>
+<%- include('home-sections/consult',{defaultInterest:'Du học Hàn Quốc'}) %>
 </main>

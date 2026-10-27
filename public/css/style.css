@@ -57,6 +57,17 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .sec-head p{color:var(--muted);font-size:17px}
 .accent{color:var(--persimmon)}
 .accent-sky{color:var(--sky)}
+.study-hub-actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+.study-hub-content{max-width:900px}
+.study-hub-content .knowledge-section p{margin:12px 0;color:var(--ink-2);line-height:1.8}
+.study-hub-links,.study-hub-checklist{padding-left:24px;margin:16px 0}
+.study-hub-links li,.study-hub-checklist li{margin:10px 0}
+.study-hub-links a{color:var(--sky);text-decoration:underline;text-underline-offset:3px}
+.study-hub-partners{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;margin:20px 0}
+.study-hub-partners a{display:block;padding:18px;background:#fff;border:1px solid var(--line);border-radius:12px;min-height:90px}
+.study-hub-partners span{display:block;color:var(--muted);margin-top:6px}
+.content-responsibility{padding:14px 16px;background:var(--paper-2);border-radius:10px;line-height:1.75;margin:20px 0}
+.content-responsibility a{color:var(--sky);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- Buttons ---------- */
 .btn{

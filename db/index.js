@@ -1444,3 +1444,5 @@ module.exports = db;
 { const result=require('../lib/siteContentMigration').applySiteContent(db);if(result.fields||result.datasets)console.log('[content] editable website content',JSON.stringify(result)); }
 { const result=require('../lib/seoAuditMigration').applySeoAuditFixes(db);if(result)console.log('[seo] verified metadata fixes',JSON.stringify(result)); }
 { const result=require('../lib/seoTopicReviewMigration').applySeoTopicReview(db);if(result)console.log('[seo] owner-approved topic review',JSON.stringify(result)); }
+{ const result=require('../lib/confirmedStatsMigration').applyConfirmedStats(db);if(result)console.log('[content] owner-confirmed statistics',JSON.stringify(result)); }
+{ const result=require('../lib/studyHubMigration').applyStudyHubCopy(db);if(result)console.log('[seo] nationwide study hub',JSON.stringify(result)); }

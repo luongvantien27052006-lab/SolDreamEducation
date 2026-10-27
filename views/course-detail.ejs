@@ -49,6 +49,7 @@
       <p class="section-lead"><%= siteText("view.course-detail.040") %></p>
       <ol><li><%= siteText("view.course-detail.041") %> <%= String(course.language || siteText("view.course-detail.059")).toLocaleLowerCase('vi') %>.</li><li><%= siteText("view.course-detail.042") %></li><li><%= siteText("view.course-detail.043") %></li></ol>
     </section>
+    <%- include('partials/content-responsibility',{item:course,kind:'course'}) %>
     <section class="faq-section" aria-labelledby="course-faq-title">
       <h2 id="course-faq-title"><%= siteText("view.course-detail.044") %> <%= course.name %></h2>
       <% courseFaqs.forEach(function(faq, index){ %><details class="faq-item" <%= index === 0 ? 'open' : '' %>><summary><%= faq.question %></summary><p class="section-lead"><%= faq.answer %></p></details><% }); %>

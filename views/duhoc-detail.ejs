@@ -18,6 +18,7 @@
       <%- responsiveContent(program.contentHtml) %>
     </div>
     <%- include('partials/article-sources',{item:program}) %>
+    <%- include('partials/content-responsibility',{item:program,kind:'program'}) %>
     <% if (relatedFaqs && relatedFaqs.length) { %>
     <section class="related-faq" aria-labelledby="program-faq-title">
       <h2 id="program-faq-title"><%= siteText("view.duhoc-detail.005") %> <%= isSchoolPage?siteText("view.duhoc-detail.013"):siteText("view.duhoc-detail.014") %></h2>

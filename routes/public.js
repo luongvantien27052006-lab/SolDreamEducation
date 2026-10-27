@@ -23,6 +23,7 @@ const { articleDates, coverMetadata } = require('../lib/articleMetadata');
 const { storedDescription, automaticDescription } = require('../lib/seoDescription');
 const { aboutPageMetadata } = require('../lib/aboutPageMetadata');
 const { socialImage } = require('../lib/responsiveImages');
+const { accountabilitySchema } = require('../lib/editorialResponsibility');
 
 
 
@@ -301,6 +302,7 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
       inLanguage: course.language === 'Tiếng Anh' ? 'en' : 'ko',
       provider: { '@id': `${SITE_URL}/#organization` },
       dateModified: getCourseUpdatedDate(),
+      ...accountabilitySchema(course,'course'),
       ...(Number.isFinite(price) && price > 0 ? { offers: { '@type': 'Offer', price, priceCurrency: 'VND', url, availability: 'https://schema.org/InStock' } } : {}),
     },
     { ...generateFAQSchema(courseFaqs), '@id': `${url}#faq`, url, inLanguage: 'vi-VN' },
@@ -384,6 +386,7 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
         ...(publishedTime ? { datePublished: publishedTime } : {}),
         ...(modifiedTime ? { dateModified: modifiedTime } : {}),
         author: authorEntity(post),
+        ...accountabilitySchema(post,'post'),
         publisher: { '@id': `${SITE_URL}/#organization`, '@type': 'EducationalOrganization', name: siteText("server.routes.public.041"), logo: { '@type': 'ImageObject', url: LOGO_URL } },
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         ...(post.sourceLinks.length ? { citation: post.sourceLinks } : {}),
@@ -410,18 +413,34 @@ router.get('/tin-tuc/:slug', (req, res, next) => {
 // Study-abroad programs listing
 router.get('/du-hoc', (req, res) => {
   const programs = db.prepare("SELECT * FROM programs WHERE published = 1 AND category='Chương trình du học' ORDER BY sort_order ASC, id ASC").all().map(decorate);
+  const storedHub=require('../lib/siteContent').getDataset('study-abroad-hub',require('../data/study-abroad-hub.json'));
+  const bySlug=new Map(programs.map(program=>[program.slug,program]));
+  const hub={...storedHub,sections:storedHub.sections.map(section=>({...section,links:section.links.map(link=>{
+    const program=link.programSlug?bySlug.get(link.programSlug):null;
+    if(link.programSlug&&!program)return null;
+    const href=program?programPublicPath(program):require('../lib/util').normalizeReferenceUrl(link.href);
+    if(!href)return null;
+    if(href.startsWith('/tin-tuc/')&&!db.prepare('SELECT 1 FROM posts WHERE slug=? AND published=1').get(href.slice('/tin-tuc/'.length)))return null;
+    return {href,label:link.label||program?.title||href};
+  }).filter(Boolean)}))};
+  const stories=db.prepare('SELECT * FROM posts WHERE id IN (269,270,271) AND published=1 ORDER BY id').all().map(decorate);
+  const partners=require('../lib/partnerSchools').buildPartnerCards(require('../lib/siteContent').getDataset('partners').schools,db.prepare("SELECT * FROM programs WHERE published=1 AND category='Thông tin trường'").all(),getAllUniversities()).filter(school=>school.featured).slice(0,6);
   const url = abs('/du-hoc');
   const jsonLd = jsonLdScript({
     '@context': 'https://schema.org', '@graph': [{ '@type': 'CollectionPage', '@id': `${url}#page`, url,
     name: siteText("server.routes.public.042"),
     description: siteText("server.routes.public.043"),
+    about:{'@type':'Thing',name:'Du học Hàn Quốc'},
+    ...accountabilitySchema({},'hub'),
+    dateModified:require('../lib/pageFreshness').getPageFreshness().get('/du-hoc')||undefined,
+    hasPart:hub.sections.map(section=>({'@type':'WebPageElement','@id':url+'#'+section.id,name:section.title})),
     inLanguage: 'vi-VN', isPartOf: { '@id': `${SITE_URL}/#website` }, publisher: { '@id': `${SITE_URL}/#organization` },
     mainEntity: { '@type': 'ItemList', itemListElement: programs.map((program, index) => ({
       '@type': 'ListItem', position: index + 1, name: program.title, url: abs(`/du-hoc/${program.slug}`),
     })) } }, generateBreadcrumbSchema([{ name: siteText("server.routes.public.044"), url: '/' }, { name: siteText("server.routes.public.045"), url: '/du-hoc' }])],
   });
   res.render('duhoc-list', {
-    programs,
+    programs,hub,stories,partners,
     title: siteText("server.routes.public.046"),
     description: siteText("server.routes.public.047"),
     canonical: url,
@@ -457,7 +476,7 @@ router.get('/du-hoc/:slug', (req, res, next) => {
         wordCount: program.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true,
         datePublished: publishedTime,
         dateModified: modifiedTime,
-        author: authorEntity(program), publisher: { '@id': `${SITE_URL}/#organization` },
+        author: authorEntity(program), ...accountabilitySchema(program,'program'), publisher: { '@id': `${SITE_URL}/#organization` },
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         ...(program.sourceLinks.length ? { citation: program.sourceLinks } : {}),
         ...(program.focus_keyword ? { keywords: program.focus_keyword } : {}),
@@ -542,7 +561,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
       generateBreadcrumbSchema([{ name: siteText("server.routes.public.058"), url: '/' }, { name: siteText("server.routes.public.059"), url: '/truong-dai-hoc' }, { name: program.title, url: programPublicPath(program) }]),
       { '@type': 'Article', '@id': `${url}#article`, headline: program.title, description: storedDescription(program), image: [{'@type':'ImageObject',url:ogImg,description:program.cover_alt||program.title,...(program.cover_caption?{caption:program.cover_caption}:{})}], articleSection: program.category,
         wordCount: program.wordCount, inLanguage: 'vi-VN', isAccessibleForFree: true, datePublished: publishedTime, dateModified: modifiedTime,
-        author: authorEntity(program), publisher: { '@id': `${SITE_URL}/#organization` }, mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        author: authorEntity(program), ...accountabilitySchema(program,'program'), publisher: { '@id': `${SITE_URL}/#organization` }, mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         ...(program.sourceLinks.length ? { citation: program.sourceLinks } : {}), ...(program.focus_keyword ? { keywords: program.focus_keyword } : {}) },
       ...(relatedFaqs.length ? [{ ...generateFAQSchema(relatedFaqs), '@id': `${url}#faq`, url, inLanguage: 'vi-VN' }] : []),
     ] });
@@ -584,6 +603,7 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
         inLanguage: 'vi-VN',
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         author: advisor ? { '@id': advisor['@id'] } : { '@id': `${SITE_URL}/#organization` },
+        ...accountabilitySchema(university,'university'),
         publisher: { '@id': `${SITE_URL}/#organization` },
         about: { '@id': `${url}#university` },
         ...(university.officialWebsite ? { citation: [university.officialWebsite] } : {}),

@@ -1,0 +1,3 @@
+<% const responsible=contentResponsibility(item,kind); if(responsible){ %>
+<p class="source-meta content-responsibility"><strong><%= siteText('content.responsibility.label') %></strong> <a href="<%= responsible.profilePath %>"><%= responsible.honorificPrefix %> <%= responsible.name %></a> — <%= responsible.jobTitle %>. <%= responsible.responsibility %>.</p>
+<% } %>

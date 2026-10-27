@@ -1,0 +1,90 @@
+{
+  "intro": "Bắt đầu kế hoạch du học Hàn Quốc từ bậc học, ngành quan tâm, năng lực tiếng Hàn và ngân sách gia đình. Các mục dưới đây giúp bạn chọn hướng tìm hiểu trước khi đối chiếu với trường và kỳ nhập học cụ thể.",
+  "sections": [
+    {
+      "id": "chon-chuong-trinh",
+      "title": "Các chương trình du học Hàn Quốc tại SolDream",
+      "paragraphs": [
+        "Năm lộ trình gồm học tiếng Hàn D-4-1, cao đẳng D-2-1, đại học D-2-2, thạc sĩ D-2-3 và trao đổi sinh viên D-2-6. Chọn bậc học theo nền tảng đã có và mục tiêu học tiếp.",
+        "E-Visa là tên gói tư vấn thạc sĩ tại SolDream, tương ứng mã D-2-3. Chương trình trao đổi cần đối chiếu thỏa thuận của trường cử đi và trường tiếp nhận trong kỳ đăng ký."
+      ],
+      "links": [
+        { "programSlug": "cac-chuong-trinh-du-hoc-han-quoc-trong-ho-so-sol-dream-2026", "label": "So sánh năm lộ trình du học" },
+        { "programSlug": "phan-biet-visa-du-hoc-han-quoc-d4-1-d2", "label": "Phân biệt các mã thị thực D-4 và D-2" }
+      ]
+    },
+    {
+      "id": "dieu-kien-va-ho-so",
+      "title": "Điều kiện và hồ sơ cần đối chiếu",
+      "paragraphs": [
+        "Kết quả học tập, năm tốt nghiệp, ngoại ngữ và tài chính được đối chiếu theo trường, ngành và chương trình. Một mức điểm hoặc yêu cầu được một trường chấp nhận không áp dụng chung cho mọi hồ sơ.",
+        "Chuẩn bị thông tin học tập và mục tiêu trước buổi tư vấn. Sau khi chọn chương trình, dùng danh mục giấy tờ của trường và cơ quan tiếp nhận thị thực để lập kế hoạch hoàn thiện hồ sơ."
+      ],
+      "links": [
+        { "programSlug": "dieu-kien-du-hoc-han-quoc", "label": "Xem điều kiện theo từng bậc học" },
+        { "programSlug": "5-buoc-chuan-bi-ho-so-du-hoc-han-quoc", "label": "Theo dõi năm bước chuẩn bị hồ sơ" }
+      ]
+    },
+    {
+      "id": "du-tru-chi-phi",
+      "title": "Dự trù chi phí theo từng khoản",
+      "paragraphs": [
+        "Tách phí dịch vụ và đào tạo tại Việt Nam khỏi học phí, ký túc xá và các khoản trường Hàn Quốc thu. Khi so sánh gói, kiểm tra khoản đã gồm, khoản đóng riêng và lịch thanh toán.",
+        "Bảng phí dịch vụ và bảng học phí trường có phạm vi khác nhau. Gia đình nên đối chiếu thông báo thu, đơn vị nhận tiền và hạn thanh toán trước khi xác định ngân sách cho chương trình đã chọn."
+      ],
+      "links": [
+        { "programSlug": "chi-phi-du-hoc-han-quoc-2026-2027", "label": "Phí dịch vụ, khoản bao gồm và lịch thanh toán" },
+        { "programSlug": "hoc-phi-truong-doi-tac-han-quoc-2026", "label": "Học phí hệ tiếng và chuyên ngành tại trường" }
+      ]
+    },
+    {
+      "id": "chon-truong-va-nganh",
+      "title": "Chọn trường, ngành và kỳ nhập học",
+      "paragraphs": [
+        "So sánh ngành học, cơ sở, ngôn ngữ giảng dạy, điều kiện đầu vào và ngân sách. Danh mục trường hợp tác là điểm bắt đầu; cần đọc thông báo của đúng trường và kỳ dự kiến.",
+        "Khi xem học bổng và chỗ ở, ghi lại đối tượng áp dụng, khoản được hỗ trợ và điều kiện duy trì. Cùng tên trường nhưng khác cơ sở hoặc chương trình có thể có yêu cầu và chi phí riêng."
+      ],
+      "links": [
+        { "href": "/truong-dai-hoc#partner-schools-title", "label": "Khảo sát danh mục trường hợp tác" },
+        { "href": "/truong-dai-hoc", "label": "Đọc hồ sơ trường và nguồn tuyển sinh" }
+      ]
+    },
+    {
+      "id": "tieng-han-va-topik",
+      "title": "Chuẩn bị tiếng Hàn và TOPIK",
+      "paragraphs": [
+        "Kế hoạch học tiếng cần gắn với đầu vào, khả năng giao tiếp, phỏng vấn và yêu cầu của chương trình. Phần đào tạo trong gói du học và khóa đăng ký lẻ được trình bày riêng trên website.",
+        "Xem phiếu nhập học để biết học phần, số tiết, lịch học và khoản đã bao gồm. Nếu trường hoặc kỳ tuyển sinh thay đổi yêu cầu, kế hoạch đào tạo cần được trao đổi lại với học viên."
+      ],
+      "links": [
+        { "programSlug": "lo-trinh-hoc-tieng-han-truoc-khi-du-hoc", "label": "Xem lộ trình tiếng Hàn theo chương trình" },
+        { "href": "/khoa-hoc", "label": "So sánh các lớp tiếng Hàn đăng ký lẻ" }
+      ]
+    },
+    {
+      "id": "kinh-nghiem-dong-hanh",
+      "title": "Trải nghiệm của đội ngũ và học viên",
+      "paragraphs": [
+        "Tiến sĩ Đào Duy Thắng, Giám đốc và người sáng lập SolDream, từng học tập và làm việc tại Hàn Quốc. Những trải nghiệm này được chia sẻ trong phần giới thiệu và câu chuyện của trung tâm.",
+        "Những giờ học, buổi phỏng vấn với trường và hoạt động chung cho thấy quá trình chuẩn bị trước ngày đi. Bạn có thể tìm hiểu đội ngũ và câu chuyện học viên để hình dung cách SolDream đồng hành."
+      ],
+      "links": [
+        { "href": "/gioi-thieu", "label": "Tìm hiểu người sáng lập và đội ngũ SolDream" },
+        { "href": "/tin-tuc/co-ba-sai-gon-khoi-nghiep-han-quoc-bai-hoc-that-bai", "label": "Đọc câu chuyện trải nghiệm tại Hàn Quốc" }
+      ]
+    }
+  ],
+  "checklistTitle": "Năm bước chuẩn bị từ mục tiêu đến xuất cảnh",
+  "checklist": [
+    "Làm rõ mục tiêu: ghi bậc học, ngành quan tâm, kết quả học tập, năng lực tiếng Hàn và ngân sách dự kiến để xác định điểm xuất phát.",
+    "Chọn trường và chương trình: đối chiếu cơ sở, ngành, đầu vào, lịch tuyển sinh, học phí, học bổng và ký túc xá từ thông báo chính thức.",
+    "Chuẩn bị hồ sơ và năng lực: hoàn thiện giấy tờ học tập, tài chính, dịch thuật hoặc hợp pháp hóa theo danh mục; học tiếng và luyện phỏng vấn khi chương trình yêu cầu.",
+    "Nộp hồ sơ, chờ trường xét: nộp đúng hạn, theo dõi yêu cầu bổ sung và thanh toán học phí trường theo hướng dẫn chính thức của chương trình.",
+    "Làm thị thực và chuẩn bị xuất cảnh: sau khi có giấy tờ tiếp nhận từ trường, đối chiếu thủ tục tại cơ quan tiếp nhận ở Việt Nam và chuẩn bị lên đường khi đủ điều kiện."
+  ],
+  "programsTitle": "Chương trình và hướng dẫn chi tiết",
+  "schoolsTitle": "Chọn trường theo hồ sơ và ngân sách",
+  "storiesTitle": "Cuộc sống SolDream: lớp học và trải nghiệm",
+  "consultationTitle": "Tìm lộ trình du học phù hợp",
+  "consultationText": "Chuẩn bị năm tốt nghiệp, kết quả học tập, trình độ ngoại ngữ, ngành quan tâm và ngân sách dự kiến. SolDream cùng bạn đối chiếu lựa chọn trường và những bước cần hoàn thiện cho kỳ dự định đăng ký."
+}

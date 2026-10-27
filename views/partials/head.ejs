@@ -6,6 +6,7 @@
 <meta name="googlebot" content="<%= robots %>">
 <title><%= title %></title>
 <meta name="description" content="<%= description %>">
+<% if(siteText('seo.google-site-verification').trim()){ %><meta name="google-site-verification" content="<%= siteText('seo.google-site-verification').trim() %>"><% } %>
 <link rel="canonical" href="<%= canonical %>">
 <link rel="alternate" hreflang="vi-VN" href="<%= canonical %>">
 <link rel="alternate" hreflang="x-default" href="<%= canonical %>">

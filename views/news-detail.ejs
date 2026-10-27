@@ -17,6 +17,7 @@
       <%- responsiveContent(post.contentHtml) %>
     </div>
     <%- include('partials/article-sources',{item:post}) %>
+    <%- include('partials/content-responsibility',{item:post,kind:'post'}) %>
     <% if (relatedFaqs && relatedFaqs.length) { %>
     <section class="related-faq" aria-labelledby="article-faq-title">
       <h2 id="article-faq-title"><%= siteText("view.news-detail.006") %></h2>

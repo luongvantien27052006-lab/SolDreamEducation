@@ -94,7 +94,9 @@
 
       <section class="author-box" aria-labelledby="advisor-title">
         <h2 id="advisor-title"><%= siteText("view.university-detail.037") %></h2>
-        <% if (advisor) { %>
+        <% if (contentResponsibility(university,'university')) { %>
+          <%- include('partials/content-responsibility',{item:university,kind:'university'}) %>
+        <% } else if (advisor) { %>
           <p class="section-lead"><strong><%= advisor.name %></strong> — <%= advisor.jobTitle %><%= siteText("view.university-detail.038") %></p>
           <% if (advisor.hasCredential && advisor.hasCredential.length) { %><ul><% advisor.hasCredential.forEach(function(credential){ %><li><%= credential.name %></li><% }); %></ul><% } %>
           <% if (advisor.sameAs && advisor.sameAs.length) { %><p><a href="<%= advisor.sameAs[0] %>" rel="me noopener" target="_blank"><%= siteText("view.university-detail.039") %></a></p><% } %>

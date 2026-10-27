@@ -15,7 +15,7 @@
           <option value="Tiếng Hàn giao tiếp"><%= siteText("view.home-sections.consult.004") %></option>
           <option value="Tiếng Hàn cấp tốc"><%= siteText("view.home-sections.consult.005") %></option>
           <option value="Tiếng Hàn sơ cấp / trung cấp"><%= siteText("view.home-sections.consult.006") %></option>
-          <option value="Du học Hàn Quốc"><%= siteText("view.home-sections.consult.007") %></option>
+          <option value="Du học Hàn Quốc" <%= typeof defaultInterest!=='undefined'&&defaultInterest==='Du học Hàn Quốc'?'selected':'' %>><%= siteText("view.home-sections.consult.007") %></option>
           <option value="Thông tin trường"><%= siteText("view.home-sections.consult.008") %></option>
         </select>
       </div>

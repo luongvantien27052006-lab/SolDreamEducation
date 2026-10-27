@@ -1,0 +1,32 @@
+[
+  {
+    "key": "view.duhoc-list.006",
+    "expectedValue": "Chương trình du học Hàn Quốc",
+    "value": "Du học Hàn Quốc: chương trình, điều kiện và chi phí"
+  },
+  {
+    "key": "view.duhoc-list.007",
+    "expectedValue": "Thông tin chương trình, điều kiện, chi phí và lộ trình hồ sơ được SOL DREAM EDUCATION tư vấn, đồng hành từ A–Z.",
+    "value": "Tìm hiểu chương trình, visa D4/D2, học phí và trường Hàn Quốc để chuẩn bị lộ trình phù hợp với năng lực và ngân sách."
+  },
+  {
+    "key": "server.routes.public.042",
+    "expectedValue": "Chương trình du học Hàn Quốc | SOL DREAM EDUCATION",
+    "value": "Du học Hàn Quốc: chương trình, điều kiện và chi phí"
+  },
+  {
+    "key": "server.routes.public.043",
+    "expectedValue": "Chương trình tư vấn du học Hàn Quốc, chọn trường, dự toán chi phí và chuẩn bị hồ sơ cùng SOL DREAM EDUCATION.",
+    "value": "Tìm hiểu du học Hàn Quốc: chương trình, điều kiện, visa D4/D2, chi phí và trường đối tác. SolDream tư vấn lộ trình theo hồ sơ và ngân sách."
+  },
+  {
+    "key": "server.routes.public.046",
+    "expectedValue": "Chương trình du học Hàn Quốc | SOL DREAM EDUCATION",
+    "value": "Du học Hàn Quốc: điều kiện, chi phí và lộ trình | SolDream"
+  },
+  {
+    "key": "server.routes.public.047",
+    "expectedValue": "Tìm hiểu chương trình du học Hàn Quốc, điều kiện tham gia, chi phí và lộ trình chuẩn bị hồ sơ cùng SolDream.",
+    "value": "Tìm hiểu du học Hàn Quốc: chương trình, điều kiện, visa D4/D2, chi phí và trường đối tác. SolDream tư vấn lộ trình theo hồ sơ và ngân sách."
+  }
+]
