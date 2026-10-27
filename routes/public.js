@@ -561,6 +561,8 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
   const universityFaqs = getUniversityFaqs(university);
   if(university.supplementaryProgram){for(const faq of getRelatedFaqs('program',university.supplementaryProgram.id)){if(!universityFaqs.some(item=>item.question===faq.question&&item.answer===faq.answer))universityFaqs.push(faq);}}
   const advisor = getVerifiedAdvisor();
+  const universityDescription=university.supplementaryProgram?storedDescription(university.supplementaryProgram):university.description;
+  const universityModifiedDate=require('../lib/pageFreshness').latestRecordedDate(university.updatedDate,university.supplementaryProgram?.content_modified_at,university.supplementaryProgram?.updated_at);
   const jsonLd = jsonLdScript([
     generateUniversitySchema(university, advisor),
     ...(advisor ? [advisor] : []),
@@ -575,9 +577,9 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
         '@type': 'Article',
         '@id': `${url}#article`,
         headline: siteText('school.article-headline',{v0:university.name}),
-        description: university.description,
+        description: universityDescription,
         datePublished: university.firstPublishedAt || university.updatedDate,
-        dateModified: university.updatedDate,
+        dateModified: universityModifiedDate,
         image:[{ '@type':'ImageObject',url:abs('/img/og-'+university.id+'.jpg'),width:1200,height:630,description:university.name+' — thông tin trường tại SolDream' }],
         inLanguage: 'vi-VN',
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -592,14 +594,14 @@ router.get('/truong-dai-hoc/:id', (req, res, next) => {
     universityFaqs,
     advisor,
     relatedUniversities: getAllUniversities().filter((item) => item.id !== university.id).slice(0, 5),
-    title: siteText("server.routes.public.062",{v0:(university.name)}),
-    description: university.description,
+    title: university.supplementaryProgram?.seo_title || siteText("server.routes.public.062",{v0:(university.name)}),
+    description: universityDescription,
     canonical: url,
     ogType: 'article',
     ogImage:abs('/img/og-'+university.id+'.jpg'),
     ogImageAlt: siteText('school.og-alt',{v0:university.name}),
     publishedTime: `${university.firstPublishedAt || university.updatedDate}T00:00:00+07:00`,
-    modifiedTime: `${university.updatedDate}T00:00:00+07:00`,
+    modifiedTime: `${universityModifiedDate}T00:00:00+07:00`,
     jsonLd,
   });
 });

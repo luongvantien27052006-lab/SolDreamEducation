@@ -27,7 +27,7 @@
     <% if (relatedPrograms.length) { %>
     <section class="related-content" aria-labelledby="related-programs-title">
       <h2 id="related-programs-title"><%= isSchoolPage?siteText("view.duhoc-detail.015"):siteText("view.duhoc-detail.016") %></h2>
-      <ul><% relatedPrograms.forEach(function(item){ %><li><a href="<%= isSchoolPage?'/truong-dai-hoc/':'/du-hoc/' %><%= item.slug %>"><%= item.title %></a><span><%= item.categoryLabel %> <%= siteText("view.duhoc-detail.006") %> <%= item.updatedDateFull %></span></li><% }); %></ul>
+      <ul><% relatedPrograms.forEach(function(item){ %><li><a href="<%= programPublicPath(item) %>"><%= item.title %></a><span><%= item.categoryLabel %> <%= siteText("view.duhoc-detail.006") %> <%= item.updatedDateFull %></span></li><% }); %></ul>
     </section>
     <% } %>
     <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--line)">

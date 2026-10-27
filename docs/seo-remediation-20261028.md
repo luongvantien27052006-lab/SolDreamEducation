@@ -7,6 +7,7 @@
 - Mô tả tự tạo dùng câu hoàn chỉnh, không cắt giữa từ/cụm chỉ để ép về 160 ký tự. Mô tả nhập thủ công giữ nguyên khi lưu.
 - Hồ sơ 7 trường có lớp trình bày riêng: bỏ các hàng/nhãn hoàn toàn chưa có dữ liệu, giữ số tiền và ghi chú có nội dung, gộp thành một ghi chú chỉnh được qua CMS. Không sửa dataset hoặc tính tổng/đổi tiền mới.
 - Woosong dùng URL chính `/truong-dai-hoc/woosong`; URL `/truong-dai-hoc/dai-hoc-woosong` chuyển 301. Toàn bộ nội dung, ảnh, nguồn và FAQ của hồ sơ bổ sung được đưa lên trang chính; bản ghi nguồn còn nguyên trong CMS.
+- SEO title/mô tả của hồ sơ Woosong bổ sung vẫn điều khiển metadata trang chính qua CMS. Ngày sửa trang hợp nhất lấy ngày muộn nhất đã ghi nhận trong hai nguồn, không dùng ngày yêu cầu truy cập. Liên kết bài liên quan dẫn thẳng URL chính.
 - Ba ảnh gốc 1,24–2,68 MB có bản WebP 480/960/1440 px. HTML dùng srcset/sizes và ảnh chia sẻ dùng bản lớn phù hợp; ảnh gốc không bị xóa hoặc ghi đè.
 - Ảnh chia sẻ thương hiệu và 7 trường có kích thước 1200×630. Đồ họa ghi rõ tên trường, không dùng ảnh khuôn viên giả; khai báo ảnh cho Article trường.
 - Sitemap dùng ngày sửa thực tế từ dữ liệu CMS, không gán ngày hiện tại hàng loạt. Bỏ image:title đã ngừng hỗ trợ; ưu tiên đúng hồ sơ được route sử dụng.
