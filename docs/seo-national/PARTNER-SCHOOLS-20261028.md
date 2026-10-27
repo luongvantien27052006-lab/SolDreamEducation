@@ -2,7 +2,7 @@
 
 ## Phạm vi
 
-Danh mục profile có 22 mục trường/cơ sở. Trước đợt này có 8 URL hồ sơ trường trong nước; 13 trường còn dẫn ra website chính thức. Hanyang Seoul và ERICA dùng chung một hồ sơ, vì vậy sau bổ sung có 21 URL nội bộ cho đủ 22 mục.
+Danh mục profile có 22 mục trường/cơ sở. Trước đợt này có 8 URL hồ sơ trường trên website; 13 trường còn dẫn ra website chính thức. Hanyang Seoul và ERICA dùng chung một hồ sơ, vì vậy sau bổ sung có 21 URL nội bộ cho đủ 22 mục.
 
 - Hoàn thiện Hannam, Woosong University, Hanyang, Daeduk, Dongyang, Gimhae, Sogang và Yonsei.
 - Bổ sung Woosong College, Sookmyung, Kunjang, Kunsan National University, Gachon, Daejeon Health, Jeonju, Shinhan, Hanbat, Pai Chai, Kookmin, Dong-A và Kyung Hee.
@@ -22,6 +22,8 @@ Các hồ sơ mới có ngày tạo và xuất bản thực tế, không mượn
 `data/partner-editorial-20261028/new-schools.json` chứa 13 hồ sơ mới và nguồn tương ứng. `existing-schools.json` chứa mục bổ sung cho 7 hồ sơ dữ liệu; `yonsei.html` bổ sung bài hiện có. Danh mục đối tác chỉ đổi trường `profilePath` của những mục trước đây chưa có bài.
 
 Mẫu hồ sơ đại học hỗ trợ các liên kết hướng dẫn trong từng mục. Các liên kết được kiểm tra và chuẩn hóa trước khi hiển thị. Những mục cũ, bảng, điều kiện và câu hỏi không bị viết lại.
+
+Các hồ sơ mới dùng đúng ảnh đã được lưu theo từng trường trong danh mục CMS. Bước bổ sung ảnh chỉ áp dụng khi bài mới chưa có ảnh, không ghi đè lựa chọn của người biên tập và không thay ngày xuất bản. Không tạo ảnh trường giả.
 
 ## Kiểm tra
 
