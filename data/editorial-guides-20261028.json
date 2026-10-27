@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "5-buoc-chuan-bi-ho-so-du-hoc-han-quoc",
+    "expectedTitle": "5 bước chuẩn bị hồ sơ du học Hàn Quốc từ chọn trường đến xuất cảnh",
+    "expectedContentHash": "8b0518b734096fa6b03e5a092bc9525ca67111744fe3d9f77532eca9a873b11a",
+    "file": "dossier.html",
+    "before": "<h2>Checklist trước khi chốt trường</h2>",
+    "addSources": [
+      "https://www.studyinkorea.go.kr/en/plan/visaAndStay.do"
+    ]
+  },
+  {
+    "slug": "chi-phi-du-hoc-han-quoc-2026-2027",
+    "expectedTitle": "Chi phí du học Hàn Quốc 2026–2027: phí dịch vụ và khoản cần dự trù",
+    "expectedContentHash": "3d1ceed79eff3bf4093ed705e701cc5cb0b34c85e848d0ec1373aee5df614e12",
+    "file": "costs.html",
+    "before": "<p><a href=\"/documents/sol-dream-profile-2026-2027.pdf\">",
+    "addSources": [
+      "https://www.studyinkorea.go.kr/en/plan/abroadExpenses.do"
+    ]
+  },
+  {
+    "slug": "hoc-phi-truong-doi-tac-han-quoc-2026",
+    "expectedTitle": "Học phí trường đối tác Hàn Quốc: hệ tiếng và đại học năm 2026",
+    "expectedContentHash": "6b6c0ccac629fb9ff05d5e945cea3f060d760a1165a4ac815145d5aab332ee91",
+    "file": "tuition.html",
+    "before": "",
+    "addSources": [
+      "https://www.studyinkorea.go.kr/en/plan/abroadExpenses.do"
+    ]
+  },
+  {
+    "slug": "phan-biet-visa-du-hoc-han-quoc-d4-1-d2",
+    "expectedTitle": "D4-1 và D2-1, D2-2, D2-3, D2-6 khác nhau thế nào?",
+    "expectedContentHash": "9a1bc999d2ce0660682c3c07632623516277f182a064504adafe96a551b59ec2",
+    "file": "visa.html",
+    "before": "<h2>Hồ sơ và quyết định thị thực</h2>",
+    "addSources": [
+      "https://www.studyinkorea.go.kr/en/plan/visaAndStay.do"
+    ]
+  }
+]
