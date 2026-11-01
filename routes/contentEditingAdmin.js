@@ -28,7 +28,8 @@ module.exports=function(router,{uploadCover}){
     if(type==='course'){
       let f={};try{f=JSON.parse(old.financials_json||'{}');}catch(_){}
       const course=require('../lib/courseKnowledge').rowToCourse({...row,id:old.id||'preview',name:b.name||'',language:b.language||'Tiếng Hàn',price:b.price||'',audience:b.audience||'',description:b.description||'',bluf_summary:b.bluf_summary||'',financials_json:JSON.stringify(courseFinancials(b,f)),requirements_json:JSON.stringify({entryLevel:b.entry_level||'',certificateRequired:b.certificate_required||'',status:b.requirement_status||''})});
-      return res.render('course-detail',{...common,course,courseFaqs:[],courseNotice:require('../lib/courseKnowledge').getCourseNotice()});
+      const englishContent=require('../lib/englishCourse').getEnglishCourseContent(course);
+      return res.render('course-detail',{...common,course,courseFaqs:[],englishContent,courseNotice:require('../lib/englishCourse').getEnglishCourseNotice(course)||require('../lib/courseKnowledge').getCourseNotice()});
     }
     const item=decorate(row);const relatedFaqs=row.faq_mode==='manual'?manualFaqInput(b):row.faq_mode==='auto'?require('../lib/publicationPipeline').deriveFaqs(type,row):[];
     if(type==='post')return res.render('news-detail',{...common,post:item,relatedFaqs,relatedPosts:[],coverMeta:require('../lib/articleMetadata').coverMetadata(item),displayTime:String(row.created_at).slice(0,10),contentModifiedTime:row.updated_at});

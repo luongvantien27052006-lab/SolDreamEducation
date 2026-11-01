@@ -73,5 +73,100 @@
         "bytes": 143302
       }
     ]
+  },
+  "/img/english/classroom-1-1280.jpg": {
+    "width": 1280,
+    "height": 960,
+    "originalBytes": 117941,
+    "variants": [
+      {
+        "src": "/img/english/classroom-1-640.jpg",
+        "width": 640,
+        "height": 480,
+        "bytes": 42555
+      },
+      {
+        "src": "/img/english/classroom-1-1280.jpg",
+        "width": 1280,
+        "height": 960,
+        "bytes": 117941
+      }
+    ]
+  },
+  "/img/english/classroom-2-1280.jpg": {
+    "width": 1280,
+    "height": 1707,
+    "originalBytes": 180463,
+    "variants": [
+      {
+        "src": "/img/english/classroom-2-640.jpg",
+        "width": 640,
+        "height": 854,
+        "bytes": 65350
+      },
+      {
+        "src": "/img/english/classroom-2-1280.jpg",
+        "width": 1280,
+        "height": 1707,
+        "bytes": 180463
+      }
+    ]
+  },
+  "/img/english/classroom-3-1280.jpg": {
+    "width": 1280,
+    "height": 1707,
+    "originalBytes": 190651,
+    "variants": [
+      {
+        "src": "/img/english/classroom-3-640.jpg",
+        "width": 640,
+        "height": 854,
+        "bytes": 66631
+      },
+      {
+        "src": "/img/english/classroom-3-1280.jpg",
+        "width": 1280,
+        "height": 1707,
+        "bytes": 190651
+      }
+    ]
+  },
+  "/img/english/classroom-4-1280.jpg": {
+    "width": 1280,
+    "height": 1392,
+    "originalBytes": 254308,
+    "variants": [
+      {
+        "src": "/img/english/classroom-4-640.jpg",
+        "width": 640,
+        "height": 696,
+        "bytes": 84344
+      },
+      {
+        "src": "/img/english/classroom-4-1280.jpg",
+        "width": 1280,
+        "height": 1392,
+        "bytes": 254308
+      }
+    ]
+  },
+  "/img/english/classroom-5-1280.jpg": {
+    "width": 1280,
+    "height": 960,
+    "originalBytes": 195161,
+    "variants": [
+      {
+        "src": "/img/english/classroom-5-640.jpg",
+        "width": 640,
+        "height": 480,
+        "bytes": 61491
+      },
+      {
+        "src": "/img/english/classroom-5-1280.jpg",
+        "width": 1280,
+        "height": 960,
+        "bytes": 195161
+      }
+    ]
   }
 }

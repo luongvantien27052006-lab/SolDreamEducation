@@ -1,0 +1,37 @@
+{
+  "enabled": true,
+  "eyebrow": "TIẾNG ANH TẠI SOLDREAM",
+  "headline": "Vững nền tảng. Tự tin giao tiếp.",
+  "intro": "Phát triển tiếng Anh từ những tình huống gần gũi trong học tập và cuộc sống. Bắt đầu với trình độ hiện tại, luyện tập từng kỹ năng và xây dựng hướng học phù hợp với mục tiêu của bạn.",
+  "primaryLabel": "Nhận tư vấn lộ trình",
+  "secondaryLabel": "Khám phá phương pháp học",
+  "heroCaption": "Một giờ học tiếng Anh qua hoạt động tương tác trên lớp.",
+  "heroAlt": "Giáo viên và học sinh trao đổi trong giờ học tiếng Anh",
+  "heroImage": "/img/english/classroom-1-1280.jpg",
+  "goalsTitle": "Bắt đầu từ mục tiêu của bạn",
+  "goalsLead": "Từ củng cố kiến thức cơ bản đến giao tiếp và định hướng luyện thi, mỗi mục tiêu cần một cách chuẩn bị phù hợp.",
+  "goals": [
+    {"title": "Củng cố nền tảng", "text": "Ôn lại ngữ pháp, mở rộng vốn từ theo chủ đề và luyện phát âm. Tạo nền tảng để nghe hiểu và diễn đạt ý rõ ràng hơn."},
+    {"title": "Giao tiếp thực tế", "text": "Thực hành nghe và nói qua hội thoại, trao đổi nhóm và các tình huống thường gặp. Tập đặt câu hỏi, phản hồi và trình bày ý kiến."},
+    {"title": "Định hướng IELTS", "text": "Xác định mục tiêu điểm số và những kỹ năng cần củng cố trước khi luyện thi. Trao đổi với SolDream để được tư vấn khả năng xếp lớp theo trình độ và nhu cầu."}
+  ],
+  "methodsTitle": "Học để hiểu, thực hành để tiến bộ",
+  "methodsLead": "Kết hợp kiến thức nền tảng với hoạt động sử dụng tiếng Anh, chú trọng cách diễn đạt và khả năng vận dụng sau mỗi bài học.",
+  "methods": [
+    {"title": "Nghe chủ động", "text": "Luyện nhận diện từ khóa, nắm ý chính và nghe chi tiết qua nội dung theo chủ đề."},
+    {"title": "Nói tự tin", "text": "Luyện phát âm, phản xạ hội thoại và trình bày quan điểm qua hoạt động tương tác."},
+    {"title": "Đọc có chiến lược", "text": "Xây dựng vốn từ, tập đọc lấy ý chính và tìm thông tin cần thiết trong văn bản."},
+    {"title": "Viết rõ ý", "text": "Rèn cách đặt câu, liên kết ý và triển khai đoạn văn; nhận diện lỗi ngữ pháp và cách dùng từ."}
+  ],
+  "galleryTitle": "Những giờ học tiếng Anh",
+  "galleryLead": "Học qua trao đổi, lắng nghe và cùng nhau thực hành.",
+  "gallery": [
+    {"image": "/img/english/classroom-1-1280.jpg", "alt": "Học sinh thực hành bài tập tiếng Anh trên bảng", "caption": "Cùng thực hành bài học"},
+    {"image": "/img/english/classroom-2-1280.jpg", "alt": "Giáo viên trao đổi với học sinh trong giờ học tiếng Anh", "caption": "Trao đổi trực tiếp trên lớp"},
+    {"image": "/img/english/classroom-3-1280.jpg", "alt": "Giáo viên hướng dẫn học sinh trả lời câu hỏi tiếng Anh", "caption": "Lắng nghe và phản hồi"},
+    {"image": "/img/english/classroom-4-1280.jpg", "alt": "Học sinh theo dõi phần hướng dẫn của giáo viên tiếng Anh", "caption": "Học theo chủ đề"},
+    {"image": "/img/english/classroom-5-1280.jpg", "alt": "Giáo viên và học sinh trao đổi bằng tiếng Anh trong lớp học", "caption": "Tự tin trình bày ý kiến"}
+  ],
+  "detailsTitle": "Thông tin lớp học tại SolDream",
+  "notice": "Học phí, thời lượng, lịch học, giáo trình và điều kiện áp dụng được SolDream xác nhận theo lớp đăng ký sau khi trao đổi nhu cầu và kiểm tra trình độ. Vui lòng liên hệ để nhận thông tin lớp phù hợp trước khi đăng ký."
+}

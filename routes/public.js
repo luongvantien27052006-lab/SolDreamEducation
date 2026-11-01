@@ -287,6 +287,8 @@ router.get('/khoa-hoc', (req, res) => {
 router.get('/khoa-hoc/:id', (req, res, next) => {
   const course = getCourseById(req.params.id);
   if (!course) return next();
+  const englishContent = require('../lib/englishCourse').getEnglishCourseContent(course);
+  const englishUpdatedAt = require('../lib/englishCourse').isEnglishCourse(course) ? db.prepare("SELECT updated_at FROM site_datasets WHERE key='english-course'").get()?.updated_at : '';
   const url = abs(course.url);
   const price = Number(course.financials?.priceVndTotal);
   const generatedCourseFaqs = getRelatedFaqs('course', course.id);
@@ -301,7 +303,7 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
       name: course.name, description: course.blufSummary, url,
       inLanguage: course.language === 'Tiếng Anh' ? 'en' : 'ko',
       provider: { '@id': `${SITE_URL}/#organization` },
-      dateModified: getCourseUpdatedDate(),
+      dateModified: englishUpdatedAt ? require('../lib/pageFreshness').latestRecordedDate(course.lastUpdated, englishUpdatedAt) : getCourseUpdatedDate(),
       ...accountabilitySchema(course,'course'),
       ...(Number.isFinite(price) && price > 0 ? { offers: { '@type': 'Offer', price, priceCurrency: 'VND', url, availability: 'https://schema.org/InStock' } } : {}),
     },
@@ -309,7 +311,7 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
     generateBreadcrumbSchema([{ name: siteText("server.routes.public.034"), url: '/' }, { name: siteText("server.routes.public.035"), url: '/khoa-hoc' }, { name: course.name, url: course.url }]),
   ]);
   res.render('course-detail', {
-    course, courseFaqs, courseNotice: getCourseNotice(),
+    course, courseFaqs, englishContent, courseNotice: require('../lib/englishCourse').getEnglishCourseNotice(course) || getCourseNotice(),
     title: course.seoTitle || `${course.name} | SOL DREAM EDUCATION`, description: course.metaDescription || automaticDescription(course.blufSummary, course.description),
     canonical: url, jsonLd,
   });

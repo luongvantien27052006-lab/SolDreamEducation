@@ -70,6 +70,63 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
 .content-responsibility a{color:var(--sky);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- Buttons ---------- */
+/* English course: shared SolDream colors, typography, navigation and CMS copy. */
+.english-course{padding-top:36px}
+.english-course .crumbs{margin-bottom:34px}
+.english-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:52px;align-items:center;margin-bottom:76px}
+.english-hero__copy,.english-hero__photo{min-width:0}
+.english-hero h1{font-size:clamp(34px,4.5vw,60px);margin:18px 0;color:var(--ink)}
+.english-hero__headline{font-family:var(--font-disp);font-size:clamp(22px,2.4vw,30px);line-height:1.25;font-weight:700;color:var(--persimmon)}
+.english-hero__intro{font-size:17px;line-height:1.85;color:var(--ink-2);margin:22px 0 30px}
+.english-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.english-actions .btn{white-space:normal;text-align:center;justify-content:center}
+.english-text-link{font-weight:700;color:var(--sky);text-decoration:underline;text-underline-offset:5px;line-height:1.7}
+.english-hero__photo{padding:10px;background:var(--white);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow)}
+.english-hero__photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px}
+.english-hero__photo figcaption{padding:16px 12px 10px;color:var(--muted);font-size:13px;line-height:1.7}
+.english-section{margin:0 0 72px;scroll-margin-top:110px}
+.english-section__head{max-width:720px;margin-bottom:28px}
+.english-section__head h2,.english-details>h2{font-size:clamp(25px,3vw,36px);line-height:1.25;margin-bottom:14px}
+.english-section__head .eyebrow{margin-bottom:14px}
+.english-section__head p{color:var(--ink-2);line-height:1.85}
+.english-goals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.english-goal{padding:28px;background:var(--white);border:1px solid var(--line);border-radius:20px}
+.english-number{display:block;font-family:var(--font-disp);font-size:34px;font-weight:700;color:var(--persimmon);margin-bottom:20px}
+.english-goal h3,.english-skill h3{font-size:21px;line-height:1.35;margin-bottom:12px}
+.english-goal p,.english-skill p{font-size:15px;line-height:1.85;color:var(--ink-2)}
+.english-methods{padding:36px;background:var(--paper-2);border-radius:24px}
+.english-skills{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.english-skill{min-width:0}
+.english-skill__icon{display:grid;place-items:center;width:48px;height:48px;background:white;color:var(--sky);border-radius:14px;margin-bottom:20px}
+.english-skill__icon svg{width:25px;height:25px}
+.english-gallery{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.english-gallery figure{grid-column:span 2;min-width:0;background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.english-gallery figure:nth-child(n+4){grid-column:span 3}
+.english-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 65%}
+.english-gallery figure:nth-child(2) img,.english-gallery figure:nth-child(3) img{object-position:center 58%}
+.english-gallery figure:nth-child(4) img{object-position:center 25%}
+.english-gallery figcaption{padding:16px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.english-details{padding-top:20px}
+.english-course .knowledge-section,.english-course .english-details,.english-course .faq-section,.english-course .content-responsibility,.english-course .source-note{max-width:920px;margin-left:auto;margin-right:auto}
+.english-course :is(.english-goal,.english-skill,.english-section__head,figcaption){overflow-wrap:anywhere}
+@media(max-width:900px){
+  .english-hero{grid-template-columns:minmax(0,1fr);gap:30px;margin-bottom:52px}
+  .english-hero__photo{max-width:640px}
+  .english-skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .english-goals{gap:14px}.english-goal{padding:22px}
+}
+@media(max-width:600px){
+  .english-course{padding-top:24px}
+  .english-course .crumbs{font-size:12px;margin-bottom:26px}
+  .english-section{margin-bottom:48px}
+  .english-goals,.english-skills,.english-gallery{grid-template-columns:minmax(0,1fr)}
+  .english-gallery figure,.english-gallery figure:nth-child(n+4){grid-column:auto}
+  .english-methods{padding:24px 20px}
+  .english-skills{gap:24px}.english-skill{padding-bottom:20px;border-bottom:1px solid var(--line)}
+  .english-skill:last-child{padding-bottom:0;border-bottom:0}
+  .english-actions{gap:18px}.english-hero__intro{font-size:16px}
+}
+
 .btn{
   display:inline-flex;align-items:center;gap:9px;font-family:var(--font-body);
   font-weight:700;font-size:15px;padding:14px 24px;border-radius:999px;cursor:pointer;

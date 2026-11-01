@@ -1,10 +1,14 @@
 <main>
-<article class="section knowledge-hub">
-  <div class="wrap" style="max-width:920px">
+<article class="section knowledge-hub <%= englishContent ? 'english-course' : '' %>">
+  <div class="wrap" <% if(!englishContent){ %>style="max-width:920px"<% } %>>
     <nav class="crumbs" aria-label="<%= siteText("view.course-detail.001") %>"><a href="<%= siteText("view.course-detail.002") %>"><%= siteText("view.course-detail.003") %></a> <span>›</span> <a href="<%= siteText("view.course-detail.004") %>"><%= siteText("view.course-detail.005") %></a> <span>›</span> <span><%= course.name %></span></nav>
-    <header class="knowledge-hero">
+    <% if(englishContent){ %>
+      <%- include('partials/english-course') %>
+    <% } %>
+    <% if(!englishContent){ %><header class="knowledge-hero">
       <span class="eyebrow"><%= course.language %></span>
       <h1><%= course.name %></h1>
+    <% } else { %><section class="english-details" aria-labelledby="english-details-title"><h2 id="english-details-title"><%= englishContent.detailsTitle %></h2><% } %>
       <div class="geo-summary-box">
         <p class="geo-summary-box__bluf"><%= course.blufSummary %></p>
         <ul class="geo-summary-box__facts">
@@ -14,7 +18,7 @@
           <li><strong><%= course.entryExamLabel %>:</strong> <%= course.entryExamRequirement || siteText("view.course-detail.055") %></li>
         </ul>
       </div>
-    </header>
+    <% if(!englishContent){ %></header><% } else { %></section><% } %>
     <% if (course.financials && (course.financials.tuition2026 || course.financials.classDetails)) { const spec = course.financials.tuition2026 || course.financials.classDetails; %>
     <section class="knowledge-section" aria-labelledby="class-specs-title">
       <h2 id="class-specs-title"><%= siteText("view.course-detail.009") %></h2>
@@ -66,7 +70,8 @@
       </aside>
     <% } %>
     <aside class="source-note"><strong><%= siteText("view.course-detail.051") %></strong> <%= courseNotice %></aside>
-    <p style="margin-top:28px"><a href="<%= siteText("view.course-detail.052") %>" class="btn btn-primary"><%= siteText("view.course-detail.053") %></a></p>
+    <p style="margin-top:28px"><a href="<%= englishContent ? '#lienhe' : siteText("view.course-detail.052") %>" class="btn btn-primary"><%= siteText("view.course-detail.053") %></a></p>
   </div>
 </article>
+<% if(englishContent){ %><%- include('home-sections/consult', { defaultInterest: course.name }) %><% } %>
 </main>

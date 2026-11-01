@@ -12,6 +12,7 @@
       <div class="field"><label for="email"><%= getBlock("consult-label-email").title %></label><input id="email" name="email" type="email" autocomplete="email" maxlength="180" required placeholder="<%= siteText("view.home-sections.consult.003") %>"></div>
       <div class="field"><label for="kh"><%= getBlock("consult-label-interest").title %></label>
         <select id="kh" name="interest" data-interest-select>
+          <% if(typeof defaultInterest!=='undefined' && defaultInterest!=='Du học Hàn Quốc'){ %><option value="<%= defaultInterest %>" selected><%= defaultInterest %></option><% } %>
           <option value="Tiếng Hàn giao tiếp"><%= siteText("view.home-sections.consult.004") %></option>
           <option value="Tiếng Hàn cấp tốc"><%= siteText("view.home-sections.consult.005") %></option>
           <option value="Tiếng Hàn sơ cấp / trung cấp"><%= siteText("view.home-sections.consult.006") %></option>

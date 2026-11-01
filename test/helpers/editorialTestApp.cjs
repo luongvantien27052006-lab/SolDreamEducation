@@ -42,7 +42,7 @@ app.use(require('express-ejs-layouts'));app.set('layout','layout');
 app.use(express.urlencoded({extended:true,limit:'2mb'}));
 app.use(session({secret:'isolated-fixture-session-only',resave:false,saveUninitialized:false}));
 app.use(express.static(path.join(root,'public')));
-app.use((req,res,next)=>{Object.assign(res.locals,require('../../lib/seo').seoDefaults(req),require('../../lib/siteContent').siteContentLocals(),require('../../lib/sharedBlocks').blockLocals(),{assetVer:'editorial-test',navigationCourses:require('../../lib/courseKnowledge').getCourses(),sitePopup:null,leadPopup:null,leadContext:null});next();});
+app.use((req,res,next)=>{Object.assign(res.locals,require('../../lib/seo').seoDefaults(req),require('../../lib/siteContent').siteContentLocals(),require('../../lib/sharedBlocks').blockLocals(),require('../../lib/responsiveImages'),require('../../lib/editorialResponsibility'),{programPublicPath:require('../../lib/util').programPublicPath,assetVer:'editorial-test',navigationCourses:require('../../lib/courseKnowledge').getCourses(),sitePopup:null,leadPopup:null,leadContext:null});next();});
 app.use('/admin',require('../../routes/admin'));
 app.use('/',require('../../routes/public'));
 app.use((error,req,res,next)=>{console.error(error);res.status(500).send(error.message);});
