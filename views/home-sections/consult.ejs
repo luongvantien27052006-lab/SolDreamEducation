@@ -2,7 +2,11 @@
 <section class="section cta" id="lienhe">
   <div class="wrap reveal">
     <div class="cta__left">
-      <%- include("../partials/shared-block", { blockKey: "consult-intro" }) %>
+      <% if(typeof consultationIntro!=='undefined' && consultationIntro){ %>
+        <span class="eyebrow"><%= consultationIntro.consultationEyebrow %></span>
+        <h2><%= consultationIntro.consultationTitle %></h2>
+        <p><%= consultationIntro.consultationText %></p>
+      <% }else{ %><%- include("../partials/shared-block", { blockKey: "consult-intro" }) %><% } %>
       <div class="cta__contacts"><%- getBlock("consult-contact").content %></div>
     </div>
     <form class="cta__form" id="consultationForm" data-lead-form>

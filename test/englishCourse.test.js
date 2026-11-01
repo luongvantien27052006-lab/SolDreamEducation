@@ -17,6 +17,7 @@ test('English introduction uses CMS copy and real photos without changing course
   assert.match(page.html,/srcset="\/img\/english\//);
   assert.match(page.html,/value="Tiếng Anh giao tiếp" selected/);
   assert.match(page.html,/data-lead-form/);
+  assert.match(page.html,/Bắt đầu hành trình tiếng Anh của bạn/);
   assert.doesNotMatch(page.html,/IELTS Master|5,200|98\.5%|Cambridge 2026|Voucher|Trần Minh Anh|7\.5\+ Trong/);
   const note=page.html.match(/<aside class="source-note">([\s\S]*?)<\/aside>/)[1];
   assert.doesNotMatch(note,/tiếng Hàn|90 phút|3 buổi/);

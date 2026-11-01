@@ -73,5 +73,5 @@
     <p style="margin-top:28px"><a href="<%= englishContent ? '#lienhe' : siteText("view.course-detail.052") %>" class="btn btn-primary"><%= siteText("view.course-detail.053") %></a></p>
   </div>
 </article>
-<% if(englishContent){ %><%- include('home-sections/consult', { defaultInterest: course.name }) %><% } %>
+<% if(englishContent){ %><%- include('home-sections/consult', { defaultInterest: course.name, consultationIntro: englishContent }) %><% } %>
 </main>
