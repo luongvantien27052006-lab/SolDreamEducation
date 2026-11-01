@@ -15,7 +15,9 @@ test('English introduction uses CMS copy and real photos without changing course
   assert.match(page.html,/Định hướng IELTS/);
   for(let i=1;i<=5;i++)assert.ok(page.html.includes(`/img/english/classroom-${i}-1280.jpg`));
   assert.match(page.html,/srcset="\/img\/english\//);
-  assert.match(page.html,/value="Tiếng Anh giao tiếp" selected/);
+  assert.match(page.html,/name="interest" value="Tiếng Anh giao tiếp"/);
+  assert.match(page.html,/<main class="english-landing"/);
+  assert.match(page.html,/id="english-plan"/);
   assert.match(page.html,/data-lead-form/);
   assert.match(page.html,/Bắt đầu hành trình tiếng Anh của bạn/);
   assert.doesNotMatch(page.html,/IELTS Master|5,200|98\.5%|Cambridge 2026|Voucher|Trần Minh Anh|7\.5\+ Trong/);
@@ -35,7 +37,7 @@ test('CMS save/reopen survives reinitialization, escapes copy and changes only E
   const intro='Lời giới thiệu từ CMS & mục tiêu tiếng Anh. <script>không thực thi</script>';
   const saved=await app.request('/admin/du-lieu-trang/english-course',{form:{['values['+token+']']:intro,page:'1'}});
   assert.equal(saved.status,302);
-  const reopened=await app.request('/admin/du-lieu-trang/english-course');
+  const reopened=await app.request('/admin/du-lieu-trang/english-course?q='+encodeURIComponent('Lời giới thiệu từ CMS'));
   assert.equal(reopened.status,200);
   assert.ok(reopened.html.includes('Lời giới thiệu từ CMS &amp; mục tiêu tiếng Anh.'));
   require('../lib/siteContentMigration').applySiteContent(db);
@@ -62,4 +64,22 @@ test('hiding the new introduction retains the original English course and its ow
     assert.equal((page.html.match(/<h1\b/g)||[]).length,1);
     assert.doesNotMatch(page.html.match(/<aside class="source-note">([\s\S]*?)<\/aside>/)[1],/tiếng Hàn|90 phút/);
   }finally{fixture.db.prepare("UPDATE site_datasets SET content=?,updated_at=? WHERE key='english-course'").run(row.content,row.updated_at);}
+});
+
+test('landing rollout preserves existing CMS copy and new section copy survives save/reopen',async()=>{
+  const db=fixture.db,row=db.prepare("SELECT * FROM site_datasets WHERE key='english-course'").get();
+  const previous=JSON.parse(row.content);delete previous.landing;previous.headline='Thông điệp đã được trung tâm biên tập';
+  db.prepare("UPDATE site_datasets SET content=? WHERE key='english-course'").run(JSON.stringify(previous));
+  try{
+    require('../lib/siteContentMigration').applySiteContent(db);
+    const after=JSON.parse(db.prepare("SELECT content FROM site_datasets WHERE key='english-course'").get().content);
+    assert.equal(after.headline,previous.headline);
+    assert.ok(after.landing.planTitle);
+    const title='Tiêu đề lộ trình được biên tập trong CMS';
+    const token=Buffer.from(JSON.stringify(['landing','planTitle'])).toString('base64url');
+    assert.equal((await app.request('/admin/du-lieu-trang/english-course',{form:{['values['+token+']']:title}})).status,302);
+    assert.ok((await app.request('/admin/du-lieu-trang/english-course?q='+encodeURIComponent(title))).html.includes(title));
+    require('../lib/siteContentMigration').applySiteContent(db);
+    assert.ok((await app.request('/khoa-hoc/tieng-anh-giao-tiep')).html.includes(title));
+  }finally{db.prepare("UPDATE site_datasets SET content=?,updated_at=? WHERE key='english-course'").run(row.content,row.updated_at);}
 });

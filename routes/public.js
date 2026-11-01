@@ -310,7 +310,7 @@ router.get('/khoa-hoc/:id', (req, res, next) => {
     { ...generateFAQSchema(courseFaqs), '@id': `${url}#faq`, url, inLanguage: 'vi-VN' },
     generateBreadcrumbSchema([{ name: siteText("server.routes.public.034"), url: '/' }, { name: siteText("server.routes.public.035"), url: '/khoa-hoc' }, { name: course.name, url: course.url }]),
   ]);
-  res.render('course-detail', {
+  res.render(englishContent ? 'english-landing' : 'course-detail', {
     course, courseFaqs, englishContent, courseNotice: require('../lib/englishCourse').getEnglishCourseNotice(course) || getCourseNotice(),
     title: course.seoTitle || `${course.name} | SOL DREAM EDUCATION`, description: course.metaDescription || automaticDescription(course.blufSummary, course.description),
     canonical: url, jsonLd,

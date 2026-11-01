@@ -1,14 +1,10 @@
 <main>
-<article class="section knowledge-hub <%= englishContent ? 'english-course' : '' %>">
-  <div class="wrap" <% if(!englishContent){ %>style="max-width:920px"<% } %>>
+<article class="section knowledge-hub">
+  <div class="wrap" style="max-width:920px">
     <nav class="crumbs" aria-label="<%= siteText("view.course-detail.001") %>"><a href="<%= siteText("view.course-detail.002") %>"><%= siteText("view.course-detail.003") %></a> <span>›</span> <a href="<%= siteText("view.course-detail.004") %>"><%= siteText("view.course-detail.005") %></a> <span>›</span> <span><%= course.name %></span></nav>
-    <% if(englishContent){ %>
-      <%- include('partials/english-course') %>
-    <% } %>
-    <% if(!englishContent){ %><header class="knowledge-hero">
+    <header class="knowledge-hero">
       <span class="eyebrow"><%= course.language %></span>
       <h1><%= course.name %></h1>
-    <% } else { %><section class="english-details" aria-labelledby="english-details-title"><h2 id="english-details-title"><%= englishContent.detailsTitle %></h2><% } %>
       <div class="geo-summary-box">
         <p class="geo-summary-box__bluf"><%= course.blufSummary %></p>
         <ul class="geo-summary-box__facts">
@@ -18,41 +14,8 @@
           <li><strong><%= course.entryExamLabel %>:</strong> <%= course.entryExamRequirement || siteText("view.course-detail.055") %></li>
         </ul>
       </div>
-    <% if(!englishContent){ %></header><% } else { %></section><% } %>
-    <% if (course.financials && (course.financials.tuition2026 || course.financials.classDetails)) { const spec = course.financials.tuition2026 || course.financials.classDetails; %>
-    <section class="knowledge-section" aria-labelledby="class-specs-title">
-      <h2 id="class-specs-title"><%= siteText("view.course-detail.009") %></h2>
-      <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th><%= siteText("view.course-detail.010") %></th><th><%= siteText("view.course-detail.011") %></th></tr></thead><tbody>
-        <% if(spec.code){ %><tr><td><%= siteText("view.course-detail.012") %></td><td><%= spec.code %></td></tr><% } %>
-        <% if(spec.sessions){ %><tr><td><%= siteText("view.course-detail.013") %></td><td><%= spec.sessions %> <%= siteText("view.course-detail.014") %> <%= spec.minutesPerSession %> <%= siteText("view.course-detail.015") %><%= spec.totalHours %> <%= siteText("view.course-detail.016") %></td></tr><% } %>
-        <% if(spec.estimatedWeeks){ %><tr><td><%= siteText("view.course-detail.017") %></td><td><%= spec.estimatedWeeks %> <%= siteText("view.course-detail.018") %></td></tr><% } %>
-        <% if(spec.instructors){ %><tr><td><%= siteText("view.course-detail.019") %></td><td><%= spec.instructors %></td></tr><% } %>
-        <tr><td><%= siteText("view.course-detail.020") %></td><td><%= spec.classSize %> <%= siteText("view.course-detail.021") %><% if(spec.minimumStudents!=null){ %><%= siteText("view.course-detail.022") %> <%= spec.minimumStudents %> <%= siteText("view.course-detail.023") %><% } %></td></tr>
-        <tr><td><%= siteText("view.course-detail.024") %></td><td><%= spec.textbook || '' %></td></tr><tr><td><%= siteText("view.course-detail.025") %></td><td><%= spec.textbook || '' %><br><%= spec.materials %></td></tr>
-        <tr><td><%= siteText("view.course-detail.026") %></td><td><strong><%= course.price %></strong></td></tr>
-      </tbody></table></div>
-    </section>
-    <% } %>
-    <section class="knowledge-section">
-      <h2><%= course.name %> <%= siteText("view.course-detail.027") %></h2>
-      <p class="section-lead"><%= course.blufSummary %></p>
-      <ul><li><strong><%= siteText("view.course-detail.028") %></strong> <%= course.audience %></li><li><strong><%= siteText("view.course-detail.029") %></strong> <%= course.description %></li><li><strong><%= siteText("view.course-detail.030") %></strong> <%= course.financials.priceNote %></li></ul>
-    </section>
-    <section class="knowledge-section">
-      <h2><%= siteText("view.course-detail.031") %> <%= course.name %></h2>
-      <p class="section-lead"><%= siteText("view.course-detail.032") %></p>
-      <div class="knowledge-table-wrap"><table class="knowledge-table"><thead><tr><th><%= siteText("view.course-detail.033") %></th><th><%= siteText("view.course-detail.034") %></th></tr></thead><tbody>
-        <tr><td><%= siteText("view.course-detail.035") %></td><td><%= course.price %></td></tr>
-        <tr><td><%= siteText("view.course-detail.036") %></td><td><%= course.financials.priceNote %></td></tr>
-        <tr><td><%= siteText("view.course-detail.037") %></td><td><%= course.requirements.entryLevel || siteText("view.course-detail.056") %></td></tr>
-        <tr><td><%= siteText("view.course-detail.038") %> <%= course.entryExamLabel %></td><td><%= course.entryExamRequirement || (siteText("view.course-detail.057") + course.entryExamLabel + siteText("view.course-detail.058")) %></td></tr>
-      </tbody></table></div>
-    </section>
-    <section class="knowledge-section">
-      <h2><%= siteText("view.course-detail.039") %></h2>
-      <p class="section-lead"><%= siteText("view.course-detail.040") %></p>
-      <ol><li><%= siteText("view.course-detail.041") %> <%= String(course.language || siteText("view.course-detail.059")).toLocaleLowerCase('vi') %>.</li><li><%= siteText("view.course-detail.042") %></li><li><%= siteText("view.course-detail.043") %></li></ol>
-    </section>
+    </header>
+    <%- include('partials/course-information') %>
     <%- include('partials/content-responsibility',{item:course,kind:'course'}) %>
     <section class="faq-section" aria-labelledby="course-faq-title">
       <h2 id="course-faq-title"><%= siteText("view.course-detail.044") %> <%= course.name %></h2>
@@ -70,8 +33,7 @@
       </aside>
     <% } %>
     <aside class="source-note"><strong><%= siteText("view.course-detail.051") %></strong> <%= courseNotice %></aside>
-    <p style="margin-top:28px"><a href="<%= englishContent ? '#lienhe' : siteText("view.course-detail.052") %>" class="btn btn-primary"><%= siteText("view.course-detail.053") %></a></p>
+    <p style="margin-top:28px"><a href="<%= siteText("view.course-detail.052") %>" class="btn btn-primary"><%= siteText("view.course-detail.053") %></a></p>
   </div>
 </article>
-<% if(englishContent){ %><%- include('home-sections/consult', { defaultInterest: course.name, consultationIntro: englishContent }) %><% } %>
 </main>
